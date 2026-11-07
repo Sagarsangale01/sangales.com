@@ -9,7 +9,8 @@ export const metadata: Metadata = {
     "Explore professional career opportunities across Sangales Group companies in food, agriculture, enterprise operations, trading, and packaging.",
 };
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function CareersPage() {
   const careers = await getPublishedCareers();
@@ -48,3 +49,4 @@ export default async function CareersPage() {
     </div>
   );
 }
+

@@ -223,3 +223,4 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
     </form>
   );
 }
+

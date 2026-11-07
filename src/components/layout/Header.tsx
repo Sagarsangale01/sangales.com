@@ -15,7 +15,16 @@ const NAV_LINKS = [
   { label: "Contact", href: "/contact" },
 ];
 
-export default function Header() {
+interface Props {
+  settings?: {
+    siteName?: string;
+    descriptor?: string;
+  };
+}
+
+export default function Header({ settings }: Props) {
+  const siteName = settings?.siteName || "SANGALES";
+  const descriptor = settings?.descriptor || "A Group of Companies";
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -54,14 +63,14 @@ export default function Header() {
                 isDarkHero ? "text-white group-hover:text-gold" : "text-navy group-hover:text-gold"
               }`}
             >
-              SANGALES
+              {siteName}
             </span>
             <span
               className={`text-[9px] sm:text-[10px] font-semibold tracking-superwide uppercase ${
                 isDarkHero ? "text-gold" : "text-gold-700"
               }`}
             >
-              A Group of Companies
+              {descriptor}
             </span>
           </Link>
 
@@ -161,3 +170,4 @@ export default function Header() {
     </header>
   );
 }
+

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { createEnquiry, getAllEnquiries } from "@/services/enquiryService";
 import { getCurrentAdmin } from "@/lib/auth";
+import { notifyNewEnquiry } from "@/lib/email";
 
 const enquirySchema = z.object({
   fullName: z.string().min(2, "Full name is required"),
@@ -30,6 +31,18 @@ export async function POST(req: NextRequest) {
       subject: validated.subject,
       message: validated.message,
     });
+
+    // Asynchronously dispatch transactional notifications
+    notifyNewEnquiry({
+      id: enquiry.id,
+      fullName: enquiry.fullName,
+      email: enquiry.email,
+      phone: enquiry.phone,
+      companyName: enquiry.companyName,
+      enquiryType: enquiry.enquiryType,
+      businessName: enquiry.businessName,
+      message: enquiry.message,
+    }).catch((err) => console.error("Notification dispatch error:", err));
 
     return NextResponse.json({ success: true, enquiry }, { status: 201 });
   } catch (error: any) {
@@ -60,3 +73,4 @@ export async function GET(req: NextRequest) {
   const list = await getAllEnquiries({ status, businessId, search });
   return NextResponse.json({ success: true, enquiries: list });
 }
+

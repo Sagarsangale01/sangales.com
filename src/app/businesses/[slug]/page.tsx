@@ -43,7 +43,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function BusinessDetailPage({ params }: Props) {
   const [business, allBusinesses] = await Promise.all([
@@ -433,3 +434,4 @@ export default async function BusinessDetailPage({ params }: Props) {
     </div>
   );
 }
+

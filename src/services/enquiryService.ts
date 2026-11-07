@@ -82,3 +82,4 @@ export async function updateEnquiryStatus(
   saveStore(store);
   return store.enquiries[idx];
 }
+

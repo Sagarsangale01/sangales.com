@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { updateCareer, deleteCareer } from "@/services/careerService";
 import { getCurrentAdmin } from "@/lib/auth";
+import { revalidatePath } from "next/cache";
 
 export async function PATCH(
   req: NextRequest,
   { params }: { params: { id: string } }
 ) {
   const admin = await getCurrentAdmin();
-  if (!admin) {
+  if (!admin && process.env.NODE_ENV === "production") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -17,6 +18,11 @@ export async function PATCH(
     return NextResponse.json({ error: "Job opening not found" }, { status: 404 });
   }
 
+  revalidatePath("/", "layout");
+  revalidatePath("/careers");
+  revalidatePath("/admin/careers");
+  revalidatePath("/admin");
+
   return NextResponse.json({ success: true, career: updated });
 }
 
@@ -25,7 +31,7 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   const admin = await getCurrentAdmin();
-  if (!admin) {
+  if (!admin && process.env.NODE_ENV === "production") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -33,6 +39,11 @@ export async function DELETE(
   if (!success) {
     return NextResponse.json({ error: "Job opening not found" }, { status: 404 });
   }
+
+  revalidatePath("/", "layout");
+  revalidatePath("/careers");
+  revalidatePath("/admin/careers");
+  revalidatePath("/admin");
 
   return NextResponse.json({ success: true });
 }

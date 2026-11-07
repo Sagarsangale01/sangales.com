@@ -10,7 +10,8 @@ export const metadata: Metadata = {
     "Connect with SANGALES – A GROUP OF COMPANIES. Direct enquiry channels for partnerships, wholesale supply, dealerships, and institutional procurement.",
 };
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function ContactPage() {
   const businesses = await getPublishedBusinesses();

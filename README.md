@@ -111,3 +111,4 @@ The project is configured for PostgreSQL. To synchronize with a live PostgreSQL 
    ```
 
 *Note: The platform features an intelligent resilience layer (`src/lib/store.ts`) that guarantees complete functionality and full persistence even prior to local database provisioning!*
+

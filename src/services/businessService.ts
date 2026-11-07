@@ -120,3 +120,4 @@ export async function deleteCategory(id: string) {
   saveStore(store);
   return true;
 }
+

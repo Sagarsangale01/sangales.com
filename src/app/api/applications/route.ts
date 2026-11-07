@@ -37,3 +37,4 @@ export async function GET(req: NextRequest) {
   const apps = await getAllApplications();
   return NextResponse.json({ success: true, applications: apps });
 }
+

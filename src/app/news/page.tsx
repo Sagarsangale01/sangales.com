@@ -11,7 +11,8 @@ export const metadata: Metadata = {
     "Official corporate news, press releases, expansion announcements, and updates from SANGALES – A GROUP OF COMPANIES.",
 };
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function NewsPage() {
   const newsList = await getPublishedNews();
@@ -95,3 +96,4 @@ export default async function NewsPage() {
     </div>
   );
 }
+

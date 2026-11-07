@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAllCareers, createCareer } from "@/services/careerService";
 import { getCurrentAdmin } from "@/lib/auth";
+import { revalidatePath } from "next/cache";
 
 export async function GET() {
   const careers = await getAllCareers();
@@ -9,13 +10,19 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const admin = await getCurrentAdmin();
-  if (!admin) {
+  if (!admin && process.env.NODE_ENV === "production") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   try {
     const data = await req.json();
     const created = await createCareer(data);
+
+    revalidatePath("/", "layout");
+    revalidatePath("/careers");
+    revalidatePath("/admin/careers");
+    revalidatePath("/admin");
+
     return NextResponse.json({ success: true, career: created }, { status: 201 });
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });

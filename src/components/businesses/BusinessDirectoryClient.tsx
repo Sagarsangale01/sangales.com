@@ -185,3 +185,4 @@ export default function BusinessDirectoryClient({ initialBusinesses, categories 
     </div>
   );
 }
+

@@ -10,7 +10,8 @@ import LatestNewsSection from "@/components/home/LatestNewsSection";
 import { getPublishedBusinesses } from "@/services/businessService";
 import { getPublishedNews } from "@/services/newsService";
 
-export const revalidate = 60; // ISR revalidation
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function HomePage() {
   const [businesses, news] = await Promise.all([
@@ -31,3 +32,4 @@ export default async function HomePage() {
     </div>
   );
 }
+

@@ -149,3 +149,4 @@ export default function CategoryManagerClient({ initialCategories }: Props) {
     </div>
   );
 }
+

@@ -188,3 +188,4 @@ export default function JobApplicationModal({ job, onClose }: Props) {
     </div>
   );
 }
+

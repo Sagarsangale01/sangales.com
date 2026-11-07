@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Plus, Edit3, Trash2, ExternalLink, Calendar, Newspaper, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Plus, Edit3, Trash2, ExternalLink, Calendar, Newspaper, X, AlertCircle } from "lucide-react";
 import { NewsRecord } from "@/lib/data";
 import { formatDate } from "@/lib/utils";
 
@@ -10,10 +11,12 @@ interface Props {
 }
 
 export default function NewsManagerClient({ initialNews }: Props) {
+  const router = useRouter();
   const [newsList, setNewsList] = useState<NewsRecord[]>(initialNews);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingArticle, setEditingArticle] = useState<NewsRecord | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const [formData, setFormData] = useState<Partial<NewsRecord>>({
     title: "",
@@ -48,6 +51,7 @@ export default function NewsManagerClient({ initialNews }: Props) {
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
 
     try {
       if (editingArticle) {
@@ -57,10 +61,12 @@ export default function NewsManagerClient({ initialNews }: Props) {
           body: JSON.stringify(formData),
         });
         const data = await res.json();
-        if (data.success) {
-          setNewsList(newsList.map((n) => (n.id === editingArticle.id ? data.article : n)));
-          setIsModalOpen(false);
+        if (!res.ok || !data.success) {
+          throw new Error(data.message || data.error || "Failed to update article.");
         }
+        setNewsList(newsList.map((n) => (n.id === editingArticle.id ? data.article : n)));
+        setIsModalOpen(false);
+        router.refresh();
       } else {
         const res = await fetch("/api/news", {
           method: "POST",
@@ -68,13 +74,16 @@ export default function NewsManagerClient({ initialNews }: Props) {
           body: JSON.stringify(formData),
         });
         const data = await res.json();
-        if (data.success) {
-          setNewsList([data.article, ...newsList]);
-          setIsModalOpen(false);
+        if (!res.ok || !data.success) {
+          throw new Error(data.message || data.error || "Failed to create article.");
         }
+        setNewsList([data.article, ...newsList]);
+        setIsModalOpen(false);
+        router.refresh();
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
+      setError(err.message || "An error occurred.");
     } finally {
       setLoading(false);
     }
@@ -306,3 +315,4 @@ export default function NewsManagerClient({ initialNews }: Props) {
     </div>
   );
 }
+

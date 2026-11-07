@@ -3,6 +3,7 @@ import { Manrope, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { getSiteSettings } from "@/services/settingsService";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -72,6 +73,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const settings = getSiteSettings();
+
   // Organization Structured Data (JSON-LD)
   const organizationJsonLd = {
     "@context": "https://schema.org",
@@ -128,10 +131,11 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-offwhite text-charcoal">
-        <Header />
+        <Header settings={settings} />
         <main className="flex-grow">{children}</main>
         <Footer />
       </body>
     </html>
   );
 }
+

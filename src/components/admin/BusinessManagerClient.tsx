@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Plus, Edit3, Trash2, ExternalLink, Sparkles, Check, X, Building, ShieldCheck } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Plus, Edit3, Trash2, ExternalLink, Sparkles, Check, X, Building, ShieldCheck, AlertCircle, CheckCircle2 } from "lucide-react";
 import { BusinessRecord } from "@/lib/data";
 
 interface Props {
@@ -10,10 +11,13 @@ interface Props {
 }
 
 export default function BusinessManagerClient({ initialBusinesses, categories }: Props) {
+  const router = useRouter();
   const [businesses, setBusinesses] = useState<BusinessRecord[]>(initialBusinesses);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingBiz, setEditingBiz] = useState<BusinessRecord | null>(null);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successBanner, setSuccessBanner] = useState<string | null>(null);
 
   const [formData, setFormData] = useState<Partial<BusinessRecord>>({
     name: "",
@@ -36,6 +40,7 @@ export default function BusinessManagerClient({ initialBusinesses, categories }:
 
   const openCreateModal = () => {
     setEditingBiz(null);
+    setErrorMessage(null);
     setFormData({
       name: "",
       slug: "",
@@ -59,6 +64,7 @@ export default function BusinessManagerClient({ initialBusinesses, categories }:
 
   const openEditModal = (biz: BusinessRecord) => {
     setEditingBiz(biz);
+    setErrorMessage(null);
     setFormData({ ...biz });
     setIsModalOpen(true);
   };
@@ -66,6 +72,7 @@ export default function BusinessManagerClient({ initialBusinesses, categories }:
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setErrorMessage(null);
 
     try {
       if (editingBiz) {
@@ -73,28 +80,39 @@ export default function BusinessManagerClient({ initialBusinesses, categories }:
         const res = await fetch(`/api/businesses/${editingBiz.id}`, {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
           body: JSON.stringify(formData),
         });
         const data = await res.json();
-        if (data.success) {
-          setBusinesses(businesses.map((b) => (b.id === editingBiz.id ? data.business : b)));
-          setIsModalOpen(false);
+        if (!res.ok || !data.success) {
+          throw new Error(data.message || data.error || "Failed to update business in database.");
         }
+        setBusinesses(businesses.map((b) => (b.id === editingBiz.id ? data.business : b)));
+        setIsModalOpen(false);
+        setSuccessBanner(`"${data.business.name}" updated successfully in database! All frontend pages refreshed.`);
+        setTimeout(() => setSuccessBanner(null), 5000);
+        router.refresh();
       } else {
         // Create
         const res = await fetch("/api/businesses", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          credentials: "include",
           body: JSON.stringify(formData),
         });
         const data = await res.json();
-        if (data.success) {
-          setBusinesses([...businesses, data.business]);
-          setIsModalOpen(false);
+        if (!res.ok || !data.success) {
+          throw new Error(data.message || data.error || "Failed to create business in database.");
         }
+        setBusinesses([...businesses, data.business]);
+        setIsModalOpen(false);
+        setSuccessBanner(`"${data.business.name}" created and published!`);
+        setTimeout(() => setSuccessBanner(null), 5000);
+        router.refresh();
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error("Save error:", err);
+      setErrorMessage(err.message || "An error occurred while saving.");
     } finally {
       setLoading(false);
     }
@@ -135,6 +153,13 @@ export default function BusinessManagerClient({ initialBusinesses, categories }:
           <span>Add New Business</span>
         </button>
       </div>
+
+      {successBanner && (
+        <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-sm flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 shrink-0" />
+          <span>{successBanner}</span>
+        </div>
+      )}
 
       {/* Businesses Table */}
       <div className="bg-white rounded-sm border border-stone-200 shadow-sm overflow-hidden">
@@ -254,6 +279,13 @@ export default function BusinessManagerClient({ initialBusinesses, categories }:
                   Fill in the corporate profile and publishing parameters.
                 </p>
               </div>
+
+              {errorMessage && (
+                <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-sm flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
@@ -457,3 +489,4 @@ export default function BusinessManagerClient({ initialBusinesses, categories }:
     </div>
   );
 }
+

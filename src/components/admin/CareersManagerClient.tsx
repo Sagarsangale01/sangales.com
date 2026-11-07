@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Plus, Edit3, Trash2, Briefcase, Users, FileText, CheckCircle, X, ExternalLink } from "lucide-react";
 import { CareerRecord } from "@/lib/data";
 import { ApplicationRecord } from "@/lib/store";
@@ -17,6 +18,7 @@ export default function CareersManagerClient({
   initialApplications,
   businesses,
 }: Props) {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<"JOBS" | "APPLICATIONS">("JOBS");
   const [careers, setCareers] = useState<CareerRecord[]>(initialCareers);
   const [applications, setApplications] = useState<ApplicationRecord[]>(initialApplications);
@@ -62,6 +64,7 @@ export default function CareersManagerClient({
         if (data.success) {
           setCareers(careers.map((c) => (c.id === editingJob.id ? data.career : c)));
           setIsModalOpen(false);
+          router.refresh();
         }
       } else {
         const res = await fetch("/api/careers", {
@@ -73,6 +76,7 @@ export default function CareersManagerClient({
         if (data.success) {
           setCareers([data.career, ...careers]);
           setIsModalOpen(false);
+          router.refresh();
         }
       }
     } catch (err) {
@@ -388,3 +392,4 @@ export default function CareersManagerClient({
     </div>
   );
 }
+

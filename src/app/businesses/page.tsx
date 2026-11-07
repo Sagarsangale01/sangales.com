@@ -9,7 +9,8 @@ export const metadata: Metadata = {
     "Explore the diversified business portfolio of Sangales Group: Annamrit Foods, Sangales Farms, Sangales Enterprises, Sangales Trading, and Sangales Packaging.",
 };
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function BusinessesPage() {
   const [businesses, categories] = await Promise.all([
@@ -54,3 +55,4 @@ export default async function BusinessesPage() {
     </div>
   );
 }
+

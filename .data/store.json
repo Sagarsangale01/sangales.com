@@ -4,7 +4,7 @@
       "id": "biz-1",
       "name": "Annamrit Foods",
       "slug": "annamrit-foods",
-      "tagline": "Purity, Nutrition & Conscious Dining",
+      "tagline": "100% Pure, Stone-Ground & Chemical-Free Living (Updated via Admin)",
       "category": "Food & Wellness",
       "categorySlug": "food-and-wellness",
       "shortDescription": "A flagship food brand dedicated to nutritious, clean, and thoughtfully crafted food solutions.",
@@ -683,10 +683,10 @@
   "settings": {
     "siteName": "SANGALES",
     "descriptor": "A GROUP OF COMPANIES",
-    "tagline": "Building Businesses. Creating Opportunities.",
+    "tagline": "One Vision. Multiple Global Businesses.",
     "contactEmail": "contact@sangales.com",
-    "contactPhone": "+91 98220 00000",
-    "corporateAddress": "Sangales Corporate House, India",
+    "contactPhone": "+91 98220 99999",
+    "corporateAddress": "Sangales Tower, BKC, Mumbai & Pune, Maharashtra, India",
     "primaryNavy": "#142735",
     "accentGold": "#C6A66B"
   }

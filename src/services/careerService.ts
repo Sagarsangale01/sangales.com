@@ -110,3 +110,4 @@ export async function updateApplicationStatus(id: string, status: ApplicationRec
   }
   return null;
 }
+

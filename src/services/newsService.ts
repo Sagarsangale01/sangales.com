@@ -68,3 +68,4 @@ export async function deleteNews(id: string): Promise<boolean> {
   }
   return false;
 }
+

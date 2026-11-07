@@ -1,9 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowUpRight, Mail, Phone, MapPin, Globe } from "lucide-react";
+import { getSiteSettings } from "@/services/settingsService";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const settings = getSiteSettings();
 
   return (
     <footer className="bg-navy text-stone-300 border-t border-navy-800">
@@ -12,10 +14,10 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             <span className="text-gold text-xs font-semibold tracking-superwide uppercase block mb-1">
-              One Vision. Multiple Businesses.
+              {settings.descriptor}
             </span>
             <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white">
-              Building Businesses. Creating Opportunities.
+              {settings.tagline}
             </h3>
           </div>
           <Link
@@ -35,10 +37,10 @@ export default function Footer() {
           <div className="lg:col-span-2 space-y-4">
             <div className="flex flex-col">
               <span className="font-heading text-2xl font-extrabold tracking-widest text-white">
-                SANGALES
+                {settings.siteName}
               </span>
               <span className="text-[10px] font-semibold tracking-superwide uppercase text-gold">
-                A Group of Companies
+                {settings.descriptor}
               </span>
             </div>
             <p className="text-sm text-stone-400 leading-relaxed max-w-sm">
@@ -124,7 +126,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/admin/login" className="text-xs text-stone-500 hover:text-stone-300 transition-colors">
+                <Link href="/admin" className="text-xs text-stone-500 hover:text-stone-300 transition-colors">
                   Admin CMS
                 </Link>
               </li>
@@ -139,17 +141,17 @@ export default function Footer() {
             <div className="space-y-3 text-sm text-stone-400">
               <p className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-gold shrink-0 mt-0.5" />
-                <span>Sangales Corporate House, Maharashtra, India</span>
+                <span>{settings.corporateAddress}</span>
               </p>
               <p className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-gold shrink-0" />
-                <a href="mailto:contact@sangales.com" className="hover:text-gold transition-colors">
-                  contact@sangales.com
+                <a href={`mailto:${settings.contactEmail}`} className="hover:text-gold transition-colors">
+                  {settings.contactEmail}
                 </a>
               </p>
               <p className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-gold shrink-0" />
-                <span>+91 98220 00000</span>
+                <span>{settings.contactPhone}</span>
               </p>
               <div className="pt-2">
                 <Link
@@ -168,7 +170,7 @@ export default function Footer() {
       <div className="border-t border-navy-800 bg-navy-950 py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-400 gap-4">
           <p>
-            &copy; {currentYear} SANGALES – A GROUP OF COMPANIES. All Rights Reserved.
+            &copy; {currentYear} {settings.siteName} &ndash; {settings.descriptor}. All Rights Reserved.
           </p>
           <div className="flex items-center space-x-6">
             <Link href="/privacy-policy" className="hover:text-stone-200 transition-colors">
