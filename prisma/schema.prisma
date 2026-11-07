@@ -1,0 +1,217 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+enum BusinessStatus {
+  DRAFT
+  PUBLISHED
+  UPCOMING
+  ARCHIVED
+}
+
+enum EnquiryStatus {
+  NEW
+  IN_PROGRESS
+  CONTACTED
+  CONVERTED
+  CLOSED
+}
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model Role {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  permissions String[] // e.g. ["all"], ["businesses:write", "enquiries:read"]
+  users       User[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model User {
+  id           String     @id @default(cuid())
+  name         String
+  email        String     @unique
+  passwordHash String
+  roleId       String
+  role         Role       @relation(fields: [roleId], references: [id])
+  status       UserStatus @default(ACTIVE)
+  auditLogs    AuditLog[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model BusinessCategory {
+  id          String     @id @default(cuid())
+  name        String     @unique
+  slug        String     @unique
+  description String?
+  businesses  Business[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Business {
+  id                  String           @id @default(cuid())
+  name                String
+  slug                String           @unique
+  tagline             String?
+  categoryId          String
+  category            BusinessCategory @relation(fields: [categoryId], references: [id])
+  shortDescription    String
+  about               String           @db.Text
+  logo                String?
+  coverImage          String?
+  brandPrimaryColor   String?          @default("#142735")
+  brandSecondaryColor String?          @default("#C6A66B")
+  email               String?
+  phone               String?
+  address             String?
+  website             String?
+  socialLinks         Json?            // { linkedin, twitter, instagram, facebook }
+  status              BusinessStatus   @default(DRAFT)
+  isFeatured          Boolean          @default(false)
+  displayOrder        Int              @default(0)
+  seoTitle            String?
+  seoDescription      String?
+  
+  images              BusinessImage[]
+  products            ProductService[]
+  enquiries           Enquiry[]
+  careers             Career[]
+
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+
+  @@index([slug])
+  @@index([status])
+}
+
+model BusinessImage {
+  id           String   @id @default(cuid())
+  businessId   String
+  business     Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  imageUrl     String
+  altText      String?
+  displayOrder Int      @default(0)
+  createdAt    DateTime @default(now())
+}
+
+model ProductService {
+  id          String        @id @default(cuid())
+  businessId  String
+  business    Business      @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  name        String
+  description String        @db.Text
+  image       String?
+  category    String?
+  status      ContentStatus @default(PUBLISHED)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Enquiry {
+  id          String        @id @default(cuid())
+  businessId  String?
+  business    Business?     @relation(fields: [businessId], references: [id], onDelete: SetNull)
+  fullName    String
+  email       String
+  phone       String
+  companyName String?
+  enquiryType String        // General, Partnership, Supplier, Distribution, Wholesale, Career, Product
+  subject     String?
+  message     String        @db.Text
+  status      EnquiryStatus @default(NEW)
+  adminNotes  String?       @db.Text
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([status])
+  @@index([businessId])
+}
+
+model News {
+  id             String        @id @default(cuid())
+  title          String
+  slug           String        @unique
+  excerpt        String        @db.Text
+  content        String        @db.Text
+  featuredImage  String?
+  category       String        // Corporate, Expansion, Sustainability, Innovation
+  status         ContentStatus @default(PUBLISHED)
+  publishedAt    DateTime      @default(now())
+  seoTitle       String?
+  seoDescription String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([slug])
+  @@index([status])
+}
+
+model Career {
+  id             String        @id @default(cuid())
+  businessId     String?
+  business       Business?     @relation(fields: [businessId], references: [id], onDelete: SetNull)
+  title          String
+  slug           String        @unique
+  department     String
+  location       String
+  employmentType String        // Full-time, Contract, Internship
+  description    String        @db.Text
+  requirements   String?       @db.Text
+  status         ContentStatus @default(PUBLISHED)
+  closingDate    DateTime?
+  applications   Application[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([slug])
+  @@index([status])
+}
+
+model Application {
+  id          String   @id @default(cuid())
+  careerId    String
+  career      Career   @relation(fields: [careerId], references: [id], onDelete: Cascade)
+  fullName    String
+  email       String
+  phone       String
+  resumeUrl   String
+  coverLetter String?  @db.Text
+  status      String   @default("Pending") // Pending, Reviewed, Shortlisted, Rejected
+  createdAt   DateTime @default(now())
+}
+
+model SiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action     String
+  entityType String
+  entityId   String?
+  details    Json?
+  createdAt  DateTime @default(now())
+}
