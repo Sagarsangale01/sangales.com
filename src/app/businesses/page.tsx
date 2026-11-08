@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import BusinessDirectoryClient from "@/components/businesses/BusinessDirectoryClient";
-import { getPublishedBusinesses, getCategories } from "@/services/businessService";
+import { getPublicBusinesses, getCategories } from "@/services/businessService";
 
 export const metadata: Metadata = {
   title: "Our Businesses | Group Portfolio Directory",
@@ -14,7 +14,7 @@ export const revalidate = 0;
 
 export default async function BusinessesPage() {
   const [businesses, categories] = await Promise.all([
-    getPublishedBusinesses(),
+    getPublicBusinesses(),
     getCategories(),
   ]);
 

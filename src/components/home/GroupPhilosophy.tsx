@@ -1,8 +1,22 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, Building, ShieldCheck, TrendingUp, Users } from "lucide-react";
+import { ArrowRight, Building, TrendingUp } from "lucide-react";
+import { SiteSettings } from "@/services/settingsService";
 
-export default function GroupPhilosophy() {
+interface Props {
+  settings?: SiteSettings;
+}
+
+export default function GroupPhilosophy({ settings }: Props) {
+  const subtitle = settings?.aboutSubtitle || "Corporate Identity & Philosophy";
+  const headline = settings?.aboutHeadline || "One Vision. Multiple Businesses.";
+  const desc1 =
+    settings?.aboutDescription ||
+    "SANGALES – A GROUP OF COMPANIES operates as a unified parent brand fostering independent, mission-driven operating enterprises. From farm gate cultivation and nutritious pantry staples to wholesale enterprise supplies, trading networks, and engineered packaging, we believe true corporate strength lies in patient value creation.";
+  const desc2 =
+    settings?.aboutSecondaryText ||
+    "Every business under the Sangales umbrella retains its dedicated brand ethos, client connections, and specialized domain expertise—while anchoring itself in group-wide standards of governance, operational discipline, and long-term partnership reliability.";
+
   return (
     <section className="py-20 lg:py-28 bg-offwhite">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -11,20 +25,19 @@ export default function GroupPhilosophy() {
           <div className="lg:col-span-7 space-y-6">
             <div className="inline-flex items-center gap-2 text-gold-700 text-xs font-bold tracking-superwide uppercase">
               <span className="w-8 h-[2px] bg-gold-600" />
-              Corporate Identity &amp; Philosophy
+              {subtitle}
             </div>
 
             <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy leading-tight">
-              One Vision. <br className="hidden sm:inline" />
-              <span className="text-gold-700">Multiple Businesses.</span>
+              {headline}
             </h2>
 
             <p className="text-base sm:text-lg text-charcoal leading-relaxed">
-              <strong>SANGALES – A GROUP OF COMPANIES</strong> operates as a unified parent brand fostering independent, mission-driven operating enterprises. From farm gate cultivation and nutritious pantry staples to wholesale enterprise supplies, trading networks, and engineered packaging, we believe true corporate strength lies in patient value creation.
+              {desc1}
             </p>
 
             <p className="text-sm sm:text-base text-charcoal-100 leading-relaxed">
-              Every business under the Sangales umbrella retains its dedicated brand ethos, client connections, and specialized domain expertise—while anchoring itself in group-wide standards of governance, operational discipline, and long-term partnership reliability.
+              {desc2}
             </p>
 
             {/* Core Pillars */}
@@ -37,7 +50,7 @@ export default function GroupPhilosophy() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-3.5 rounded-sm bg-white border border-stone-200/60 shadow-sm">
+              <div className="flex items-start gap-3.5 p-3.5 rounded-sm bg-white border border-stone-200/60 shadow-sm">
                 <TrendingUp className="w-5 h-5 text-gold-600 shrink-0 mt-0.5" />
                 <div>
                   <h4 className="text-sm font-bold text-navy">Sustainable Growth</h4>
@@ -85,7 +98,7 @@ export default function GroupPhilosophy() {
                 </div>
                 <div className="flex items-center justify-between border-b border-navy-800 pb-2 text-xs">
                   <span className="text-stone-400">Headquarters</span>
-                  <span className="text-white font-semibold">Maharashtra, India</span>
+                  <span className="text-white font-semibold">{settings?.corporateAddress || "Maharashtra, India"}</span>
                 </div>
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-stone-400">Operational Philosophy</span>
@@ -99,4 +112,3 @@ export default function GroupPhilosophy() {
     </section>
   );
 }
-

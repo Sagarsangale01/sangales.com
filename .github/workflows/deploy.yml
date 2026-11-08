@@ -1,0 +1,29 @@
+name: Deploy Sangales to AWS Lightsail
+
+on:
+  push:
+    branches: [main, master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to AWS Lightsail via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.LIGHTSAIL_HOST }}
+          username: ${{ secrets.LIGHTSAIL_USERNAME || 'ubuntu' }}
+          key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
+          script: |
+            set -e
+            cd /var/www/sangales
+            git pull origin master || git pull origin main
+            npm install --production=false
+            npm run build
+            pm2 reload ecosystem.config.js || pm2 start ecosystem.config.js
+            echo "Sangales.com successfully updated and reloaded!"
+

@@ -2,6 +2,10 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Compass, Target, ShieldCheck, HeartHandshake, Award, Sprout, ArrowRight } from "lucide-react";
+import { getSiteSettings } from "@/services/settingsService";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Our Vision, Mission & Values | Sangales Group",
@@ -10,6 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function VisionPage() {
+  const settings = getSiteSettings();
   const coreValues = [
     {
       title: "Ethical Diligence & Corporate Integrity",
@@ -77,14 +82,11 @@ export default function VisionPage() {
                 The Group Vision
               </span>
               <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-navy">
-                Building Enduring Indian Enterprises
+                {settings.tagline}
               </h2>
             </div>
             <p className="text-sm sm:text-base text-charcoal leading-relaxed">
-              To be recognized as a premier, values-driven Indian business group that transforms traditional sectors through disciplined execution, creates generational value for partners, and champions sustainable industrial practices.
-            </p>
-            <p className="text-xs sm:text-sm text-charcoal-100 leading-relaxed">
-              We envision Sangales as a national symbol of reliability—where every operating business stands as a benchmark of product integrity and trusted commerce.
+              {settings.visionStatement}
             </p>
           </div>
 
@@ -101,10 +103,7 @@ export default function VisionPage() {
               </h2>
             </div>
             <p className="text-sm sm:text-base text-charcoal leading-relaxed">
-              To build, scale, and nurture essential business ventures in food, agriculture, trade, and packaging by prioritizing customer well-being, fostering fair agricultural livelihoods, and maintaining institutional governance.
-            </p>
-            <p className="text-xs sm:text-sm text-charcoal-100 leading-relaxed">
-              Our mission is realized through daily operational rigor—ensuring every grain, package, and consignment meets the exacting expectations of our clients.
+              {settings.missionStatement}
             </p>
           </div>
         </section>

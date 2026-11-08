@@ -1,9 +1,15 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, Calendar, CheckCircle } from "lucide-react";
-import { INITIAL_MILESTONES } from "@/lib/data";
+import { MilestoneRecord, INITIAL_MILESTONES } from "@/lib/data";
 
-export default function JourneyTimeline() {
+interface Props {
+  milestones?: MilestoneRecord[];
+}
+
+export default function JourneyTimeline({ milestones }: Props) {
+  const displayMilestones = milestones && milestones.length > 0 ? milestones : INITIAL_MILESTONES;
+
   return (
     <section className="py-20 lg:py-28 bg-white border-t border-stone-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,7 +38,7 @@ export default function JourneyTimeline() {
 
         {/* Milestone Timeline cards */}
         <div className="relative border-l-2 border-stone-200 pl-6 sm:pl-10 space-y-12 ml-4 sm:ml-6">
-          {INITIAL_MILESTONES.map((item, idx) => (
+          {displayMilestones.map((item, idx) => (
             <div key={idx} className="relative group">
               {/* Dot indicator */}
               <div className="absolute -left-[31px] sm:-left-[47px] top-1.5 w-4 h-4 rounded-full bg-white border-4 border-gold-600 group-hover:scale-125 transition-transform" />

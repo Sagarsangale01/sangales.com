@@ -5,9 +5,11 @@ import {
   INITIAL_CATEGORIES,
   INITIAL_NEWS,
   INITIAL_CAREERS,
+  INITIAL_MILESTONES,
   BusinessRecord,
   NewsRecord,
   CareerRecord,
+  MilestoneRecord,
 } from "./data";
 
 export interface EnquiryRecord {
@@ -58,6 +60,7 @@ export interface StoreState {
   applications: ApplicationRecord[];
   media: MediaRecord[];
   settings: Record<string, string>;
+  milestones?: MilestoneRecord[];
 }
 
 const DATA_DIR = path.join(process.cwd(), ".data");
@@ -173,10 +176,12 @@ function getDefaultState(): StoreState {
       tagline: "Building Businesses. Creating Opportunities.",
       contactEmail: "contact@sangales.com",
       contactPhone: "+91 98220 00000",
-      corporateAddress: "Sangales Corporate House, India",
+      corporateAddress: "Sangales Corporate House, Maharashtra, India",
+      workingHours: "Monday – Saturday: 09:30 AM – 06:30 PM IST",
       primaryNavy: "#142735",
       accentGold: "#C6A66B",
     },
+    milestones: INITIAL_MILESTONES,
   };
 }
 
@@ -191,7 +196,11 @@ export function getStore(): StoreState {
       return defaultState;
     }
     const raw = fs.readFileSync(STORE_FILE, "utf-8");
-    return JSON.parse(raw);
+    const data: StoreState = JSON.parse(raw);
+    if (!data.milestones || data.milestones.length === 0) {
+      data.milestones = INITIAL_MILESTONES;
+    }
+    return data;
   } catch (err) {
     console.error("Store read error, using default state:", err);
     return getDefaultState();

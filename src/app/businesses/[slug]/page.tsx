@@ -14,6 +14,7 @@ import {
   Building,
   ArrowUpRight,
   Sparkles,
+  Rocket,
 } from "lucide-react";
 import { getBusinessBySlug, getPublishedBusinesses } from "@/services/businessService";
 import BusinessEnquiryForm from "@/components/forms/BusinessEnquiryForm";
@@ -137,6 +138,16 @@ export default async function BusinessDetailPage({ params }: Props) {
               <p className="text-sm sm:text-base text-stone-200/90 font-light leading-relaxed max-w-2xl pt-1">
                 {business.shortDescription}
               </p>
+
+              {business.status === "UPCOMING" && (
+                <div className="mt-3 bg-amber-500/20 border border-amber-400/40 rounded-sm p-3.5 backdrop-blur-md flex items-center gap-3 text-amber-200 text-xs max-w-2xl">
+                  <Rocket className="w-5 h-5 text-gold shrink-0" />
+                  <div>
+                    <p className="font-bold text-white uppercase tracking-wider">UPCOMING ENTERPRISE • IN ACTIVE INCUBATION</p>
+                    <p className="text-stone-300 text-[11px] mt-0.5">This business entity is under active development. Open for forward distribution, vendor linkages, and early partner discussions.</p>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Quick Contact CTAs in Hero */}

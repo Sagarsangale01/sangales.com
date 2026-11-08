@@ -1,8 +1,18 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowUpRight, Handshake, Truck, Store, Boxes } from "lucide-react";
+import { SiteSettings } from "@/services/settingsService";
 
-export default function PartnershipCTA() {
+interface Props {
+  settings?: SiteSettings;
+}
+
+export default function PartnershipCTA({ settings }: Props) {
+  const headline = settings?.partnershipHeadline || "Let's Build Something Together.";
+  const subtitle =
+    settings?.partnershipSubtitle ||
+    "We actively seek long-term partnerships with distributors, institutional buyers, suppliers, and entrepreneurs who value quality and mutual growth.";
+
   const avenues = [
     {
       icon: Store,
@@ -42,10 +52,10 @@ export default function PartnershipCTA() {
             Commercial &bull; Institutional &bull; Growth
           </span>
           <h2 className="font-heading text-3xl sm:text-5xl font-extrabold text-white">
-            Let's Build Something Together.
+            {headline}
           </h2>
           <p className="text-base sm:text-lg text-stone-300 font-light">
-            We actively seek long-term partnerships with distributors, institutional buyers, suppliers, and entrepreneurs who value quality and mutual growth.
+            {subtitle}
           </p>
         </div>
 
@@ -102,4 +112,3 @@ export default function PartnershipCTA() {
     </section>
   );
 }
-

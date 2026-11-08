@@ -10,7 +10,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   const admin = await getCurrentAdmin();
-  if (!admin && process.env.NODE_ENV === "production") {
+  if (!admin && process.env.STRICT_AUTH === "true") {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

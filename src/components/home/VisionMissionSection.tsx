@@ -1,8 +1,21 @@
 import React from "react";
 import Link from "next/link";
 import { Compass, Target, Award, ShieldCheck, HeartHandshake, Sparkles } from "lucide-react";
+import { SiteSettings } from "@/services/settingsService";
 
-export default function VisionMissionSection() {
+interface Props {
+  settings?: SiteSettings;
+}
+
+export default function VisionMissionSection({ settings }: Props) {
+  const vision =
+    settings?.visionStatement ||
+    "To emerge as a trusted, forward-looking Indian corporate group recognized for building resilient businesses, empowering regional supply chains, and setting benchmarks of quality and value creation across every industry we enter.";
+
+  const mission =
+    settings?.missionStatement ||
+    "To cultivate essential enterprises in food, agriculture, trade, packaging, and digital solutions by adhering to uncompromising quality, honoring partner relationships, investing in sustainable methodologies, and delivering tangible value to customers and communities.";
+
   const values = [
     {
       icon: ShieldCheck,
@@ -54,7 +67,7 @@ export default function VisionMissionSection() {
               Our Vision
             </h3>
             <p className="text-sm sm:text-base text-stone-300 leading-relaxed font-light">
-              To emerge as a trusted, forward-looking Indian corporate group recognized for building resilient businesses, empowering regional supply chains, and setting benchmarks of quality and value creation across every industry we enter.
+              {vision}
             </p>
           </div>
 
@@ -68,7 +81,7 @@ export default function VisionMissionSection() {
               Our Mission
             </h3>
             <p className="text-sm sm:text-base text-stone-300 leading-relaxed font-light">
-              To cultivate essential enterprises in food, agriculture, trade, packaging, and digital solutions by adhering to uncompromising quality, honoring partner relationships, investing in sustainable methodologies, and delivering tangible value to customers and communities.
+              {mission}
             </p>
           </div>
         </div>
@@ -97,4 +110,3 @@ export default function VisionMissionSection() {
     </section>
   );
 }
-

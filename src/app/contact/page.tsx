@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Mail, Phone, MapPin, Clock, Building, ShieldCheck } from "lucide-react";
 import CorporateContactForm from "@/components/forms/CorporateContactForm";
 import { getPublishedBusinesses } from "@/services/businessService";
+import { getSiteSettings } from "@/services/settingsService";
 
 export const metadata: Metadata = {
   title: "Contact Us & Business Enquiries | Sangales Group",
@@ -14,7 +15,10 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function ContactPage() {
-  const businesses = await getPublishedBusinesses();
+  const [businesses, settings] = await Promise.all([
+    getPublishedBusinesses(),
+    Promise.resolve(getSiteSettings()),
+  ]);
 
   return (
     <div className="pt-24 pb-20 bg-offwhite min-h-screen">
@@ -61,7 +65,7 @@ export default async function ContactPage() {
                   <MapPin className="w-5 h-5 text-gold-700 shrink-0 mt-0.5" />
                   <div>
                     <span className="block text-xs uppercase font-bold text-stone-400">Postal Address</span>
-                    <span>Sangales Corporate House, Maharashtra, India</span>
+                    <span className="font-medium text-navy">{settings.corporateAddress}</span>
                   </div>
                 </div>
 
@@ -69,8 +73,8 @@ export default async function ContactPage() {
                   <Mail className="w-5 h-5 text-gold-700 shrink-0 mt-0.5" />
                   <div>
                     <span className="block text-xs uppercase font-bold text-stone-400">Corporate Email</span>
-                    <a href="mailto:contact@sangales.com" className="text-navy hover:text-gold font-medium">
-                      contact@sangales.com
+                    <a href={`mailto:${settings.contactEmail}`} className="text-navy hover:text-gold font-medium">
+                      {settings.contactEmail}
                     </a>
                   </div>
                 </div>
@@ -79,7 +83,9 @@ export default async function ContactPage() {
                   <Phone className="w-5 h-5 text-gold-700 shrink-0 mt-0.5" />
                   <div>
                     <span className="block text-xs uppercase font-bold text-stone-400">Telephone Hotline</span>
-                    <span>+91 98220 00000</span>
+                    <a href={`tel:${settings.contactPhone.replace(/\s+/g, "")}`} className="text-navy hover:text-gold font-medium">
+                      {settings.contactPhone}
+                    </a>
                   </div>
                 </div>
 
@@ -87,7 +93,7 @@ export default async function ContactPage() {
                   <Clock className="w-5 h-5 text-gold-700 shrink-0 mt-0.5" />
                   <div>
                     <span className="block text-xs uppercase font-bold text-stone-400">Desk Working Hours</span>
-                    <span>Monday &ndash; Saturday: 09:30 AM &ndash; 06:30 PM IST</span>
+                    <span>{settings.workingHours}</span>
                   </div>
                 </div>
               </div>
@@ -105,7 +111,7 @@ export default async function ContactPage() {
             </div>
           </div>
 
-          {/* Right Column: Unified Form wrapped in Suspense */}
+          {/* Right Column: Unified Form */}
           <div className="lg:col-span-7">
             <Suspense fallback={<div className="bg-white p-8 rounded-sm border border-stone-200">Loading enquiry desk...</div>}>
               <CorporateContactForm businesses={businesses} />

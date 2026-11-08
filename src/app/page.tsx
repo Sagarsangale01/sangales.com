@@ -7,29 +7,31 @@ import WhySangales from "@/components/home/WhySangales";
 import JourneyTimeline from "@/components/home/JourneyTimeline";
 import PartnershipCTA from "@/components/home/PartnershipCTA";
 import LatestNewsSection from "@/components/home/LatestNewsSection";
-import { getPublishedBusinesses } from "@/services/businessService";
+import { getPublicBusinesses } from "@/services/businessService";
 import { getPublishedNews } from "@/services/newsService";
+import { getSiteSettings, getMilestones } from "@/services/settingsService";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function HomePage() {
-  const [businesses, news] = await Promise.all([
-    getPublishedBusinesses(),
+  const [businesses, news, settings, milestones] = await Promise.all([
+    getPublicBusinesses(),
     getPublishedNews(),
+    Promise.resolve(getSiteSettings()),
+    Promise.resolve(getMilestones()),
   ]);
 
   return (
     <div className="flex flex-col">
-      <HeroBanner />
-      <GroupPhilosophy />
+      <HeroBanner settings={settings} />
+      <GroupPhilosophy settings={settings} />
       <PortfolioShowcase businesses={businesses} />
-      <VisionMissionSection />
+      <VisionMissionSection settings={settings} />
       <WhySangales />
-      <JourneyTimeline />
-      <PartnershipCTA />
+      <JourneyTimeline milestones={milestones} />
+      <PartnershipCTA settings={settings} />
       <LatestNewsSection news={news} />
     </div>
   );
 }
-

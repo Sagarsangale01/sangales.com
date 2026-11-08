@@ -4,6 +4,10 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { getSiteSettings } from "@/services/settingsService";
+import { getPublishedBusinesses } from "@/services/businessService";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -68,54 +72,34 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const settings = getSiteSettings();
+  const [settings, businesses] = await Promise.all([
+    Promise.resolve(getSiteSettings()),
+    getPublishedBusinesses(),
+  ]);
 
   // Organization Structured Data (JSON-LD)
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "SANGALES – A GROUP OF COMPANIES",
-    alternateName: "Sangales Group",
+    name: `${settings.siteName} – ${settings.descriptor}`,
+    alternateName: `${settings.siteName} Group`,
     url: "https://www.sangales.com",
     logo: "https://www.sangales.com/logos/sangales-wordmark.svg",
-    description:
-      "A diversified Indian business group bringing together wholesome food, sustainable agriculture, commercial trading, packaging solutions, and next-generation enterprise innovation.",
+    description: settings.metaDescription,
     foundingLocation: "India",
-    department: [
-      {
-        "@type": "Organization",
-        name: "Annamrit Foods",
-        url: "https://www.sangales.com/businesses/annamrit-foods",
-      },
-      {
-        "@type": "Organization",
-        name: "Sangales Farms",
-        url: "https://www.sangales.com/businesses/sangales-farms",
-      },
-      {
-        "@type": "Organization",
-        name: "Sangales Enterprises",
-        url: "https://www.sangales.com/businesses/sangales-enterprises",
-      },
-      {
-        "@type": "Organization",
-        name: "Sangales Trading",
-        url: "https://www.sangales.com/businesses/sangales-trading",
-      },
-      {
-        "@type": "Organization",
-        name: "Sangales Packaging",
-        url: "https://www.sangales.com/businesses/sangales-packaging",
-      },
-    ],
+    department: businesses.map((b) => ({
+      "@type": "Organization",
+      name: b.name,
+      url: `https://www.sangales.com/businesses/${b.slug}`,
+    })),
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+91-98220-00000",
+      telephone: settings.contactPhone,
       contactType: "customer service",
       areaServed: "IN",
       availableLanguage: ["en", "hi", "mr"],
@@ -133,7 +117,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-offwhite text-charcoal">
         <Header settings={settings} />
         <main className="flex-grow">{children}</main>
-        <Footer />
+        <Footer settings={settings} businesses={businesses} />
       </body>
     </html>
   );

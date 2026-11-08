@@ -4,9 +4,9 @@
       "id": "biz-1",
       "name": "Annamrit Foods",
       "slug": "annamrit-foods",
-      "tagline": "100% Pure, Stone-Ground & Chemical-Free Living (Updated via Admin)",
+      "tagline": "100% Pure, Stone-Ground & Chemical-Free Living (Updated Live from CMS)",
       "category": "Food & Wellness",
-      "categorySlug": "food-and-wellness",
+      "categorySlug": "food-wellness",
       "shortDescription": "A flagship food brand dedicated to nutritious, clean, and thoughtfully crafted food solutions.",
       "about": "Annamrit Foods was established with a singular conviction: good nutrition is the bedrock of vibrant communities. Grounded in uncompromising hygiene, heritage ingredients, and modern food-science standards, Annamrit Foods develops wholesome staple foods, healthy ready-to-eat snacks, and culinary essentials. Every product adheres to rigorous quality benchmarks from sourcing to packaging.",
       "logo": "/logos/annamrit-foods.svg",
@@ -66,6 +66,13 @@
           "description": "Single-origin raw wild forest honey and granular jaggery produced without sulphur processing.",
           "image": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&q=80&w=800",
           "category": "Natural Sweeteners"
+        },
+        {
+          "id": "prod-test-live-1",
+          "name": "Cold-Pressed Certified Organic Sesame Oil (Live Added)",
+          "category": "Wellness Oils",
+          "description": "Freshly stone-pressed virgin sesame oil rich in antioxidants and natural lignans.",
+          "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=800"
         }
       ],
       "gallery": [
@@ -91,7 +98,7 @@
       "id": "biz-2",
       "name": "Sangales Farms",
       "slug": "sangales-farms",
-      "tagline": "Cultivating Sustainability from Soil to Harvest",
+      "tagline": "Pioneering Sustainable Precision Agriculture (Updated Live)",
       "category": "Agriculture & Farming",
       "categorySlug": "agriculture-and-farming",
       "shortDescription": "An agriculture-focused enterprise representing progressive farming practices, seasonal produce, and agri-partnerships.",
@@ -569,6 +576,21 @@
   ],
   "enquiries": [
     {
+      "id": "enq-1794109501199",
+      "businessName": "Sangales Corporate Group",
+      "fullName": "Sagar Dashrath sangale",
+      "email": "sagarsangale111@gmail.com",
+      "phone": "+919595078808",
+      "companyName": "test",
+      "enquiryType": "Product",
+      "subject": "test heading",
+      "message": "Test message",
+      "status": "NEW",
+      "adminNotes": "",
+      "createdAt": "2026-11-08T03:45:01.199Z",
+      "updatedAt": "2026-11-08T03:45:01.199Z"
+    },
+    {
       "id": "enq-1794064718075",
       "businessName": "Sangales Corporate Group",
       "fullName": "Sunil Kulkarni",
@@ -685,9 +707,43 @@
     "descriptor": "A GROUP OF COMPANIES",
     "tagline": "One Vision. Multiple Global Businesses.",
     "contactEmail": "contact@sangales.com",
-    "contactPhone": "+91 98220 99999",
+    "contactPhone": "+91 95950 78808",
     "corporateAddress": "Sangales Tower, BKC, Mumbai & Pune, Maharashtra, India",
     "primaryNavy": "#142735",
-    "accentGold": "#C6A66B"
-  }
+    "accentGold": "#C6A66B",
+    "metaTitle": "SANGALES – A GROUP OF COMPANIES | Building Businesses. Creating Opportunities.",
+    "metaDescription": "Official corporate website of SANGALES – A GROUP OF COMPANIES. Leading Indian group in food, agriculture, trading, packaging, and commercial enterprises."
+  },
+  "milestones": [
+    {
+      "year": "Inception",
+      "title": "Founding Vision & Commercial Inception",
+      "description": "Sangales was established around a foundational principle: building robust Indian enterprises focused on essential commodities, reliability, and long-term partner trust.",
+      "tag": "Group Foundation"
+    },
+    {
+      "year": "Expansion",
+      "title": "Agricultural & Supply Chain Integration",
+      "description": "Initiated structured agricultural operations and commercial wholesale supply channels to connect rural produce with urban demand centres.",
+      "tag": "Farming & Wholesale"
+    },
+    {
+      "year": "Brand Genesis",
+      "title": "Establishment of Annamrit Foods",
+      "description": "Launched Annamrit Foods to bring pure, unadulterated, stone-ground flours and cold-pressed wellness oils directly to conscious consumers.",
+      "tag": "Food & Wellness"
+    },
+    {
+      "year": "Diversification",
+      "title": "Packaging & Sustainable Materials Division",
+      "description": "Inaugurated Sangales Packaging to supply food-grade, eco-conscious, and heavy-duty industrial packaging to regional businesses.",
+      "tag": "Manufacturing & Packaging"
+    },
+    {
+      "year": "Present & Future",
+      "title": "Unified Digital Ecosystem & Scalable Horizons",
+      "description": "Rollout of the centralized digital architecture to accelerate partnerships, institutional distribution, and incubation of future tech and logistics ventures.",
+      "tag": "Corporate Platform"
+    }
+  ]
 }

@@ -3,8 +3,21 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, ChevronDown, Sparkles } from "lucide-react";
+import { SiteSettings } from "@/services/settingsService";
 
-export default function HeroBanner() {
+interface Props {
+  settings?: SiteSettings;
+}
+
+export default function HeroBanner({ settings }: Props) {
+  const label = settings?.heroLabel || "DIVERSIFIED BUSINESS GROUP • INDIA";
+  const headline = settings?.heroHeadline || "Building Businesses. Creating Opportunities.";
+  const subtitle =
+    settings?.heroSubtitle ||
+    "A growing business group bringing together wholesome food, sustainable agriculture, commercial trading, packaging solutions, and next-generation enterprise innovation.";
+  const ctaPrimary = settings?.heroCtaPrimary || "Explore Our Businesses";
+  const ctaSecondary = settings?.heroCtaSecondary || "Discover Our Story";
+
   return (
     <section className="relative min-h-[92vh] flex items-center justify-center bg-navy text-white overflow-hidden pt-24 pb-16">
       {/* Cinematic Background Layer */}
@@ -25,18 +38,17 @@ export default function HeroBanner() {
           {/* Label Tag */}
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-gold text-xs font-semibold tracking-superwide uppercase">
             <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
-            DIVERSIFIED BUSINESS GROUP &bull; INDIA
+            {label}
           </div>
 
           {/* Large Editorial Headline */}
           <h1 className="font-heading text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08]">
-            Building Businesses. <br />
-            <span className="text-gold">Creating Opportunities.</span>
+            {headline}
           </h1>
 
           {/* Subtitle */}
           <p className="text-lg sm:text-xl text-stone-200/90 leading-relaxed font-light max-w-2xl">
-            A growing business group bringing together wholesome food, sustainable agriculture, commercial trading, packaging solutions, and next-generation enterprise innovation.
+            {subtitle}
           </p>
 
           {/* Action CTAs */}
@@ -45,7 +57,7 @@ export default function HeroBanner() {
               href="/businesses"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gold hover:bg-white text-navy font-bold text-xs tracking-widest uppercase rounded-sm transition-all duration-300 shadow-xl group"
             >
-              <span>Explore Our Businesses</span>
+              <span>{ctaPrimary}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
 
@@ -53,7 +65,7 @@ export default function HeroBanner() {
               href="/about"
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-transparent hover:bg-white/10 text-white font-medium text-xs tracking-widest uppercase border border-white/30 rounded-sm transition-all duration-300"
             >
-              <span>Discover Our Story</span>
+              <span>{ctaSecondary}</span>
             </Link>
           </div>
 
@@ -83,4 +95,3 @@ export default function HeroBanner() {
     </section>
   );
 }
-

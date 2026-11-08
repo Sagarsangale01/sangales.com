@@ -2,6 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Building2, CheckCircle2, ShieldCheck, Sprout, Target } from "lucide-react";
+import { getSiteSettings } from "@/services/settingsService";
 
 export const metadata: Metadata = {
   title: "About Us | Sangales Corporate Profile & Philosophy",
@@ -9,7 +10,12 @@ export const metadata: Metadata = {
     "Learn about SANGALES – A GROUP OF COMPANIES, our founding philosophy of patient entrepreneurship, business governance, and our diversified portfolio.",
 };
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default function AboutPage() {
+  const settings = getSiteSettings();
+
   return (
     <div className="pt-24 pb-20 bg-offwhite min-h-screen">
       {/* Editorial Page Header */}
@@ -28,7 +34,7 @@ export default function AboutPage() {
               Corporate Overview &bull; Identity
             </span>
             <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
-              About Sangales
+              About {settings.siteName}
             </h1>
             <p className="text-lg text-stone-200 font-light leading-relaxed">
               A diversified Indian business group committed to building sustainable, purpose-driven enterprises and creating long-term value across essential industries.
@@ -44,17 +50,16 @@ export default function AboutPage() {
           <div className="lg:col-span-6 space-y-6">
             <div className="inline-flex items-center gap-2 text-gold-700 text-xs font-bold tracking-superwide uppercase">
               <span className="w-8 h-[2px] bg-gold-600" />
-              Who We Are
+              {settings.aboutSubtitle}
             </div>
             <h2 className="font-heading text-3xl sm:text-4xl font-extrabold text-navy">
-              Grounded in Purpose. <br />
-              <span className="text-gold-700">Driven by Value Creation.</span>
+              {settings.aboutHeadline}
             </h2>
             <p className="text-base sm:text-lg text-charcoal leading-relaxed">
-              <strong>SANGALES – A GROUP OF COMPANIES</strong> was founded on a simple yet enduring premise: lasting enterprises are built by solving real, tangible problems with consistency, integrity, and operational focus.
+              {settings.aboutDescription}
             </p>
             <p className="text-sm sm:text-base text-charcoal-100 leading-relaxed">
-              Rather than pursuing superficial expansion, the group has purposefully concentrated its activities across fundamental economic sectors that touch daily life: nutritional food staples, sustainable agriculture, commercial trading, wholesale procurement, and eco-conscious packaging.
+              {settings.aboutSecondaryText}
             </p>
           </div>
 
@@ -151,4 +156,3 @@ export default function AboutPage() {
     </div>
   );
 }
-

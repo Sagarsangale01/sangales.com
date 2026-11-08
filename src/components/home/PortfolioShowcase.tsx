@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowUpRight, ArrowRight, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowUpRight, ArrowRight, ShieldCheck, Sparkles, Rocket } from "lucide-react";
 import { BusinessRecord } from "@/lib/data";
 
 interface Props {
@@ -9,6 +9,7 @@ interface Props {
 
 export default function PortfolioShowcase({ businesses }: Props) {
   const published = businesses.filter((b) => b.status === "PUBLISHED");
+  const upcoming = businesses.filter((b) => b.status === "UPCOMING");
   const featured = published.find((b) => b.slug === "annamrit-foods") || published[0];
   const others = published.filter((b) => b.id !== featured?.id);
 
@@ -148,6 +149,84 @@ export default function PortfolioShowcase({ businesses }: Props) {
             </div>
           ))}
         </div>
+
+        {/* 3. Upcoming Ventures Horizon */}
+        {upcoming.length > 0 && (
+          <div className="mt-16 pt-12 border-t border-stone-200">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+              <div>
+                <div className="inline-flex items-center gap-2 text-amber-600 text-xs font-bold tracking-superwide uppercase mb-1">
+                  <Rocket className="w-4 h-4 text-amber-500" />
+                  <span>Strategic Incubation Pipeline</span>
+                </div>
+                <h3 className="font-heading text-2xl sm:text-3xl font-extrabold text-navy">
+                  Upcoming Group Ventures
+                </h3>
+                <p className="text-xs sm:text-sm text-charcoal-100 mt-1">
+                  Emerging business identities in planning, feasibility analysis, or preliminary infrastructure incubation.
+                </p>
+              </div>
+
+              <Link
+                href="/businesses"
+                className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-navy hover:text-gold transition-colors shrink-0"
+              >
+                <span>View Full Directory</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {upcoming.map((biz) => (
+                <div
+                  key={biz.id}
+                  className="bg-offwhite rounded-sm overflow-hidden border border-amber-200/80 shadow-sm hover:shadow-editorial transition-all flex flex-col justify-between group"
+                >
+                  <div>
+                    <div className="relative h-44 overflow-hidden bg-navy-950">
+                      <img
+                        src={biz.coverImage}
+                        alt={biz.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent" />
+                      <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider text-white bg-amber-600 px-2.5 py-1 rounded-sm flex items-center gap-1">
+                        <Rocket className="w-3 h-3 text-gold" /> Upcoming Venture
+                      </span>
+                      <span className="absolute bottom-3 left-3 text-[11px] font-bold uppercase tracking-wider text-gold bg-navy/80 px-2 py-0.5 rounded-sm">
+                        {biz.category}
+                      </span>
+                    </div>
+
+                    <div className="p-5 space-y-2">
+                      <h4 className="font-heading text-lg font-bold text-navy group-hover:text-gold transition-colors">
+                        {biz.name}
+                      </h4>
+                      {biz.tagline && (
+                        <p className="text-xs text-gold-700 italic font-medium">
+                          &quot;{biz.tagline}&quot;
+                        </p>
+                      )}
+                      <p className="text-xs text-charcoal-100 line-clamp-2 leading-relaxed">
+                        {biz.shortDescription}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="p-5 pt-0 border-t border-stone-200/60 mt-3">
+                    <Link
+                      href={`/businesses/${biz.slug}`}
+                      className="pt-3 inline-flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-navy group-hover:text-gold transition-colors"
+                    >
+                      <span>Explore Incubation Details</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 text-gold" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

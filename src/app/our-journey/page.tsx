@@ -2,7 +2,10 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Calendar, Flag, Award, Sparkles } from "lucide-react";
-import { INITIAL_MILESTONES } from "@/lib/data";
+import { getMilestones } from "@/services/settingsService";
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Our Journey & Corporate Milestones | Sangales Group",
@@ -11,6 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function JourneyPage() {
+  const milestones = getMilestones();
   return (
     <div className="pt-24 pb-20 bg-offwhite min-h-screen">
       {/* Editorial Page Header */}
@@ -54,7 +58,7 @@ export default function JourneyPage() {
 
         {/* Timeline Items */}
         <div className="relative border-l-2 border-stone-300 pl-6 sm:pl-10 space-y-12 ml-4 sm:ml-8">
-          {INITIAL_MILESTONES.map((item, idx) => (
+          {milestones.map((item, idx) => (
             <div key={idx} className="relative group">
               {/* Dot */}
               <div className="absolute -left-[31px] sm:-left-[47px] top-2 w-4 h-4 rounded-full bg-white border-4 border-gold-600 group-hover:scale-125 transition-transform" />

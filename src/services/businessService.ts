@@ -9,6 +9,20 @@ export async function getPublishedBusinesses(): Promise<BusinessRecord[]> {
     .sort((a, b) => a.displayOrder - b.displayOrder);
 }
 
+export async function getUpcomingBusinesses(): Promise<BusinessRecord[]> {
+  const store = getStore();
+  return store.businesses
+    .filter((b) => b.status === "UPCOMING")
+    .sort((a, b) => a.displayOrder - b.displayOrder);
+}
+
+export async function getPublicBusinesses(): Promise<BusinessRecord[]> {
+  const store = getStore();
+  return store.businesses
+    .filter((b) => b.status === "PUBLISHED" || b.status === "UPCOMING")
+    .sort((a, b) => a.displayOrder - b.displayOrder);
+}
+
 export async function getAllBusinesses(): Promise<BusinessRecord[]> {
   const store = getStore();
   return store.businesses.sort((a, b) => a.displayOrder - b.displayOrder);

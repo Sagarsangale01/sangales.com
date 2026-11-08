@@ -1,11 +1,19 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowUpRight, Mail, Phone, MapPin, Globe } from "lucide-react";
-import { getSiteSettings } from "@/services/settingsService";
+import { getSiteSettings, SiteSettings } from "@/services/settingsService";
+import { BusinessRecord } from "@/lib/data";
+import { getStore } from "@/lib/store";
 
-export default function Footer() {
+interface FooterProps {
+  settings?: SiteSettings;
+  businesses?: BusinessRecord[];
+}
+
+export default function Footer({ settings: propSettings, businesses: propBusinesses }: FooterProps) {
   const currentYear = new Date().getFullYear();
-  const settings = getSiteSettings();
+  const settings = propSettings || getSiteSettings();
+  const businesses = propBusinesses || getStore().businesses.filter(b => b.status === "PUBLISHED");
 
   return (
     <footer className="bg-navy text-stone-300 border-t border-navy-800">
@@ -61,31 +69,13 @@ export default function Footer() {
               Group Portfolio
             </h4>
             <ul className="space-y-2.5 text-sm">
-              <li>
-                <Link href="/businesses/annamrit-foods" className="hover:text-gold transition-colors">
-                  Annamrit Foods
-                </Link>
-              </li>
-              <li>
-                <Link href="/businesses/sangales-farms" className="hover:text-gold transition-colors">
-                  Sangales Farms
-                </Link>
-              </li>
-              <li>
-                <Link href="/businesses/sangales-enterprises" className="hover:text-gold transition-colors">
-                  Sangales Enterprises
-                </Link>
-              </li>
-              <li>
-                <Link href="/businesses/sangales-trading" className="hover:text-gold transition-colors">
-                  Sangales Trading
-                </Link>
-              </li>
-              <li>
-                <Link href="/businesses/sangales-packaging" className="hover:text-gold transition-colors">
-                  Sangales Packaging
-                </Link>
-              </li>
+              {businesses.slice(0, 6).map((b) => (
+                <li key={b.id}>
+                  <Link href={`/businesses/${b.slug}`} className="hover:text-gold transition-colors">
+                    {b.name}
+                  </Link>
+                </li>
+              ))}
               <li>
                 <Link href="/businesses" className="text-gold hover:underline text-xs inline-flex items-center gap-1 mt-1">
                   View Full Directory &rarr;

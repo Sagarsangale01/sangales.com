@@ -3,6 +3,7 @@ import BusinessManagerClient from "@/components/admin/BusinessManagerClient";
 import { getAllBusinesses, getCategories } from "@/services/businessService";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export default async function AdminBusinessesPage() {
   const [businesses, categories] = await Promise.all([
