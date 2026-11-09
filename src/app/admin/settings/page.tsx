@@ -34,7 +34,7 @@ export default function AdminSettingsPage() {
     tagline: "Building Businesses. Creating Opportunities.",
     contactEmail: "contact@sangales.com",
     contactPhone: "+91 98220 00000",
-    corporateAddress: "Sangales Corporate House, Maharashtra, India",
+    corporateAddress: "Samruddhi Park, Kapaleshwar nagar, Panchwati, Nashik -03",
     workingHours: "Monday – Saturday: 09:30 AM – 06:30 PM IST",
     primaryNavy: "#142735",
     accentGold: "#C6A66B",

@@ -101,7 +101,7 @@ export const INITIAL_BUSINESSES: BusinessRecord[] = [
     brandSecondaryColor: "#C6A66B",
     email: "enquiry@annamritfoods.com",
     phone: "+91 98220 00000",
-    address: "Sangales Corporate House, Maharashtra, India",
+    address: "Samruddhi Park, Kapaleshwar nagar, Panchwati, Nashik -03",
     website: "https://www.annamritfoods.com",
     socialLinks: {
       linkedin: "https://linkedin.com/company/sangales",
