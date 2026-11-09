@@ -7,8 +7,8 @@ import { Lock, Mail, ArrowRight, AlertCircle, Shield } from "lucide-react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("admin@sangales.com");
-  const [password, setPassword] = useState("SangalesAdmin2026!");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -102,11 +102,11 @@ export default function AdminLoginPage() {
               </div>
             </div>
 
-            <div className="p-3 bg-stone-50 border border-stone-200 text-[11px] text-charcoal-100 rounded-sm space-y-0.5">
+            {/* <div className="p-3 bg-stone-50 border border-stone-200 text-[11px] text-charcoal-100 rounded-sm space-y-0.5">
               <p className="font-bold text-navy">Default Initial Credentials:</p>
               <p>Email: <span className="font-mono text-navy font-semibold">admin@sangales.com</span></p>
               <p>Password: <span className="font-mono text-navy font-semibold">SangalesAdmin2026!</span></p>
-            </div>
+            </div> */}
 
             <button
               type="submit"

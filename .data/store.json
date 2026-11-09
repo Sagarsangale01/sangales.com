@@ -4,13 +4,13 @@
       "id": "biz-1",
       "name": "Annamrit Foods",
       "slug": "annamrit-foods",
-      "tagline": "100% Pure, Stone-Ground & Chemical-Free Living",
+      "tagline": "Fresh Organic Sprouts, Wholesome Parathas & Healthy Daily Foods",
       "category": "Food & Wellness",
       "categorySlug": "food-wellness",
-      "shortDescription": "A flagship food brand dedicated to nutritious, clean, and thoughtfully crafted food solutions.",
-      "about": "Annamrit Foods was established with a singular conviction: good nutrition is the bedrock of vibrant communities. Grounded in uncompromising hygiene, heritage ingredients, and modern food-science standards, Annamrit Foods develops wholesome staple foods, healthy ready-to-eat snacks, and culinary essentials. Every product adheres to rigorous quality benchmarks from sourcing to packaging.",
+      "shortDescription": "A flagship healthy food brand providing fresh protein-rich organic sprouts, wholesome multigrain parathas, nutritious noodles (Maggi style), and pure food essentials.",
+      "about": "Annamrit Foods was established with a singular conviction: good nutrition and vitality begin with pure, unadulterated everyday food. Grounded in uncompromising hygiene, farm-fresh ingredients, and modern culinary standards, Annamrit Foods crafts delicious and healthy daily meal solutions. Our signature lineup features enzymatically active fresh organic sprouts, nourishing homestyle stuffed multigrain parathas, guilt-free nutrient-rich noodles (Maggi style crafted with whole grains and zero harmful preservatives), alongside cold-pressed wellness oils and pure sweeteners. Every offering is prepared with zero artificial food colors or toxic additives to give conscious families and working professionals authentic homestyle nutrition.",
       "logo": "/logos/annamrit-foods.svg",
-      "coverImage": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1600",
+      "coverImage": "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&q=80&w=1600",
       "brandPrimaryColor": "#142735",
       "brandSecondaryColor": "#C6A66B",
       "email": "enquiry@annamritfoods.com",
@@ -24,73 +24,73 @@
       "status": "PUBLISHED",
       "isFeatured": true,
       "displayOrder": 1,
-      "seoTitle": "Annamrit Foods | Healthy & Wholesome Food Brands | Sangales Group",
-      "seoDescription": "Discover Annamrit Foods, offering nutritious grains, cold-pressed oils, and healthy packaged food products under Sangales Group.",
+      "seoTitle": "Annamrit Foods | Fresh Organic Sprouts, Healthy Parathas & Nutritious Meals | Sangales Group",
+      "seoDescription": "Discover Annamrit Foods — fresh protein sprouts, wholesome stuffed parathas, healthy Maggi-style noodles, and certified healthy food solutions.",
       "strengths": [
-        "Zero compromise on hygiene and food-safety certifications",
-        "Direct procurement of unadulterated raw grains and ingredients",
-        "Modern processing and clean room food packaging standards",
-        "Nutrient retention using traditional stone-ground techniques"
+        "Fresh daily hygienic preparation of protein-rich organic sprouts",
+        "Homestyle nutritious parathas made with ancient grains & cold-pressed oils",
+        "Healthy quick-cook noodles (Maggi style) with zero maida and zero artificial preservatives",
+        "Uncompromising clean-room food safety and certified quality standards"
       ],
       "targetAudience": [
-        "Health-conscious households and families",
-        "Hospitality and premium institutional kitchens",
-        "Modern retail chains and specialty organic food stores",
-        "Wholesale grocery distributors"
+        "Health-conscious households, fitness enthusiasts, and students",
+        "Corporate offices, institutional cafeterias, and wellness kitchens",
+        "Modern grocery stores, retail food chains, and supermarkets",
+        "HORECA partners seeking hygienic, healthy food bases"
       ],
       "products": [
         {
           "id": "af-1",
-          "name": "Stone-Ground Heritage Flours",
-          "description": "Nutrient-dense ancient whole wheat, millet, and multi-grain flours milled without chemical additives.",
-          "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=800",
-          "category": "Staples"
+          "name": "Fresh Organic Sprouts & Protein Mixes",
+          "category": "Fresh Nutrition",
+          "description": "Enzymatically active, protein-rich sprouted mung, chickpeas, and mixed pulses. Freshly cultivated under certified clean-room conditions for daily vitality.",
+          "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=800"
         },
         {
           "id": "af-2",
-          "name": "Artisanal Cold-Pressed Oils",
-          "description": "Wood-pressed mustard, sesame, and groundnut oils preserving natural antioxidants and aroma.",
-          "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=800",
-          "category": "Cold-Pressed Oils"
+          "name": "Wholesome Stuffed & Multigrain Parathas",
+          "category": "Healthy Quick Meals",
+          "description": "Homestyle whole wheat and multigrain parathas (Methi, Paneer, Mixed Veg) crafted using pure cold-pressed oils without hydrogenated fats.",
+          "image": "https://images.unsplash.com/photo-1626074353765-517a681e40be?auto=format&fit=crop&q=80&w=800"
         },
         {
           "id": "af-3",
-          "name": "Nutri-Crunch Roasted Snacks",
-          "description": "Oil-free roasted seed blends, seasoned fox nuts (makhana), and roasted pulses.",
-          "image": "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?auto=format&fit=crop&q=80&w=800",
-          "category": "Healthy Snacks"
+          "name": "Nutri-Noodles (Healthy Maggi Alternative)",
+          "category": "Healthy Instant Comfort",
+          "description": "Guilt-free instant noodles prepared with ragi, whole wheat, and foxtail millets with natural aromatic spices. Zero maida, zero palm oil, 100% MSG-free.",
+          "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&q=80&w=800"
         },
         {
           "id": "af-4",
-          "name": "Pure Natural Sweeteners",
-          "description": "Single-origin raw wild forest honey and granular jaggery produced without sulphur processing.",
-          "image": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&q=80&w=800",
-          "category": "Natural Sweeteners"
+          "name": "Stone-Ground Heritage Flours",
+          "category": "Staples",
+          "description": "Nutrient-dense ancient whole wheat, millet, and multi-grain flours milled slowly without heat degradation.",
+          "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=800"
         },
         {
           "id": "af-5",
-          "name": "Cold-Pressed Certified Organic Sesame Oil",
+          "name": "Artisanal Cold-Pressed Virgin Oils",
           "category": "Wellness Oils",
-          "description": "Freshly stone-pressed virgin sesame oil rich in antioxidants and natural lignans.",
+          "description": "Wood-pressed raw sesame, groundnut, and mustard oils rich in antioxidants and natural plant nutrients.",
           "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=800"
         }
       ],
       "gallery": [
         {
-          "url": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=1200",
-          "alt": "Fresh flour milling"
+          "url": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=1200",
+          "alt": "Fresh organic protein sprouts"
         },
         {
-          "url": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1200",
-          "alt": "Annamrit organic produce display"
+          "url": "https://images.unsplash.com/photo-1626074353765-517a681e40be?auto=format&fit=crop&q=80&w=1200",
+          "alt": "Golden wholesome multigrain parathas"
         },
         {
-          "url": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=1200",
-          "alt": "Pure cold-pressed oil extraction"
+          "url": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&q=80&w=1200",
+          "alt": "Healthy vegetable noodles bowl"
         },
         {
-          "url": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&q=80&w=1200",
-          "alt": "Pure natural honey harvest"
+          "url": "https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&q=80&w=1200",
+          "alt": "Hygienic wholesome food preparation"
         }
       ]
     },
@@ -494,16 +494,16 @@
     },
     {
       "id": "news-2",
-      "title": "Annamrit Foods Expands Natural Cold-Pressed & Stone-Ground Processing Facility",
-      "slug": "annamrit-foods-expands-processing-facility",
-      "excerpt": "New zero-heat milling and wood-pressed oil units commissioned to meet surging demand for unadulterated staple foods.",
-      "content": "To keep pace with growing consumer affinity for pure, unadulterated staple nutrition, Annamrit Foods has expanded its specialized processing facility with advanced stone-ground milling units and stainless steel clean-room packaging lines.\n\nThe expanded capacity allows Annamrit Foods to scale the production of whole-grain flours, unrefined forest honey, and wood-pressed seed oils without utilizing high temperatures, thereby conserving essential micronutrients and natural flavors.\n\nAll output continues to undergo stringent multi-point batch tests for purity, moisture content, and zero pesticide residues before reaching retail shelves and institutional kitchens.",
-      "featuredImage": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1200",
+      "title": "Annamrit Foods Introduces Daily Healthy Foods Range: Fresh Sprouts, Multigrain Parathas & Nutri-Noodles",
+      "slug": "annamrit-foods-expands-healthy-foods-range",
+      "excerpt": "New ready-to-eat and wholesome cooking division brings enzymatically active fresh organic sprouts, multigrain stuffed parathas, and chemical-free millet noodles to health-conscious consumers.",
+      "content": "Responding to the rapidly expanding demand for honest, chemical-free everyday nutrition, Annamrit Foods has expanded its portfolio with a dedicated Healthy Foods division.\n\nThe new collection includes fresh, vacuum-sealed organic sprouted pulses, homestyle multigrain stuffed parathas prepared with cold-pressed oils, and guilt-free Nutri-Noodles (a wholesome Maggi-style comfort food crafted from ragi, whole wheat, and foxtail millets with zero palm oil, zero maida, and zero MSG).\n\n\"Our everyday meals should build health, not compromise it,\" said the brand leadership. \"By bringing together live organic sprouts, nourishing parathas, and nutritious noodles, Annamrit Foods ensures that fast, everyday eating remains deeply nourishing and 100% wholesome for every family.\"",
+      "featuredImage": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=1200",
       "category": "Expansion",
       "publishedAt": "2026-09-28T10:30:00.000Z",
       "status": "PUBLISHED",
-      "seoTitle": "Annamrit Foods Expands Processing Facility | Sangales News",
-      "seoDescription": "Annamrit Foods scales natural cold-pressed oil and stone-ground heritage flour production with expanded facility."
+      "seoTitle": "Annamrit Foods Launches Fresh Sprouts, Parathas & Nutri-Noodles | Sangales News",
+      "seoDescription": "Annamrit Foods unveils wholesome daily nutrition range including organic fresh sprouts, multigrain parathas, and chemical-free noodles."
     },
     {
       "id": "news-3",
