@@ -158,12 +158,6 @@ export default function Header({ settings }: Props) {
             >
               Partner With Us
             </Link>
-            <Link
-              href="/admin/login"
-              className="text-center text-xs text-stone-400 hover:text-stone-200 py-1"
-            >
-              Admin Portal
-            </Link>
           </div>
         </div>
       )}
