@@ -42,16 +42,21 @@ export default function AskSamikshaChatbot({
   corporateName = "SANGALES",
 }: AskSamikshaChatbotProps) {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [hasInteracted, setHasInteracted] = useState(false);
   const [showNotificationBadge, setShowNotificationBadge] = useState(true);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Strip everything except numbers for WhatsApp wa.me link
   const rawNumber = phone.replace(/[^0-9]/g, "");
 
-  // Do not show chatbot inside the admin CMS portal
-  if (pathname?.startsWith("/admin")) {
+  // Do not render on SSR or inside the admin CMS portal
+  if (!mounted || pathname?.startsWith("/admin")) {
     return null;
   }
 
@@ -76,7 +81,7 @@ export default function AskSamikshaChatbot({
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 print:hidden font-sans">
+    <div className="fixed bottom-6 right-6 z-[9999] print:hidden font-sans">
       <AnimatePresence>
         {isOpen && (
           <motion.div
