@@ -3,6 +3,7 @@ import { Manrope, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import AskSamikshaChatbot from "@/components/common/AskSamikshaChatbot";
 import { getSiteSettings } from "@/services/settingsService";
 import { getPublishedBusinesses } from "@/services/businessService";
 
@@ -118,6 +119,7 @@ export default async function RootLayout({
         <Header settings={settings} />
         <main className="flex-grow">{children}</main>
         <Footer settings={settings} businesses={businesses} />
+        <AskSamikshaChatbot phone={settings.contactPhone} corporateName={settings.siteName} />
       </body>
     </html>
   );
