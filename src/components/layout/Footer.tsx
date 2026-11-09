@@ -115,11 +115,11 @@ export default function Footer({ settings: propSettings, businesses: propBusines
                   Careers &amp; Openings
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/admin" className="text-xs text-stone-500 hover:text-stone-300 transition-colors">
                   Admin CMS
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
