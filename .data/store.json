@@ -4,7 +4,7 @@
       "id": "biz-1",
       "name": "Annamrit Foods",
       "slug": "annamrit-foods",
-      "tagline": "100% Pure, Stone-Ground & Chemical-Free Living (Updated Live from CMS)",
+      "tagline": "100% Pure, Stone-Ground & Chemical-Free Living",
       "category": "Food & Wellness",
       "categorySlug": "food-wellness",
       "shortDescription": "A flagship food brand dedicated to nutritious, clean, and thoughtfully crafted food solutions.",
@@ -68,8 +68,8 @@
           "category": "Natural Sweeteners"
         },
         {
-          "id": "prod-test-live-1",
-          "name": "Cold-Pressed Certified Organic Sesame Oil (Live Added)",
+          "id": "af-5",
+          "name": "Cold-Pressed Certified Organic Sesame Oil",
           "category": "Wellness Oils",
           "description": "Freshly stone-pressed virgin sesame oil rich in antioxidants and natural lignans.",
           "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=800"
@@ -98,7 +98,7 @@
       "id": "biz-2",
       "name": "Sangales Farms",
       "slug": "sangales-farms",
-      "tagline": "Pioneering Sustainable Precision Agriculture (Updated Live)",
+      "tagline": "Pioneering Sustainable Precision Agriculture",
       "category": "Agriculture & Farming",
       "categorySlug": "agriculture-and-farming",
       "shortDescription": "An agriculture-focused enterprise representing progressive farming practices, seasonal produce, and agri-partnerships.",

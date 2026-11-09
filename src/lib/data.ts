@@ -153,6 +153,13 @@ export const INITIAL_BUSINESSES: BusinessRecord[] = [
         image: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&q=80&w=800",
         category: "Natural Sweeteners",
       },
+      {
+        id: "af-5",
+        name: "Cold-Pressed Certified Organic Sesame Oil",
+        description: "Freshly stone-pressed virgin sesame oil rich in antioxidants and natural lignans.",
+        image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=800",
+        category: "Wellness Oils",
+      },
     ],
     gallery: [
       { url: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=1200", alt: "Fresh flour milling" },
