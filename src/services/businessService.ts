@@ -60,7 +60,7 @@ export async function createBusiness(input: Partial<BusinessRecord>): Promise<Bu
     brandPrimaryColor: input.brandPrimaryColor || "#142735",
     brandSecondaryColor: input.brandSecondaryColor || "#C6A66B",
     email: input.email || "contact@sangales.com",
-    phone: input.phone || "+91 98220 00000",
+    phone: input.phone || "+91 75077 00936",
     address: input.address || "Sangales Corporate House, India",
     website: input.website || `https://${slug}.sangales.com`,
     socialLinks: input.socialLinks || {},

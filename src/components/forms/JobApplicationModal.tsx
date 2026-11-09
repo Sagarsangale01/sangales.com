@@ -133,7 +133,7 @@ export default function JobApplicationModal({ job, onClose }: Props) {
                   required
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  placeholder="+91 98220 00000"
+                  placeholder="+91 75077 00936"
                   className="w-full px-3.5 py-2 text-sm bg-offwhite border border-stone-200 rounded-sm focus:outline-none focus:border-gold text-charcoal"
                 />
               </div>

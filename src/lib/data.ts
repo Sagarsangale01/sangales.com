@@ -100,7 +100,7 @@ export const INITIAL_BUSINESSES: BusinessRecord[] = [
     brandPrimaryColor: "#142735",
     brandSecondaryColor: "#C6A66B",
     email: "enquiry@annamritfoods.com",
-    phone: "+91 98220 00000",
+    phone: "+91 75077 00936",
     address: "Samruddhi Park, Kapaleshwar nagar, Panchwati, Nashik -03",
     website: "https://www.annamritfoods.com",
     socialLinks: {
@@ -175,7 +175,7 @@ export const INITIAL_BUSINESSES: BusinessRecord[] = [
     brandPrimaryColor: "#1e3a2f",
     brandSecondaryColor: "#C6A66B",
     email: "farms@sangales.com",
-    phone: "+91 98220 00000",
+    phone: "+91 75077 00936",
     address: "Agro-Division, Sangales Rural Hub, Maharashtra, India",
     website: "https://farms.sangales.com",
     socialLinks: {
@@ -241,7 +241,7 @@ export const INITIAL_BUSINESSES: BusinessRecord[] = [
     brandPrimaryColor: "#1c2a38",
     brandSecondaryColor: "#C6A66B",
     email: "enterprises@sangales.com",
-    phone: "+91 98220 00000",
+    phone: "+91 75077 00936",
     address: "Commercial Center, Sangales Group, India",
     website: "https://enterprises.sangales.com",
     socialLinks: {
@@ -299,7 +299,7 @@ export const INITIAL_BUSINESSES: BusinessRecord[] = [
     brandPrimaryColor: "#142735",
     brandSecondaryColor: "#C6A66B",
     email: "trading@sangales.com",
-    phone: "+91 98220 00000",
+    phone: "+91 75077 00936",
     address: "Logistics Hub, Sangales Group, India",
     website: "https://trading.sangales.com",
     socialLinks: {
@@ -356,7 +356,7 @@ export const INITIAL_BUSINESSES: BusinessRecord[] = [
     brandPrimaryColor: "#1d2939",
     brandSecondaryColor: "#C6A66B",
     email: "packaging@sangales.com",
-    phone: "+91 98220 00000",
+    phone: "+91 75077 00936",
     address: "Industrial Packaging Zone, Sangales Group, India",
     website: "https://packaging.sangales.com",
     socialLinks: {
@@ -422,7 +422,7 @@ export const INITIAL_BUSINESSES: BusinessRecord[] = [
     brandPrimaryColor: "#0f172a",
     brandSecondaryColor: "#C6A66B",
     email: "digital@sangales.com",
-    phone: "+91 98220 00000",
+    phone: "+91 75077 00936",
     address: "Technology Hub, Sangales Group, India",
     website: "https://digital.sangales.com",
     socialLinks: {},
@@ -450,7 +450,7 @@ export const INITIAL_BUSINESSES: BusinessRecord[] = [
     brandPrimaryColor: "#142735",
     brandSecondaryColor: "#C6A66B",
     email: "logistics@sangales.com",
-    phone: "+91 98220 00000",
+    phone: "+91 75077 00936",
     address: "Logistics Corridor, Sangales Group, India",
     website: "https://logistics.sangales.com",
     socialLinks: {},
