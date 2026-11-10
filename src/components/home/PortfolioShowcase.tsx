@@ -62,9 +62,20 @@ export default function PortfolioShowcase({ businesses }: Props) {
               {/* Featured Details */}
               <div className="lg:col-span-5 p-8 sm:p-12 flex flex-col justify-between">
                 <div className="space-y-4">
-                  <span className="text-xs font-bold uppercase tracking-widest text-gold-700">
-                    {featured.category}
-                  </span>
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="text-xs font-bold uppercase tracking-widest text-gold-700">
+                      {featured.category}
+                    </span>
+                    {featured.logo && (
+                      <div className="w-12 h-12 rounded-full bg-white p-0.5 shadow border border-gold/30 shrink-0 overflow-hidden flex items-center justify-center">
+                        <img
+                          src={featured.logo}
+                          alt={featured.name}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                    )}
+                  </div>
                   <h3 className="font-heading text-3xl sm:text-4xl font-extrabold text-navy">
                     {featured.name}
                   </h3>

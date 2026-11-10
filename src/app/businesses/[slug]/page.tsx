@@ -123,16 +123,28 @@ export default async function BusinessDetailPage({ params }: Props) {
                 </span>
               </div>
 
-              {/* 2. Business Name & Tagline */}
-              <h1 className="font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white">
-                {business.name}
-              </h1>
-
-              {business.tagline && (
-                <p className="text-base sm:text-xl text-gold font-medium italic">
-                  "{business.tagline}"
-                </p>
-              )}
+              {/* 2. Business Logo & Name & Tagline */}
+              <div className="flex items-center gap-4 pt-1">
+                {business.logo && (
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white p-1 shadow-xl border-2 border-gold/40 shrink-0 overflow-hidden flex items-center justify-center">
+                    <img
+                      src={business.logo}
+                      alt={business.name}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                )}
+                <div>
+                  <h1 className="font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white">
+                    {business.name}
+                  </h1>
+                  {business.tagline && (
+                    <p className="text-base sm:text-xl text-gold font-medium italic mt-1">
+                      &quot;{business.tagline}&quot;
+                    </p>
+                  )}
+                </div>
+              </div>
 
               {/* 4. Short Introduction */}
               <p className="text-sm sm:text-base text-stone-200/90 font-light leading-relaxed max-w-2xl pt-1">
@@ -413,6 +425,21 @@ export default async function BusinessDetailPage({ params }: Props) {
           <div className="lg:col-span-4 space-y-8">
             {/* 10. Contact Details & 11. Links */}
             <div className="bg-white p-6 sm:p-8 rounded-sm border border-stone-200/80 shadow-sm space-y-6 sticky top-28">
+              {business.logo && (
+                <div className="pb-4 border-b border-stone-100 flex flex-col items-center justify-center gap-2">
+                  <div className="w-24 h-24 rounded-full bg-white p-1 border-2 border-stone-100 shadow-sm flex items-center justify-center overflow-hidden">
+                    <img
+                      src={business.logo}
+                      alt={business.name}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400">
+                    Official Brand Seal
+                  </span>
+                </div>
+              )}
+
               <h3 className="font-heading text-base font-bold text-navy uppercase tracking-wider border-b border-stone-100 pb-3">
                 Business Contact Desk
               </h3>

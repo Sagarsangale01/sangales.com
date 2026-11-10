@@ -12,8 +12,8 @@ interface AskSamikshaChatbotProps {
 
 const PRESET_QUERIES = [
   {
-    label: "🌾 Sprouts & Healthy Foods",
-    text: "Hello Samiksha, I would like to enquire about Annamrit Foods fresh sprouts, nutritious parathas, healthy noodles, and distribution rights.",
+    label: "🥗 Healthy Chaat & Sprouts",
+    text: "Hello Samiksha, I would like to enquire about Annamrit Foods menu — healthy chaat, fresh sprouts, breakfast favourites, wholesome meals, and distribution in Nashik.",
   },
   {
     label: "🧈 Anvayi Farms A2 Ghee",
