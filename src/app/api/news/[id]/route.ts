@@ -8,7 +8,7 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   const admin = await getCurrentAdmin();
-  if (!admin && process.env.STRICT_AUTH === "true") {
+  if (!admin) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -33,7 +33,7 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   const admin = await getCurrentAdmin();
-  if (!admin && process.env.STRICT_AUTH === "true") {
+  if (!admin) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

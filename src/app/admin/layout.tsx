@@ -1,5 +1,8 @@
 import React from "react";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import AdminSidebar from "@/components/admin/AdminSidebar";
+import { getCurrentAdmin } from "@/lib/auth";
 
 export const metadata = {
   title: "Admin CMS | Sangales Group",
@@ -9,11 +12,23 @@ export const metadata = {
   },
 };
 
-export default function AdminLayout({
+export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const admin = await getCurrentAdmin();
+  const headerList = headers();
+  const pathname = headerList.get("x-pathname") || "";
+
+  // If unauthenticated or accessing the login page, render cleanly without the admin layout chrome
+  if (pathname === "/admin/login" || !admin) {
+    if (pathname && pathname !== "/admin/login" && !admin) {
+      redirect("/admin/login");
+    }
+    return <>{children}</>;
+  }
+
   return (
     <div className="flex min-h-screen bg-stone-100 text-charcoal">
       <AdminSidebar />
@@ -25,13 +40,15 @@ export default function AdminLayout({
               Corporate Administration Console
             </span>
             <span className="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase rounded-sm">
-              Live Environment
+              Authenticated
             </span>
           </div>
 
           <div className="flex items-center gap-3 text-xs">
             <span className="text-stone-500">Authorized:</span>
-            <span className="font-bold text-navy">admin@sangales.com (Super Admin)</span>
+            <span className="font-bold text-navy">
+              {admin.email} ({admin.role})
+            </span>
           </div>
         </header>
 
@@ -42,4 +59,3 @@ export default function AdminLayout({
     </div>
   );
 }
-

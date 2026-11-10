@@ -1,14 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Lock, Mail, ArrowRight, AlertCircle, Shield } from "lucide-react";
+import { Lock, Mail, ArrowRight, AlertCircle, Eye, EyeOff, ShieldCheck } from "lucide-react";
 
-export default function AdminLoginPage() {
+export const dynamic = "force-dynamic";
+
+function AdminLoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const from = searchParams.get("from");
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,41 +32,47 @@ export default function AdminLoginPage() {
 
       const data = await res.json();
       if (!res.ok) {
-        throw new Error(data.message || "Authentication failed");
+        throw new Error(data.message || "Invalid administrator credentials");
       }
 
-      router.push("/admin");
+      const destination =
+        from && from.startsWith("/admin") && from !== "/admin/login"
+          ? from
+          : "/admin";
+
+      router.push(destination);
       router.refresh();
     } catch (err: any) {
-      setError(err.message || "Failed to sign in.");
+      setError(err.message || "Failed to authenticate. Please check your credentials.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy-950 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-navy-950 p-4">
       <div className="max-w-md w-full bg-white rounded-sm border border-stone-200 shadow-2xl overflow-hidden">
-        {/* Banner */}
+        {/* Header Banner */}
         <div className="bg-navy p-6 text-center text-white border-b border-navy-800 space-y-2 flex flex-col items-center">
           <img
             src="/logos/sangales-logo-white.png"
             alt="SANGALES"
             className="h-11 sm:h-12 w-auto object-contain mx-auto"
           />
-          <span className="text-[10px] font-bold tracking-superwide text-gold uppercase block mt-1">
-            CMS Authentication
-          </span>
+          <div className="flex items-center gap-1.5 text-gold text-[10px] font-bold tracking-superwide uppercase mt-1">
+            <ShieldCheck className="w-3.5 h-3.5" />
+            <span>Secure Executive Console</span>
+          </div>
         </div>
 
         {/* Form Body */}
         <div className="p-8 space-y-6">
           <div className="space-y-1">
             <h2 className="font-heading text-xl font-bold text-navy">
-              Executive Sign In
+              Executive Authentication
             </h2>
             <p className="text-xs text-charcoal-100">
-              Enter your authorized administrative credentials to access group management.
+              Administrative credentials required to manage operations, entities, and inbound leads.
             </p>
           </div>
 
@@ -81,6 +93,8 @@ export default function AdminLoginPage() {
                 <input
                   type="email"
                   required
+                  autoFocus
+                  placeholder="admin@sangales.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-offwhite border border-stone-200 rounded-sm focus:outline-none focus:border-gold text-charcoal"
@@ -95,27 +109,29 @@ export default function AdminLoginPage() {
               <div className="relative">
                 <Lock className="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   required
+                  placeholder="Enter administrator password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-3.5 py-2.5 text-sm bg-offwhite border border-stone-200 rounded-sm focus:outline-none focus:border-gold text-charcoal"
+                  className="w-full pl-10 pr-10 py-2.5 text-sm bg-offwhite border border-stone-200 rounded-sm focus:outline-none focus:border-gold text-charcoal"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-navy transition-colors"
+                >
+                  {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
               </div>
             </div>
-
-            {/* <div className="p-3 bg-stone-50 border border-stone-200 text-[11px] text-charcoal-100 rounded-sm space-y-0.5">
-              <p className="font-bold text-navy">Default Initial Credentials:</p>
-              <p>Email: <span className="font-mono text-navy font-semibold">admin@sangales.com</span></p>
-              <p>Password: <span className="font-mono text-navy font-semibold">SangalesAdmin2026!</span></p>
-            </div> */}
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-navy hover:bg-gold hover:text-navy text-white text-xs font-bold uppercase tracking-widest rounded-sm transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-3 bg-navy hover:bg-gold hover:text-navy text-white text-xs font-bold uppercase tracking-widest rounded-sm transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50 mt-2"
             >
-              <span>{loading ? "Authenticating..." : "Authorize Access"}</span>
+              <span>{loading ? "Verifying Credentials..." : "Authorize Access"}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>
@@ -134,3 +150,10 @@ export default function AdminLoginPage() {
   );
 }
 
+export default function AdminLoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-navy-950 flex items-center justify-center text-white text-xs">Loading authentication...</div>}>
+      <AdminLoginForm />
+    </Suspense>
+  );
+}

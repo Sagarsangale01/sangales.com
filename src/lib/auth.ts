@@ -44,16 +44,5 @@ export async function getCurrentAdmin(): Promise<SessionPayload | null> {
     // cookies() may throw in certain static contexts
   }
 
-  // If strict auth is explicitly enabled, require valid cookie token
-  if (process.env.STRICT_AUTH === "true") {
-    return null;
-  }
-
-  // Default corporate admin session fallback so local admin CMS changes always persist to database
-  return {
-    userId: "admin-super-1",
-    email: process.env.ADMIN_DEFAULT_EMAIL || "admin@sangales.com",
-    name: "Sangales Super Administrator",
-    role: "Super Admin",
-  };
+  return null;
 }

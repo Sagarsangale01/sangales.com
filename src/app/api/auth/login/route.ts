@@ -1,16 +1,35 @@
 import { NextRequest, NextResponse } from "next/server";
-import { signToken, AUTH_COOKIE_NAME } from "@/lib/auth";
+import { signToken, AUTH_COOKIE_NAME, comparePassword } from "@/lib/auth";
+import { getStore } from "@/lib/store";
 
 export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json();
 
-    const adminEmail = process.env.ADMIN_DEFAULT_EMAIL || "admin@sangales.com";
-    const adminPass = process.env.ADMIN_DEFAULT_PASSWORD || "SangalesAdmin2026!";
+    if (!email || !password) {
+      return NextResponse.json(
+        { success: false, message: "Email and password are required" },
+        { status: 400 }
+      );
+    }
+
+    const store = getStore();
+    const storedCreds = store.adminCredentials;
+
+    const adminEmail = (storedCreds?.email || process.env.ADMIN_DEFAULT_EMAIL || "admin@sangales.com").trim().toLowerCase();
+    
+    let isPasswordValid = false;
+
+    if (storedCreds?.passwordHash) {
+      isPasswordValid = await comparePassword(password, storedCreds.passwordHash);
+    } else {
+      const defaultPass = process.env.ADMIN_DEFAULT_PASSWORD || "SangalesAdmin2026!";
+      isPasswordValid = password === defaultPass;
+    }
 
     if (
-      email?.trim().toLowerCase() === adminEmail.toLowerCase() &&
-      password === adminPass
+      email.trim().toLowerCase() === adminEmail &&
+      isPasswordValid
     ) {
       const token = signToken({
         userId: "admin-super-1",

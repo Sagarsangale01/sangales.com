@@ -61,6 +61,11 @@ export interface StoreState {
   media: MediaRecord[];
   settings: Record<string, string>;
   milestones?: MilestoneRecord[];
+  adminCredentials?: {
+    email: string;
+    passwordHash: string;
+    updatedAt?: string;
+  };
 }
 
 const DATA_DIR = path.join(process.cwd(), ".data");
