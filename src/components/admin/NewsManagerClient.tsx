@@ -259,7 +259,8 @@ export default function NewsManagerClient({ initialNews }: Props) {
                   Featured Image URL
                 </label>
                 <input
-                  type="url"
+                  type="text"
+                  placeholder="e.g. /images/... or https://..."
                   value={formData.featuredImage}
                   onChange={(e) => setFormData({ ...formData, featuredImage: e.target.value })}
                   className="w-full px-3 py-2 text-xs bg-offwhite border border-stone-200 rounded-sm font-mono"

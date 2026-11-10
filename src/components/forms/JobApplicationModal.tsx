@@ -144,11 +144,11 @@ export default function JobApplicationModal({ job, onClose }: Props) {
                 Resume / LinkedIn Portfolio URL <span className="text-red-500">*</span>
               </label>
               <input
-                type="url"
+                type="text"
                 required
                 value={formData.resumeUrl}
                 onChange={(e) => setFormData({ ...formData, resumeUrl: e.target.value })}
-                placeholder="https://drive.google.com/... or https://linkedin.com/in/..."
+                placeholder="https://drive.google.com/... or linkedin.com/in/..."
                 className="w-full px-3.5 py-2 text-sm bg-offwhite border border-stone-200 rounded-sm focus:outline-none focus:border-gold text-charcoal"
               />
             </div>

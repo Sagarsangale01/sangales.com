@@ -183,14 +183,14 @@ export default function MediaLibraryClient({ initialMedia }: Props) {
 
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1">
-                  Image URL (S3 / CDN / Cloudinary) <span className="text-red-500">*</span>
+                  Image URL (Local Path or Web URL) <span className="text-red-500">*</span>
                 </label>
                 <input
-                  type="url"
+                  type="text"
                   required
                   value={newAsset.url}
                   onChange={(e) => setNewAsset({ ...newAsset, url: e.target.value })}
-                  placeholder="https://images.unsplash.com/..."
+                  placeholder="/images/... or https://..."
                   className="w-full px-3 py-2 text-xs bg-offwhite border border-stone-200 rounded-sm focus:outline-none focus:border-gold font-mono"
                 />
               </div>

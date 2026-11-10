@@ -600,7 +600,8 @@ export default function BusinessManagerClient({ initialBusinesses, categories }:
                         Cover Image URL
                       </label>
                       <input
-                        type="url"
+                        type="text"
+                        placeholder="e.g. /images/... or https://..."
                         value={formData.coverImage}
                         onChange={(e) => setFormData({ ...formData, coverImage: e.target.value })}
                         className="w-full px-3 py-2 text-xs bg-offwhite border border-stone-200 rounded-sm font-mono"
@@ -612,7 +613,8 @@ export default function BusinessManagerClient({ initialBusinesses, categories }:
                         Official Website
                       </label>
                       <input
-                        type="url"
+                        type="text"
+                        placeholder="e.g. https://www.sangales.com/businesses/..."
                         value={formData.website}
                         onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                         className="w-full px-3 py-2 text-xs bg-offwhite border border-stone-200 rounded-sm"
@@ -739,8 +741,8 @@ export default function BusinessManagerClient({ initialBusinesses, categories }:
                       />
                     </div>
                     <input
-                      type="url"
-                      placeholder="Product Image URL"
+                      type="text"
+                      placeholder="Product Image URL (e.g. /images/... or https://...)"
                       value={newProduct.image}
                       onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
                       className="w-full px-3 py-2 text-xs bg-white border border-stone-200 rounded-sm font-mono"
@@ -842,8 +844,8 @@ export default function BusinessManagerClient({ initialBusinesses, categories }:
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <input
-                        type="url"
-                        placeholder="Image URL (CDN / S3 / Unsplash)"
+                        type="text"
+                        placeholder="Image URL (e.g. /images/... or https://...)"
                         value={newGalleryImg.url}
                         onChange={(e) => setNewGalleryImg({ ...newGalleryImg, url: e.target.value })}
                         className="px-3 py-2 text-xs bg-white border border-stone-200 rounded-sm font-mono"
