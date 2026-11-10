@@ -227,11 +227,11 @@
       "id": "biz-3",
       "name": "Sangales Enterprises",
       "slug": "sangales-enterprises",
-      "tagline": "Commercial, Industrial & Architectural LED Lighting Solutions",
+      "tagline": "Home Lights, Panel Lights, LED Lights, Street Lights & Tube Lights",
       "category": "Lighting & LED Solutions",
       "categorySlug": "lighting-and-led-solutions",
-      "shortDescription": "A specialized illumination enterprise delivering high-efficiency commercial LED lighting, industrial high bays, architectural track luminaires, and smart outdoor street lighting solutions.",
-      "about": "Sangales Enterprises is a premier illumination and lighting infrastructure provider delivering cutting-edge LED solutions for commercial, industrial, and architectural applications.\n\nWe design, engineer, and supply high-performance, energy-efficient lighting fixtures engineered to deliver optimal lumens-per-watt, superior thermal heat dissipation, and long-lasting optical performance. Our comprehensive lighting catalog includes commercial 2x2 LED panel lights, glare-free downlights, heavy-duty industrial high bay fixtures, weatherproof outdoor floodlights, architectural magnetic track systems, and smart street lighting.\n\nPartnering with architects, interior consultants, electrical contractors, and institutional developers, Sangales Enterprises illuminates corporate headquarters, manufacturing facilities, retail showrooms, luxury hotels, and modern urban infrastructure with sustainable, smart LED technology.",
+      "shortDescription": "A trusted illumination enterprise providing complete lighting solutions including modern home lights, ultra-slim panel lights, commercial LED luminaires, outdoor street lights, and energy-saving tube lights.",
+      "about": "Sangales Enterprises is a premier lighting and illumination provider delivering high-efficiency LED solutions for residential, commercial, industrial, and infrastructure applications.\n\nOur extensive lighting lineup features modern Home Lights, ultra-slim Panel Lights (2x2 ft and round fixtures), commercial LED Lights and architectural track spotlights, high-lumen outdoor Street Lights, energy-saving LED Tube Lights and battens, and heavy-duty industrial floodlights. Engineered with advanced thermal management and high lumens-per-watt ratings, our fixtures deliver bright, flicker-free illumination with significant energy savings.\n\nWhether illuminating modern homes, corporate offices, retail showrooms, municipal roadways, or manufacturing plants, Sangales Enterprises provides reliable quality, competitive wholesale pricing, and customized lighting solutions across Maharashtra and pan-India.",
       "logo": "/logos/sangales-enterprises.svg",
       "coverImage": "/images/enterprises/sangales-enterprises-cover.jpg",
       "brandPrimaryColor": "#1c2a38",
@@ -246,93 +246,93 @@
       "status": "PUBLISHED",
       "isFeatured": true,
       "displayOrder": 3,
-      "seoTitle": "Sangales Enterprises | Commercial & Industrial LED Lighting Solutions | Nashik",
-      "seoDescription": "Sangales Enterprises — High-efficiency commercial LED panels, industrial high bays, architectural track lighting, streetlights, and smart lighting solutions.",
+      "seoTitle": "Sangales Enterprises | Home Lights, Panel Lights, LED Lights, Street Lights & Tube Lights",
+      "seoDescription": "Sangales Enterprises — Complete lighting solutions in Nashik: Home lights, ultra-slim panel lights, commercial LED lights, outdoor streetlights, and energy-saving tube lights.",
       "strengths": [
-        "Comprehensive LED Range: Commercial Panels, Industrial High Bays, Floodlights & Streetlights",
+        "Complete Lighting Range: Home Lights, Panel Lights, LED Lights, Street Lights & Tube Lights",
         "High Lumen-per-Watt Efficiency & Advanced Aluminum Heat Sink Management",
-        "Custom Architectural & Interior Lighting Layout Consultancy",
-        "IP66 & Heavy-Duty Weatherproof Certification for Industrial and Outdoor Luminaires",
-        "Direct Bulk Wholesale Supply for Contractors, Builders, Showrooms & Institutions"
+        "Up to 60% Power Savings with Long-Life High-CRI LED Technology",
+        "Weatherproof IP66 Outdoor Streetlights & Heavy-Duty Industrial Luminaires",
+        "Wholesale Supply & Consultancy for Homes, Showrooms, Offices & Infrastructure"
       ],
       "targetAudience": [
-        "Architects, lighting designers, interior contractors & MEP consultants",
-        "Industrial manufacturing plants, warehouses & logistics hubs",
-        "Commercial office complexes, banks, IT parks & retail showrooms",
-        "Hotels, banquet halls, restaurants & institutional campuses"
+        "Homeowners, interior designers, architects & residential contractors",
+        "Commercial office complexes, retail showrooms, malls & hospitality spaces",
+        "Municipal corporations, private townships, gated communities & street lighting planners",
+        "Industrial manufacturing plants, warehouses & logistics hubs"
       ],
       "products": [
         {
           "id": "se-1",
-          "name": "Commercial Office LED Panels & Recessed Downlights",
-          "category": "Commercial Lighting",
-          "description": "Ultra-slim, glare-free 2x2 ft and 1x4 ft backlit & edgelit LED ceiling panels and recessed COB downlights engineered for uniform illumination in corporate offices, banks, and conference suites.",
-          "image": "/images/enterprises/commercial-led-panel-lights.jpg"
+          "name": "Home Lights & Residential Fixtures",
+          "category": "Home Lighting",
+          "description": "Modern interior residential lights including recessed ceiling downlights, ambient wall sconces, cove fixtures, and decorative chandeliers for luxury homes.",
+          "image": "/images/enterprises/decorative-ambient-lighting.jpg"
         },
         {
           "id": "se-2",
-          "name": "Architectural Magnetic Track & Spotlight Systems",
-          "category": "Architectural Lighting",
-          "description": "Versatile low-voltage magnetic track lighting systems, adjustable spotlight luminaires, and linear profile fixtures providing dramatic accent illumination for retail showrooms, galleries, and luxury spaces.",
-          "image": "/images/enterprises/architectural-track-lighting.jpg"
+          "name": "Ultra-Slim Commercial & Home LED Panel Lights",
+          "category": "Panel Lights",
+          "description": "Glare-free, ultra-slim square (2x2 ft, 1x1 ft) and round edge-lit LED panel lights engineered for modular false ceilings in homes, offices, hospitals, and educational institutions.",
+          "image": "/images/enterprises/commercial-led-panel-lights.jpg"
         },
         {
           "id": "se-3",
-          "name": "Heavy-Duty Industrial LED High Bays & Floodlights",
-          "category": "Industrial Lighting",
-          "description": "High-power IP66 dust-and-waterproof industrial LED high bay fixtures and floodlights with robust die-cast aluminum heat sinks for factories, production floors, and logistics warehouses.",
-          "image": "/images/enterprises/industrial-led-floodlights.jpg"
+          "name": "Commercial & Architectural LED Lights",
+          "category": "LED Lights",
+          "description": "High-performance commercial LED luminaires, magnetic track systems, COB spotlights, and profile fixtures providing superior lumens-per-watt efficiency and accent lighting.",
+          "image": "/images/enterprises/architectural-track-lighting.jpg"
         },
         {
           "id": "se-4",
-          "name": "Outdoor LED Streetlights & Area Luminaires",
-          "category": "Outdoor Infrastructure",
-          "description": "High-efficiency roadway LED streetlights with dusk-to-dawn sensor compatibility, surge protection, and wide beam angle lenses for municipal roads, private townships, and commercial campuses.",
+          "name": "Outdoor LED Street Lights & Luminaires",
+          "category": "Street Lights",
+          "description": "Heavy-duty weatherproof outdoor roadway LED streetlights with surge protection, wide roadway beam angles, and automated dusk-to-dawn sensor compatibility for streets and campuses.",
           "image": "/images/enterprises/outdoor-led-street-lighting.jpg"
         },
         {
           "id": "se-5",
-          "name": "Linear Profile & Ambient Ceiling Lights",
-          "category": "Architectural Lighting",
-          "description": "Continuous seamless aluminum profile linear luminaires and suspended architectural lighting grids offering sleek minimalist aesthetics and soft, uniform diffused lighting.",
-          "image": "/images/enterprises/architectural-linear-ceiling-lights.jpg"
+          "name": "Energy-Saving LED Tube Lights & Battens",
+          "category": "Tube Lights",
+          "description": "High-efficiency T5 and T8 integrated LED tube lights and slim batten fittings delivering instant, flicker-free bright illumination with up to 60% energy savings over conventional tubelights.",
+          "image": "/images/enterprises/led-tube-lights.jpg"
         },
         {
           "id": "se-6",
-          "name": "Decorative Ambient Sconces & Accent Lighting",
-          "category": "Decorative & Ambient",
-          "description": "Modern architectural wall sconces, modern pendant fixtures, and dynamic CCT-tunable ambient illumination designed to elevate hospitality, reception, and upscale dining environments.",
-          "image": "/images/enterprises/decorative-ambient-lighting.jpg"
+          "name": "Heavy-Duty Industrial High Bays & Floodlights",
+          "category": "Industrial & Floodlights",
+          "description": "Robust IP66 dust-and-waterproof industrial LED high bay fixtures and high-wattage floodlights with die-cast aluminum heat sinks for factories, production floors, and warehouses.",
+          "image": "/images/enterprises/industrial-led-floodlights.jpg"
         }
       ],
       "gallery": [
         {
+          "url": "/images/enterprises/decorative-ambient-lighting.jpg",
+          "alt": "Home lights and ambient residential interior fixtures"
+        },
+        {
           "url": "/images/enterprises/commercial-led-panel-lights.jpg",
-          "alt": "Commercial office LED panel and downlight illumination"
+          "alt": "Ultra-slim 2x2 LED panel lights for home and office"
         },
         {
           "url": "/images/enterprises/architectural-track-lighting.jpg",
-          "alt": "Architectural magnetic track lighting and spotlight luminaires"
+          "alt": "Commercial LED lights and magnetic track spotlights"
+        },
+        {
+          "url": "/images/enterprises/outdoor-led-street-lighting.jpg",
+          "alt": "High-efficiency outdoor roadway LED street lights"
+        },
+        {
+          "url": "/images/enterprises/led-tube-lights.jpg",
+          "alt": "Energy-saving T5 and T8 LED tube lights and battens"
         },
         {
           "url": "/images/enterprises/industrial-led-floodlights.jpg",
           "alt": "Heavy-duty industrial IP66 LED floodlights"
         },
         {
-          "url": "/images/enterprises/outdoor-led-street-lighting.jpg",
-          "alt": "High-efficiency outdoor roadway LED streetlights"
-        },
-        {
-          "url": "/images/enterprises/architectural-linear-ceiling-lights.jpg",
-          "alt": "Modern architectural linear ceiling lighting system"
-        },
-        {
-          "url": "/images/enterprises/decorative-ambient-lighting.jpg",
-          "alt": "Modern ambient wall sconce and interior decorative lighting"
-        },
-        {
           "url": "/images/enterprises/sangales-enterprises-cover.jpg",
-          "alt": "Precision LED luminaire engineering and testing"
+          "alt": "Sangales Enterprises LED lighting manufacturing and testing"
         }
       ]
     },
@@ -471,7 +471,7 @@
           "name": "Food-Grade Disposable Spoons & Cutlery",
           "category": "Disposable Cutlery",
           "description": "Sturdy, food-grade transparent and white disposable spoons, forks, and individually wrapped cutlery kits for clean and hygienic food delivery.",
-          "image": "/images/packaging/4cp-meal-box.jpg"
+          "image": "/images/packaging/disposable-spoon.jpg"
         },
         {
           "id": "sp-6",
