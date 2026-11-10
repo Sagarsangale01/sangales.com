@@ -29,7 +29,7 @@ export default function PartnershipCTA({ settings }: Props) {
     {
       icon: Boxes,
       title: "Wholesale & Enterprise Procurement",
-      desc: "Contract procurement for corporate facilities, hotel chains, and industrial kitchens.",
+      desc: "Procure commercial LED lighting fixtures, industrial high bays, packaging disposables, and enterprise supplies.",
       type: "Wholesale",
     },
     {

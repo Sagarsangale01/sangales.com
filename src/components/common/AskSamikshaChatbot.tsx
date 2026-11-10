@@ -28,6 +28,10 @@ const PRESET_QUERIES = [
     text: "Hello Samiksha, I am interested in wholesome wheat, bajra, jowar, ancient millets, and grain supplies from Sangales Farms.",
   },
   {
+    label: "💡 LED & Lighting Solutions",
+    text: "Hello Samiksha, I would like to enquire about Sangales Enterprises commercial LED panels, industrial high bays, architectural track lights, and street lighting solutions.",
+  },
+  {
     label: "📦 Packaging & Disposables",
     text: "Hello Samiksha, I would like to enquire about Sangales Packaging wholesale supplies — 4CP meal boxes, aluminium foil containers, paper bags, plates, glasses, and spoons.",
   },

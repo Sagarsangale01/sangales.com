@@ -227,63 +227,112 @@
       "id": "biz-3",
       "name": "Sangales Enterprises",
       "slug": "sangales-enterprises",
-      "tagline": "Reliable Institutional Supplies & Commercial Operations",
-      "category": "Enterprise & Wholesale",
-      "categorySlug": "enterprise-and-wholesale",
-      "shortDescription": "A specialized entity dedicated to commercial wholesale supplies, institutional procurement, and enterprise support.",
-      "about": "Sangales Enterprises operates as the commercial backbone for institutional clients requiring steady, high-volume procurement and dependable trade logistics. By aggregating demand and establishing rigorous quality inspection checkpoints, we supply enterprises with essential consumables, raw inputs, and commercial operational items with transparent SLA commitments.",
+      "tagline": "Commercial, Industrial & Architectural LED Lighting Solutions",
+      "category": "Lighting & LED Solutions",
+      "categorySlug": "lighting-and-led-solutions",
+      "shortDescription": "A specialized illumination enterprise delivering high-efficiency commercial LED lighting, industrial high bays, architectural track luminaires, and smart outdoor street lighting solutions.",
+      "about": "Sangales Enterprises is a premier illumination and lighting infrastructure provider delivering cutting-edge LED solutions for commercial, industrial, and architectural applications.\n\nWe design, engineer, and supply high-performance, energy-efficient lighting fixtures engineered to deliver optimal lumens-per-watt, superior thermal heat dissipation, and long-lasting optical performance. Our comprehensive lighting catalog includes commercial 2x2 LED panel lights, glare-free downlights, heavy-duty industrial high bay fixtures, weatherproof outdoor floodlights, architectural magnetic track systems, and smart street lighting.\n\nPartnering with architects, interior consultants, electrical contractors, and institutional developers, Sangales Enterprises illuminates corporate headquarters, manufacturing facilities, retail showrooms, luxury hotels, and modern urban infrastructure with sustainable, smart LED technology.",
       "logo": "/logos/sangales-enterprises.svg",
-      "coverImage": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1600",
+      "coverImage": "/images/enterprises/sangales-enterprises-cover.jpg",
       "brandPrimaryColor": "#1c2a38",
       "brandSecondaryColor": "#C6A66B",
       "email": "contact.sangales@gmail.com",
       "phone": "+91 75077 00936",
-      "address": "Commercial Center, Sangales Group, India",
-      "website": "https://enterprises.sangales.com",
+      "address": "Samruddhi Park, Kapaleshwar nagar, Panchwati, Nashik -03, Maharashtra, India",
+      "website": "https://www.sangales.com/businesses/sangales-enterprises",
       "socialLinks": {
         "linkedin": "https://linkedin.com/company/sangales"
       },
       "status": "PUBLISHED",
       "isFeatured": true,
       "displayOrder": 3,
-      "seoTitle": "Sangales Enterprises | Commercial Supplies & Institutional Solutions",
-      "seoDescription": "Explore Sangales Enterprises - B2B commercial supplies, institutional fulfillment, and procurement contracts.",
+      "seoTitle": "Sangales Enterprises | Commercial & Industrial LED Lighting Solutions | Nashik",
+      "seoDescription": "Sangales Enterprises — High-efficiency commercial LED panels, industrial high bays, architectural track lighting, streetlights, and smart lighting solutions.",
       "strengths": [
-        "Customized vendor management and structured procurement contracts",
-        "Comprehensive quality audits before consignment dispatch",
-        "Flexible multi-tier credit and delivery schedules",
-        "Single-window account manager for enterprise accounts"
+        "Comprehensive LED Range: Commercial Panels, Industrial High Bays, Floodlights & Streetlights",
+        "High Lumen-per-Watt Efficiency & Advanced Aluminum Heat Sink Management",
+        "Custom Architectural & Interior Lighting Layout Consultancy",
+        "IP66 & Heavy-Duty Weatherproof Certification for Industrial and Outdoor Luminaires",
+        "Direct Bulk Wholesale Supply for Contractors, Builders, Showrooms & Institutions"
       ],
       "targetAudience": [
-        "Commercial enterprises and manufacturing plants",
-        "Hotels, caterers, and corporate facilities",
-        "Regional retail store networks",
-        "Government and institutional tenders"
+        "Architects, lighting designers, interior contractors & MEP consultants",
+        "Industrial manufacturing plants, warehouses & logistics hubs",
+        "Commercial office complexes, banks, IT parks & retail showrooms",
+        "Hotels, banquet halls, restaurants & institutional campuses"
       ],
       "products": [
         {
           "id": "se-1",
-          "name": "Institutional Bulk Supplies",
-          "description": "Scheduled high-volume delivery of commercial supplies tailored for corporate facilities and institutions.",
-          "image": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800",
-          "category": "Institutional"
+          "name": "Commercial Office LED Panels & Recessed Downlights",
+          "category": "Commercial Lighting",
+          "description": "Ultra-slim, glare-free 2x2 ft and 1x4 ft backlit & edgelit LED ceiling panels and recessed COB downlights engineered for uniform illumination in corporate offices, banks, and conference suites.",
+          "image": "/images/enterprises/commercial-led-panel-lights.jpg"
         },
         {
           "id": "se-2",
-          "name": "Enterprise Consumables & Hygiene Solutions",
-          "description": "Industrial sanitization, hygiene consumables, and commercial facility upkeep provisions.",
-          "image": "https://images.unsplash.com/photo-1584744982491-665216d95f8b?auto=format&fit=crop&q=80&w=800",
-          "category": "Facility Supplies"
+          "name": "Architectural Magnetic Track & Spotlight Systems",
+          "category": "Architectural Lighting",
+          "description": "Versatile low-voltage magnetic track lighting systems, adjustable spotlight luminaires, and linear profile fixtures providing dramatic accent illumination for retail showrooms, galleries, and luxury spaces.",
+          "image": "/images/enterprises/architectural-track-lighting.jpg"
+        },
+        {
+          "id": "se-3",
+          "name": "Heavy-Duty Industrial LED High Bays & Floodlights",
+          "category": "Industrial Lighting",
+          "description": "High-power IP66 dust-and-waterproof industrial LED high bay fixtures and floodlights with robust die-cast aluminum heat sinks for factories, production floors, and logistics warehouses.",
+          "image": "/images/enterprises/industrial-led-floodlights.jpg"
+        },
+        {
+          "id": "se-4",
+          "name": "Outdoor LED Streetlights & Area Luminaires",
+          "category": "Outdoor Infrastructure",
+          "description": "High-efficiency roadway LED streetlights with dusk-to-dawn sensor compatibility, surge protection, and wide beam angle lenses for municipal roads, private townships, and commercial campuses.",
+          "image": "/images/enterprises/outdoor-led-street-lighting.jpg"
+        },
+        {
+          "id": "se-5",
+          "name": "Linear Profile & Ambient Ceiling Lights",
+          "category": "Architectural Lighting",
+          "description": "Continuous seamless aluminum profile linear luminaires and suspended architectural lighting grids offering sleek minimalist aesthetics and soft, uniform diffused lighting.",
+          "image": "/images/enterprises/architectural-linear-ceiling-lights.jpg"
+        },
+        {
+          "id": "se-6",
+          "name": "Decorative Ambient Sconces & Accent Lighting",
+          "category": "Decorative & Ambient",
+          "description": "Modern architectural wall sconces, modern pendant fixtures, and dynamic CCT-tunable ambient illumination designed to elevate hospitality, reception, and upscale dining environments.",
+          "image": "/images/enterprises/decorative-ambient-lighting.jpg"
         }
       ],
       "gallery": [
         {
-          "url": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200",
-          "alt": "Enterprise warehouse logistics"
+          "url": "/images/enterprises/commercial-led-panel-lights.jpg",
+          "alt": "Commercial office LED panel and downlight illumination"
         },
         {
-          "url": "https://images.unsplash.com/photo-1584744982491-665216d95f8b?auto=format&fit=crop&q=80&w=1200",
-          "alt": "Facility logistics inventory"
+          "url": "/images/enterprises/architectural-track-lighting.jpg",
+          "alt": "Architectural magnetic track lighting and spotlight luminaires"
+        },
+        {
+          "url": "/images/enterprises/industrial-led-floodlights.jpg",
+          "alt": "Heavy-duty industrial IP66 LED floodlights"
+        },
+        {
+          "url": "/images/enterprises/outdoor-led-street-lighting.jpg",
+          "alt": "High-efficiency outdoor roadway LED streetlights"
+        },
+        {
+          "url": "/images/enterprises/architectural-linear-ceiling-lights.jpg",
+          "alt": "Modern architectural linear ceiling lighting system"
+        },
+        {
+          "url": "/images/enterprises/decorative-ambient-lighting.jpg",
+          "alt": "Modern ambient wall sconce and interior decorative lighting"
+        },
+        {
+          "url": "/images/enterprises/sangales-enterprises-cover.jpg",
+          "alt": "Precision LED luminaire engineering and testing"
         }
       ]
     },
@@ -637,9 +686,9 @@
     },
     {
       "id": "cat-3",
-      "name": "Enterprise & Wholesale",
-      "slug": "enterprise-and-wholesale",
-      "description": "Commercial supply networks and enterprise procurement."
+      "name": "Lighting & LED Solutions",
+      "slug": "lighting-and-led-solutions",
+      "description": "Advanced commercial, industrial, and architectural LED lighting infrastructure."
     },
     {
       "id": "cat-4",
