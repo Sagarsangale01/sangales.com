@@ -10,8 +10,10 @@ interface Props {
 export default function PortfolioShowcase({ businesses }: Props) {
   const published = businesses.filter((b) => b.status === "PUBLISHED");
   const upcoming = businesses.filter((b) => b.status === "UPCOMING");
-  const featured = published.find((b) => b.slug === "annamrit-foods") || published[0];
-  const others = published.filter((b) => b.id !== featured?.id);
+  const associate = published.find((b) => b.isAssociate || b.slug === "anvayi-farms");
+  const groupOperating = published.filter((b) => !b.isAssociate && b.slug !== "anvayi-farms");
+  const featured = groupOperating.find((b) => b.slug === "annamrit-foods") || groupOperating[0];
+  const others = groupOperating.filter((b) => b.id !== featured?.id);
 
   return (
     <section id="portfolio" className="py-20 lg:py-28 bg-white border-y border-stone-200/70">
@@ -149,6 +151,116 @@ export default function PortfolioShowcase({ businesses }: Props) {
             </div>
           ))}
         </div>
+
+        {/* 2.5 Strategic Associate Company Spotlight: Anvayi Farms */}
+        {associate && (
+          <div className="mt-16 bg-gradient-to-br from-navy-950 via-navy-900 to-[#14261d] text-white rounded-sm overflow-hidden border border-emerald-500/30 shadow-2xl">
+            <div className="p-8 sm:p-12 lg:p-14">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                {/* Left Overview */}
+                <div className="lg:col-span-6 space-y-5">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase tracking-wider rounded-sm border border-emerald-500/40">
+                    <Sparkles className="w-3.5 h-3.5 text-gold" />
+                    <span>Strategic Associate Company &bull; anvayifarms.com</span>
+                  </div>
+
+                  <h3 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
+                    {associate.name}
+                  </h3>
+
+                  <p className="text-base sm:text-lg text-gold font-medium italic">
+                    &quot;{associate.tagline}&quot;
+                  </p>
+
+                  <p className="text-sm sm:text-base text-stone-300 leading-relaxed">
+                    {associate.shortDescription}
+                  </p>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    {associate.strengths?.slice(0, 4).map((str, idx) => (
+                      <div key={idx} className="flex items-center gap-2 text-xs text-stone-200">
+                        <span className="w-1.5 h-1.5 rounded-full bg-gold shrink-0" />
+                        <span>{str}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="pt-4 flex flex-wrap items-center gap-4">
+                    <Link
+                      href={`/businesses/${associate.slug}`}
+                      className="px-6 py-3.5 bg-gold hover:bg-white text-navy font-bold text-xs uppercase tracking-widest rounded-sm transition-all shadow-md inline-flex items-center gap-2"
+                    >
+                      <span>Explore Products &amp; Story</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+
+                    {associate.website && (
+                      <a
+                        href={associate.website + "/shop"}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold text-xs uppercase tracking-widest rounded-sm transition-all border border-white/20 inline-flex items-center gap-2"
+                      >
+                        <span>Visit anvayifarms.com</span>
+                        <ArrowUpRight className="w-4 h-4 text-gold" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                {/* Right Product Showcase Cards */}
+                <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {associate.products?.slice(0, 2).map((prod) => (
+                    <div
+                      key={prod.id}
+                      className="bg-navy-900/90 rounded-sm overflow-hidden border border-white/10 shadow-lg flex flex-col justify-between group"
+                    >
+                      <div>
+                        {prod.image && (
+                          <div className="h-44 overflow-hidden relative bg-navy-950">
+                            <img
+                              src={prod.image}
+                              alt={prod.name}
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                            {prod.price && (
+                              <span className="absolute top-2.5 right-2.5 bg-navy/90 backdrop-blur-md text-gold px-2.5 py-1 text-[11px] font-extrabold rounded-sm border border-gold/30">
+                                {prod.price}
+                              </span>
+                            )}
+                          </div>
+                        )}
+                        <div className="p-4 space-y-1.5">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400">
+                            {prod.category || "Associate Offering"}
+                          </span>
+                          <h4 className="font-heading text-sm font-bold text-white group-hover:text-gold transition-colors line-clamp-1">
+                            {prod.name}
+                          </h4>
+                          <p className="text-[11px] text-stone-300 line-clamp-2 leading-relaxed">
+                            {prod.description}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="p-4 pt-0">
+                        <a
+                          href={prod.directBuyUrl || associate.website || "#"}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="pt-2 border-t border-white/10 inline-flex items-center justify-between w-full text-[11px] font-bold uppercase tracking-wider text-gold hover:text-white transition-colors"
+                        >
+                          <span>Buy Online ↗</span>
+                          <span className="text-[10px] text-stone-400 font-normal">anvayifarms.com</span>
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* 3. Upcoming Ventures Horizon */}
         {upcoming.length > 0 && (

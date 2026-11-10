@@ -34,11 +34,15 @@ export interface BusinessRecord {
     description: string;
     image: string;
     category?: string;
+    price?: string;
+    directBuyUrl?: string;
   }[];
   gallery: {
     url: string;
     alt: string;
   }[];
+  isAssociate?: boolean;
+  associationType?: string;
 }
 
 export interface NewsRecord {
@@ -470,6 +474,92 @@ export const INITIAL_BUSINESSES: BusinessRecord[] = [
     targetAudience: ["Agricultural shippers", "Commercial suppliers"],
     products: [],
     gallery: [],
+  },
+  {
+    id: "biz-8",
+    name: "Anvayi Farms",
+    slug: "anvayi-farms",
+    tagline: "Pure Desi Cow A2 Bilona Ghee & Traditional Farm Nutrition",
+    category: "Agriculture & Farming",
+    categorySlug: "agriculture-and-farming",
+    isAssociate: true,
+    associationType: "Strategic Associate Company",
+    shortDescription: "An esteemed associate company of Sangales Group delivering pure, laboratory-certified Desi Cow A2 Bilona Ghee handcrafted through the ancient wooden bilona method and ethical Ahinsak Dohan.",
+    about: "Anvayi Farms was founded on the sacred principles of purity, cow care, and generational Indian nutrition. Operating in close strategic association with Sangales Group, Anvayi Farms maintains its own indigenous Desi cows raised naturally on nutritious vegetarian farm feed without synthetic hormones or factory confinement. True to the timeless Vedic principle of 'Ahinsak Dohan', the calf is always fed first before any milk is collected. Milk is gently boiled, set into whole curd overnight, and churned clockwise and anti-clockwise with traditional wooden bilona to yield rich cultured makkhan (butter), which is then slow-simmered into pure, golden, danedar (grainy) Desi Cow Ghee. Independently laboratory-tested and confirmed 100% free from preservatives, artificial colors, and adulteration, Anvayi Farms brings heritage health directly to conscious homes across India.",
+    logo: "/logos/anvayi-farms-logo.png",
+    coverImage: "/images/anvayi-farms/anvayi-bilona-method.png",
+    brandPrimaryColor: "#2D5A27",
+    brandSecondaryColor: "#C6A66B",
+    email: "contact.sangales@gmail.com",
+    phone: "+91 86989 90710",
+    address: "Samruddhi Park, Kapaleshwar nagar, Panchwati, Nashik -03, Maharashtra, India",
+    website: "https://www.anvayifarms.com",
+    socialLinks: {
+      facebook: "https://facebook.com/anvayifarms",
+      instagram: "https://instagram.com/anvayifarms",
+    },
+    status: "PUBLISHED",
+    isFeatured: true,
+    displayOrder: 2,
+    seoTitle: "Anvayi Farms | Pure Desi Cow A2 Bilona Ghee | Associate Company",
+    seoDescription: "Anvayi Farms (Associated with Sangales Group) - Pure Desi Cow A2 Bilona Ghee, ethical Ahinsak Dohan, lab-tested purity, and traditional farm wellness products.",
+    strengths: [
+      "100% Pure Desi Cow Milk (From our own cows, zero outsourced milk)",
+      "Vedic Ahinsak Dohan (Calf feeds first with utmost ethical care)",
+      "Traditional Wooden Bilona Method (Curd churned both ways)",
+      "Certified Lab-Tested (Free from preservatives, colors & adulteration)",
+      "Danedar (Grainy) Texture & Rich In Natural Beta-Carotene",
+      "FSSAI Certified Brand (Lic. No. 11526999000448)",
+    ],
+    targetAudience: [
+      "Health-conscious families seeking authentic Vedic nutrition",
+      "Ayurvedic and holistic wellness practitioners",
+      "Conscious parents focused on children's brain development & immunity",
+      "Gourmet culinary kitchens and traditional sweet makers",
+      "Organic food retailers and health food stores",
+    ],
+    products: [
+      {
+        id: "af-ghee-1l",
+        name: "Premium Desi Cow A2 Bilona Ghee (1 Litre)",
+        category: "A2 Bilona Ghee",
+        price: "₹ 1,400.00",
+        description: "Pure, aromatic, danedar (grainy) A2 Desi Cow Ghee lovingly handcrafted from whole curd using the traditional wooden bilona churning process. Packed with natural vitamins, healthy fats, and beta-carotene.",
+        image: "/images/anvayi-farms/anvayi-ghee-1litre.jpg",
+        directBuyUrl: "https://www.anvayifarms.com/shop",
+      },
+      {
+        id: "af-ghee-500ml",
+        name: "Premium Desi Cow A2 Bilona Ghee (500ml)",
+        category: "A2 Bilona Ghee",
+        price: "₹ 750.00",
+        description: "Small-batch authentic Desi Cow Bilona Ghee in a premium glass jar. Produced under Ahinsak Dohan with zero preservatives, chemicals, or additives for daily family nourishment.",
+        image: "/images/anvayi-farms/anvayi-ghee-500ml.jpg",
+        directBuyUrl: "https://www.anvayifarms.com/shop",
+      },
+      {
+        id: "af-makkhan",
+        name: "Traditional Cultured Makkhan (Cultured Butter)",
+        category: "Cultured Dairy",
+        description: "Slow-churned artisanal white butter extracted directly from whole cultured curd using the traditional bilona method, preserving active probiotic enzymes and homestyle flavor.",
+        image: "/images/anvayi-farms/anvayi-bilona-method.png",
+        directBuyUrl: "https://www.anvayifarms.com/shop",
+      },
+      {
+        id: "af-farm-dairy",
+        name: "Ethical Desi Cow Farm Produce",
+        category: "Farm Heritage",
+        description: "Fresh, unadulterated farm staples sourced from naturally grazed indigenous cows fed a pure vegetarian diet under compassionate care.",
+        image: "/images/anvayi-farms/anvayi-desi-cows.png",
+        directBuyUrl: "https://www.anvayifarms.com",
+      },
+    ],
+    gallery: [
+      { url: "/images/anvayi-farms/anvayi-ghee-1litre.jpg", alt: "Anvayi Farms Desi Cow A2 Bilona Ghee" },
+      { url: "/images/anvayi-farms/anvayi-bilona-method.png", alt: "Traditional Bilona Churning Method" },
+      { url: "/images/anvayi-farms/anvayi-desi-cows.png", alt: "Desi Cows Raised Naturally on Vegetarian Diet" },
+      { url: "/images/anvayi-farms/anvayi-ghee-500ml.jpg", alt: "Anvayi Farms 500ml Danedar Ghee Jar" },
+    ],
   },
 ];
 

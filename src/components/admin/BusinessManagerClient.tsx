@@ -335,7 +335,14 @@ export default function BusinessManagerClient({ initialBusinesses, categories }:
                         className="w-10 h-8 object-cover rounded-sm border border-stone-200 shrink-0"
                       />
                       <div>
-                        <p className="font-bold text-navy text-xs">{biz.name}</p>
+                        <div className="flex items-center gap-1.5">
+                          <p className="font-bold text-navy text-xs">{biz.name}</p>
+                          {biz.isAssociate && (
+                            <span className="text-[9px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.2 rounded">
+                              Associate
+                            </span>
+                          )}
+                        </div>
                         <p className="text-[11px] font-mono text-stone-400">/{biz.slug}</p>
                       </div>
                     </div>
@@ -651,18 +658,48 @@ export default function BusinessManagerClient({ initialBusinesses, categories }:
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2 pt-2">
-                    <input
-                      type="checkbox"
-                      id="featuredToggle"
-                      checked={formData.isFeatured}
-                      onChange={(e) => setFormData({ ...formData, isFeatured: e.target.checked })}
-                      className="rounded border-stone-300 text-gold focus:ring-gold"
-                    />
-                    <label htmlFor="featuredToggle" className="text-xs font-bold text-navy">
-                      Feature this business prominently on homepage portfolio showcase
-                    </label>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 pt-2 border-t border-stone-100">
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        id="featuredToggle"
+                        checked={formData.isFeatured || false}
+                        onChange={(e) => setFormData({ ...formData, isFeatured: e.target.checked })}
+                        className="rounded border-stone-300 text-gold focus:ring-gold"
+                      />
+                      <label htmlFor="featuredToggle" className="text-xs font-bold text-navy">
+                        Feature prominently on homepage
+                      </label>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        id="associateToggle"
+                        checked={formData.isAssociate || false}
+                        onChange={(e) => setFormData({ ...formData, isAssociate: e.target.checked })}
+                        className="rounded border-stone-300 text-emerald-600 focus:ring-emerald-500"
+                      />
+                      <label htmlFor="associateToggle" className="text-xs font-bold text-navy">
+                        Mark as Associate Company (e.g. anvayifarms.com)
+                      </label>
+                    </div>
                   </div>
+
+                  {formData.isAssociate && (
+                    <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-sm space-y-1">
+                      <label className="text-[11px] font-bold text-emerald-900 uppercase tracking-wider block">
+                        Association Type / Badge Label
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.associationType || "Strategic Associate Company"}
+                        onChange={(e) => setFormData({ ...formData, associationType: e.target.value })}
+                        placeholder="e.g. Strategic Associate Company"
+                        className="w-full text-xs p-2 rounded border border-emerald-300 focus:ring-emerald-500 focus:border-emerald-500"
+                      />
+                    </div>
+                  )}
                 </div>
               )}
 

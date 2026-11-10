@@ -119,7 +119,7 @@ export default async function BusinessDetailPage({ params }: Props) {
                   {business.category}
                 </span>
                 <span className="text-xs uppercase tracking-wider text-stone-300 font-semibold">
-                  A Sangales Company
+                  {business.isAssociate ? (business.associationType || "Strategic Associate Company") : "A Sangales Company"}
                 </span>
               </div>
 
@@ -165,7 +165,7 @@ export default async function BusinessDetailPage({ params }: Props) {
                   rel="noreferrer"
                   className="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-medium text-xs tracking-widest uppercase rounded-sm transition-all border border-white/20 inline-flex items-center gap-1.5"
                 >
-                  <span>Visit Domain</span>
+                  <span>{business.isAssociate ? "Visit Official Store" : "Visit Domain"}</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
               )}
@@ -193,16 +193,59 @@ export default async function BusinessDetailPage({ params }: Props) {
               </div>
             </section>
 
+            {/* Association Spotlight if Associate Entity */}
+            {business.isAssociate && (
+              <section className="bg-gradient-to-r from-emerald-900/90 to-navy-950 text-white p-6 sm:p-8 rounded-sm border border-emerald-500/30 shadow-md">
+                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                  <div className="space-y-2">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-gold text-navy text-[11px] font-bold uppercase tracking-wider rounded-sm">
+                      <Sparkles className="w-3.5 h-3.5" /> Corporate Strategic Association
+                    </span>
+                    <h3 className="font-heading text-xl sm:text-2xl font-extrabold text-white">
+                      Anvayi Farms &bull; Associated with Sangales Group
+                    </h3>
+                    <p className="text-xs sm:text-sm text-stone-300 leading-relaxed max-w-2xl">
+                      Anvayi Farms operates in close collaboration with Sangales Group, sharing our foundational standards of uncompromised quality, rural farmer prosperity, and authentic Indian farm nutrition. FSSAI Certified: Lic. No. 11526999000448.
+                    </p>
+                  </div>
+                  {business.website && (
+                    <a
+                      href={business.website}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="px-5 py-3 bg-gold hover:bg-white text-navy font-bold text-xs uppercase tracking-widest rounded-sm transition-all shrink-0 inline-flex items-center gap-2 shadow-lg"
+                    >
+                      <span>Explore anvayifarms.com</span>
+                      <ArrowUpRight className="w-4 h-4" />
+                    </a>
+                  )}
+                </div>
+              </section>
+            )}
+
             {/* 6. Products & Services */}
             {business.products && business.products.length > 0 && (
               <section className="space-y-6">
-                <div>
-                  <span className="text-gold-700 text-xs font-bold tracking-superwide uppercase block mb-1">
-                    Offerings &bull; Capabilities
-                  </span>
-                  <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-navy">
-                    Products &amp; Solutions
-                  </h2>
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                  <div>
+                    <span className="text-gold-700 text-xs font-bold tracking-superwide uppercase block mb-1">
+                      Offerings &bull; Capabilities
+                    </span>
+                    <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-navy">
+                      Products &amp; Solutions
+                    </h2>
+                  </div>
+                  {business.website && (
+                    <a
+                      href={business.website + (business.isAssociate ? "/shop" : "")}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-xs font-bold uppercase tracking-wider text-navy hover:text-gold inline-flex items-center gap-1.5 group"
+                    >
+                      <span>{business.isAssociate ? "Order Online at anvayifarms.com" : "View Online Catalog"}</span>
+                      <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </a>
+                  )}
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -213,20 +256,32 @@ export default async function BusinessDetailPage({ params }: Props) {
                     >
                       <div>
                         {prod.image && (
-                          <div className="h-44 overflow-hidden bg-navy-900">
+                          <div className="h-52 overflow-hidden bg-navy-900 relative">
                             <img
                               src={prod.image}
                               alt={prod.name}
                               className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
                             />
+                            {prod.price && (
+                              <span className="absolute top-3 right-3 bg-navy/90 backdrop-blur-md text-gold px-3 py-1 text-xs font-extrabold tracking-wide rounded-sm border border-gold/30">
+                                {prod.price}
+                              </span>
+                            )}
                           </div>
                         )}
                         <div className="p-5 space-y-2">
-                          {prod.category && (
-                            <span className="text-[10px] uppercase font-bold tracking-wider text-gold-700">
-                              {prod.category}
-                            </span>
-                          )}
+                          <div className="flex items-center justify-between gap-2">
+                            {prod.category && (
+                              <span className="text-[10px] uppercase font-bold tracking-wider text-gold-700">
+                                {prod.category}
+                              </span>
+                            )}
+                            {prod.price && !prod.image && (
+                              <span className="text-xs font-extrabold text-navy">
+                                {prod.price}
+                              </span>
+                            )}
+                          </div>
                           <h3 className="font-heading text-base font-bold text-navy">
                             {prod.name}
                           </h3>
@@ -235,13 +290,33 @@ export default async function BusinessDetailPage({ params }: Props) {
                           </p>
                         </div>
                       </div>
-                      <div className="p-5 pt-0">
-                        <a
-                          href="#enquiry-section"
-                          className="text-xs font-bold text-navy hover:text-gold uppercase tracking-wider inline-flex items-center gap-1"
-                        >
-                          Enquire for Pricing &rarr;
-                        </a>
+                      <div className="p-5 pt-0 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-t border-stone-100 mt-4">
+                        {prod.directBuyUrl ? (
+                          <>
+                            <a
+                              href={prod.directBuyUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-navy hover:bg-gold hover:text-navy text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all"
+                            >
+                              <span>Buy Online</span>
+                              <ArrowUpRight className="w-3.5 h-3.5" />
+                            </a>
+                            <a
+                              href="#enquiry-section"
+                              className="text-xs font-semibold text-charcoal-100 hover:text-navy uppercase tracking-wider text-center"
+                            >
+                              B2B Enquiry &rarr;
+                            </a>
+                          </>
+                        ) : (
+                          <a
+                            href="#enquiry-section"
+                            className="text-xs font-bold text-navy hover:text-gold uppercase tracking-wider inline-flex items-center gap-1"
+                          >
+                            Enquire for Pricing &rarr;
+                          </a>
+                        )}
                       </div>
                     </div>
                   ))}

@@ -68,10 +68,15 @@ export default function Footer({ settings: propSettings, businesses: propBusines
               Group Portfolio
             </h4>
             <ul className="space-y-2.5 text-sm">
-              {businesses.slice(0, 6).map((b) => (
+              {businesses.slice(0, 8).map((b) => (
                 <li key={b.id}>
-                  <Link href={`/businesses/${b.slug}`} className="hover:text-gold transition-colors">
-                    {b.name}
+                  <Link href={`/businesses/${b.slug}`} className="hover:text-gold transition-colors flex items-center justify-between">
+                    <span>{b.name}</span>
+                    {b.isAssociate && (
+                      <span className="text-[9px] uppercase tracking-wider text-emerald-400 font-bold bg-emerald-950/60 px-1.5 py-0.5 rounded border border-emerald-500/30">
+                        Associate
+                      </span>
+                    )}
                   </Link>
                 </li>
               ))}

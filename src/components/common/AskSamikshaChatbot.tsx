@@ -16,6 +16,10 @@ const PRESET_QUERIES = [
     text: "Hello Samiksha, I would like to enquire about Annamrit Foods fresh sprouts, nutritious parathas, healthy noodles, and distribution rights.",
   },
   {
+    label: "🧈 Anvayi Farms A2 Ghee",
+    text: "Hello Samiksha, I would like to enquire about Anvayi Farms pure Desi Cow A2 Bilona Ghee and associate products.",
+  },
+  {
     label: "🚜 Sangales Farms",
     text: "Hello Samiksha, I am interested in bulk agricultural produce and supply partnerships with Sangales Farms.",
   },

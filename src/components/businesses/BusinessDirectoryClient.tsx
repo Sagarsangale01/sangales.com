@@ -11,16 +11,20 @@ interface Props {
 }
 
 export default function BusinessDirectoryClient({ initialBusinesses, categories }: Props) {
-  const [statusFilter, setStatusFilter] = useState<"ALL" | "PUBLISHED" | "UPCOMING">("ALL");
+  const [statusFilter, setStatusFilter] = useState<"ALL" | "PUBLISHED" | "UPCOMING" | "ASSOCIATE">("ALL");
   const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const publishedCount = useMemo(
-    () => initialBusinesses.filter((b) => b.status === "PUBLISHED").length,
+    () => initialBusinesses.filter((b) => b.status === "PUBLISHED" && !b.isAssociate).length,
     [initialBusinesses]
   );
   const upcomingCount = useMemo(
     () => initialBusinesses.filter((b) => b.status === "UPCOMING").length,
+    [initialBusinesses]
+  );
+  const associateCount = useMemo(
+    () => initialBusinesses.filter((b) => b.isAssociate).length,
     [initialBusinesses]
   );
 
@@ -28,8 +32,9 @@ export default function BusinessDirectoryClient({ initialBusinesses, categories 
     return initialBusinesses.filter((b) => {
       const matchesStatus =
         statusFilter === "ALL" ||
-        (statusFilter === "PUBLISHED" && b.status === "PUBLISHED") ||
-        (statusFilter === "UPCOMING" && b.status === "UPCOMING");
+        (statusFilter === "PUBLISHED" && b.status === "PUBLISHED" && !b.isAssociate) ||
+        (statusFilter === "UPCOMING" && b.status === "UPCOMING") ||
+        (statusFilter === "ASSOCIATE" && b.isAssociate);
 
       const matchesCategory =
         selectedCategory === "ALL" || b.categorySlug === selectedCategory || b.category === selectedCategory;
@@ -73,6 +78,20 @@ export default function BusinessDirectoryClient({ initialBusinesses, categories 
               <CheckCircle className="w-3.5 h-3.5 text-emerald-500" />
               <span>Operating Companies ({publishedCount})</span>
             </button>
+
+            {associateCount > 0 && (
+              <button
+                onClick={() => setStatusFilter("ASSOCIATE")}
+                className={`px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider rounded-sm transition-all flex items-center gap-1.5 ${
+                  statusFilter === "ASSOCIATE"
+                    ? "bg-navy text-gold shadow-sm"
+                    : "bg-offwhite text-charcoal hover:bg-stone-200/70"
+                }`}
+              >
+                <Sparkles className="w-3.5 h-3.5 text-gold" />
+                <span>Associate Companies ({associateCount})</span>
+              </button>
+            )}
 
             <button
               onClick={() => setStatusFilter("UPCOMING")}
@@ -188,13 +207,19 @@ export default function BusinessDirectoryClient({ initialBusinesses, categories 
                         {biz.category}
                       </span>
 
+                      {biz.isAssociate && (
+                        <span className="text-[10px] font-extrabold uppercase tracking-wider text-navy bg-emerald-400 px-2.5 py-1 rounded-sm flex items-center gap-1 shadow-sm font-heading">
+                          <Sparkles className="w-3 h-3 text-navy" /> Associate Company
+                        </span>
+                      )}
+
                       {isUpcoming && (
                         <span className="text-[10px] font-extrabold uppercase tracking-wider text-white bg-amber-600 px-2.5 py-1 rounded-sm flex items-center gap-1 shadow-sm">
                           <Rocket className="w-3 h-3 text-gold" /> Upcoming Venture
                         </span>
                       )}
 
-                      {!isUpcoming && biz.isFeatured && (
+                      {!isUpcoming && !biz.isAssociate && biz.isFeatured && (
                         <span className="text-[10px] font-bold uppercase tracking-wider text-white bg-gold-700 px-2 py-1 rounded-sm flex items-center gap-1">
                           <Sparkles className="w-3 h-3" /> Featured
                         </span>
@@ -241,14 +266,25 @@ export default function BusinessDirectoryClient({ initialBusinesses, categories 
                 </div>
 
                 {/* Action Link Footer */}
-                <div className="p-6 pt-0 border-t border-stone-100 mt-4">
+                <div className="p-6 pt-0 border-t border-stone-100 mt-4 flex items-center justify-between gap-3">
                   <Link
                     href={`/businesses/${biz.slug}`}
-                    className="pt-3 inline-flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-navy group-hover:text-gold transition-colors"
+                    className="pt-3 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-navy group-hover:text-gold transition-colors"
                   >
-                    <span>{isUpcoming ? "Explore Incubation Profile" : "Explore Dedicated Profile"}</span>
+                    <span>{isUpcoming ? "Explore Incubation" : "Explore Profile"}</span>
                     <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 text-gold" />
                   </Link>
+
+                  {biz.isAssociate && biz.website && (
+                    <a
+                      href={biz.website}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="pt-3 text-[11px] font-bold text-emerald-700 hover:text-navy uppercase tracking-wider inline-flex items-center gap-1 shrink-0"
+                    >
+                      <span>anvayifarms.com ↗</span>
+                    </a>
+                  )}
                 </div>
               </div>
             );
