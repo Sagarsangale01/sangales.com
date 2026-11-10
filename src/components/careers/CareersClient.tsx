@@ -44,7 +44,7 @@ export default function CareersClient({ careers }: Props) {
           <div className="p-12 text-center bg-white rounded-sm border border-stone-200">
             <Briefcase className="w-10 h-10 text-stone-300 mx-auto mb-2" />
             <h4 className="font-heading text-base font-bold text-navy">No active openings at this moment</h4>
-            <p className="text-xs text-charcoal-100 mt-1">Please check back periodically or email your resume to careers@sangales.com</p>
+            <p className="text-xs text-charcoal-100 mt-1">Please check back periodically or email your resume to contact.sangales@gmail.com</p>
           </div>
         ) : (
           <div className="space-y-4">

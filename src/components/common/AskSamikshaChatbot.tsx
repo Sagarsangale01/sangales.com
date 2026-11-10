@@ -81,7 +81,7 @@ export default function AskSamikshaChatbot({
         body: JSON.stringify({
           fullName: senderName.trim() || "Website Visitor",
           phone: phone,
-          email: "whatsapp-enquiry@sangales.com",
+          email: "contact.sangales@gmail.com",
           subject: "Enquiry via Ask to Samiksha WhatsApp Desk",
           message: finalMsg,
           enquiryType: "General",

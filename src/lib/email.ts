@@ -59,7 +59,7 @@ export async function notifyNewEnquiry(enquiry: {
   businessName?: string;
   message: string;
 }) {
-  const adminEmail = process.env.NOTIFICATION_EMAIL || "contact@sangales.com";
+  const adminEmail = process.env.NOTIFICATION_EMAIL || "contact.sangales@gmail.com";
 
   const adminHtml = `
     <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 4px;">

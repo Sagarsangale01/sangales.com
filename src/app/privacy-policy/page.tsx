@@ -56,7 +56,7 @@ export default function PrivacyPolicyPage() {
 
             <h2 className="font-heading text-lg font-bold text-navy mt-6">5. Grievance Redressal</h2>
             <p>
-              For any questions regarding this Privacy Policy or to request deletion of your submitted details, please write to our Corporate Governance Officer at: <a href="mailto:privacy@sangales.com" className="text-gold font-semibold underline">privacy@sangales.com</a>.
+              For any questions regarding this Privacy Policy or to request deletion of your submitted details, please write to our Corporate Governance Officer at: <a href="mailto:contact.sangales@gmail.com" className="text-gold font-semibold underline">contact.sangales@gmail.com</a>.
             </p>
           </div>
         </div>

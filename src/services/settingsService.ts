@@ -42,7 +42,7 @@ export function getSiteSettings(): SiteSettings {
     siteName: "SANGALES",
     descriptor: "A GROUP OF COMPANIES",
     tagline: "Building Businesses. Creating Opportunities.",
-    contactEmail: "contact@sangales.com",
+    contactEmail: "contact.sangales@gmail.com",
     contactPhone: "+91 75077 00936",
     corporateAddress: "Samruddhi Park, Kapaleshwar nagar, Panchwati, Nashik -03",
     workingHours: "Monday – Saturday: 09:30 AM – 06:30 PM IST",
