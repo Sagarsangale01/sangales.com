@@ -4,9 +4,9 @@ import BusinessDirectoryClient from "@/components/businesses/BusinessDirectoryCl
 import { getPublicBusinesses, getCategories } from "@/services/businessService";
 
 export const metadata: Metadata = {
-  title: "Our Businesses | Group Portfolio Directory | Sangales Group",
+  title: "Our Businesses | Group Portfolio Directory | SANGALES GROUP",
   description:
-    "Explore the diversified business portfolio of Sangales Group: Annamrit Foods, Sangales Farms, Sangales Enterprises, Sangales Trading, Sangales Packaging, and Sangales Digital.",
+    "Explore the diversified business portfolio of SANGALES: Annamrit Foods, Sangales Farms, Sangales Enterprises, Sangales Trading, Sangales Packaging, Anvayi Farms, and upcoming ventures.",
 };
 
 export const dynamic = "force-dynamic";
@@ -39,7 +39,7 @@ export default async function BusinessesPage() {
               Our Operating Businesses
             </h1>
             <p className="text-lg text-stone-200 font-light leading-relaxed">
-              Explore the independent business entities operating under the Sangales Group umbrella, delivering quality solutions in food, agriculture, wholesale, trading, and packaging.
+              Explore the independent business entities operating under the SANGALES umbrella, delivering quality solutions in food, agriculture, wholesale, trading, and packaging.
             </p>
           </div>
         </div>

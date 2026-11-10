@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: "Our Vision, Mission & Values | Sangales Group",
+  title: "Our Vision, Mission & Values | SANGALES GROUP",
   description:
     "Discover the foundational vision, corporate mission, and guiding ethical values that shape every operating company under SANGALES – A GROUP OF COMPANIES.",
 };

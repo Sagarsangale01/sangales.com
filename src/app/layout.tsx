@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     template: "%s | SANGALES GROUP",
   },
   description:
-    "Official corporate portal of SANGALES – A GROUP OF COMPANIES. Leading Indian conglomerate with interests in food, agriculture, wholesale supplies, trading, packaging, and scalable enterprise ventures.",
+    "Official corporate portal of SANGALES – A GROUP OF COMPANIES. A diversified Indian business group bringing together initiatives across food, agriculture, wholesale supplies, trading, packaging, and enterprise ventures.",
   keywords: [
     "Sangales",
     "Sangales Group",

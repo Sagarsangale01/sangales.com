@@ -6,7 +6,7 @@ import { getPublishedBusinesses } from "@/services/businessService";
 import { getSiteSettings } from "@/services/settingsService";
 
 export const metadata: Metadata = {
-  title: "Contact Us & Business Enquiries | Sangales Group",
+  title: "Contact Us & Business Enquiries | SANGALES GROUP",
   description:
     "Connect with SANGALES – A GROUP OF COMPANIES. Direct enquiry channels for partnerships, wholesale supply, dealerships, and institutional procurement.",
 };

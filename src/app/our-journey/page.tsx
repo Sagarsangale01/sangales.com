@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: "Our Journey & Corporate Milestones | Sangales Group",
+  title: "Our Journey & Corporate Milestones | SANGALES GROUP",
   description:
     "Explore the evolution of SANGALES – A GROUP OF COMPANIES, highlighting verified milestones from inception to multi-industry expansion.",
 };

@@ -4,9 +4,9 @@ import CareersClient from "@/components/careers/CareersClient";
 import { getPublishedCareers } from "@/services/careerService";
 
 export const metadata: Metadata = {
-  title: "Careers & Opportunities | Join Sangales Group",
+  title: "Careers & Opportunities | Join SANGALES GROUP",
   description:
-    "Explore professional career opportunities across Sangales Group companies in food, agriculture, enterprise operations, trading, and packaging.",
+    "Explore professional career opportunities across SANGALES businesses in food, agriculture, enterprise operations, trading, and packaging.",
 };
 
 export const dynamic = "force-dynamic";

@@ -6,7 +6,7 @@ import { getPublishedNews } from "@/services/newsService";
 import { formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "News & Media Releases | Sangales Group Announcements",
+  title: "News & Media Releases | SANGALES GROUP Announcements",
   description:
     "Official corporate news, press releases, expansion announcements, and updates from SANGALES – A GROUP OF COMPANIES.",
 };
