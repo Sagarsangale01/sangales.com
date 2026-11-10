@@ -421,7 +421,7 @@ export default function BusinessManagerClient({ initialBusinesses, categories }:
               <X className="w-5 h-5" />
             </button>
 
-            <form onSubmit={handleSave} className="space-y-6">
+            <form onSubmit={handleSave} noValidate className="space-y-6">
               <div>
                 <h3 className="font-heading text-xl font-bold text-navy">
                   {editingBiz ? `Edit Business: ${editingBiz.name}` : "Create New Group Business"}

@@ -277,7 +277,7 @@ export default function CareersManagerClient({
               <X className="w-5 h-5" />
             </button>
 
-            <form onSubmit={handleSaveJob} className="space-y-4">
+            <form onSubmit={handleSaveJob} noValidate className="space-y-4">
               <h3 className="font-heading text-lg font-bold text-navy">
                 {editingJob ? "Edit Job Opening" : "Create Career Opportunity"}
               </h3>

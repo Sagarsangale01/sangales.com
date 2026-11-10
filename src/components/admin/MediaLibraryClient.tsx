@@ -166,7 +166,7 @@ export default function MediaLibraryClient({ initialMedia }: Props) {
               Register New Media Asset
             </h3>
 
-            <form onSubmit={handleAdd} className="space-y-3">
+            <form onSubmit={handleAdd} noValidate className="space-y-3">
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1">
                   Asset Title / File Name <span className="text-red-500">*</span>

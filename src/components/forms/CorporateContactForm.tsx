@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { Send, CheckCircle2, AlertCircle, MessageCircle } from "lucide-react";
 import { BusinessRecord } from "@/lib/data";
 
 interface Props {
@@ -81,18 +81,34 @@ export default function CorporateContactForm({ businesses }: Props) {
 
   if (success) {
     return (
-      <div className="bg-white p-8 sm:p-12 rounded-sm border border-stone-200/80 shadow-editorial text-center space-y-4">
+      <div className="bg-white p-8 sm:p-12 rounded-sm border border-stone-200/80 shadow-editorial text-center space-y-5">
         <CheckCircle2 className="w-14 h-14 text-emerald-600 mx-auto" />
         <h3 className="font-heading text-2xl font-bold text-navy">
           Your Enquiry Has Been Received
         </h3>
         <p className="text-sm text-charcoal-100 max-w-md mx-auto leading-relaxed">
-          Thank you for contacting <strong>SANGALES – A GROUP OF COMPANIES</strong>. Your inquiry has been routed to the relevant operating leadership desk and our team will get in touch with you shortly.
+          Thank you for contacting <strong>SANGALE&apos;S – A GROUP OF COMPANIES</strong>. An acknowledgement has been sent to your email, and our operating desk has been notified.
         </p>
-        <div className="pt-2">
+
+        <div className="p-4 bg-stone-50 border border-stone-200 rounded-sm max-w-md mx-auto text-left space-y-1 text-xs">
+          <p className="font-bold text-navy uppercase tracking-wider text-[11px]">Direct Support Desk:</p>
+          <p className="text-stone-600">Email: <span className="font-mono text-navy font-semibold">contact.sangales@gmail.com</span></p>
+          <p className="text-stone-600">Phone &amp; WhatsApp: <span className="font-semibold text-navy">+91 75077 00936</span></p>
+        </div>
+
+        <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a
+            href="https://wa.me/917507700936?text=Hello%20Sangale%27s%20Group,%20I%20have%20submitted%20a%20commercial%20enquiry%20on%20your%20website%20and%20would%20like%20to%20connect%20directly."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
+          >
+            <MessageCircle className="w-4 h-4" />
+            Connect on WhatsApp (+91 75077 00936)
+          </a>
           <button
             onClick={() => setSuccess(false)}
-            className="px-6 py-2.5 bg-navy text-gold text-xs font-bold uppercase tracking-wider rounded-sm hover:bg-gold hover:text-navy transition-all"
+            className="w-full sm:w-auto px-6 py-2.5 bg-navy text-gold text-xs font-bold uppercase tracking-wider rounded-sm hover:bg-gold hover:text-navy transition-all"
           >
             Submit Another Request
           </button>

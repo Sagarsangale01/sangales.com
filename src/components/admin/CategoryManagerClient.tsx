@@ -80,7 +80,7 @@ export default function CategoryManagerClient({ initialCategories }: Props) {
             Create Business Category
           </h3>
 
-          <form onSubmit={handleAdd} className="space-y-3">
+          <form onSubmit={handleAdd} noValidate className="space-y-3">
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1">
                 Category Title <span className="text-red-500">*</span>

@@ -204,7 +204,7 @@ export default function NewsManagerClient({ initialNews }: Props) {
               <X className="w-5 h-5" />
             </button>
 
-            <form onSubmit={handleSave} className="space-y-4">
+            <form onSubmit={handleSave} noValidate className="space-y-4">
               <h3 className="font-heading text-lg font-bold text-navy">
                 {editingArticle ? "Edit Press Release" : "Publish Corporate Press Release"}
               </h3>

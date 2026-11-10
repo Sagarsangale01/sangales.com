@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { Send, CheckCircle2, AlertCircle, MessageCircle } from "lucide-react";
 
 interface Props {
   businessId: string;
@@ -72,14 +72,28 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
         <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
         <h4 className="font-heading text-xl font-bold text-navy">Enquiry Dispatched Successfully</h4>
         <p className="text-sm text-charcoal-100 max-w-md mx-auto">
-          Thank you for reaching out to <strong>{businessName}</strong>. Our commercial desk will review your details and connect with you shortly.
+          Thank you for reaching out to <strong>{businessName}</strong>. An acknowledgement email has been sent, and our team will review your details shortly.
         </p>
-        <button
-          onClick={() => setSuccess(false)}
-          className="mt-2 text-xs font-bold uppercase tracking-wider text-navy hover:text-gold underline"
-        >
-          Submit Another Enquiry
-        </button>
+
+        <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a
+            href={`https://wa.me/917507700936?text=${encodeURIComponent(
+              `Hello Sangale's Group, I have submitted an enquiry for ${businessName} via your website.`
+            )}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
+          >
+            <MessageCircle className="w-4 h-4" />
+            Connect on WhatsApp (+91 75077 00936)
+          </a>
+          <button
+            onClick={() => setSuccess(false)}
+            className="w-full sm:w-auto px-5 py-2.5 bg-stone-100 hover:bg-stone-200 text-navy text-xs font-bold uppercase tracking-wider rounded-sm transition-all"
+          >
+            Submit Another Enquiry
+          </button>
+        </div>
       </div>
     );
   }
