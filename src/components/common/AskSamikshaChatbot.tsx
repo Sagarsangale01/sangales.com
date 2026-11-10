@@ -20,8 +20,8 @@ const PRESET_QUERIES = [
     text: "Hello Samiksha, I would like to enquire about Anvayi Farms pure Desi Cow A2 Bilona Ghee and associate products.",
   },
   {
-    label: "🚜 Sangales Farms",
-    text: "Hello Samiksha, I am interested in bulk agricultural produce and supply partnerships with Sangales Farms.",
+    label: "🌾 Wheat, Bajra & Millets",
+    text: "Hello Samiksha, I am interested in wholesome wheat, bajra, jowar, ancient millets, and grain supplies from Sangales Farms.",
   },
   {
     label: "📦 Packaging & Disposables",

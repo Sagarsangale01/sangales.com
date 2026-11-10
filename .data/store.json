@@ -103,74 +103,93 @@
       "id": "biz-2",
       "name": "Sangales Farms",
       "slug": "sangales-farms",
-      "tagline": "Pioneering Sustainable Precision Agriculture",
+      "tagline": "Wholesome Wheat, Bajra, Jowar, Ancient Millets & Sustainable Farm Produce",
       "category": "Agriculture & Farming",
       "categorySlug": "agriculture-and-farming",
-      "shortDescription": "An agriculture-focused enterprise representing progressive farming practices, seasonal produce, and agri-partnerships.",
-      "about": "Sangales Farms embodies the group's deep commitment to rural prosperity, regenerative agriculture, and modern agricultural stewardship. Working across high-yield arable land, Sangales Farms combines traditional agronomy wisdom with drip-irrigation, natural soil enrichment, and organized post-harvest handling to deliver exceptional farm produce.",
+      "shortDescription": "An agriculture and grain-cultivation enterprise providing pure, unadulterated wholesome wheat, bajra (pearl millet), jowar (sorghum), and traditional nutrition-rich millets direct from sustainable Maharashtra farmlands.",
+      "about": "Sangales Farms represents the group's deep commitment to rural agricultural prosperity, soil health, and pure grain heritage. Based across fertile farmlands in Maharashtra, we cultivate and curate authentic, chemical-free grains and traditional superfoods.\n\nOur harvest lineup features premium wholesome wheat, pearl millet (bajra), sorghum (jowar), and ancient nutrient-dense millets (ragi, foxtail, barnyard). By combining generational agronomy wisdom with natural soil enrichment, solar drying, and precision quality grading, Sangales Farms provides households, millers, food brands, and wholesale grain aggregators with clean, unadulterated grains packed with natural vitality.",
       "logo": "/logos/sangales-farms.svg",
       "coverImage": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=1600",
       "brandPrimaryColor": "#1e3a2f",
       "brandSecondaryColor": "#C6A66B",
       "email": "contact.sangales@gmail.com",
       "phone": "+91 75077 00936",
-      "address": "Agro-Division, Sangales Rural Hub, Maharashtra, India",
-      "website": "https://farms.sangales.com",
+      "address": "Samruddhi Park, Kapaleshwar nagar, Panchwati, Nashik -03, Maharashtra, India",
+      "website": "https://www.sangales.com/businesses/sangales-farms",
       "socialLinks": {
         "linkedin": "https://linkedin.com/company/sangales"
       },
       "status": "PUBLISHED",
       "isFeatured": true,
       "displayOrder": 2,
-      "seoTitle": "Sangales Farms | Sustainable Agriculture & Farm Produce",
-      "seoDescription": "Explore Sangales Farms - sustainable agriculture, organic orchards, seasonal harvest, and institutional farm partnerships.",
+      "seoTitle": "Sangales Farms | Wholesome Wheat, Bajra, Jowar & Ancient Millets | Nashik",
+      "seoDescription": "Sangales Farms — Premium wholesome wheat, bajra (pearl millet), jowar (sorghum), and nutrient-dense ancient millets harvested sustainably in Maharashtra.",
       "strengths": [
-        "Precision drip irrigation and water-conservation infrastructure",
-        "Zero synthetic hormone usage across orchard crops",
-        "Direct farm-to-aggregation center cold-chain linkages",
-        "Collaborative farmer community enablement and training"
+        "100% Wholesome Grains: Pure Wheat, Bajra, Jowar & Ancient Millets",
+        "Direct Farm-to-Consumer & Wholesale Mandi Sourcing",
+        "Zero Chemical Polishing, Artificial Bleach, or Harmful Storage Preservatives",
+        "Naturally Sun-Dried & Moisture-Controlled for Maximum Shelf Life",
+        "Bulk Supply for Atta Chakkis, Food Brands, Retailers & Households"
       ],
       "targetAudience": [
-        "Food processing units and agro-manufacturers",
-        "Fresh produce wholesale aggregators and mandis",
-        "Supermarket chains seeking contract farming supply",
-        "Bulk institutional buyers"
+        "Health-conscious households seeking pure unpolished wheat, bajra & jowar",
+        "Atta chakkis, flour mills & regional grain retailers",
+        "Organic food brands, cloud kitchens & corporate cafeterias",
+        "Wholesale grain merchants, APMC mandis & bulk aggregators"
       ],
       "products": [
         {
           "id": "sf-1",
-          "name": "Seasonal Orchard Fruits",
-          "description": "Naturally matured pomegranates, citrus, and seasonal fruit crops grown with strict IPM practices.",
-          "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&q=80&w=800",
-          "category": "Fresh Produce"
+          "name": "Wholesome Natural Wheat (गहू)",
+          "category": "Wholesome Grains",
+          "description": "Golden, sun-ripened whole wheat grains with high bran and natural gluten integrity. Cleaned, sorted, and free from synthetic polish — ideal for soft rotis, chapatis, and stone-ground flour.",
+          "image": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=800"
         },
         {
           "id": "sf-2",
-          "name": "Bulk Grain & Pulses Harvest",
-          "description": "Sorted, moisture-controlled pulses and whole wheat ready for commercial packaging and processing.",
-          "image": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=800",
-          "category": "Bulk Crops"
+          "name": "Pure Farm-Fresh Bajra / Pearl Millet (बाजरी)",
+          "category": "Millets & Superfoods",
+          "description": "Traditional drought-hardy, nutrient-rich Pearl Millet (Bajra) packed with iron, zinc, dietary fiber, and complex carbohydrates for wholesome daily winter bhakris and nutritious rotlas.",
+          "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=800"
         },
         {
           "id": "sf-3",
-          "name": "Bio-Enriched Soil Amendments",
-          "description": "Organic vermicompost and microbial soil inoculants developed from farm residue.",
-          "image": "https://images.unsplash.com/photo-1592417817098-8f3d69106095?auto=format&fit=crop&q=80&w=800",
-          "category": "Agri Inputs"
+          "name": "Authentic Shalu Jowar / Sorghum (ज्वारी)",
+          "category": "Wholesome Grains",
+          "description": "Naturally gluten-free, premium white Shalu Jowar cultivated with organic soil enrichment. Rich in antioxidants, magnesium, and digestive fiber, producing soft, sweet traditional bhakris.",
+          "image": "https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&q=80&w=800"
+        },
+        {
+          "id": "sf-4",
+          "name": "Ancient Millets & Superfood Mix (पौष्टिक भरडधान्य)",
+          "category": "Millets & Superfoods",
+          "description": "A curated range of unprocessed, mineral-packed ancient Indian millets including Finger Millet (Ragi / Nachani), Foxtail Millet (Kangni), and Little Millet (Kutki) for diabetic-friendly, high-calcium nutrition.",
+          "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=800"
+        },
+        {
+          "id": "sf-5",
+          "name": "Farm Harvest Pulses & Legumes",
+          "category": "Farm Harvest",
+          "description": "Naturally matured, unpolished whole pulses including moong, chana, and tur grown through sustainable crop-rotation to naturally nourish the soil and provide pure protein.",
+          "image": "https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&q=80&w=800"
         }
       ],
       "gallery": [
         {
-          "url": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=1200",
-          "alt": "Sunset across Sangales agricultural fields"
-        },
-        {
-          "url": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&q=80&w=1200",
-          "alt": "Freshly harvested pomegranates"
-        },
-        {
           "url": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=1200",
-          "alt": "Ripening golden wheat fields"
+          "alt": "Ripening golden wheat fields at Sangales Farms"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=1200",
+          "alt": "Sunset across Sangales agricultural farmlands"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=1200",
+          "alt": "Wholesome farm grain harvest - bajra and jowar"
+        },
+        {
+          "url": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=1200",
+          "alt": "Ancient Indian millets and heritage grains"
         }
       ]
     },
