@@ -32,6 +32,10 @@ const PRESET_QUERIES = [
     text: "Hello Samiksha, I would like to enquire about Sangale's Enterprises home lights, ultra-slim panel lights, commercial LED luminaires, street lights, and tube lights.",
   },
   {
+    label: "🏗️ PVC Panels & Materials",
+    text: "Hello Samiksha, I would like to enquire about Sangale's Trading wholesale materials — PVC wall and ceiling panels, WPC fluted louvers, UV marble sheets, trim profiles, and mounting hardware.",
+  },
+  {
     label: "📦 Packaging & Disposables",
     text: "Hello Samiksha, I would like to enquire about Sangale's Packaging wholesale supplies — 4CP meal boxes, aluminium foil containers, paper bags (10x14, 6x14, 6x11, 4x10, 4x8), disposable glasses, and cutlery.",
   },
