@@ -17,7 +17,7 @@ export default function PartnershipCTA({ settings }: Props) {
     {
       icon: Store,
       title: "Distribution & Dealerships",
-      desc: "Distribute Annamrit Foods healthy meals, fresh sprouts & staples, or Sangales Packaging containers across regional market channels.",
+      desc: "Distribute Annamrit Foods healthy meals, or Sangales Packaging 4CP meal boxes, aluminium containers & paper bags across market channels.",
       type: "Distribution",
     },
     {

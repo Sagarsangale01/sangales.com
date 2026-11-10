@@ -24,8 +24,8 @@ const PRESET_QUERIES = [
     text: "Hello Samiksha, I am interested in bulk agricultural produce and supply partnerships with Sangales Farms.",
   },
   {
-    label: "📦 Sangales Packaging",
-    text: "Hello Samiksha, I would like to know more about your biodegradable and commercial packaging solutions.",
+    label: "📦 Packaging & Disposables",
+    text: "Hello Samiksha, I would like to enquire about Sangales Packaging wholesale supplies — 4CP meal boxes, aluminium foil containers, paper bags, plates, glasses, and spoons.",
   },
   {
     label: "🤝 Corporate Partnership",
