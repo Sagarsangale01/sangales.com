@@ -103,13 +103,13 @@
       "id": "biz-2",
       "name": "Sangales Farms",
       "slug": "sangales-farms",
-      "tagline": "Wholesome Wheat, Bajra, Jowar, Ancient Millets & Sustainable Farm Produce",
+      "tagline": "Farm-Fresh Organic Vegetables, Wholesome Grains & Ancient Millets",
       "category": "Agriculture & Farming",
       "categorySlug": "agriculture-and-farming",
-      "shortDescription": "An agriculture and grain-cultivation enterprise providing pure, unadulterated wholesome wheat, bajra (pearl millet), jowar (sorghum), and traditional nutrition-rich millets direct from sustainable Maharashtra farmlands.",
-      "about": "Sangales Farms represents the group's deep commitment to rural agricultural prosperity, soil health, and pure grain heritage. Based across fertile farmlands in Maharashtra, we cultivate and curate authentic, chemical-free grains and traditional superfoods.\n\nOur harvest lineup features premium wholesome wheat, pearl millet (bajra), sorghum (jowar), and ancient nutrient-dense millets (ragi, foxtail, barnyard). By combining generational agronomy wisdom with natural soil enrichment, solar drying, and precision quality grading, Sangales Farms provides households, millers, food brands, and wholesale grain aggregators with clean, unadulterated grains packed with natural vitality.",
+      "shortDescription": "An agriculture and organic farming enterprise providing fresh farm-harvested vegetables, wholesome wheat, bajra (pearl millet), jowar (sorghum), and traditional nutrition-rich millets direct from sustainable Maharashtra farmlands.",
+      "about": "Sangales Farms represents the group's deep commitment to rural agricultural prosperity, soil health, and pure organic nourishment. Cultivating across fertile agricultural lands in Maharashtra, we produce farm-fresh organic vegetables, pure wholesome grains, and heritage superfoods with zero harmful synthetic pesticides.\n\nOur produce portfolio includes daily farm-fresh organic vegetables (vine tomatoes, leafy spinach, cucumbers, gourds, and seasonal greens), premium wholesome wheat (गहू), pearl millet (बाजरी), white sorghum (ज्वारी), and nutrient-dense ancient millets (ragi, foxtail, little millet). By combining generational agronomy wisdom with natural soil enrichment, solar drying, and precision grading, Sangales Farms provides households, food businesses, and regional markets with genuine, unadulterated farm produce packed with vitality.",
       "logo": "/logos/sangales-farms.svg",
-      "coverImage": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=1600",
+      "coverImage": "/images/farms/organic-farm-vegetables.jpg",
       "brandPrimaryColor": "#1e3a2f",
       "brandSecondaryColor": "#C6A66B",
       "email": "contact.sangales@gmail.com",
@@ -122,74 +122,104 @@
       "status": "PUBLISHED",
       "isFeatured": true,
       "displayOrder": 2,
-      "seoTitle": "Sangales Farms | Wholesome Wheat, Bajra, Jowar & Ancient Millets | Nashik",
-      "seoDescription": "Sangales Farms — Premium wholesome wheat, bajra (pearl millet), jowar (sorghum), and nutrient-dense ancient millets harvested sustainably in Maharashtra.",
+      "seoTitle": "Sangales Farms | Farm-Fresh Organic Vegetables, Wheat, Bajra, Jowar & Millets | Nashik",
+      "seoDescription": "Sangales Farms — 100% farm-fresh organic vegetables, wholesome wheat, bajra (pearl millet), jowar (sorghum), and nutrient-dense ancient millets harvested sustainably in Maharashtra.",
       "strengths": [
-        "100% Wholesome Grains: Pure Wheat, Bajra, Jowar & Ancient Millets",
-        "Direct Farm-to-Consumer & Wholesale Mandi Sourcing",
-        "Zero Chemical Polishing, Artificial Bleach, or Harmful Storage Preservatives",
-        "Naturally Sun-Dried & Moisture-Controlled for Maximum Shelf Life",
-        "Bulk Supply for Atta Chakkis, Food Brands, Retailers & Households"
+        "100% Farm-Fresh Organic Vegetables: Daily Harvest of Tomatoes, Greens & Seasonal Veggies",
+        "Wholesome Traditional Grains: Pure Wheat (गहू), Bajra (बाजरी) & Shalu Jowar (ज्वारी)",
+        "Zero Chemical Polishing, Synthetic Pesticides, or Harmful Storage Preservatives",
+        "Direct Farm-to-Consumer, Kitchen, and Wholesale Mandi Supply",
+        "Ancient Indian Superfood Millets: Ragi (Nachani), Foxtail & Little Millets"
       ],
       "targetAudience": [
-        "Health-conscious households seeking pure unpolished wheat, bajra & jowar",
+        "Health-conscious households seeking pure organic vegetables and unpolished grains",
         "Atta chakkis, flour mills & regional grain retailers",
-        "Organic food brands, cloud kitchens & corporate cafeterias",
-        "Wholesale grain merchants, APMC mandis & bulk aggregators"
+        "Restaurants, cloud kitchens, caterers & fresh food providers",
+        "Wholesale vegetable & grain merchants, APMC mandis & bulk aggregators"
       ],
       "products": [
         {
           "id": "sf-1",
-          "name": "Wholesome Natural Wheat (गहू)",
-          "category": "Wholesome Grains",
-          "description": "Golden, sun-ripened whole wheat grains with high bran and natural gluten integrity. Cleaned, sorted, and free from synthetic polish — ideal for soft rotis, chapatis, and stone-ground flour.",
-          "image": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=800"
+          "name": "Farm-Fresh Organic Vegetables & Greens (सेंद्रिय भाजीपाला)",
+          "category": "Organic Vegetables",
+          "description": "Naturally grown, chemical-free daily vegetables harvested fresh from Maharashtra farmlands — including fresh farm tomatoes, cucumbers, spinach (पालक), fenugreek (मेथी), brinjals, gourds, and coriander herbs for wholesome daily meals.",
+          "image": "/images/farms/organic-farm-vegetables.jpg"
         },
         {
           "id": "sf-2",
-          "name": "Pure Farm-Fresh Bajra / Pearl Millet (बाजरी)",
-          "category": "Millets & Superfoods",
-          "description": "Traditional drought-hardy, nutrient-rich Pearl Millet (Bajra) packed with iron, zinc, dietary fiber, and complex carbohydrates for wholesome daily winter bhakris and nutritious rotlas.",
-          "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=800"
+          "name": "Wholesome Natural Wheat (गहू)",
+          "category": "Wholesome Grains",
+          "description": "Golden, sun-ripened whole wheat grains with high bran and natural gluten integrity. Cleaned, sorted, and free from synthetic polish — ideal for soft rotis, chapatis, and stone-ground flour.",
+          "image": "/images/farms/wholesome-wheat-grains.jpg"
         },
         {
           "id": "sf-3",
-          "name": "Authentic Shalu Jowar / Sorghum (ज्वारी)",
-          "category": "Wholesome Grains",
-          "description": "Naturally gluten-free, premium white Shalu Jowar cultivated with organic soil enrichment. Rich in antioxidants, magnesium, and digestive fiber, producing soft, sweet traditional bhakris.",
-          "image": "https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&q=80&w=800"
+          "name": "Pure Farm-Fresh Bajra / Pearl Millet (बाजरी)",
+          "category": "Millets & Superfoods",
+          "description": "Authentic, nutrient-dense Pearl Millet (Bajra) grains packed with iron, zinc, dietary fiber, and complex carbohydrates for wholesome daily winter bhakris and nutritious rotlas.",
+          "image": "/images/farms/pure-bajra-pearl-millet.jpg"
         },
         {
           "id": "sf-4",
-          "name": "Ancient Millets & Superfood Mix (पौष्टिक भरडधान्य)",
-          "category": "Millets & Superfoods",
-          "description": "A curated range of unprocessed, mineral-packed ancient Indian millets including Finger Millet (Ragi / Nachani), Foxtail Millet (Kangni), and Little Millet (Kutki) for diabetic-friendly, high-calcium nutrition.",
-          "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=800"
+          "name": "Authentic Shalu Jowar / Sorghum (ज्वारी)",
+          "category": "Wholesome Grains",
+          "description": "Naturally gluten-free, premium white Shalu Jowar cultivated with organic soil enrichment. Rich in antioxidants, magnesium, and digestive fiber, producing soft, sweet traditional bhakris.",
+          "image": "/images/farms/authentic-shalu-jowar.jpg"
         },
         {
           "id": "sf-5",
-          "name": "Farm Harvest Pulses & Legumes",
+          "name": "Ancient Indian Millets & Superfood Mix (पौष्टिक भरडधान्य)",
+          "category": "Millets & Superfoods",
+          "description": "A curated range of unprocessed, mineral-packed ancient Indian millets including Finger Millet (Ragi / Nachani), Foxtail Millet (Kangni), and Little Millet (Kutki) for diabetic-friendly, high-calcium nutrition.",
+          "image": "/images/farms/ancient-indian-millets-ragi.jpg"
+        },
+        {
+          "id": "sf-6",
+          "name": "Farm-Fresh Vine Tomatoes & Salad Veggies (ताजी टोमॅटो व सॅलड)",
+          "category": "Organic Vegetables",
+          "description": "Naturally ripened, farm-fresh juicy red vine tomatoes and crisp salad vegetables grown with organic compost and zero synthetic ripening chemicals.",
+          "image": "/images/farms/farm-fresh-tomatoes.jpg"
+        },
+        {
+          "id": "sf-7",
+          "name": "Farm Harvest Pulses & Legumes (डाळी व कडधान्ये)",
           "category": "Farm Harvest",
-          "description": "Naturally matured, unpolished whole pulses including moong, chana, and tur grown through sustainable crop-rotation to naturally nourish the soil and provide pure protein.",
-          "image": "https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?auto=format&fit=crop&q=80&w=800"
+          "description": "Naturally matured, unpolished whole pulses including whole green moong, desi chana, and tur grown through sustainable crop-rotation to naturally enrich the soil and provide pure protein.",
+          "image": "/images/farms/farm-harvest-pulses-legumes.jpg"
         }
       ],
       "gallery": [
         {
-          "url": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=1200",
-          "alt": "Ripening golden wheat fields at Sangales Farms"
+          "url": "/images/farms/organic-farm-vegetables.jpg",
+          "alt": "Farm-fresh organic vegetables harvest in Maharashtra"
         },
         {
-          "url": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&q=80&w=1200",
-          "alt": "Sunset across Sangales agricultural farmlands"
+          "url": "/images/farms/wholesome-wheat-grains.jpg",
+          "alt": "Golden sun-ripened wholesome wheat grain harvest"
         },
         {
-          "url": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=1200",
-          "alt": "Wholesome farm grain harvest - bajra and jowar"
+          "url": "/images/farms/pure-bajra-pearl-millet.jpg",
+          "alt": "Pure pearl millet bajra grain harvest"
         },
         {
-          "url": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=1200",
-          "alt": "Ancient Indian millets and heritage grains"
+          "url": "/images/farms/authentic-shalu-jowar.jpg",
+          "alt": "Authentic white Shalu Jowar grain harvest"
+        },
+        {
+          "url": "/images/farms/farm-fresh-tomatoes.jpg",
+          "alt": "Fresh vine-ripened organic red tomatoes"
+        },
+        {
+          "url": "/images/farms/ancient-indian-millets-ragi.jpg",
+          "alt": "Ancient Indian millets and Ragi superfoods"
+        },
+        {
+          "url": "/images/farms/colourful-vegetables-market.jpg",
+          "alt": "Vibrant fresh market vegetables in Maharashtra"
+        },
+        {
+          "url": "/images/farms/farm-harvest-pulses-legumes.jpg",
+          "alt": "Farm-harvested unpolished green moong and pulses"
         }
       ]
     },

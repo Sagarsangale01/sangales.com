@@ -12,6 +12,10 @@ interface AskSamikshaChatbotProps {
 
 const PRESET_QUERIES = [
   {
+    label: "🥦 Organic Vegetables & Grains",
+    text: "Hello Samiksha, I am interested in farm-fresh organic vegetables, wholesome wheat, bajra, jowar, and ancient millets from Sangales Farms.",
+  },
+  {
     label: "🥗 Healthy Chaat & Sprouts",
     text: "Hello Samiksha, I would like to enquire about Annamrit Foods menu — healthy chaat, fresh sprouts, breakfast favourites, wholesome meals, and distribution in Nashik.",
   },
