@@ -12,10 +12,10 @@ export default function GroupPhilosophy({ settings }: Props) {
   const headline = settings?.aboutHeadline || "One Vision. Multiple Businesses.";
   const desc1 =
     settings?.aboutDescription ||
-    "SANGALES – A GROUP OF COMPANIES operates as a unified parent brand fostering independent, mission-driven operating enterprises. From farm gate cultivation and nutritious pantry staples to wholesale enterprise supplies, trading networks, and engineered packaging, we believe true corporate strength lies in patient value creation.";
+    "SANGALE'S – A GROUP OF COMPANIES operates as a unified parent brand fostering independent, mission-driven operating enterprises. From farm gate cultivation and nutritious pantry staples to wholesale enterprise supplies, trading networks, and engineered packaging, we believe true corporate strength lies in patient value creation.";
   const desc2 =
     settings?.aboutSecondaryText ||
-    "Every business under the Sangales umbrella retains its dedicated brand ethos, client connections, and specialized domain expertise—while anchoring itself in group-wide standards of governance, operational discipline, and long-term partnership reliability.";
+    "Every business under the Sangale's umbrella retains its dedicated brand ethos, client connections, and specialized domain expertise—while anchoring itself in group-wide standards of governance, operational discipline, and long-term partnership reliability.";
 
   return (
     <section className="py-20 lg:py-28 bg-offwhite">
@@ -76,7 +76,7 @@ export default function GroupPhilosophy({ settings }: Props) {
               <div className="relative h-80 sm:h-96">
                 <img
                   src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1200"
-                  alt="Sangales Group Leadership and Strategy"
+                  alt="Sangale's Group Leadership and Strategy"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950/90 via-navy-900/40 to-transparent" />

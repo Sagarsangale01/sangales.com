@@ -29,15 +29,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const business = await getBusinessBySlug(params.slug);
   if (!business) {
     return {
-      title: "Business Not Found | Sangales Group",
+      title: "Business Not Found | Sangale's Group",
     };
   }
 
   return {
-    title: `${business.name} | Sangales Group`,
+    title: `${business.name} | Sangale's Group`,
     description: business.seoDescription || business.shortDescription,
     openGraph: {
-      title: `${business.name} - Sangales Group`,
+      title: `${business.name} - Sangale's Group`,
       description: business.shortDescription,
       images: [{ url: business.coverImage }],
     },
@@ -68,7 +68,7 @@ export default async function BusinessDetailPage({ params }: Props) {
     name: business.name,
     parentOrganization: {
       "@type": "Organization",
-      name: "SANGALES – A GROUP OF COMPANIES",
+      name: "SANGALE'S – A GROUP OF COMPANIES",
     },
     description: business.shortDescription,
     image: business.coverImage,
@@ -119,7 +119,7 @@ export default async function BusinessDetailPage({ params }: Props) {
                   {business.category}
                 </span>
                 <span className="text-xs uppercase tracking-wider text-stone-300 font-semibold">
-                  {business.isAssociate ? (business.associationType || "Strategic Associate Company") : "A Sangales Company"}
+                  {business.isAssociate ? (business.associationType || "Strategic Associate Company") : "A Sangale's Company"}
                 </span>
               </div>
 
@@ -214,10 +214,10 @@ export default async function BusinessDetailPage({ params }: Props) {
                       <Sparkles className="w-3.5 h-3.5" /> Corporate Strategic Association
                     </span>
                     <h3 className="font-heading text-xl sm:text-2xl font-extrabold text-white">
-                      Anvayi Farms &bull; Associated with Sangales Group
+                      Anvayi Farms &bull; Associated with Sangale's Group
                     </h3>
                     <p className="text-xs sm:text-sm text-stone-300 leading-relaxed max-w-2xl">
-                      Anvayi Farms operates in close collaboration with Sangales Group, sharing our foundational standards of uncompromised quality, rural farmer prosperity, and authentic Indian farm nutrition. FSSAI Certified: Lic. No. 11526999000448.
+                      Anvayi Farms operates in close collaboration with Sangale's Group, sharing our foundational standards of uncompromised quality, rural farmer prosperity, and authentic Indian farm nutrition. FSSAI Certified: Lic. No. 11526999000448.
                     </p>
                   </div>
                   {business.website && (
@@ -492,10 +492,10 @@ export default async function BusinessDetailPage({ params }: Props) {
               {/* Group Governance Note */}
               <div className="p-4 bg-offwhite rounded-sm border border-stone-200/60 space-y-2">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-navy block">
-                  Sangales Corporate Assurance
+                  Sangale's Corporate Assurance
                 </span>
                 <p className="text-xs text-charcoal-100 leading-relaxed">
-                  All commercial agreements with {business.name} are backed by the statutory diligence and governance of SANGALES – A GROUP OF COMPANIES.
+                  All commercial agreements with {business.name} are backed by the statutory diligence and governance of SANGALE'S – A GROUP OF COMPANIES.
                 </p>
               </div>
             </div>
@@ -511,7 +511,7 @@ export default async function BusinessDetailPage({ params }: Props) {
                   Portfolio Exploration
                 </span>
                 <h3 className="font-heading text-2xl font-extrabold text-navy">
-                  Other Sangales Group Companies
+                  Other Sangale's Group Companies
                 </h3>
               </div>
               <Link

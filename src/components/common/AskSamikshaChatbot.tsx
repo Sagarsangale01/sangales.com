@@ -12,8 +12,12 @@ interface AskSamikshaChatbotProps {
 
 const PRESET_QUERIES = [
   {
+    label: "💻 CRM, AI & Dynamic Websites",
+    text: "Hello Samiksha, I would like to enquire about Sangale's Digital custom CRM solutions, AI integrations, dynamic websites, and software platforms.",
+  },
+  {
     label: "🥦 Organic Vegetables & Grains",
-    text: "Hello Samiksha, I am interested in farm-fresh organic vegetables, wholesome wheat, bajra, jowar, and ancient millets from Sangales Farms.",
+    text: "Hello Samiksha, I am interested in farm-fresh organic vegetables, wholesome wheat, bajra, jowar, and ancient millets from Sangale's Farms.",
   },
   {
     label: "🥗 Healthy Chaat & Sprouts",
@@ -24,24 +28,20 @@ const PRESET_QUERIES = [
     text: "Hello Samiksha, I would like to enquire about Anvayi Farms pure Desi Cow A2 Bilona Ghee and associate products.",
   },
   {
-    label: "🌾 Wheat, Bajra & Millets",
-    text: "Hello Samiksha, I am interested in wholesome wheat, bajra, jowar, ancient millets, and grain supplies from Sangales Farms.",
-  },
-  {
     label: "💡 LED & Lighting Solutions",
-    text: "Hello Samiksha, I would like to enquire about Sangales Enterprises commercial LED panels, industrial high bays, architectural track lights, and street lighting solutions.",
+    text: "Hello Samiksha, I would like to enquire about Sangale's Enterprises home lights, ultra-slim panel lights, commercial LED luminaires, street lights, and tube lights.",
   },
   {
     label: "📦 Packaging & Disposables",
-    text: "Hello Samiksha, I would like to enquire about Sangales Packaging wholesale supplies — 4CP meal boxes, aluminium foil containers, paper bags, plates, glasses, and spoons.",
+    text: "Hello Samiksha, I would like to enquire about Sangale's Packaging wholesale supplies — 4CP meal boxes, aluminium foil containers, paper bags (10x14, 6x14, 6x11, 4x10, 4x8), disposable glasses, and cutlery.",
   },
   {
     label: "🤝 Corporate Partnership",
-    text: "Hello Samiksha, I represent an organization and would like to explore a commercial partnership with SANGALES Group.",
+    text: "Hello Samiksha, I represent an organization and would like to explore a commercial partnership with SANGALE'S Group.",
   },
   {
     label: "💼 Careers",
-    text: "Hello Samiksha, I am reaching out regarding career opportunities at SANGALES Group.",
+    text: "Hello Samiksha, I am reaching out regarding career opportunities at SANGALE'S Group.",
   },
 ];
 
@@ -97,7 +97,7 @@ export default function AskSamikshaChatbot({
           subject: "Enquiry via Ask to Samiksha WhatsApp Desk",
           message: finalMsg,
           enquiryType: "General",
-          businessName: "Sangales Corporate Group",
+          businessName: "Sangale's Corporate Group",
         }),
       }).catch(() => {});
     } catch {

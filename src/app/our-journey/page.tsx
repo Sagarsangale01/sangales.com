@@ -8,9 +8,9 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: "Our Journey & Corporate Milestones | Sangales Group",
+  title: "Our Journey & Corporate Milestones | Sangale's Group",
   description:
-    "Explore the evolution of SANGALES – A GROUP OF COMPANIES, highlighting verified milestones from inception to multi-industry expansion.",
+    "Explore the evolution of SANGALE'S – A GROUP OF COMPANIES, highlighting verified milestones from inception to multi-industry expansion.",
 };
 
 export default function JourneyPage() {
@@ -36,7 +36,7 @@ export default function JourneyPage() {
               Our Journey
             </h1>
             <p className="text-lg text-stone-200 font-light leading-relaxed">
-              Tracing the deliberate, step-by-step evolution of Sangales as we developed specialized business divisions and lasting partnerships.
+              Tracing the deliberate, step-by-step evolution of Sangale's as we developed specialized business divisions and lasting partnerships.
             </p>
           </div>
         </div>
@@ -95,7 +95,7 @@ export default function JourneyPage() {
             Writing the Next Chapters
           </h3>
           <p className="text-sm text-charcoal-100 leading-relaxed">
-            Our story is ongoing. As consumer preferences shift toward unadulterated wellness foods, sustainable farm practices, and zero-plastic packaging solutions, Sangales continues to invest in capabilities that build resilience and create shared prosperity.
+            Our story is ongoing. As consumer preferences shift toward unadulterated wellness foods, sustainable farm practices, and zero-plastic packaging solutions, Sangale's continues to invest in capabilities that build resilience and create shared prosperity.
           </p>
           <div className="pt-2">
             <Link

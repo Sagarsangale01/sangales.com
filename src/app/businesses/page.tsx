@@ -4,9 +4,9 @@ import BusinessDirectoryClient from "@/components/businesses/BusinessDirectoryCl
 import { getPublicBusinesses, getCategories } from "@/services/businessService";
 
 export const metadata: Metadata = {
-  title: "Our Businesses | Group Portfolio Directory",
+  title: "Our Businesses | Group Portfolio Directory | Sangale's Group",
   description:
-    "Explore the diversified business portfolio of Sangales Group: Annamrit Foods, Sangales Farms, Sangales Enterprises, Sangales Trading, and Sangales Packaging.",
+    "Explore the diversified business portfolio of Sangale's Group: Annamrit Foods, Sangale's Farms, Sangale's Enterprises, Sangale's Trading, Sangale's Packaging, and Sangale's Digital.",
 };
 
 export const dynamic = "force-dynamic";

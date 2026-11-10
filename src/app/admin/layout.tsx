@@ -5,7 +5,7 @@ import AdminSidebar from "@/components/admin/AdminSidebar";
 import { getCurrentAdmin } from "@/lib/auth";
 
 export const metadata = {
-  title: "Admin CMS | Sangales Group",
+  title: "Admin CMS | Sangale's Group",
   robots: {
     index: false,
     follow: false,

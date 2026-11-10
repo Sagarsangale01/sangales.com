@@ -48,7 +48,7 @@ export default function WhySangales() {
             Our Business Philosophy
           </h2>
           <p className="text-base sm:text-lg text-charcoal-100">
-            A disciplined, values-led approach that sets Sangales apart as a dependable parent enterprise and operating partner.
+            A disciplined, values-led approach that sets Sangale's apart as a dependable parent enterprise and operating partner.
           </p>
         </div>
 

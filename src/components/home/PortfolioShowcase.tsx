@@ -29,7 +29,7 @@ export default function PortfolioShowcase({ businesses }: Props) {
               Our Operating Businesses
             </h2>
             <p className="mt-4 text-base sm:text-lg text-charcoal-100">
-              Each enterprise operates with independent brand authority and deep domain specialization, reinforced by the corporate governance of Sangales Group.
+              Each enterprise operates with independent brand authority and deep domain specialization, reinforced by the corporate governance of Sangale's Group.
             </p>
           </div>
 

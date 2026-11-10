@@ -46,7 +46,7 @@ export default function Footer({ settings: propSettings, businesses: propBusines
             <Link href="/" className="inline-block focus:outline-none">
               <img
                 src="/logos/sangales-logo-white.png"
-                alt="SANGALES – A GROUP OF COMPANIES"
+                alt="SANGALE'S – A GROUP OF COMPANIES"
                 className="h-11 sm:h-12 w-auto object-contain"
               />
             </Link>
