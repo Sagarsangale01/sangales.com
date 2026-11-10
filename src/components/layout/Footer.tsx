@@ -43,14 +43,13 @@ export default function Footer({ settings: propSettings, businesses: propBusines
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex flex-col">
-              <span className="font-heading text-2xl font-extrabold tracking-widest text-white">
-                {settings.siteName}
-              </span>
-              <span className="text-[10px] font-semibold tracking-superwide uppercase text-gold">
-                {settings.descriptor}
-              </span>
-            </div>
+            <Link href="/" className="inline-block focus:outline-none">
+              <img
+                src="/logos/sangales-logo-white.png"
+                alt="SANGALES – A GROUP OF COMPANIES"
+                className="h-11 sm:h-12 w-auto object-contain"
+              />
+            </Link>
             <p className="text-sm text-stone-400 leading-relaxed max-w-sm">
               A diversified Indian business group bringing together wholesome food, sustainable agriculture, commercial trading, packaging solutions, and next-generation enterprise innovation.
             </p>

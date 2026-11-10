@@ -42,12 +42,14 @@ export default function AdminLoginPage() {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy-950 p-4">
       <div className="max-w-md w-full bg-white rounded-sm border border-stone-200 shadow-2xl overflow-hidden">
         {/* Banner */}
-        <div className="bg-navy p-8 text-center text-white border-b border-navy-800 space-y-2">
-          <span className="font-heading text-2xl font-black tracking-widest text-white block">
-            SANGALES
-          </span>
-          <span className="text-[10px] font-bold tracking-superwide text-gold uppercase block">
-            A Group of Companies &bull; CMS Authentication
+        <div className="bg-navy p-6 text-center text-white border-b border-navy-800 space-y-2 flex flex-col items-center">
+          <img
+            src="/logos/sangales-logo-white.png"
+            alt="SANGALES"
+            className="h-11 sm:h-12 w-auto object-contain mx-auto"
+          />
+          <span className="text-[10px] font-bold tracking-superwide text-gold uppercase block mt-1">
+            CMS Authentication
           </span>
         </div>
 

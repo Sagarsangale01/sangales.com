@@ -48,12 +48,14 @@ export default function AdminSidebar() {
     <aside className="w-64 bg-navy-950 text-stone-300 border-r border-navy-800 flex flex-col justify-between shrink-0 min-h-screen">
       <div>
         {/* Brand Header */}
-        <div className="p-6 border-b border-navy-800">
-          <Link href="/admin" className="flex flex-col group">
-            <span className="font-heading text-lg font-black tracking-widest text-white group-hover:text-gold transition-colors">
-              SANGALES
-            </span>
-            <span className="text-[9px] font-bold tracking-superwide text-gold uppercase">
+        <div className="p-5 border-b border-navy-800">
+          <Link href="/admin" className="flex flex-col group gap-2">
+            <img
+              src="/logos/sangales-logo-white.png"
+              alt="SANGALES"
+              className="h-9 w-auto object-contain"
+            />
+            <span className="text-[9px] font-bold tracking-superwide text-gold uppercase text-center">
               Management CMS &bull; Portal
             </span>
           </Link>

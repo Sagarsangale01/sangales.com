@@ -56,22 +56,13 @@ export default function Header({ settings }: Props) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          {/* Brand Wordmark */}
-          <Link href="/" className="group flex flex-col focus:outline-none">
-            <span
-              className={`font-heading text-xl sm:text-2xl font-extrabold tracking-widest transition-colors ${
-                isDarkHero ? "text-white group-hover:text-gold" : "text-navy group-hover:text-gold"
-              }`}
-            >
-              {siteName}
-            </span>
-            <span
-              className={`text-[9px] sm:text-[10px] font-semibold tracking-superwide uppercase ${
-                isDarkHero ? "text-gold" : "text-gold-700"
-              }`}
-            >
-              {descriptor}
-            </span>
+          {/* Brand Logo */}
+          <Link href="/" className="group flex items-center focus:outline-none py-1">
+            <img
+              src={isDarkHero ? "/logos/sangales-logo-white.png" : "/logos/sangales-logo.png"}
+              alt={`${siteName} – ${descriptor}`}
+              className="h-10 sm:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -134,6 +125,13 @@ export default function Header({ settings }: Props) {
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-navy-900 border-b border-navy-800 text-white px-6 py-6 space-y-4 shadow-xl">
+          <div className="pb-3 border-b border-navy-800/80">
+            <img
+              src="/logos/sangales-logo-white.png"
+              alt="SANGALES – A GROUP OF COMPANIES"
+              className="h-9 w-auto object-contain"
+            />
+          </div>
           <nav className="flex flex-col space-y-3">
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));

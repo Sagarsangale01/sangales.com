@@ -61,7 +61,7 @@ export default async function NewsDetailPage({ params }: Props) {
       name: "SANGALES – A GROUP OF COMPANIES",
       logo: {
         "@type": "ImageObject",
-        url: "https://www.sangales.com/logos/sangales-wordmark.svg",
+        url: "https://www.sangales.com/logos/sangales-logo.png",
       },
     },
     description: article.excerpt,

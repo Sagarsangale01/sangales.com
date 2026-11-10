@@ -90,7 +90,7 @@ export default async function RootLayout({
     name: `${settings.siteName} – ${settings.descriptor}`,
     alternateName: `${settings.siteName} Group`,
     url: "https://www.sangales.com",
-    logo: "https://www.sangales.com/logos/sangales-wordmark.svg",
+    logo: "https://www.sangales.com/logos/sangales-logo.png",
     description: settings.metaDescription,
     foundingLocation: "India",
     department: businesses.map((b) => ({
