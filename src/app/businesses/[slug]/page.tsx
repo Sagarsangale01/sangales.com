@@ -16,9 +16,11 @@ import {
   Sparkles,
   Rocket,
   MessageCircle,
+  ExternalLink,
 } from "lucide-react";
 import { getBusinessBySlug, getPublishedBusinesses } from "@/services/businessService";
 import BusinessEnquiryForm from "@/components/forms/BusinessEnquiryForm";
+import ShareBusinessButton from "@/components/businesses/ShareBusinessButton";
 
 interface Props {
   params: {
@@ -30,15 +32,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const business = await getBusinessBySlug(params.slug);
   if (!business) {
     return {
-      title: "Business Not Found | Sangales Group",
+      title: "Business Not Found | SANGALES GROUP",
     };
   }
 
   return {
-    title: `${business.name} | Sangales Group`,
+    title: `${business.name} | SANGALES GROUP`,
     description: business.seoDescription || business.shortDescription,
     openGraph: {
-      title: `${business.name} - Sangales Group`,
+      title: `${business.name} | SANGALES GROUP`,
       description: business.shortDescription,
       images: [{ url: business.coverImage }],
     },
@@ -236,6 +238,74 @@ export default async function BusinessDetailPage({ params }: Props) {
               </section>
             )}
 
+            {/* Annamrit Foods Dual-Mode Order & Catering Banner */}
+            {business.slug === "annamrit-foods" && (
+              <section className="bg-gradient-to-br from-emerald-950 via-navy-950 to-navy text-white p-6 sm:p-8 rounded-sm border border-emerald-500/30 shadow-lg space-y-6">
+                <div className="border-b border-white/10 pb-4">
+                  <span className="text-gold text-xs font-bold uppercase tracking-superwide block mb-1">
+                    Flexible Dining &bull; Supply Solutions
+                  </span>
+                  <h3 className="font-heading text-xl sm:text-2xl font-extrabold text-white">
+                    Choose How You Would Like to Order with Annamrit Foods
+                  </h3>
+                  <p className="text-xs sm:text-sm text-stone-300 mt-1 max-w-2xl font-light">
+                    We serve individual health enthusiasts in Nashik city as well as corporate campuses, hospitals, and educational institutions across the region.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  {/* Mode A: Daily Retail & Healthy Tiffins */}
+                  <div className="bg-white/5 border border-white/10 rounded-sm p-5 flex flex-col justify-between hover:bg-white/10 transition-colors">
+                    <div className="space-y-2.5">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-emerald-500/20 text-emerald-300 text-[10px] font-bold uppercase tracking-wider rounded-sm border border-emerald-400/30">
+                        🥗 Daily Kitchen &bull; Nashik City Direct
+                      </div>
+                      <h4 className="font-heading text-lg font-bold text-white">
+                        Daily Healthy Meals &amp; Fresh Sprouts
+                      </h4>
+                      <p className="text-xs text-stone-300 leading-relaxed font-light">
+                        Craving fresh sprout bowls, high-protein breakfast mixes, wholesome homestyle meals, or healthy chaat delivered to your home or office in Nashik? Order directly via our kitchen dispatch desk.
+                      </p>
+                    </div>
+                    <div className="pt-5">
+                      <a
+                        href="https://wa.me/917507700936?text=Hello%20Annamrit%20Foods,%20I%20would%20like%20to%20order%20daily%20meals%20/%20fresh%20sprouts%20in%20Nashik."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-sm transition-all shadow-md"
+                      >
+                        <MessageCircle className="w-4 h-4" />
+                        <span>Order on WhatsApp (Kitchen Desk)</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Mode B: Corporate & Institutional Catering */}
+                  <div className="bg-white/5 border border-white/10 rounded-sm p-5 flex flex-col justify-between hover:bg-white/10 transition-colors">
+                    <div className="space-y-2.5">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-gold/20 text-gold-300 text-[10px] font-bold uppercase tracking-wider rounded-sm border border-gold/30">
+                        🏢 Institutional &bull; Corporate Scale
+                      </div>
+                      <h4 className="font-heading text-lg font-bold text-white">
+                        Corporate Catering &amp; Canteen Supply
+                      </h4>
+                      <p className="text-xs text-stone-300 leading-relaxed font-light">
+                        Custom bulk tiffin service, factory canteens, corporate seminars, and daily employee dietary meal plans. Compliant with strict FSSAI hygiene standards and predictable delivery schedules.
+                      </p>
+                    </div>
+                    <div className="pt-5">
+                      <a
+                        href="#enquiry-section"
+                        className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gold hover:bg-white text-navy font-bold text-xs uppercase tracking-wider rounded-sm transition-all shadow-md"
+                      >
+                        <span>Request Institutional Catering Proposal &rarr;</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )}
+
             {/* 6. Products & Services */}
             {business.products && business.products.length > 0 && (
               <section className="space-y-6">
@@ -324,6 +394,106 @@ export default async function BusinessDetailPage({ params }: Props) {
                               B2B / Catering &rarr;
                             </a>
                           </div>
+                        ) : business.slug === "sangales-packaging" ? (
+                          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 w-full">
+                            <a
+                              href={`https://wa.me/917507700936?text=${encodeURIComponent(
+                                `Hello Sangales Packaging, I would like to request a sample kit and size chart for ${prod.name}.`
+                              )}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
+                            >
+                              <MessageCircle className="w-3.5 h-3.5" />
+                              <span>Sample &amp; Size Chart</span>
+                            </a>
+                            <a
+                              href="#enquiry-section"
+                              className="text-xs font-semibold text-charcoal-100 hover:text-navy uppercase tracking-wider text-center"
+                            >
+                              Bulk Pricing &rarr;
+                            </a>
+                          </div>
+                        ) : business.slug === "sangales-trading" ? (
+                          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 w-full">
+                            <a
+                              href={`https://wa.me/917507700936?text=${encodeURIComponent(
+                                `Hello Sangales Trading, please share PVC/WPC catalog and contractor rates for ${prod.name}.`
+                              )}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
+                            >
+                              <MessageCircle className="w-3.5 h-3.5" />
+                              <span>Catalog &amp; Rates</span>
+                            </a>
+                            <a
+                              href="#enquiry-section"
+                              className="text-xs font-semibold text-charcoal-100 hover:text-navy uppercase tracking-wider text-center"
+                            >
+                              Contractor Quote &rarr;
+                            </a>
+                          </div>
+                        ) : business.slug === "sangales-enterprises" ? (
+                          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 w-full">
+                            <a
+                              href={`https://wa.me/917507700936?text=${encodeURIComponent(
+                                `Hello Sangales Enterprises, I would like to enquire about commercial lighting specs and quote for ${prod.name}.`
+                              )}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
+                            >
+                              <MessageCircle className="w-3.5 h-3.5" />
+                              <span>Lighting Quote</span>
+                            </a>
+                            <a
+                              href="#enquiry-section"
+                              className="text-xs font-semibold text-charcoal-100 hover:text-navy uppercase tracking-wider text-center"
+                            >
+                              Project Tender &rarr;
+                            </a>
+                          </div>
+                        ) : business.slug === "sangales-farms" ? (
+                          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 w-full">
+                            <a
+                              href={`https://wa.me/917507700936?text=${encodeURIComponent(
+                                `Hello Sangales Farms, I would like to enquire about wholesale / Mandi harvest supply for ${prod.name}.`
+                              )}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
+                            >
+                              <MessageCircle className="w-3.5 h-3.5" />
+                              <span>Mandi / Bulk Offtake</span>
+                            </a>
+                            <a
+                              href="#enquiry-section"
+                              className="text-xs font-semibold text-charcoal-100 hover:text-navy uppercase tracking-wider text-center"
+                            >
+                              Wholesale Supply &rarr;
+                            </a>
+                          </div>
+                        ) : business.slug === "sangales-digital" ? (
+                          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 w-full">
+                            <a
+                              href={`https://wa.me/917507700936?text=${encodeURIComponent(
+                                `Hello Sangales Digital, I would like to discuss custom CRM / AI integration project for ${prod.name}.`
+                              )}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
+                            >
+                              <MessageCircle className="w-3.5 h-3.5" />
+                              <span>Discuss Project</span>
+                            </a>
+                            <a
+                              href="#enquiry-section"
+                              className="text-xs font-semibold text-charcoal-100 hover:text-navy uppercase tracking-wider text-center"
+                            >
+                              Request Scope &rarr;
+                            </a>
+                          </div>
                         ) : prod.directBuyUrl ? (
                           <>
                             <a
@@ -343,12 +513,25 @@ export default async function BusinessDetailPage({ params }: Props) {
                             </a>
                           </>
                         ) : (
-                          <a
-                            href="#enquiry-section"
-                            className="text-xs font-bold text-navy hover:text-gold uppercase tracking-wider inline-flex items-center gap-1"
-                          >
-                            Enquire for Pricing &rarr;
-                          </a>
+                          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 w-full">
+                            <a
+                              href={`https://wa.me/917507700936?text=${encodeURIComponent(
+                                `Hello SANGALES, I would like to enquire about ${prod.name} (${business.name}).`
+                              )}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
+                            >
+                              <MessageCircle className="w-3.5 h-3.5" />
+                              <span>Inquire on WhatsApp</span>
+                            </a>
+                            <a
+                              href="#enquiry-section"
+                              className="text-xs font-bold text-navy hover:text-gold uppercase tracking-wider text-center"
+                            >
+                              Enquire for Pricing &rarr;
+                            </a>
+                          </div>
                         )}
                       </div>
                     </div>
@@ -470,7 +653,15 @@ export default async function BusinessDetailPage({ params }: Props) {
                   <MapPin className="w-4 h-4 text-gold-700 shrink-0 mt-1" />
                   <div>
                     <span className="block text-[10px] uppercase font-bold text-stone-400">Location</span>
-                    <span>{business.address}</span>
+                    <a
+                      href={`https://maps.google.com/?q=${encodeURIComponent(business.address + ", Maharashtra, India")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-navy hover:text-gold transition-colors font-medium inline-flex items-center gap-1 group"
+                    >
+                      <span>{business.address}</span>
+                      <ExternalLink className="w-3 h-3 text-stone-400 group-hover:text-gold shrink-0" />
+                    </a>
                   </div>
                 </div>
 
@@ -488,7 +679,12 @@ export default async function BusinessDetailPage({ params }: Props) {
                   <Phone className="w-4 h-4 text-gold-700 shrink-0 mt-1" />
                   <div>
                     <span className="block text-[10px] uppercase font-bold text-stone-400">Direct Telephone</span>
-                    <span>{business.phone}</span>
+                    <a
+                      href={`tel:${business.phone.replace(/[^0-9+]/g, "")}`}
+                      className="text-navy hover:text-gold font-medium"
+                    >
+                      {business.phone}
+                    </a>
                   </div>
                 </div>
 
@@ -508,6 +704,23 @@ export default async function BusinessDetailPage({ params }: Props) {
                     </div>
                   </div>
                 )}
+              </div>
+
+              {/* Action Buttons in Contact Desk */}
+              <div className="pt-2 space-y-2 border-t border-stone-100">
+                <a
+                  href={`https://wa.me/917507700936?text=${encodeURIComponent(
+                    `Hello SANGALES, I would like to inquire regarding ${business.name}.`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 px-4 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs uppercase tracking-wider rounded-sm flex items-center justify-center gap-2 shadow-sm transition-all"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>Chat on WhatsApp</span>
+                </a>
+
+                <ShareBusinessButton businessName={business.name} />
               </div>
 
               {/* Group Governance Note */}

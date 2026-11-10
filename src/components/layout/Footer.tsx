@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowUpRight, Mail, Phone, MapPin, Globe } from "lucide-react";
+import { ArrowUpRight, Mail, Phone, MapPin, Globe, MessageCircle } from "lucide-react";
 import { getSiteSettings, SiteSettings } from "@/services/settingsService";
 import { BusinessRecord } from "@/lib/data";
 import { getStore } from "@/lib/store";
@@ -135,7 +135,14 @@ export default function Footer({ settings: propSettings, businesses: propBusines
             <div className="space-y-3 text-sm text-stone-400">
               <p className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-gold shrink-0 mt-0.5" />
-                <span>{settings.corporateAddress}</span>
+                <a
+                  href="https://maps.google.com/?q=Samruddhi+Park+Kapaleshwar+nagar+Panchwati+Nashik+Maharashtra+India"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-gold transition-colors"
+                >
+                  {settings.corporateAddress}
+                </a>
               </p>
               <p className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-gold shrink-0" />
@@ -145,7 +152,23 @@ export default function Footer({ settings: propSettings, businesses: propBusines
               </p>
               <p className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-gold shrink-0" />
-                <span>{settings.contactPhone}</span>
+                <a
+                  href={`tel:${settings.contactPhone.replace(/[^0-9+]/g, "")}`}
+                  className="hover:text-gold transition-colors font-medium"
+                >
+                  {settings.contactPhone}
+                </a>
+              </p>
+              <p className="flex items-center gap-2.5">
+                <MessageCircle className="w-4 h-4 text-[#25D366] shrink-0" />
+                <a
+                  href="https://wa.me/917507700936?text=Hello%20SANGALES%20Corporate%20Desk,%20I%20would%20like%20to%20connect."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-gold transition-colors"
+                >
+                  WhatsApp: +91 75077 00936
+                </a>
               </p>
               <div className="pt-2">
                 <Link

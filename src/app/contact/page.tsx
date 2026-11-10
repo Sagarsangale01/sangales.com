@@ -1,7 +1,8 @@
 import React, { Suspense } from "react";
 import type { Metadata } from "next";
-import { Mail, Phone, MapPin, Clock, Building, ShieldCheck } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Building, ShieldCheck, MessageCircle, ExternalLink } from "lucide-react";
 import CorporateContactForm from "@/components/forms/CorporateContactForm";
+import FAQSection from "@/components/common/FAQSection";
 import { getPublishedBusinesses } from "@/services/businessService";
 import { getSiteSettings } from "@/services/settingsService";
 
@@ -65,7 +66,15 @@ export default async function ContactPage() {
                   <MapPin className="w-5 h-5 text-gold-700 shrink-0 mt-0.5" />
                   <div>
                     <span className="block text-xs uppercase font-bold text-stone-400">Postal Address</span>
-                    <span className="font-medium text-navy">{settings.corporateAddress}</span>
+                    <a
+                      href="https://maps.google.com/?q=Samruddhi+Park+Kapaleshwar+nagar+Panchwati+Nashik+Maharashtra+India"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-navy hover:text-gold transition-colors inline-flex items-center gap-1 group"
+                    >
+                      <span>{settings.corporateAddress}</span>
+                      <ExternalLink className="w-3.5 h-3.5 text-stone-400 group-hover:text-gold shrink-0" />
+                    </a>
                   </div>
                 </div>
 
@@ -83,7 +92,7 @@ export default async function ContactPage() {
                   <Phone className="w-5 h-5 text-gold-700 shrink-0 mt-0.5" />
                   <div>
                     <span className="block text-xs uppercase font-bold text-stone-400">Telephone Hotline</span>
-                    <a href={`tel:${settings.contactPhone.replace(/\s+/g, "")}`} className="text-navy hover:text-gold font-medium">
+                    <a href={`tel:${settings.contactPhone.replace(/[^0-9+]/g, "")}`} className="text-navy hover:text-gold font-medium">
                       {settings.contactPhone}
                     </a>
                   </div>
@@ -96,6 +105,28 @@ export default async function ContactPage() {
                     <span>{settings.workingHours}</span>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Instant WhatsApp Priority Connect Card */}
+            <div className="bg-gradient-to-br from-emerald-900 to-navy text-white p-6 sm:p-7 rounded-sm border border-emerald-500/30 space-y-3 shadow-sm">
+              <div className="flex items-center gap-2 text-emerald-400">
+                <MessageCircle className="w-5 h-5" />
+                <h3 className="font-heading text-base font-bold text-white">Instant WhatsApp Connect</h3>
+              </div>
+              <p className="text-xs text-stone-300 leading-relaxed font-light">
+                Need urgent catalog specs, pricing sheets, or direct order placement? Connect directly with our Nashik corporate representative desk.
+              </p>
+              <div className="pt-2">
+                <a
+                  href="https://wa.me/917507700936?text=Hello%20SANGALES%20Group,%20I%20would%20like%20to%20connect%20regarding%20commercial%20requirements."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs uppercase tracking-wider rounded-sm transition-all shadow-md"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>Chat on WhatsApp (+91 75077 00936)</span>
+                </a>
               </div>
             </div>
 
@@ -117,6 +148,11 @@ export default async function ContactPage() {
               <CorporateContactForm businesses={businesses} />
             </Suspense>
           </div>
+        </div>
+
+        {/* Interactive FAQ Section */}
+        <div className="mt-20 border-t border-stone-200 pt-16">
+          <FAQSection />
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import BusinessDirectoryClient from "@/components/businesses/BusinessDirectoryClient";
+import FAQSection from "@/components/common/FAQSection";
 import { getPublicBusinesses, getCategories } from "@/services/businessService";
 
 export const metadata: Metadata = {
@@ -46,11 +47,19 @@ export default async function BusinessesPage() {
       </section>
 
       {/* Directory Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 space-y-16">
         <BusinessDirectoryClient
           initialBusinesses={businesses}
           categories={categories}
         />
+
+        {/* Directory FAQ */}
+        <div className="border-t border-stone-200/80 pt-16">
+          <FAQSection
+            title="Procurement & Partnership Questions"
+            subtitle="Guidance for wholesalers, contractors, institutions, and buyers sourcing from our diverse operating entities."
+          />
+        </div>
       </div>
     </div>
   );

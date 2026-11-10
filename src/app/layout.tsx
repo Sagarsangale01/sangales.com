@@ -3,6 +3,7 @@ import { Manrope, Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import MobileQuickBar from "@/components/layout/MobileQuickBar";
 import AskSamikshaChatbot from "@/components/common/AskSamikshaChatbot";
 import { getSiteSettings } from "@/services/settingsService";
 import { getPublishedBusinesses } from "@/services/businessService";
@@ -115,10 +116,11 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-offwhite text-charcoal">
+      <body className="min-h-screen flex flex-col bg-offwhite text-charcoal pb-14 sm:pb-0">
         <Header settings={settings} />
         <main className="flex-grow">{children}</main>
         <Footer settings={settings} businesses={businesses} />
+        <MobileQuickBar phone={settings.contactPhone} />
         <AskSamikshaChatbot phone={settings.contactPhone} corporateName={settings.siteName} />
       </body>
     </html>
