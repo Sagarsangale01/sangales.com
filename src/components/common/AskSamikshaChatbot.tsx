@@ -13,11 +13,11 @@ interface AskSamikshaChatbotProps {
 const PRESET_QUERIES = [
   {
     label: "💻 CRM, AI & Dynamic Websites",
-    text: "Hello Samiksha, I would like to enquire about Sangale's Digital custom CRM solutions, AI integrations, dynamic websites, and software platforms.",
+    text: "Hello Samiksha, I would like to enquire about Sangales Digital custom CRM solutions, AI integrations, dynamic websites, and software platforms.",
   },
   {
     label: "🥦 Organic Vegetables & Grains",
-    text: "Hello Samiksha, I am interested in farm-fresh organic vegetables, wholesome wheat, bajra, jowar, and ancient millets from Sangale's Farms.",
+    text: "Hello Samiksha, I am interested in farm-fresh organic vegetables, wholesome wheat, bajra, jowar, and ancient millets from Sangales Farms.",
   },
   {
     label: "🥗 Healthy Chaat & Sprouts",
@@ -29,23 +29,23 @@ const PRESET_QUERIES = [
   },
   {
     label: "💡 LED & Lighting Solutions",
-    text: "Hello Samiksha, I would like to enquire about Sangale's Enterprises home lights, ultra-slim panel lights, commercial LED luminaires, street lights, and tube lights.",
+    text: "Hello Samiksha, I would like to enquire about Sangales Enterprises home lights, ultra-slim panel lights, commercial LED luminaires, street lights, and tube lights.",
   },
   {
     label: "🏗️ PVC Panels & Materials",
-    text: "Hello Samiksha, I would like to enquire about Sangale's Trading wholesale materials — PVC wall and ceiling panels, WPC fluted louvers, UV marble sheets, trim profiles, and mounting hardware.",
+    text: "Hello Samiksha, I would like to enquire about Sangales Trading wholesale materials — PVC wall and ceiling panels, WPC fluted louvers, UV marble sheets, trim profiles, and mounting hardware.",
   },
   {
     label: "📦 Packaging & Disposables",
-    text: "Hello Samiksha, I would like to enquire about Sangale's Packaging wholesale supplies — 4CP meal boxes, aluminium foil containers, paper bags (10x14, 6x14, 6x11, 4x10, 4x8), disposable glasses, and cutlery.",
+    text: "Hello Samiksha, I would like to enquire about Sangales Packaging wholesale supplies — 4CP meal boxes, aluminium foil containers, paper bags (10x14, 6x14, 6x11, 4x10, 4x8), disposable glasses, and cutlery.",
   },
   {
     label: "🤝 Corporate Partnership",
-    text: "Hello Samiksha, I represent an organization and would like to explore a commercial partnership with SANGALE'S Group.",
+    text: "Hello Samiksha, I represent an organization and would like to explore a commercial partnership with SANGALES Group.",
   },
   {
     label: "💼 Careers",
-    text: "Hello Samiksha, I am reaching out regarding career opportunities at SANGALE'S Group.",
+    text: "Hello Samiksha, I am reaching out regarding career opportunities at SANGALES Group.",
   },
 ];
 
@@ -101,7 +101,7 @@ export default function AskSamikshaChatbot({
           subject: "Enquiry via Ask to Samiksha WhatsApp Desk",
           message: finalMsg,
           enquiryType: "General",
-          businessName: "Sangale's Corporate Group",
+          businessName: "Sangales Corporate Group",
           privacyConsent: true,
         }),
       }).catch(() => {});

@@ -112,7 +112,7 @@ export default function CorporateContactForm({ businesses }: Props) {
           Your Enquiry Has Been Received
         </h3>
         <p className="text-sm text-charcoal-100 max-w-md mx-auto leading-relaxed">
-          Thank you for contacting <strong>SANGALE&apos;S – A GROUP OF COMPANIES</strong>. An acknowledgement has been sent to your email, and our operating desk has been notified.
+          Thank you for contacting <strong>SANGALES – A GROUP OF COMPANIES</strong>. An acknowledgement has been sent to your email, and our operating desk has been notified.
         </p>
 
         <div className="p-4 bg-stone-50 border border-stone-200 rounded-sm max-w-md mx-auto text-left space-y-1 text-xs">
@@ -298,7 +298,7 @@ export default function CorporateContactForm({ businesses }: Props) {
             onChange={(e) => updateField("businessId", e.target.value)}
             className="w-full px-3.5 py-2.5 text-sm bg-offwhite border border-stone-200 rounded-sm focus:outline-none focus:border-gold text-charcoal"
           >
-            <option value="">Sangale&apos;s Corporate Group (All)</option>
+            <option value="">Sangales Corporate Group (All)</option>
             {businesses.map((b) => (
               <option key={b.id} value={b.id}>
                 {b.name} ({b.category})
@@ -361,7 +361,7 @@ export default function CorporateContactForm({ businesses }: Props) {
             }`}
           />
           <label htmlFor="privacyConsentCorporate" className="text-xs text-charcoal-100 leading-normal">
-            I consent to <strong>SANGALE&apos;S – A GROUP OF COMPANIES</strong> collecting, storing, and reviewing the submitted information for evaluating and responding to this corporate inquiry.
+            I consent to <strong>SANGALES – A GROUP OF COMPANIES</strong> collecting, storing, and reviewing the submitted information for evaluating and responding to this corporate inquiry.
           </label>
         </div>
         {fieldErrors.privacyConsent && (

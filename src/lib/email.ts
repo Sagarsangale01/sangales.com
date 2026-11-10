@@ -38,7 +38,7 @@ export async function sendEmail({
       const senderFrom =
         from ||
         process.env.SMTP_FROM ||
-        `"Sangale's Group" <${smtpUser}>`;
+        `"Sangales Group" <${smtpUser}>`;
 
       const info = await transporter.sendMail({
         from: senderFrom,
@@ -65,7 +65,7 @@ export async function sendEmail({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: from || "SANGALE'S Corporate <notifications@sangales.com>",
+          from: from || "SANGALES Corporate <notifications@sangales.com>",
           to,
           subject,
           html,
@@ -129,7 +129,7 @@ async function sendAdminInstantMobileAlert(enquiry: {
         `✉️ *Email:* ${enquiry.email}\n` +
         `🏢 *Company:* ${enquiry.companyName || "Individual"}\n` +
         `📌 *Category:* ${enquiry.enquiryType}\n` +
-        `🎯 *Target Entity:* ${enquiry.businessName || "Sangale's Group"}\n\n` +
+        `🎯 *Target Entity:* ${enquiry.businessName || "Sangales Group"}\n\n` +
         `💬 *Message:*\n"${enquiry.message}"\n` +
         `━━━━━━━━━━━━━━━━━━━━━━\n` +
         `👉 [Open Admin CRM](https://www.sangales.com/admin/enquiries)\n` +
@@ -157,11 +157,11 @@ async function sendAdminInstantMobileAlert(enquiry: {
   if (cmbPhone && cmbKey) {
     try {
       const waMsg =
-        `*New Lead - Sangale's Group*\n` +
+        `*New Lead - Sangales Group*\n` +
         `Name: ${enquiry.fullName}\n` +
         `Phone: ${enquiry.phone}\n` +
         `Email: ${enquiry.email}\n` +
-        `Entity: ${enquiry.businessName || "Sangale's Group"}\n` +
+        `Entity: ${enquiry.businessName || "Sangales Group"}\n` +
         `Msg: ${enquiry.message}`;
 
       const cmbUrl = `https://api.callmebot.com/whatsapp.php?phone=${encodeURIComponent(
@@ -214,7 +214,7 @@ export async function notifyNewEnquiry(enquiry: {
   const adminHtml = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 620px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #ffffff;">
       <div style="background-color: #142735; padding: 18px 24px; border-radius: 6px; margin-bottom: 20px;">
-        <h2 style="color: #ffffff; margin: 0; font-size: 18px; letter-spacing: 0.5px;">SANGALE'S – A GROUP OF COMPANIES</h2>
+        <h2 style="color: #ffffff; margin: 0; font-size: 18px; letter-spacing: 0.5px;">SANGALES – A GROUP OF COMPANIES</h2>
         <p style="color: #C6A66B; margin: 4px 0 0; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">New Commercial Enquiry Received</p>
       </div>
 
@@ -241,7 +241,7 @@ export async function notifyNewEnquiry(enquiry: {
         </tr>
         <tr style="border-bottom: 1px solid #f1f5f9;">
           <td style="padding: 10px 0; font-weight: bold; color: #64748b;">Target Entity:</td>
-          <td style="padding: 10px 0; color: #0f172a; font-weight: 600;">${enquiry.businessName || "Sangale's Group Headquarters"}</td>
+          <td style="padding: 10px 0; color: #0f172a; font-weight: 600;">${enquiry.businessName || "Sangales Group Headquarters"}</td>
         </tr>
       </table>
 
@@ -254,20 +254,20 @@ export async function notifyNewEnquiry(enquiry: {
         <a href="https://www.sangales.com/admin/enquiries" style="display: inline-block; background-color: #142735; color: #ffffff; text-decoration: none; padding: 10px 20px; font-size: 12px; font-weight: bold; letter-spacing: 0.5px; border-radius: 4px;">MANAGE IN ADMIN CRM →</a>
       </div>
 
-      <p style="font-size: 11px; color: #94a3b8; margin-top: 24px; text-align: center;">This notification was automatically dispatched by the Sangale's Group Corporate Portal.</p>
+      <p style="font-size: 11px; color: #94a3b8; margin-top: 24px; text-align: center;">This notification was automatically dispatched by the Sangales Group Corporate Portal.</p>
     </div>
   `;
 
   const ackHtml = `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #ffffff;">
       <div style="background-color: #142735; padding: 18px 24px; border-radius: 6px; margin-bottom: 20px;">
-        <h2 style="color: #ffffff; margin: 0; font-size: 18px;">SANGALE'S – A GROUP OF COMPANIES</h2>
+        <h2 style="color: #ffffff; margin: 0; font-size: 18px;">SANGALES – A GROUP OF COMPANIES</h2>
         <p style="color: #C6A66B; margin: 4px 0 0; font-size: 12px; font-weight: 600; text-transform: uppercase;">Corporate Communications Desk</p>
       </div>
 
       <p style="font-size: 15px; color: #0f172a;">Dear <strong>${enquiry.fullName}</strong>,</p>
       <p style="font-size: 14px; color: #334155; line-height: 1.6;">
-        Thank you for contacting <strong>Sangale's Group</strong> regarding <strong>${enquiry.enquiryType}</strong> for <strong>${enquiry.businessName || "Sangale's – A Group of Companies"}</strong>.
+        Thank you for contacting <strong>Sangales Group</strong> regarding <strong>${enquiry.enquiryType}</strong> for <strong>${enquiry.businessName || "Sangales – A Group of Companies"}</strong>.
       </p>
       <p style="font-size: 14px; color: #334155; line-height: 1.6;">
         Your inquiry has been logged in our system and forwarded directly to our commercial operations team. A representative will review your requirement and connect with you shortly.
@@ -282,7 +282,7 @@ export async function notifyNewEnquiry(enquiry: {
       <p style="font-size: 13px; color: #64748b; margin-top: 30px; line-height: 1.5;">
         Warm regards,<br/>
         <strong>Commercial Operations &amp; Partnership Desk</strong><br/>
-        SANGALE'S – A GROUP OF COMPANIES<br/>
+        SANGALES – A GROUP OF COMPANIES<br/>
         <a href="https://www.sangales.com" style="color: #0284c7; text-decoration: none;">www.sangales.com</a>
       </p>
     </div>
@@ -292,13 +292,13 @@ export async function notifyNewEnquiry(enquiry: {
     // 1. Dispatch email to Corporate Email (contact.sangales@gmail.com)
     sendEmail({
       to: adminEmail,
-      subject: `[LEAD] ${enquiry.enquiryType} Enquiry - ${enquiry.fullName} (${enquiry.businessName || "Sangale's Group"})`,
+      subject: `[LEAD] ${enquiry.enquiryType} Enquiry - ${enquiry.fullName} (${enquiry.businessName || "Sangales Group"})`,
       html: adminHtml,
     }),
     // 2. Dispatch acknowledgement to prospect
     sendEmail({
       to: enquiry.email,
-      subject: `Acknowledgement: Your enquiry to Sangale's Group (${enquiry.businessName || "Commercial Desk"})`,
+      subject: `Acknowledgement: Your enquiry to Sangales Group (${enquiry.businessName || "Commercial Desk"})`,
       html: ackHtml,
     }),
     // 3. Dispatch instant mobile notifications (Telegram / WhatsApp / Webhook)

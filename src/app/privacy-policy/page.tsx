@@ -24,7 +24,7 @@ export default function PrivacyPolicyPage() {
           <div className="prose prose-stone text-sm leading-relaxed space-y-4">
             <h2 className="font-heading text-lg font-bold text-navy mt-6">1. Overview</h2>
             <p>
-              SANGALES – A GROUP OF COMPANIES (&quot;Sangales&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) operates the corporate website www.sangales.com and its associated subsidiary web pages. We respect your privacy and are committed to safeguarding the personal and commercial data you share with us.
+              SANGALES – A GROUP OF COMPANIES (&quot;SANGALES&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) operates the corporate website www.sangales.com and its associated group and operating business pages. We respect your privacy and are committed to safeguarding the personal and commercial data you share with us.
             </p>
 
             <h2 className="font-heading text-lg font-bold text-navy mt-6">2. Information We Collect</h2>

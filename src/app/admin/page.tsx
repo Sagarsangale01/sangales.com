@@ -26,7 +26,7 @@ export default async function AdminDashboardPage() {
       <div className="bg-white p-8 rounded-sm border border-stone-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
           <span className="text-gold-700 text-xs font-bold tracking-superwide uppercase block mb-1">
-            Sangale's Group Executive Console
+            Sangales Group Executive Console
           </span>
           <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-navy">
             Corporate Operations Overview

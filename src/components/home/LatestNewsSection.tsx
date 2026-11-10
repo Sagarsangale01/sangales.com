@@ -24,7 +24,7 @@ export default function LatestNewsSection({ news }: Props) {
               News &amp; Updates
             </h2>
             <p className="mt-4 text-base sm:text-lg text-charcoal-100">
-              Official press communications, operational developments, and strategic initiatives from across the Sangale's group companies.
+              Official press communications, operational developments, and strategic initiatives from across the Sangales group companies.
             </p>
           </div>
 

@@ -17,7 +17,7 @@ export default function PartnershipCTA({ settings }: Props) {
     {
       icon: Store,
       title: "Distribution & Dealerships",
-      desc: "Distribute Annamrit Foods healthy meals, or Sangale's Packaging 4CP meal boxes, aluminium containers & paper bags across market channels.",
+      desc: "Distribute Annamrit Foods healthy meals, or Sangales Packaging 4CP meal boxes, aluminium containers & paper bags across market channels.",
       type: "Distribution",
     },
     {
@@ -29,7 +29,7 @@ export default function PartnershipCTA({ settings }: Props) {
     {
       icon: Boxes,
       title: "Wholesale & Enterprise Procurement",
-      desc: "Procure Sangale's Trading PVC wall & ceiling panels, WPC louvers, LED lighting systems, and food packaging disposables.",
+      desc: "Procure Sangales Trading PVC wall & ceiling panels, WPC louvers, LED lighting systems, and food packaging disposables.",
       type: "Wholesale",
     },
     {

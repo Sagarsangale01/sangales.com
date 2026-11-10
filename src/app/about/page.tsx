@@ -5,9 +5,9 @@ import { ArrowRight, Building2, CheckCircle2, ShieldCheck, Sprout, Target } from
 import { getSiteSettings } from "@/services/settingsService";
 
 export const metadata: Metadata = {
-  title: "About Us | Sangale's Corporate Profile & Philosophy",
+  title: "About Us | Sangales Corporate Profile & Philosophy",
   description:
-    "Learn about SANGALE'S – A GROUP OF COMPANIES, our founding philosophy of patient entrepreneurship, business governance, and our diversified portfolio.",
+    "Learn about SANGALES – A GROUP OF COMPANIES, our founding philosophy of patient entrepreneurship, business governance, and our diversified portfolio.",
 };
 
 export const dynamic = "force-dynamic";
@@ -67,7 +67,7 @@ export default function AboutPage() {
             <div className="relative rounded-sm overflow-hidden shadow-editorial border border-stone-200 bg-white">
               <img
                 src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=1200"
-                alt="Sangale's Corporate Discussion"
+                alt="Sangales Corporate Discussion"
                 className="w-full h-80 sm:h-96 object-cover"
               />
               <div className="p-6 bg-navy text-stone-300">
@@ -92,7 +92,7 @@ export default function AboutPage() {
               Our Approach to Entrepreneurship
             </h2>
             <p className="mt-3 text-sm sm:text-base text-charcoal-100 leading-relaxed">
-              We practice a decentralized yet disciplined model of business governance. Each enterprise within the Sangale's family is established with a clear mandate, its own leadership accountability, and a distinct operational culture.
+              We practice a decentralized yet disciplined model of business governance. Each enterprise within the Sangales family is established with a clear mandate, its own leadership accountability, and a distinct operational culture.
             </p>
           </div>
 
@@ -133,7 +133,7 @@ export default function AboutPage() {
               Future Direction &amp; Expansion
             </h2>
             <p className="text-sm sm:text-base text-stone-300 font-light leading-relaxed">
-              As we look toward the coming years, Sangale's is laying the foundation for technology-enabled commerce, intelligent supply chains, and specialized incubation. Future initiatives—including Sangale's Digital, Sangale's Logistics, and venture platforms—will expand our capacity to create opportunities for young talent, regional producers, and enterprise clients.
+              As we look toward the coming years, Sangales is laying the foundation for technology-enabled commerce, intelligent supply chains, and specialized incubation. Future initiatives—including Sangales Digital, Sangales Logistics, and venture platforms—will expand our capacity to create opportunities for young talent, regional producers, and enterprise clients.
             </p>
           </div>
 

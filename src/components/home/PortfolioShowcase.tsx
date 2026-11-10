@@ -29,7 +29,7 @@ export default function PortfolioShowcase({ businesses }: Props) {
               Our Operating Businesses
             </h2>
             <p className="mt-4 text-base sm:text-lg text-charcoal-100">
-              Each enterprise operates with independent brand authority and deep domain specialization, reinforced by the corporate governance of Sangale's Group.
+              Each enterprise operates with independent brand authority and deep domain specialization, reinforced by the shared governance and resources of SANGALES.
             </p>
           </div>
 
@@ -163,16 +163,16 @@ export default function PortfolioShowcase({ businesses }: Props) {
           ))}
         </div>
 
-        {/* 2.5 Strategic Associate Company Spotlight: Anvayi Farms */}
+        {/* 2.5 Strategic Associate Enterprise: Anvayi Farms */}
         {associate && (
-          <div className="mt-16 bg-gradient-to-br from-navy-950 via-navy-900 to-[#14261d] text-white rounded-sm overflow-hidden border border-emerald-500/30 shadow-2xl">
+          <div className="mt-16 bg-gradient-to-br from-navy-950 via-navy-900 to-[#122319] text-white rounded-sm overflow-hidden border border-emerald-500/30 shadow-xl">
             <div className="p-8 sm:p-12 lg:p-14">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                 {/* Left Overview */}
-                <div className="lg:col-span-6 space-y-5">
+                <div className="lg:col-span-7 space-y-5">
                   <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase tracking-wider rounded-sm border border-emerald-500/40">
                     <Sparkles className="w-3.5 h-3.5 text-gold" />
-                    <span>Strategic Associate Company &bull; anvayifarms.com</span>
+                    <span>Strategic Associate Enterprise &bull; Dedicated Operation</span>
                   </div>
 
                   <h3 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
@@ -184,7 +184,7 @@ export default function PortfolioShowcase({ businesses }: Props) {
                   </p>
 
                   <p className="text-sm sm:text-base text-stone-300 leading-relaxed">
-                    {associate.shortDescription}
+                    Anvayi Farms is a strategic associate enterprise operating independently in dedicated collaboration with SANGALES. Grounded in traditional Vedic bilona churning and natural desi cow care, Anvayi Farms preserves time-tested heritage and natural nutrition.
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
@@ -201,72 +201,39 @@ export default function PortfolioShowcase({ businesses }: Props) {
                       href={`/businesses/${associate.slug}`}
                       className="px-6 py-3.5 bg-gold hover:bg-white text-navy font-bold text-xs uppercase tracking-widest rounded-sm transition-all shadow-md inline-flex items-center gap-2"
                     >
-                      <span>Explore Products &amp; Story</span>
+                      <span>Explore Associate Profile</span>
                       <ArrowRight className="w-4 h-4" />
                     </Link>
 
                     {associate.website && (
                       <a
-                        href={associate.website + "/shop"}
+                        href={associate.website}
                         target="_blank"
                         rel="noreferrer"
                         className="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white font-semibold text-xs uppercase tracking-widest rounded-sm transition-all border border-white/20 inline-flex items-center gap-2"
                       >
-                        <span>Visit anvayifarms.com</span>
+                        <span>Official Website (anvayifarms.com)</span>
                         <ArrowUpRight className="w-4 h-4 text-gold" />
                       </a>
                     )}
                   </div>
                 </div>
 
-                {/* Right Product Showcase Cards */}
-                <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {associate.products?.slice(0, 2).map((prod) => (
-                    <div
-                      key={prod.id}
-                      className="bg-navy-900/90 rounded-sm overflow-hidden border border-white/10 shadow-lg flex flex-col justify-between group"
-                    >
-                      <div>
-                        {prod.image && (
-                          <div className="h-44 overflow-hidden relative bg-navy-950">
-                            <img
-                              src={prod.image}
-                              alt={prod.name}
-                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                            />
-                            {prod.price && (
-                              <span className="absolute top-2.5 right-2.5 bg-navy/90 backdrop-blur-md text-gold px-2.5 py-1 text-[11px] font-extrabold rounded-sm border border-gold/30">
-                                {prod.price}
-                              </span>
-                            )}
-                          </div>
-                        )}
-                        <div className="p-4 space-y-1.5">
-                          <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400">
-                            {prod.category || "Associate Offering"}
-                          </span>
-                          <h4 className="font-heading text-sm font-bold text-white group-hover:text-gold transition-colors line-clamp-1">
-                            {prod.name}
-                          </h4>
-                          <p className="text-[11px] text-stone-300 line-clamp-2 leading-relaxed">
-                            {prod.description}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="p-4 pt-0">
-                        <a
-                          href={prod.directBuyUrl || associate.website || "#"}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="pt-2 border-t border-white/10 inline-flex items-center justify-between w-full text-[11px] font-bold uppercase tracking-wider text-gold hover:text-white transition-colors"
-                        >
-                          <span>Buy Online ↗</span>
-                          <span className="text-[10px] text-stone-400 font-normal">anvayifarms.com</span>
-                        </a>
-                      </div>
+                {/* Right Visual Feature */}
+                <div className="lg:col-span-5 relative">
+                  <div className="relative rounded-sm overflow-hidden border border-emerald-500/30 bg-navy-950 shadow-2xl">
+                    <img
+                      src="/images/anvayi-farms/anvayi-bilona-method.png"
+                      alt="Anvayi Farms Vedic Bilona Method"
+                      className="w-full h-72 sm:h-80 object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4 p-4 bg-navy-900/90 backdrop-blur-md border border-white/10 rounded-sm space-y-1">
+                      <span className="text-[10px] uppercase font-bold text-emerald-400 tracking-wider">Heritage Churning</span>
+                      <h4 className="text-sm font-bold text-white">Vedic A2 Desi Cow Bilona Ghee</h4>
+                      <p className="text-xs text-stone-300">Slow-churned from cultured A2 curd under traditional protocols in Maharashtra.</p>
                     </div>
-                  ))}
+                  </div>
                 </div>
               </div>
             </div>

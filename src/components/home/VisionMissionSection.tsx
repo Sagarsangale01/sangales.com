@@ -51,7 +51,7 @@ export default function VisionMissionSection({ settings }: Props) {
             Our Vision, Mission &amp; Core Values
           </h2>
           <p className="text-sm sm:text-base text-stone-300 font-light">
-            Guiding the Sangale's Group as we build sustainable businesses and unlock meaningful economic opportunities across India.
+            Guiding the Sangales Group as we build sustainable businesses and unlock meaningful economic opportunities across India.
           </p>
         </div>
 

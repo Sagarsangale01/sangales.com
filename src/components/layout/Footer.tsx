@@ -46,19 +46,19 @@ export default function Footer({ settings: propSettings, businesses: propBusines
             <Link href="/" className="inline-block focus:outline-none">
               <img
                 src="/logos/sangales-logo-white.png"
-                alt="SANGALE'S – A GROUP OF COMPANIES"
+                alt="SANGALES – A GROUP OF COMPANIES"
                 className="h-11 sm:h-12 w-auto object-contain"
               />
             </Link>
             <p className="text-sm text-stone-400 leading-relaxed max-w-sm">
               A diversified Indian business group bringing together wholesome food, sustainable agriculture, commercial trading, packaging solutions, and next-generation enterprise innovation.
             </p>
-            <div className="pt-2 flex items-center space-x-4 text-xs text-stone-400">
+            <div className="pt-2 flex items-center space-x-3 text-xs text-stone-400">
               <span className="inline-flex items-center gap-1.5">
-                <Globe className="w-4 h-4 text-gold" /> Registered in India
+                <Globe className="w-4 h-4 text-gold" /> Headquartered in Nashik, Maharashtra
               </span>
               <span>&bull;</span>
-              <span>Corporate ID: SANGALES-GRP</span>
+              <span>Indian Business Group</span>
             </div>
           </div>
 

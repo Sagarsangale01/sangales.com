@@ -23,7 +23,7 @@ interface Props {
 }
 
 export default function Header({ settings }: Props) {
-  const siteName = settings?.siteName || "SANGALE'S";
+  const siteName = settings?.siteName || "SANGALES";
   const descriptor = settings?.descriptor || "A Group of Companies";
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -128,7 +128,7 @@ export default function Header({ settings }: Props) {
           <div className="pb-3 border-b border-navy-800/80">
             <img
               src="/logos/sangales-logo-white.png"
-              alt="SANGALE'S – A GROUP OF COMPANIES"
+              alt="SANGALES – A GROUP OF COMPANIES"
               className="h-9 w-auto object-contain"
             />
           </div>

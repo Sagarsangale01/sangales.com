@@ -49,9 +49,9 @@
         },
         {
           "id": "af-2",
-          "name": "Fresh Organic Sprouts & Protein Mixes",
+          "name": "Fresh Sprout Bowls & Protein Mixes",
           "category": "Fresh Sprouts",
-          "description": "Enzymatically active steamed and seasoned sprouted moong and mixed lentils rich in live bioavailable plant protein and vitality.",
+          "description": "Daily fresh steamed and seasoned sprouted moong and mixed lentils rich in natural plant protein and wholesome nutrition.",
           "image": "/images/annamrit-foods/annamrit-fresh-sprouts.jpg"
         },
         {
@@ -101,13 +101,13 @@
     },
     {
       "id": "biz-2",
-      "name": "Sangale's Farms",
+      "name": "Sangales Farms",
       "slug": "sangales-farms",
       "tagline": "Farm-Fresh Organic Vegetables, Wholesome Grains & Ancient Millets",
       "category": "Agriculture & Farming",
       "categorySlug": "agriculture-and-farming",
       "shortDescription": "An agriculture and organic farming enterprise providing fresh farm-harvested vegetables, wholesome wheat, bajra (pearl millet), jowar (sorghum), and traditional nutrition-rich millets direct from sustainable Maharashtra farmlands.",
-      "about": "Sangale's Farms represents the group's deep commitment to rural agricultural prosperity, soil health, and pure organic nourishment. Cultivating across fertile agricultural lands in Maharashtra, we produce farm-fresh organic vegetables, pure wholesome grains, and heritage superfoods with zero harmful synthetic pesticides.\n\nOur produce portfolio includes daily farm-fresh organic vegetables (vine tomatoes, leafy spinach, cucumbers, gourds, and seasonal greens), premium wholesome wheat, pearl millet (bajra), white sorghum (jowar), and nutrient-dense ancient millets (ragi, foxtail, little millet). By combining generational agronomy wisdom with natural soil enrichment, solar drying, and precision grading, Sangale's Farms provides households, food businesses, and regional markets with genuine, unadulterated farm produce packed with vitality.",
+      "about": "Sangales Farms represents the group's deep commitment to rural agricultural prosperity, soil health, and pure organic nourishment. Cultivating across fertile agricultural lands in Maharashtra, we produce farm-fresh organic vegetables, pure wholesome grains, and heritage superfoods with zero harmful synthetic pesticides.\n\nOur produce portfolio includes daily farm-fresh organic vegetables (vine tomatoes, leafy spinach, cucumbers, gourds, and seasonal greens), premium wholesome wheat, pearl millet (bajra), white sorghum (jowar), and nutrient-dense ancient millets (ragi, foxtail, little millet). By combining generational agronomy wisdom with natural soil enrichment, solar drying, and precision grading, Sangales Farms provides households, food businesses, and regional markets with genuine, unadulterated farm produce packed with vitality.",
       "logo": "/logos/sangales-farms.svg",
       "coverImage": "/images/farms/organic-farm-vegetables.jpg",
       "brandPrimaryColor": "#1e3a2f",
@@ -122,8 +122,8 @@
       "status": "PUBLISHED",
       "isFeatured": true,
       "displayOrder": 2,
-      "seoTitle": "Sangale's Farms | Farm-Fresh Organic Vegetables, Wheat, Bajra, Jowar & Millets | Nashik",
-      "seoDescription": "Sangale's Farms — 100% farm-fresh organic vegetables, wholesome wheat, bajra (pearl millet), jowar (sorghum), and nutrient-dense ancient millets harvested sustainably in Maharashtra.",
+      "seoTitle": "Sangales Farms | Farm-Fresh Organic Vegetables, Wheat, Bajra, Jowar & Millets | Nashik",
+      "seoDescription": "Sangales Farms — 100% farm-fresh organic vegetables, wholesome wheat, bajra (pearl millet), jowar (sorghum), and nutrient-dense ancient millets harvested sustainably in Maharashtra.",
       "strengths": [
         "100% Farm-Fresh Organic Vegetables: Daily Harvest of Tomatoes, Greens & Seasonal Veggies",
         "Wholesome Traditional Grains: Pure Wheat, Bajra & Shalu Jowar",
@@ -225,13 +225,13 @@
     },
     {
       "id": "biz-3",
-      "name": "Sangale's Enterprises",
+      "name": "Sangales Enterprises",
       "slug": "sangales-enterprises",
       "tagline": "Home Lights, Panel Lights, LED Lights, Street Lights & Tube Lights",
       "category": "Lighting & LED Solutions",
       "categorySlug": "lighting-and-led-solutions",
       "shortDescription": "A trusted illumination enterprise providing complete lighting solutions including modern home lights, ultra-slim panel lights, commercial LED luminaires, outdoor street lights, and energy-saving tube lights.",
-      "about": "Sangale's Enterprises is a premier lighting and illumination provider delivering high-efficiency LED solutions for residential, commercial, industrial, and infrastructure applications.\n\nOur extensive lighting lineup features modern Home Lights, ultra-slim Panel Lights (2x2 ft and round fixtures), commercial LED Lights and architectural track spotlights, high-lumen outdoor Street Lights, energy-saving LED Tube Lights and battens, and heavy-duty industrial floodlights. Engineered with advanced thermal management and high lumens-per-watt ratings, our fixtures deliver bright, flicker-free illumination with significant energy savings.\n\nWhether illuminating modern homes, corporate offices, retail showrooms, municipal roadways, or manufacturing plants, Sangale's Enterprises provides reliable quality, competitive wholesale pricing, and customized lighting solutions across Maharashtra and pan-India.",
+      "about": "Sangales Enterprises is a premier lighting and illumination provider delivering high-efficiency LED solutions for residential, commercial, industrial, and infrastructure applications.\n\nOur extensive lighting lineup features modern Home Lights, ultra-slim Panel Lights (2x2 ft and round fixtures), commercial LED Lights and architectural track spotlights, high-lumen outdoor Street Lights, energy-saving LED Tube Lights and battens, and heavy-duty industrial floodlights. Engineered with advanced thermal management and high lumens-per-watt ratings, our fixtures deliver bright, flicker-free illumination with significant energy savings.\n\nWhether illuminating modern homes, corporate offices, retail showrooms, municipal roadways, or manufacturing plants, Sangales Enterprises provides reliable quality, competitive wholesale pricing, and customized lighting solutions across Maharashtra and pan-India.",
       "logo": "/logos/sangales-enterprises.svg",
       "coverImage": "/images/enterprises/sangales-enterprises-cover.jpg",
       "brandPrimaryColor": "#1c2a38",
@@ -246,8 +246,8 @@
       "status": "PUBLISHED",
       "isFeatured": true,
       "displayOrder": 3,
-      "seoTitle": "Sangale's Enterprises | Home Lights, Panel Lights, LED Lights, Street Lights & Tube Lights",
-      "seoDescription": "Sangale's Enterprises — Complete lighting solutions in Nashik: Home lights, ultra-slim panel lights, commercial LED lights, outdoor streetlights, and energy-saving tube lights.",
+      "seoTitle": "Sangales Enterprises | Home Lights, Panel Lights, LED Lights, Street Lights & Tube Lights",
+      "seoDescription": "Sangales Enterprises — Complete lighting solutions in Nashik: Home lights, ultra-slim panel lights, commercial LED lights, outdoor streetlights, and energy-saving tube lights.",
       "strengths": [
         "Complete Lighting Range: Home Lights, Panel Lights, LED Lights, Street Lights & Tube Lights",
         "High Lumen-per-Watt Efficiency & Advanced Aluminum Heat Sink Management",
@@ -338,13 +338,13 @@
     },
     {
       "id": "biz-4",
-      "name": "Sangale's Trading",
+      "name": "Sangales Trading",
       "slug": "sangales-trading",
       "tagline": "PVC Panels, WPC Louvers, UV Marble Sheets & Interior Building Materials",
       "category": "Building Materials & Trading",
       "categorySlug": "building-materials-and-trading",
       "shortDescription": "A leading wholesale supplier and distributor of interior architectural materials, including decorative PVC wall and ceiling panels, WPC fluted louvers, UV marble sheets, trim profiles, adhesives, and installation hardware.",
-      "about": "Sangale's Trading is a premier trading, sourcing, and distribution enterprise specializing in modern interior building materials, architectural paneling, and commercial hardware supplies.\n\nWe provide an extensive, high-demand inventory of decorative PVC Wall & Ceiling Panels (waterproof, termite-resistant, and fire-retardant), exterior and interior WPC Fluted Louvers, high-gloss PVC UV Marble Sheets, edge beadings, aluminum trim profiles, heavy-duty mounting GI channels, and high-strength structural adhesives. Our products are engineered for rapid installation, long-term durability, and sophisticated modern aesthetics across residential, commercial, and retail projects.\n\nPartnering directly with leading manufacturing hubs, Sangale's Trading caters to interior contractors, architects, builders, hardware dealers, and project managers across Maharashtra and pan-India with competitive wholesale pricing, immediate bulk stock availability, and reliable regional transit fulfillment.",
+      "about": "Sangales Trading is a premier trading, sourcing, and distribution enterprise specializing in modern interior building materials, architectural paneling, and commercial hardware supplies.\n\nWe provide an extensive, high-demand inventory of decorative PVC Wall & Ceiling Panels (waterproof, termite-resistant, and fire-retardant), exterior and interior WPC Fluted Louvers, high-gloss PVC UV Marble Sheets, edge beadings, aluminum trim profiles, heavy-duty mounting GI channels, and high-strength structural adhesives. Our products are engineered for rapid installation, long-term durability, and sophisticated modern aesthetics across residential, commercial, and retail projects.\n\nPartnering directly with leading manufacturing hubs, Sangales Trading caters to interior contractors, architects, builders, hardware dealers, and project managers across Maharashtra and pan-India with competitive wholesale pricing, immediate bulk stock availability, and reliable regional transit fulfillment.",
       "logo": "/logos/sangales-trading.svg",
       "coverImage": "/images/trading/sangales-trading-cover.jpg",
       "brandPrimaryColor": "#142735",
@@ -359,8 +359,8 @@
       "status": "PUBLISHED",
       "isFeatured": true,
       "displayOrder": 4,
-      "seoTitle": "Sangale's Trading | PVC Panels, WPC Louvers, UV Marble Sheets & Building Materials | Nashik",
-      "seoDescription": "Sangale's Trading — Wholesale supplier of PVC wall & ceiling panels, WPC fluted louvers, UV marble sheets, trim profiles, hardware channels, and structural adhesives in Nashik.",
+      "seoTitle": "Sangales Trading | PVC Panels, WPC Louvers, UV Marble Sheets & Building Materials | Nashik",
+      "seoDescription": "Sangales Trading — Wholesale supplier of PVC wall & ceiling panels, WPC fluted louvers, UV marble sheets, trim profiles, hardware channels, and structural adhesives in Nashik.",
       "strengths": [
         "Complete Interior Paneling Range: PVC Wall Panels, Ceiling Panels, WPC Louvers & UV Marble Sheets",
         "100% Waterproof, Termite-Proof, Borer-Resistant & Fire-Retardant Certified Materials",
@@ -445,19 +445,19 @@
         },
         {
           "url": "/images/trading/sangales-trading-cover.jpg",
-          "alt": "Sangale's Trading interior building materials and PVC panel warehouse"
+          "alt": "Sangales Trading interior building materials and PVC panel warehouse"
         }
       ]
     },
     {
       "id": "biz-5",
-      "name": "Sangale's Packaging",
+      "name": "Sangales Packaging",
       "slug": "sangales-packaging",
       "tagline": "Food Packaging Disposables, 4CP Meal Boxes, Aluminium Containers & Paper Bags",
       "category": "Packaging Solutions",
       "categorySlug": "packaging-solutions",
       "shortDescription": "A premier manufacturer and wholesale supplier of food packaging disposables, including heavy-duty 4CP meal boxes, leak-proof aluminium foil containers, eco-friendly paper bags in all standard sizes, paper plates, disposable glasses, and cutlery.",
-      "about": "Sangale's Packaging is a trusted packaging and disposable solutions provider serving restaurants, cloud kitchens, caterers, bakeries, supermarkets, and corporate facilities.\n\nWe specialize in high-demand, food-grade disposable materials engineered for safe transit, heat retention, and hygienic food delivery. Our comprehensive catalog includes heavy-duty 4CP meal boxes, leak-proof aluminium foil containers, durable grocery and takeaway paper bags in multiple standard sizes (10x14, 6x14, 6x11, 4x10, 4x8), disposable drinking glasses, paper plates, and sanitary dining cutlery.\n\nWhether you run a fast-paced food delivery brand or need bulk wholesale packaging supply, Sangale's Packaging delivers consistent quality, competitive bulk pricing, and prompt pan-India fulfillment.",
+      "about": "Sangales Packaging is a trusted packaging and disposable solutions provider serving restaurants, cloud kitchens, caterers, bakeries, supermarkets, and corporate facilities.\n\nWe specialize in high-demand, food-grade disposable materials engineered for safe transit, heat retention, and hygienic food delivery. Our comprehensive catalog includes heavy-duty 4CP meal boxes, leak-proof aluminium foil containers, durable grocery and takeaway paper bags in multiple standard sizes (10x14, 6x14, 6x11, 4x10, 4x8), disposable drinking glasses, paper plates, and sanitary dining cutlery.\n\nWhether you run a fast-paced food delivery brand or need bulk wholesale packaging supply, Sangales Packaging delivers consistent quality, competitive bulk pricing, and prompt pan-India fulfillment.",
       "logo": "/logos/sangales-packaging.svg",
       "coverImage": "/images/packaging/disposable-meal-packaging-kit.jpg",
       "brandPrimaryColor": "#1d2939",
@@ -472,8 +472,8 @@
       "status": "PUBLISHED",
       "isFeatured": true,
       "displayOrder": 5,
-      "seoTitle": "Sangale's Packaging | 4CP Meal Boxes, Aluminium Containers & Paper Bags | Nashik",
-      "seoDescription": "Sangale's Packaging — Food packaging disposables, 4CP compartment meal boxes, aluminium foil containers, paper bags (10x14, 6x14, 6x11, 4x10, 4x8), paper plates, disposable glasses & spoons.",
+      "seoTitle": "Sangales Packaging | 4CP Meal Boxes, Aluminium Containers & Paper Bags | Nashik",
+      "seoDescription": "Sangales Packaging — Food packaging disposables, 4CP compartment meal boxes, aluminium foil containers, paper bags (10x14, 6x14, 6x11, 4x10, 4x8), paper plates, disposable glasses & spoons.",
       "strengths": [
         "Complete Food Packaging Disposables: 4CP Boxes, Foil Containers, Glasses & Spoons",
         "Standard Paper Bag Sizes: 10x14, 6x14, 6x11, 4x10, 4x8 for Takeaway & Grocery",
@@ -556,13 +556,13 @@
     },
     {
       "id": "biz-6",
-      "name": "Sangale's Digital",
+      "name": "Sangales Digital",
       "slug": "sangales-digital",
       "tagline": "Custom CRM Solutions, AI Integrations, Dynamic Websites & Cloud Platforms",
       "category": "Technology & Software Solutions",
       "categorySlug": "technology-and-software-solutions",
       "shortDescription": "A premier software and digital transformation enterprise delivering custom CRM systems, intelligent AI integrations, modern dynamic websites, and scalable enterprise cloud solutions.",
-      "about": "Sangale's Digital is the technology innovation and digital engineering wing of Sangale's Group, empowering modern businesses, institutions, and growing enterprises with cutting-edge software systems.\n\nWe specialize in end-to-end bespoke digital infrastructure: from scalable Custom CRM Solutions tailored to your unique sales pipelines and customer lifecycles, to powerful Artificial Intelligence (AI) Integrations that automate workflows, document processing, and customer support. Our engineering team builds ultra-fast, modern Dynamic Websites and progressive web applications engineered for high conversion, robust database security, and seamless mobile responsiveness.\n\nWhether you require a custom enterprise CRM, AI-powered automation, a dynamic modern website, or turnkey cloud software, Sangale's Digital delivers enterprise-grade software engineered for scale, speed, and real business results.",
+      "about": "Sangales Digital is the technology innovation and digital engineering wing of Sangales Group, empowering modern businesses, institutions, and growing enterprises with cutting-edge software systems.\n\nWe specialize in end-to-end bespoke digital infrastructure: from scalable Custom CRM Solutions tailored to your unique sales pipelines and customer lifecycles, to powerful Artificial Intelligence (AI) Integrations that automate workflows, document processing, and customer support. Our engineering team builds ultra-fast, modern Dynamic Websites and progressive web applications engineered for high conversion, robust database security, and seamless mobile responsiveness.\n\nWhether you require a custom enterprise CRM, AI-powered automation, a dynamic modern website, or turnkey cloud software, Sangales Digital delivers enterprise-grade software engineered for scale, speed, and real business results.",
       "logo": "/logos/sangales-digital.svg",
       "coverImage": "/images/digital/sangales-digital-cover.jpg",
       "brandPrimaryColor": "#0f172a",
@@ -574,11 +574,11 @@
       "socialLinks": {
         "linkedin": "https://linkedin.com/company/sangales"
       },
-      "status": "PUBLISHED",
-      "isFeatured": true,
+      "status": "UPCOMING",
+      "isFeatured": false,
       "displayOrder": 6,
-      "seoTitle": "Sangale's Digital | Custom CRM Solutions, AI Integrations & Dynamic Websites",
-      "seoDescription": "Sangale's Digital — Enterprise technology and software solutions in Nashik: Custom CRM systems, AI integrations, dynamic modern websites, and cloud business software.",
+      "seoTitle": "Sangales Digital | Custom CRM Solutions, AI Integrations & Dynamic Websites",
+      "seoDescription": "Sangales Digital — Enterprise technology and software solutions in Nashik: Custom CRM systems, AI integrations, dynamic modern websites, and cloud business software.",
       "strengths": [
         "Tailored Custom CRM Solutions engineered for exact sales pipelines & customer retention",
         "Intelligent Enterprise AI Integrations, generative AI assistants & workflow automation",
@@ -659,19 +659,19 @@
         },
         {
           "url": "/images/digital/sangales-digital-cover.jpg",
-          "alt": "Sangale's Digital technology engineering workspace"
+          "alt": "Sangales Digital technology engineering workspace"
         }
       ]
     },
     {
       "id": "biz-7",
-      "name": "Sangale's Logistics",
+      "name": "Sangales Logistics",
       "slug": "sangales-logistics",
       "tagline": "Smart Freight & Warehousing Infrastructure",
       "category": "Trading & Distribution",
       "categorySlug": "trading-and-distribution",
       "shortDescription": "An upcoming logistics arm architecting multi-nodal cold storage and regional warehousing corridors.",
-      "about": "Sangale's Logistics is being developed to consolidate group and third-party freight, temperature-controlled storage, and rural-to-urban transit efficiency.",
+      "about": "Sangales Logistics is being developed to consolidate group and third-party freight, temperature-controlled storage, and rural-to-urban transit efficiency.",
       "logo": "/logos/sangales-logistics.svg",
       "coverImage": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1600",
       "brandPrimaryColor": "#142735",
@@ -684,8 +684,8 @@
       "status": "UPCOMING",
       "isFeatured": false,
       "displayOrder": 7,
-      "seoTitle": "Sangale's Logistics | Freight & Warehousing",
-      "seoDescription": "Upcoming logistics and cold-chain infrastructure project under Sangale's Group.",
+      "seoTitle": "Sangales Logistics | Freight & Warehousing",
+      "seoDescription": "Upcoming logistics and cold-chain infrastructure project under Sangales Group.",
       "strengths": [
         "Cold-chain integration",
         "Strategic highway connectivity"
@@ -850,12 +850,12 @@
     },
     {
       "id": "news-2",
-      "title": "Annamrit Foods Introduces Daily Healthy Foods Range: Fresh Sprouts, Multigrain Parathas & Nutri-Noodles",
-      "slug": "annamrit-foods-expands-healthy-foods-range",
-      "excerpt": "New ready-to-eat and wholesome cooking division brings enzymatically active fresh organic sprouts, multigrain stuffed parathas, and chemical-free millet noodles to health-conscious consumers.",
-      "content": "Responding to the rapidly expanding demand for honest, chemical-free everyday nutrition, Annamrit Foods has expanded its portfolio with a dedicated Healthy Foods division.\n\nThe new collection includes fresh, vacuum-sealed organic sprouted pulses, homestyle multigrain stuffed parathas prepared with cold-pressed oils, and guilt-free Nutri-Noodles (a wholesome Maggi-style comfort food crafted from ragi, whole wheat, and foxtail millets with zero palm oil, zero maida, and zero MSG).\n\n\"Our everyday meals should build health, not compromise it,\" said the brand leadership. \"By bringing together live organic sprouts, nourishing parathas, and nutritious noodles, Annamrit Foods ensures that fast, everyday eating remains deeply nourishing and 100% wholesome for every family.\"",
-      "featuredImage": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&q=80&w=1200",
-      "category": "Expansion",
+      "title": "Annamrit Foods Expands Fresh Sprouts & Healthy Chaat Offering in Nashik",
+      "slug": "annamrit-foods-expands-healthy-chaat-sprouts",
+      "excerpt": "The wholesome food brand expands its daily menu with freshly prepared sprout chaat bowls, nutrient-rich salads, and breakfast meal options.",
+      "content": "Responding to growing community demand for hygienic, wholesome everyday food, Annamrit Foods has expanded its menu offerings across Nashik.\n\nThe extended menu features daily prepared fresh sprout bowls, traditional kala chana chaat with tangy seasonings, crisp vegetable salad platters, and balanced breakfast meal boxes.\n\n\"Our core goal is to make healthy eating an enjoyable, natural part of everyday life,\" said brand leadership. \"Every dish is prepared fresh daily with meticulous hygiene and wholesome ingredients.\"",
+      "featuredImage": "/images/annamrit-foods/annamrit-sprout-chaat.jpg",
+      "category": "Menu Expansion",
       "publishedAt": "2026-09-28T10:30:00.000Z",
       "status": "PUBLISHED",
       "seoTitle": "Annamrit Foods Launches Fresh Sprouts, Parathas & Nutri-Noodles | Sangales News",
@@ -931,6 +931,21 @@
     }
   ],
   "enquiries": [
+    {
+      "id": "enq-1794322904870",
+      "businessName": "Sangales Corporate Group",
+      "fullName": "Sagar Sangale",
+      "email": "sagar.sangale@example.com",
+      "phone": "+91 75077 00936",
+      "companyName": "",
+      "enquiryType": "Product",
+      "subject": "Inquiry for LED Lighting solutions",
+      "message": "Hello, we require 200 units of street lights and 100 units of panel lights for our industrial campus.",
+      "status": "NEW",
+      "adminNotes": "",
+      "createdAt": "2026-11-10T15:01:44.870Z",
+      "updatedAt": "2026-11-10T15:01:44.870Z"
+    },
     {
       "id": "enq-1794109501199",
       "businessName": "Sangales Corporate Group",
@@ -1059,7 +1074,7 @@
     }
   ],
   "settings": {
-    "siteName": "SANGALE'S",
+    "siteName": "SANGALES",
     "descriptor": "A GROUP OF COMPANIES",
     "tagline": "One Vision. Multiple Global Businesses.",
     "contactEmail": "contact.sangales@gmail.com",
@@ -1067,8 +1082,8 @@
     "corporateAddress": "Samruddhi Park, Kapaleshwar nagar, Panchwati, Nashik -03",
     "primaryNavy": "#142735",
     "accentGold": "#C6A66B",
-    "metaTitle": "SANGALE'S – A GROUP OF COMPANIES | Building Businesses. Creating Opportunities.",
-    "metaDescription": "Official corporate website of SANGALE'S – A GROUP OF COMPANIES. Leading Indian group in food, agriculture, trading, packaging, technology, and commercial enterprises."
+    "metaTitle": "SANGALES – A GROUP OF COMPANIES | Building Businesses. Creating Opportunities.",
+    "metaDescription": "Official corporate website of SANGALES – A GROUP OF COMPANIES. Leading Indian group in food, agriculture, trading, packaging, technology, and commercial enterprises."
   },
   "milestones": [
     {
@@ -1086,7 +1101,7 @@
     {
       "year": "Brand Genesis",
       "title": "Establishment of Annamrit Foods",
-      "description": "Launched Annamrit Foods to bring pure, unadulterated, stone-ground flours and cold-pressed wellness oils directly to conscious consumers.",
+      "description": "Launched Annamrit Foods in Nashik to bring delicious, hygienic, and nutritious everyday meal boxes, healthy sprout chaats, and wholesome breakfast options to conscious consumers.",
       "tag": "Food & Wellness"
     },
     {

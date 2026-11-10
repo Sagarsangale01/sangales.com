@@ -15,6 +15,7 @@ import {
   ArrowUpRight,
   Sparkles,
   Rocket,
+  MessageCircle,
 } from "lucide-react";
 import { getBusinessBySlug, getPublishedBusinesses } from "@/services/businessService";
 import BusinessEnquiryForm from "@/components/forms/BusinessEnquiryForm";
@@ -29,15 +30,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const business = await getBusinessBySlug(params.slug);
   if (!business) {
     return {
-      title: "Business Not Found | Sangale's Group",
+      title: "Business Not Found | Sangales Group",
     };
   }
 
   return {
-    title: `${business.name} | Sangale's Group`,
+    title: `${business.name} | Sangales Group`,
     description: business.seoDescription || business.shortDescription,
     openGraph: {
-      title: `${business.name} - Sangale's Group`,
+      title: `${business.name} - Sangales Group`,
       description: business.shortDescription,
       images: [{ url: business.coverImage }],
     },
@@ -68,7 +69,7 @@ export default async function BusinessDetailPage({ params }: Props) {
     name: business.name,
     parentOrganization: {
       "@type": "Organization",
-      name: "SANGALE'S – A GROUP OF COMPANIES",
+      name: "SANGALES – A GROUP OF COMPANIES",
     },
     description: business.shortDescription,
     image: business.coverImage,
@@ -119,7 +120,7 @@ export default async function BusinessDetailPage({ params }: Props) {
                   {business.category}
                 </span>
                 <span className="text-xs uppercase tracking-wider text-stone-300 font-semibold">
-                  {business.isAssociate ? (business.associationType || "Strategic Associate Company") : "A Sangale's Company"}
+                  {business.isAssociate ? (business.associationType || "Strategic Associate Company") : "A Sangales Company"}
                 </span>
               </div>
 
@@ -214,10 +215,10 @@ export default async function BusinessDetailPage({ params }: Props) {
                       <Sparkles className="w-3.5 h-3.5" /> Corporate Strategic Association
                     </span>
                     <h3 className="font-heading text-xl sm:text-2xl font-extrabold text-white">
-                      Anvayi Farms &bull; Associated with Sangale's Group
+                      Anvayi Farms &bull; Associated with Sangales Group
                     </h3>
                     <p className="text-xs sm:text-sm text-stone-300 leading-relaxed max-w-2xl">
-                      Anvayi Farms operates in close collaboration with Sangale's Group, sharing our foundational standards of uncompromised quality, rural farmer prosperity, and authentic Indian farm nutrition. FSSAI Certified: Lic. No. 11526999000448.
+                      Anvayi Farms operates in close collaboration with Sangales Group, sharing our foundational standards of uncompromised quality, rural farmer prosperity, and authentic Indian farm nutrition. FSSAI Certified: Lic. No. 11526999000448.
                     </p>
                   </div>
                   {business.website && (
@@ -303,7 +304,27 @@ export default async function BusinessDetailPage({ params }: Props) {
                         </div>
                       </div>
                       <div className="p-5 pt-0 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-t border-stone-100 mt-4">
-                        {prod.directBuyUrl ? (
+                        {business.slug === "annamrit-foods" ? (
+                          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 w-full">
+                            <a
+                              href={`https://wa.me/917507700936?text=${encodeURIComponent(
+                                `Hello Annamrit Foods, I would like to order or enquire about ${prod.name}.`
+                              )}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
+                            >
+                              <MessageCircle className="w-3.5 h-3.5" />
+                              <span>Order on WhatsApp</span>
+                            </a>
+                            <a
+                              href="#enquiry-section"
+                              className="text-xs font-semibold text-charcoal-100 hover:text-navy uppercase tracking-wider text-center"
+                            >
+                              B2B / Catering &rarr;
+                            </a>
+                          </div>
+                        ) : prod.directBuyUrl ? (
                           <>
                             <a
                               href={prod.directBuyUrl}
@@ -492,10 +513,10 @@ export default async function BusinessDetailPage({ params }: Props) {
               {/* Group Governance Note */}
               <div className="p-4 bg-offwhite rounded-sm border border-stone-200/60 space-y-2">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-navy block">
-                  Sangale's Corporate Assurance
+                  SANGALES Corporate Assurance
                 </span>
                 <p className="text-xs text-charcoal-100 leading-relaxed">
-                  All commercial agreements with {business.name} are backed by the statutory diligence and governance of SANGALE'S – A GROUP OF COMPANIES.
+                  All commercial agreements with {business.name} are backed by the statutory diligence and governance of SANGALES – A GROUP OF COMPANIES.
                 </p>
               </div>
             </div>
@@ -511,7 +532,7 @@ export default async function BusinessDetailPage({ params }: Props) {
                   Portfolio Exploration
                 </span>
                 <h3 className="font-heading text-2xl font-extrabold text-navy">
-                  Other Sangale's Group Companies
+                  Other Sangales Group Companies
                 </h3>
               </div>
               <Link

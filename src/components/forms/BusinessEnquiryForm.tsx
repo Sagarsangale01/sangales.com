@@ -103,7 +103,7 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
         <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href={`https://wa.me/917507700936?text=${encodeURIComponent(
-              `Hello Sangale's Group, I have submitted an enquiry for ${businessName} via your website.`
+              `Hello Sangales Group, I have submitted an enquiry for ${businessName} via your website.`
             )}`}
             target="_blank"
             rel="noopener noreferrer"
