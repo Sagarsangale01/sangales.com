@@ -5,15 +5,32 @@ import { getCurrentAdmin } from "@/lib/auth";
 import { notifyNewEnquiry } from "@/lib/email";
 
 const enquirySchema = z.object({
-  fullName: z.string().min(2, "Full name is required"),
-  email: z.string().email("Valid email is required"),
-  phone: z.string().min(8, "Valid phone number is required"),
-  companyName: z.string().optional(),
-  enquiryType: z.string().min(2, "Enquiry type is required"),
-  businessId: z.string().optional(),
-  subject: z.string().optional(),
-  message: z.string().min(5, "Message must be at least 5 characters"),
-  privacyConsent: z.boolean().refine((val) => val === true, "Privacy consent required"),
+  fullName: z
+    .string()
+    .trim()
+    .min(2, "Full name is required (minimum 2 characters)"),
+  email: z
+    .string()
+    .trim()
+    .email("Please enter a valid email address (e.g. contact@company.com)"),
+  phone: z
+    .string()
+    .trim()
+    .min(8, "Phone number must be at least 8 digits"),
+  companyName: z.string().trim().optional(),
+  enquiryType: z
+    .string()
+    .trim()
+    .min(2, "Please select an enquiry classification"),
+  businessId: z.string().trim().optional(),
+  subject: z.string().trim().optional(),
+  message: z
+    .string()
+    .trim()
+    .min(5, "Message must contain at least 5 characters describing your enquiry"),
+  privacyConsent: z
+    .boolean()
+    .refine((val) => val === true, "Please accept the privacy consent to submit"),
 });
 
 export async function POST(req: NextRequest) {
@@ -32,7 +49,7 @@ export async function POST(req: NextRequest) {
       message: validated.message,
     });
 
-    // Asynchronously dispatch transactional notifications
+    // Asynchronously dispatch transactional notifications (email + mobile alert)
     notifyNewEnquiry({
       id: enquiry.id,
       fullName: enquiry.fullName,
@@ -47,11 +64,22 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true, enquiry }, { status: 201 });
   } catch (error: any) {
     if (error instanceof z.ZodError) {
+      const fieldErrors = error.flatten().fieldErrors;
+      const errorList = Object.entries(fieldErrors)
+        .map(([field, msgs]) => `${field}: ${(msgs || []).join(", ")}`)
+        .join("; ");
+
       return NextResponse.json(
-        { success: false, errors: error.flatten().fieldErrors },
+        {
+          success: false,
+          message: errorList || "Please verify your input fields and retry.",
+          errors: fieldErrors,
+        },
         { status: 400 }
       );
     }
+
+    console.error("Enquiry submission unexpected error:", error);
     return NextResponse.json(
       { success: false, message: error.message || "Failed to process enquiry" },
       { status: 500 }
@@ -70,7 +98,6 @@ export async function GET(req: NextRequest) {
   const businessId = searchParams.get("businessId") || undefined;
   const search = searchParams.get("search") || undefined;
 
-  const list = await getAllEnquiries({ status, businessId, search });
-  return NextResponse.json({ success: true, enquiries: list });
+  const enquiries = await getAllEnquiries({ status, businessId, search });
+  return NextResponse.json({ success: true, enquiries });
 }
-

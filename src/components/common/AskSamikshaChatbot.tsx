@@ -102,6 +102,7 @@ export default function AskSamikshaChatbot({
           message: finalMsg,
           enquiryType: "General",
           businessName: "Sangale's Corporate Group",
+          privacyConsent: true,
         }),
       }).catch(() => {});
     } catch {
