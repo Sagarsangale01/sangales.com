@@ -379,3 +379,4 @@ export default function ProductCatalogueClient({ businesses }: ProductCatalogueC
     </div>
   );
 }
+

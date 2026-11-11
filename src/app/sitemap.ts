@@ -9,6 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "",
     "/about",
     "/businesses",
+    "/catalogue",
     "/our-vision",
     "/our-journey",
     "/news",
@@ -20,7 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
-    priority: route === "" ? 1.0 : 0.8,
+    priority: route === "" ? 1.0 : route === "/businesses" || route === "/catalogue" ? 0.9 : 0.8,
   }));
 
   const businesses = await getPublishedBusinesses();

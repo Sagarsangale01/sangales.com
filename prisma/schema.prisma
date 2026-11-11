@@ -22,8 +22,9 @@ enum BusinessStatus {
 
 enum EnquiryStatus {
   NEW
-  IN_PROGRESS
   CONTACTED
+  IN_DISCUSSION
+  IN_PROGRESS
   CONVERTED
   CLOSED
 }
@@ -113,16 +114,20 @@ model BusinessImage {
 }
 
 model ProductService {
-  id          String        @id @default(cuid())
-  businessId  String
-  business    Business      @relation(fields: [businessId], references: [id], onDelete: Cascade)
-  name        String
-  description String        @db.Text
-  image       String?
-  category    String?
-  status      ContentStatus @default(PUBLISHED)
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  id             String        @id @default(cuid())
+  businessId     String
+  business       Business      @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  name           String
+  description    String        @db.Text
+  image          String?
+  category       String?
+  price          String?
+  directBuyUrl   String?
+  specifications Json?
+  displayOrder   Int           @default(0)
+  status         ContentStatus @default(PUBLISHED)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
 }
 
 model Enquiry {

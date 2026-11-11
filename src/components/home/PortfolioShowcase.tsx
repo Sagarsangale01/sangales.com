@@ -317,6 +317,28 @@ export default function PortfolioShowcase({ businesses }: Props) {
             </div>
           </div>
         )}
+
+        {/* Solutions & Consolidated Catalogue Discovery Callout */}
+        <div className="mt-14 p-6 sm:p-8 bg-offwhite border border-stone-200/80 rounded-sm shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="space-y-1.5 text-center sm:text-left max-w-2xl">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-gold-700 block">
+              Consolidated Offerings &bull; 34+ Solutions
+            </span>
+            <h4 className="font-heading text-lg font-bold text-navy">
+              Looking for specific products, packaging dimensions, or wholesale rates?
+            </h4>
+            <p className="text-xs text-charcoal-100 font-light leading-relaxed">
+              Explore our unified commercial catalogue spanning packaging containers, PVC interior panels, commercial LED fixtures, organic farm produce, and enterprise CRM solutions.
+            </p>
+          </div>
+          <Link
+            href="/catalogue"
+            className="px-6 py-3.5 bg-navy hover:bg-gold hover:text-navy text-white text-xs font-bold uppercase tracking-widest rounded-sm transition-all shadow-md shrink-0 inline-flex items-center gap-2 group"
+          >
+            <span>Explore Solutions Catalogue</span>
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
       </div>
     </section>
   );
