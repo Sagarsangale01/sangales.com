@@ -23,7 +23,7 @@ export interface EnquiryRecord {
   enquiryType: string;
   subject?: string;
   message: string;
-  status: "NEW" | "IN_PROGRESS" | "CONTACTED" | "CONVERTED" | "CLOSED";
+  status: "NEW" | "CONTACTED" | "IN_DISCUSSION" | "IN_PROGRESS" | "CONVERTED" | "CLOSED";
   adminNotes?: string;
   createdAt: string;
   updatedAt: string;

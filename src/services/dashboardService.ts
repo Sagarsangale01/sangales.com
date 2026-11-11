@@ -10,7 +10,9 @@ export async function getDashboardStats() {
 
   const totalEnquiries = store.enquiries.length;
   const newEnquiries = store.enquiries.filter((e) => e.status === "NEW").length;
-  const inProgressEnquiries = store.enquiries.filter((e) => e.status === "IN_PROGRESS").length;
+  const inProgressEnquiries = store.enquiries.filter(
+    (e) => e.status === "IN_PROGRESS" || e.status === "IN_DISCUSSION"
+  ).length;
   const closedEnquiries = store.enquiries.filter((e) => e.status === "CLOSED" || e.status === "CONVERTED").length;
 
   const publishedNews = store.news.filter((n) => n.status === "PUBLISHED").length;

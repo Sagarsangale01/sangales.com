@@ -8,6 +8,7 @@ import { Menu, X, ArrowUpRight, ChevronDown } from "lucide-react";
 const NAV_LINKS = [
   { label: "About Us", href: "/about" },
   { label: "Our Businesses", href: "/businesses" },
+  { label: "Catalogue", href: "/catalogue" },
   { label: "Our Vision", href: "/our-vision" },
   { label: "Our Journey", href: "/our-journey" },
   { label: "News & Updates", href: "/news" },

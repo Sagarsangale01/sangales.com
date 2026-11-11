@@ -23,6 +23,7 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
     subject: `Enquiry for ${businessName}`,
     message: "",
     privacyConsent: false,
+    botTrap: "",
   });
 
   const updateField = (field: string, value: any) => {
@@ -103,7 +104,7 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
         <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href={`https://wa.me/917507700936?text=${encodeURIComponent(
-              `Hello Sangales Group, I have submitted an enquiry for ${businessName} via your website.`
+              `Hello SANGALES Group, I have submitted an enquiry for ${businessName} via your website.`
             )}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -129,6 +130,19 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
       noValidate
       className="p-8 bg-white border border-stone-200/80 rounded-sm shadow-sm space-y-4"
     >
+      {/* Invisible Honeypot field for spam prevention */}
+      <div className="hidden" aria-hidden="true" style={{ display: "none" }}>
+        <label htmlFor="biz-botTrap">Leave this empty</label>
+        <input
+          id="biz-botTrap"
+          type="text"
+          name="botTrap"
+          tabIndex={-1}
+          autoComplete="off"
+          value={formData.botTrap}
+          onChange={(e) => updateField("botTrap", e.target.value)}
+        />
+      </div>
       {error && (
         <div className="p-4 bg-red-50 border border-red-200 text-red-800 text-xs rounded-sm space-y-1.5 shadow-sm">
           <div className="flex items-center gap-2 font-bold text-red-700">

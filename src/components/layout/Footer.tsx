@@ -100,6 +100,11 @@ export default function Footer({ settings: propSettings, businesses: propBusines
                 </Link>
               </li>
               <li>
+                <Link href="/catalogue" className="hover:text-gold transition-colors text-gold/90 font-medium">
+                  Solutions Catalogue &rarr;
+                </Link>
+              </li>
+              <li>
                 <Link href="/our-vision" className="hover:text-gold transition-colors">
                   Vision &amp; Values
                 </Link>

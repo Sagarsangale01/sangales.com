@@ -155,8 +155,9 @@ export default function EnquiryManagerClient({ initialEnquiries, businesses }: P
           >
             <option value="ALL">All Statuses</option>
             <option value="NEW">NEW</option>
-            <option value="IN_PROGRESS">IN_PROGRESS</option>
             <option value="CONTACTED">CONTACTED</option>
+            <option value="IN_DISCUSSION">IN DISCUSSION</option>
+            <option value="IN_PROGRESS">IN PROGRESS</option>
             <option value="CONVERTED">CONVERTED</option>
             <option value="CLOSED">CLOSED</option>
           </select>
@@ -220,16 +221,16 @@ export default function EnquiryManagerClient({ initialEnquiries, businesses }: P
                       className={`px-2 py-0.5 rounded-sm font-bold text-[10px] uppercase tracking-wider ${
                         enq.status === "NEW"
                           ? "bg-amber-100 text-amber-800"
-                          : enq.status === "IN_PROGRESS"
-                          ? "bg-blue-100 text-blue-800"
                           : enq.status === "CONTACTED"
                           ? "bg-purple-100 text-purple-800"
+                          : enq.status === "IN_DISCUSSION" || enq.status === "IN_PROGRESS"
+                          ? "bg-blue-100 text-blue-800"
                           : enq.status === "CONVERTED"
                           ? "bg-emerald-100 text-emerald-800"
                           : "bg-stone-100 text-stone-600"
                       }`}
                     >
-                      {enq.status}
+                      {enq.status === "IN_DISCUSSION" ? "IN DISCUSSION" : enq.status}
                     </span>
                   </td>
                   <td className="py-3.5 px-4 text-right">
@@ -302,18 +303,18 @@ export default function EnquiryManagerClient({ initialEnquiries, businesses }: P
                 Update Pipeline Status
               </span>
               <div className="flex flex-wrap gap-2">
-                {(["NEW", "IN_PROGRESS", "CONTACTED", "CONVERTED", "CLOSED"] as const).map((st) => (
+                {(["NEW", "CONTACTED", "IN_DISCUSSION", "CONVERTED", "CLOSED"] as const).map((st) => (
                   <button
                     key={st}
                     disabled={updating}
                     onClick={() => handleStatusChange(st)}
                     className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-sm transition-all ${
-                      selectedEnquiry.status === st
+                      selectedEnquiry.status === st || (st === "IN_DISCUSSION" && selectedEnquiry.status === "IN_PROGRESS")
                         ? "bg-navy text-gold shadow-sm ring-2 ring-gold"
                         : "bg-stone-100 hover:bg-stone-200 text-charcoal"
                     }`}
                   >
-                    {st}
+                    {st === "IN_DISCUSSION" ? "IN DISCUSSION" : st}
                   </button>
                 ))}
               </div>

@@ -29,6 +29,7 @@ export default function CorporateContactForm({ businesses }: Props) {
     subject: "",
     message: "",
     privacyConsent: false,
+    botTrap: "",
   });
 
   useEffect(() => {
@@ -123,7 +124,7 @@ export default function CorporateContactForm({ businesses }: Props) {
 
         <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
-            href="https://wa.me/917507700936?text=Hello%20Sangale%27s%20Group,%20I%20have%20submitted%20a%20commercial%20enquiry%20on%20your%20website%20and%20would%20like%20to%20connect%20directly."
+            href="https://wa.me/917507700936?text=Hello%20SANGALES%20Group,%20I%20have%20submitted%20a%20commercial%20enquiry%20on%20your%20website%20and%20would%20like%20to%20connect%20directly."
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
@@ -148,6 +149,19 @@ export default function CorporateContactForm({ businesses }: Props) {
       noValidate
       className="bg-white p-8 sm:p-10 rounded-sm border border-stone-200/80 shadow-editorial space-y-5"
     >
+      {/* Invisible Honeypot field for spam prevention */}
+      <div className="hidden" aria-hidden="true" style={{ display: "none" }}>
+        <label htmlFor="corp-botTrap">Leave this empty</label>
+        <input
+          id="corp-botTrap"
+          type="text"
+          name="botTrap"
+          tabIndex={-1}
+          autoComplete="off"
+          value={formData.botTrap}
+          onChange={(e) => updateField("botTrap", e.target.value)}
+        />
+      </div>
       <div>
         <h3 className="font-heading text-2xl font-bold text-navy">
           Corporate &amp; Business Enquiry Desk

@@ -21,6 +21,7 @@ import {
 import { getBusinessBySlug, getPublishedBusinesses } from "@/services/businessService";
 import BusinessEnquiryForm from "@/components/forms/BusinessEnquiryForm";
 import ShareBusinessButton from "@/components/businesses/ShareBusinessButton";
+import Breadcrumbs from "@/components/common/Breadcrumbs";
 
 interface Props {
   params: {
@@ -104,8 +105,8 @@ export default async function BusinessDetailPage({ params }: Props) {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          {/* Breadcrumb Back */}
-          <div className="mb-6">
+          {/* Breadcrumb Trail & Back Navigation */}
+          <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
             <Link
               href="/businesses"
               className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-300 hover:text-gold uppercase tracking-wider transition-colors"
@@ -113,6 +114,14 @@ export default async function BusinessDetailPage({ params }: Props) {
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Back to Group Businesses</span>
             </Link>
+
+            <Breadcrumbs
+              items={[
+                { label: "Our Businesses", href: "/businesses" },
+                { label: business.name },
+              ]}
+              className="py-0 text-stone-300 [&_a]:text-stone-300 [&_span]:text-gold"
+            />
           </div>
 
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-white/15 pb-8">

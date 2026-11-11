@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Calendar, Tag, Share2, ArrowRight } from "lucide-react";
 import { getNewsBySlug, getPublishedNews } from "@/services/newsService";
 import { formatDate } from "@/lib/utils";
+import Breadcrumbs from "@/components/common/Breadcrumbs";
 
 interface Props {
   params: {
@@ -15,13 +16,13 @@ interface Props {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const item = await getNewsBySlug(params.slug);
   if (!item) {
-    return { title: "News Not Found | Sangales Group" };
+    return { title: "News Not Found | SANGALES GROUP" };
   }
   return {
-    title: `${item.title} | Sangales Press`,
+    title: `${item.title} | SANGALES GROUP Press`,
     description: item.excerpt,
     openGraph: {
-      title: item.title,
+      title: `${item.title} | SANGALES GROUP`,
       description: item.excerpt,
       images: [{ url: item.featuredImage }],
     },
@@ -76,7 +77,7 @@ export default async function NewsDetailPage({ params }: Props) {
 
       {/* Header Container */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-6">
-        <div>
+        <div className="flex flex-wrap items-center justify-between gap-4">
           <Link
             href="/news"
             className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-500 hover:text-navy uppercase tracking-wider transition-colors"
@@ -84,6 +85,14 @@ export default async function NewsDetailPage({ params }: Props) {
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back to All News</span>
           </Link>
+
+          <Breadcrumbs
+            items={[
+              { label: "News & Media", href: "/news" },
+              { label: article.title },
+            ]}
+            className="py-0"
+          />
         </div>
 
         <div className="space-y-3">

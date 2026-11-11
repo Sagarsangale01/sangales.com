@@ -31,11 +31,53 @@ const enquirySchema = z.object({
   privacyConsent: z
     .boolean()
     .refine((val) => val === true, "Please accept the privacy consent to submit"),
+  // Invisible Honeypot Anti-Spam Field
+  botTrap: z.string().optional(),
 });
+
+// Simple in-memory sliding window rate limiter: max 6 requests per 10 minutes per IP
+const ipRateMap = new Map<string, number[]>();
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000; // 10 minutes
+const RATE_LIMIT_MAX_REQUESTS = 6;
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const timestamps = ipRateMap.get(ip) || [];
+  const validTimestamps = timestamps.filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+
+  if (validTimestamps.length >= RATE_LIMIT_MAX_REQUESTS) {
+    ipRateMap.set(ip, validTimestamps);
+    return true;
+  }
+
+  validTimestamps.push(now);
+  ipRateMap.set(ip, validTimestamps);
+  return false;
+}
 
 export async function POST(req: NextRequest) {
   try {
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "127.0.0.1";
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Too many enquiries received from this connection. Please wait a few minutes before retrying.",
+        },
+        { status: 429 }
+      );
+    }
+
     const body = await req.json();
+
+    // Silent honeypot drop: if botTrap is populated, simulate success without saving or notifying
+    if (body.botTrap && String(body.botTrap).trim().length > 0) {
+      return NextResponse.json(
+        { success: true, message: "Enquiry submitted successfully." },
+        { status: 201 }
+      );
+    }
+
     const validated = enquirySchema.parse(body);
 
     const enquiry = await createEnquiry({
