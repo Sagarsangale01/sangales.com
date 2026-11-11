@@ -19,6 +19,11 @@ export async function getDashboardStats() {
   const activeJobs = store.careers.filter((c) => c.status === "PUBLISHED").length;
   const totalApplications = store.applications.length;
 
+  let totalProducts = 0;
+  store.businesses.forEach((b) => {
+    if (b.products) totalProducts += b.products.length;
+  });
+
   // Build real recent activities feed
   const recentEnquiries = store.enquiries.slice(0, 5).map((e) => ({
     id: e.id,
@@ -44,6 +49,7 @@ export async function getDashboardStats() {
     draftBusinesses,
     upcomingBusinesses,
     totalEnquiries,
+    totalProducts,
     newEnquiries,
     inProgressEnquiries,
     closedEnquiries,

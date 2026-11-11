@@ -11,6 +11,7 @@ import {
   CheckCircle2,
   AlertCircle,
   Plus,
+  Package,
 } from "lucide-react";
 import { getDashboardStats } from "@/services/dashboardService";
 import { formatDate } from "@/lib/utils";
@@ -43,6 +44,13 @@ export default async function AdminDashboardPage() {
           >
             <Plus className="w-4 h-4" />
             <span>Add Business</span>
+          </Link>
+          <Link
+            href="/admin/products"
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-offwhite hover:bg-stone-200 text-navy text-xs font-bold uppercase tracking-wider rounded-sm transition-all border border-stone-300"
+          >
+            <Package className="w-4 h-4 text-gold-700" />
+            <span>Products ({stats.totalProducts})</span>
           </Link>
           <Link
             href="/admin/enquiries"

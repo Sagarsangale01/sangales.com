@@ -135,3 +135,157 @@ export async function deleteCategory(id: string) {
   return true;
 }
 
+export interface AdminProductItem {
+  id: string;
+  businessId: string;
+  businessName: string;
+  businessSlug: string;
+  name: string;
+  description: string;
+  image: string;
+  category?: string;
+  price?: string;
+  directBuyUrl?: string;
+}
+
+export async function getAllProductsAcrossBusinesses(): Promise<AdminProductItem[]> {
+  const store = getStore();
+  const list: AdminProductItem[] = [];
+  store.businesses.forEach((b) => {
+    if (b.products && b.products.length > 0) {
+      b.products.forEach((p) => {
+        list.push({
+          ...p,
+          businessId: b.id,
+          businessName: b.name,
+          businessSlug: b.slug,
+        });
+      });
+    }
+  });
+  return list;
+}
+
+export async function addProductToBusiness(
+  businessId: string,
+  input: {
+    name: string;
+    description: string;
+    image?: string;
+    category?: string;
+    price?: string;
+    directBuyUrl?: string;
+  }
+): Promise<AdminProductItem | null> {
+  const store = getStore();
+  const biz = store.businesses.find((b) => b.id === businessId);
+  if (!biz) return null;
+
+  if (!biz.products) biz.products = [];
+
+  const newProd = {
+    id: `prod-${Date.now()}`,
+    name: input.name.trim(),
+    description: input.description.trim(),
+    image:
+      input.image?.trim() ||
+      "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600",
+    category: input.category?.trim() || "",
+    price: input.price?.trim() || "",
+    directBuyUrl: input.directBuyUrl?.trim() || "",
+  };
+
+  biz.products.push(newProd);
+  saveStore(store);
+
+  return {
+    ...newProd,
+    businessId: biz.id,
+    businessName: biz.name,
+    businessSlug: biz.slug,
+  };
+}
+
+export async function updateProductInBusiness(
+  productId: string,
+  input: {
+    name: string;
+    description: string;
+    image?: string;
+    category?: string;
+    price?: string;
+    directBuyUrl?: string;
+    businessId?: string;
+  }
+): Promise<AdminProductItem | null> {
+  const store = getStore();
+
+  const targetBiz = store.businesses.find((b) => b.products?.some((p) => p.id === productId));
+  if (!targetBiz) return null;
+
+  const prodIdx = targetBiz.products.findIndex((p) => p.id === productId);
+  if (prodIdx === -1) return null;
+
+  // If businessId is changing, move product to the new business
+  if (input.businessId && input.businessId !== targetBiz.id) {
+    const newBiz = store.businesses.find((b) => b.id === input.businessId);
+    if (newBiz) {
+      if (!newBiz.products) newBiz.products = [];
+      const updatedProd = {
+        ...targetBiz.products[prodIdx],
+        name: input.name.trim(),
+        description: input.description.trim(),
+        image: input.image?.trim() || targetBiz.products[prodIdx].image,
+        category: input.category?.trim() || "",
+        price: input.price?.trim() || "",
+        directBuyUrl: input.directBuyUrl?.trim() || "",
+      };
+      targetBiz.products.splice(prodIdx, 1);
+      newBiz.products.push(updatedProd);
+      saveStore(store);
+      return {
+        ...updatedProd,
+        businessId: newBiz.id,
+        businessName: newBiz.name,
+        businessSlug: newBiz.slug,
+      };
+    }
+  }
+
+  // Update in place
+  targetBiz.products[prodIdx] = {
+    ...targetBiz.products[prodIdx],
+    name: input.name.trim(),
+    description: input.description.trim(),
+    image: input.image?.trim() || targetBiz.products[prodIdx].image,
+    category: input.category?.trim() || "",
+    price: input.price?.trim() || "",
+    directBuyUrl: input.directBuyUrl?.trim() || "",
+  };
+
+  saveStore(store);
+
+  return {
+    ...targetBiz.products[prodIdx],
+    businessId: targetBiz.id,
+    businessName: targetBiz.name,
+    businessSlug: targetBiz.slug,
+  };
+}
+
+export async function deleteProductFromBusiness(productId: string): Promise<boolean> {
+  const store = getStore();
+  let found = false;
+  store.businesses.forEach((b) => {
+    if (b.products && b.products.some((p) => p.id === productId)) {
+      b.products = b.products.filter((p) => p.id !== productId);
+      found = true;
+    }
+  });
+  if (found) {
+    saveStore(store);
+    return true;
+  }
+  return false;
+}
+
