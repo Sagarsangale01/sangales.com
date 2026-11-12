@@ -7,6 +7,26 @@ interface Props {
   businesses: BusinessRecord[];
 }
 
+// Recommended CTA per business slug according to Master Instructions
+const getBusinessCtaText = (slug: string) => {
+  switch (slug) {
+    case "annamrit-foods":
+      return "Order Now";
+    case "sangales-farms":
+      return "Product Enquiry";
+    case "sangales-enterprises":
+      return "Explore Products";
+    case "sangales-trading":
+      return "Business Enquiry";
+    case "sangales-packaging":
+      return "Request Wholesale Quote";
+    case "sangales-digital":
+      return "Explore Services";
+    default:
+      return "Explore Profile";
+  }
+};
+
 export default function PortfolioShowcase({ businesses }: Props) {
   const published = businesses.filter((b) => b.status === "PUBLISHED");
   const upcoming = businesses.filter((b) => b.status === "UPCOMING");
@@ -102,14 +122,14 @@ export default function PortfolioShowcase({ businesses }: Props) {
                     href={`/businesses/${featured.slug}`}
                     className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-navy hover:bg-gold hover:text-navy text-white text-xs font-bold tracking-widest uppercase rounded-sm transition-all shadow-md group"
                   >
-                    <span>Explore Business Profile</span>
+                    <span>{getBusinessCtaText(featured.slug)} &bull; View Profile</span>
                     <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Link>
                   <Link
                     href={`/contact?business=${featured.id}&type=Product`}
                     className="inline-flex items-center justify-center px-4 py-3.5 text-xs font-semibold uppercase tracking-wider text-navy hover:text-gold transition-colors text-center"
                   >
-                    Wholesale Enquiry &rarr;
+                    Wholesale &amp; Catering Enquiry &rarr;
                   </Link>
                 </div>
               </div>
@@ -155,7 +175,7 @@ export default function PortfolioShowcase({ businesses }: Props) {
                   href={`/businesses/${biz.slug}`}
                   className="pt-3 inline-flex items-center justify-between w-full text-xs font-bold uppercase tracking-wider text-navy group-hover:text-gold transition-colors"
                 >
-                  <span>View Details</span>
+                  <span>{getBusinessCtaText(biz.slug)}</span>
                   <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 text-gold" />
                 </Link>
               </div>

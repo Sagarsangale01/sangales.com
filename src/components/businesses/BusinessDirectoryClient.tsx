@@ -10,6 +10,27 @@ interface Props {
   categories: { id: string; name: string; slug: string }[];
 }
 
+// Map recommended CTA per business slug according to Master Instructions
+const getBusinessCtaLabel = (slug: string, isUpcoming?: boolean) => {
+  if (isUpcoming) return "Explore Incubation";
+  switch (slug) {
+    case "annamrit-foods":
+      return "Order Now";
+    case "sangales-farms":
+      return "Product Enquiry";
+    case "sangales-enterprises":
+      return "Explore Products";
+    case "sangales-trading":
+      return "Business Enquiry";
+    case "sangales-packaging":
+      return "Request Wholesale Quote";
+    case "sangales-digital":
+      return "Explore Services";
+    default:
+      return "Explore Profile";
+  }
+};
+
 export default function BusinessDirectoryClient({ initialBusinesses, categories }: Props) {
   const [statusFilter, setStatusFilter] = useState<"ALL" | "PUBLISHED" | "UPCOMING" | "ASSOCIATE">("ALL");
   const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
@@ -271,11 +292,11 @@ export default function BusinessDirectoryClient({ initialBusinesses, categories 
                     href={`/businesses/${biz.slug}`}
                     className="pt-3 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-navy group-hover:text-gold transition-colors"
                   >
-                    <span>{isUpcoming ? "Explore Incubation" : "Explore Profile"}</span>
+                    <span>{getBusinessCtaLabel(biz.slug, isUpcoming)}</span>
                     <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 text-gold" />
                   </Link>
 
-                  {biz.isAssociate && biz.website && (
+                  {biz.isAssociate && biz.website ? (
                     <a
                       href={biz.website}
                       target="_blank"
@@ -284,6 +305,10 @@ export default function BusinessDirectoryClient({ initialBusinesses, categories 
                     >
                       <span>anvayifarms.com ↗</span>
                     </a>
+                  ) : (
+                    <span className="pt-3 text-[11px] font-semibold text-charcoal-100 uppercase tracking-wider">
+                      {biz.category}
+                    </span>
                   )}
                 </div>
               </div>

@@ -89,6 +89,28 @@ export default async function BusinessDetailPage({ params }: Props) {
     },
   };
 
+  // Map custom recommended CTA per business slug according to Master Instructions
+  const getBusinessCta = (slug: string) => {
+    switch (slug) {
+      case "annamrit-foods":
+        return { label: "Order Now", href: "#order-options" };
+      case "sangales-farms":
+        return { label: "Product Enquiry", href: "#enquiry-section" };
+      case "sangales-enterprises":
+        return { label: "Explore Products", href: "#products-section" };
+      case "sangales-trading":
+        return { label: "Business Enquiry", href: "#enquiry-section" };
+      case "sangales-packaging":
+        return { label: "Request Wholesale Quote", href: "#enquiry-section" };
+      case "sangales-digital":
+        return { label: "Explore Services", href: "#products-section" };
+      default:
+        return { label: "Send Business Enquiry", href: "#enquiry-section" };
+    }
+  };
+
+  const heroCta = getBusinessCta(business.slug);
+
   return (
     <div className="pt-20 bg-offwhite min-h-screen">
       <script
@@ -180,10 +202,11 @@ export default async function BusinessDetailPage({ params }: Props) {
             {/* Quick Contact CTAs in Hero */}
             <div className="flex flex-wrap items-center gap-3 shrink-0">
               <a
-                href="#enquiry-section"
-                className="px-6 py-3.5 bg-gold hover:bg-white text-navy font-bold text-xs tracking-widest uppercase rounded-sm transition-all shadow-lg"
+                href={heroCta.href}
+                className="px-6 py-3.5 bg-gold hover:bg-white text-navy font-bold text-xs tracking-widest uppercase rounded-sm transition-all shadow-lg inline-flex items-center gap-2"
               >
-                Send Business Enquiry
+                <span>{heroCta.label}</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
               {business.website && (
                 <a
@@ -252,7 +275,7 @@ export default async function BusinessDetailPage({ params }: Props) {
 
             {/* Annamrit Foods Dual-Mode Order & Catering Banner */}
             {business.slug === "annamrit-foods" && (
-              <section className="bg-gradient-to-br from-emerald-950 via-navy-950 to-navy text-white p-6 sm:p-8 rounded-sm border border-emerald-500/30 shadow-lg space-y-6">
+              <section id="order-options" className="bg-gradient-to-br from-emerald-950 via-navy-950 to-navy text-white p-6 sm:p-8 rounded-sm border border-emerald-500/30 shadow-lg space-y-6">
                 <div className="border-b border-white/10 pb-4">
                   <span className="text-gold text-xs font-bold uppercase tracking-superwide block mb-1">
                     Flexible Dining &bull; Supply Solutions
@@ -320,7 +343,7 @@ export default async function BusinessDetailPage({ params }: Props) {
 
             {/* 6. Products & Services */}
             {business.products && business.products.length > 0 && (
-              <section className="space-y-6">
+              <section id="products-section" className="space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                   <div>
                     <span className="text-gold-700 text-xs font-bold tracking-superwide uppercase block mb-1">
@@ -720,6 +743,14 @@ export default async function BusinessDetailPage({ params }: Props) {
 
               {/* Action Buttons in Contact Desk */}
               <div className="pt-2 space-y-2 border-t border-stone-100">
+                <a
+                  href={heroCta.href}
+                  className="w-full py-2.5 px-4 bg-navy hover:bg-gold hover:text-navy text-white font-bold text-xs uppercase tracking-wider rounded-sm flex items-center justify-center gap-2 shadow-sm transition-all"
+                >
+                  <span>{heroCta.label}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+
                 <a
                   href={`https://wa.me/917507700936?text=${encodeURIComponent(
                     `Hello SANGALES, I would like to inquire regarding ${business.name}.`
