@@ -2,8 +2,11 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms & Conditions | Sangales Group",
+  title: "Terms & Conditions | SANGALES GROUP",
   description: "Terms and conditions of website use for SANGALES – A GROUP OF COMPANIES.",
+  alternates: {
+    canonical: "/terms-and-conditions",
+  },
 };
 
 export default function TermsPage() {

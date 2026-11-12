@@ -25,6 +25,9 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.sangales.com"),
+  alternates: {
+    canonical: "/",
+  },
   title: {
     default: "SANGALES – A GROUP OF COMPANIES | Building Businesses. Creating Opportunities.",
     template: "%s | SANGALES GROUP",

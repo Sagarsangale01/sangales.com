@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "News & Media Releases | SANGALES GROUP Announcements",
   description:
     "Official corporate news, press releases, expansion announcements, and updates from SANGALES – A GROUP OF COMPANIES.",
+  alternates: {
+    canonical: "/news",
+  },
 };
 
 export const dynamic = "force-dynamic";

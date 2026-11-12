@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Our Businesses | Group Portfolio Directory | SANGALES GROUP",
   description:
     "Explore the diversified business portfolio of SANGALES: Annamrit Foods, Sangales Farms, Sangales Enterprises, Sangales Trading, Sangales Packaging, Anvayi Farms, and upcoming ventures.",
+  alternates: {
+    canonical: "/businesses",
+  },
 };
 
 export const dynamic = "force-dynamic";

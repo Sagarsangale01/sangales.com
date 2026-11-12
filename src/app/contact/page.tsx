@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "Contact Us & Business Enquiries | SANGALES GROUP",
   description:
     "Connect with SANGALES – A GROUP OF COMPANIES. Direct enquiry channels for partnerships, wholesale supply, dealerships, and institutional procurement.",
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 export const dynamic = "force-dynamic";

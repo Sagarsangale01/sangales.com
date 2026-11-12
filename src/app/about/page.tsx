@@ -5,9 +5,12 @@ import { ArrowRight, Building2, CheckCircle2, ShieldCheck, Sprout, Target } from
 import { getSiteSettings } from "@/services/settingsService";
 
 export const metadata: Metadata = {
-  title: "About Us | Sangales Corporate Profile & Philosophy",
+  title: "About Us | SANGALES GROUP Profile & Philosophy",
   description:
     "Learn about SANGALES – A GROUP OF COMPANIES, our founding philosophy of patient entrepreneurship, business governance, and our diversified portfolio.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 export const dynamic = "force-dynamic";

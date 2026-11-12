@@ -488,3 +488,4 @@ export default function ProductManagerClient({ initialProducts, businesses }: Pr
     </div>
   );
 }
+

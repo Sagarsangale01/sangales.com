@@ -2,8 +2,11 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Sangales Group",
+  title: "Privacy Policy | SANGALES GROUP",
   description: "Official Privacy Policy of SANGALES – A GROUP OF COMPANIES.",
+  alternates: {
+    canonical: "/privacy-policy",
+  },
 };
 
 export default function PrivacyPolicyPage() {

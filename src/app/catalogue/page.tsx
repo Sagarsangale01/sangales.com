@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "Product & Solutions Catalogue | SANGALES GROUP",
   description:
     "Explore the group-wide catalogue of products, manufacturing solutions, agricultural produce, and commercial services across SANGALES operating businesses.",
+  alternates: {
+    canonical: "/catalogue",
+  },
   openGraph: {
     title: "Product & Solutions Catalogue | SANGALES GROUP",
     description:
