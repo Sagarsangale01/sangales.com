@@ -453,14 +453,14 @@ export default async function BusinessDetailPage({ params }: Props) {
                           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 w-full">
                             <a
                               href={`https://wa.me/917507700936?text=${encodeURIComponent(
-                                `Hello Sangales Trading, please share PVC/WPC catalog and contractor rates for ${prod.name}.`
+                                `Hello Sangales Trading, please share specifications and wholesale contractor rates for ${prod.name}.`
                               )}`}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
                             >
                               <MessageCircle className="w-3.5 h-3.5" />
-                              <span>Catalog &amp; Rates</span>
+                              <span>Quote &amp; Specs</span>
                             </a>
                             <a
                               href="#enquiry-section"

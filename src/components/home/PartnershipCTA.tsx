@@ -29,7 +29,7 @@ export default function PartnershipCTA({ settings }: Props) {
     {
       icon: Boxes,
       title: "Wholesale & Enterprise Procurement",
-      desc: "Procure Sangales Trading PVC wall & ceiling panels, WPC louvers, LED lighting systems, and food packaging disposables.",
+      desc: "Procure Sangales Trading construction steel & TMT rebars, PVC ply sheets, designer wallpapers, architectural panels, and food packaging disposables.",
       type: "Wholesale",
     },
     {
