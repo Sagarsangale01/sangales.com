@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowLeft,
+  ArrowRight,
   Mail,
   Phone,
   MapPin,
@@ -22,10 +23,20 @@ import { getBusinessBySlug, getPublishedBusinesses } from "@/services/businessSe
 import BusinessEnquiryForm from "@/components/forms/BusinessEnquiryForm";
 import ShareBusinessButton from "@/components/businesses/ShareBusinessButton";
 import Breadcrumbs from "@/components/common/Breadcrumbs";
+import LandingHeader from "@/components/landing/LandingHeader";
+import QuickQuoteCard from "@/components/landing/QuickQuoteCard";
+import TrustReassuranceBar from "@/components/landing/TrustReassuranceBar";
 
 interface Props {
   params: {
     slug: string;
+  };
+  searchParams?: {
+    mode?: string;
+    source?: string;
+    utm_source?: string;
+    utm_medium?: string;
+    utm_campaign?: string;
   };
 }
 
@@ -54,7 +65,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-export default async function BusinessDetailPage({ params }: Props) {
+export default async function BusinessDetailPage({ params, searchParams }: Props) {
   const [business, allBusinesses] = await Promise.all([
     getBusinessBySlug(params.slug),
     getPublishedBusinesses(),
@@ -63,6 +74,16 @@ export default async function BusinessDetailPage({ params }: Props) {
   if (!business) {
     notFound();
   }
+
+  const isLandingMode =
+    searchParams?.mode === "landing" ||
+    searchParams?.source === "ad" ||
+    Boolean(searchParams?.utm_source);
+
+  const campaignSource =
+    searchParams?.utm_campaign ||
+    searchParams?.utm_source ||
+    (isLandingMode ? "Paid Ad Campaign" : "Direct / Organic");
 
   const relatedBusinesses = allBusinesses
     .filter((b) => b.id !== business.id)
@@ -112,51 +133,95 @@ export default async function BusinessDetailPage({ params }: Props) {
   const heroCta = getBusinessCta(business.slug);
 
   return (
-    <div className="pt-20 bg-offwhite min-h-screen">
+    <div className={`bg-offwhite min-h-screen ${isLandingMode ? "pt-14 sm:pt-16" : "pt-20"}`}>
+      {isLandingMode && (
+        <LandingHeader
+          businessName={business.name}
+          businessSlug={business.slug}
+          businessLogo={business.logo}
+          category={business.category}
+        />
+      )}
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJsonLd) }}
       />
 
       {/* 1. Cover Image & Brand Hero */}
-      <section className="relative min-h-[460px] lg:min-h-[520px] flex items-end bg-navy text-white overflow-hidden pb-12 pt-24">
+      <section className="relative min-h-[500px] lg:min-h-[560px] flex items-center bg-navy text-white overflow-hidden py-16">
         <div className="absolute inset-0 z-0">
           <img
             src={business.coverImage}
             alt={business.name}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/75 to-navy-950/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/80 to-navy-950/40" />
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          {/* Breadcrumb Trail & Back Navigation */}
+          {/* Breadcrumb Trail & Mode Switcher */}
           <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-            <Link
-              href="/businesses"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-300 hover:text-gold uppercase tracking-wider transition-colors"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back to Group Businesses</span>
-            </Link>
+            {isLandingMode ? (
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-gold text-navy text-[11px] font-extrabold uppercase tracking-widest rounded-sm shadow-md">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Commercial Procurement &bull; Fast-Track Quotation Desk</span>
+              </div>
+            ) : (
+              <div className="flex flex-wrap items-center gap-4">
+                <Link
+                  href="/businesses"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-300 hover:text-gold uppercase tracking-wider transition-colors"
+                >
+                  <ArrowLeft className="w-3.5 h-3.5" />
+                  <span>Back to Group Businesses</span>
+                </Link>
 
-            <Breadcrumbs
-              items={[
-                { label: "Our Businesses", href: "/businesses" },
-                { label: business.name },
-              ]}
-              className="py-0 text-stone-300 [&_a]:text-stone-300 [&_span]:text-gold"
-            />
+                <Breadcrumbs
+                  items={[
+                    { label: "Our Businesses", href: "/businesses" },
+                    { label: business.name },
+                  ]}
+                  className="py-0 text-stone-300 [&_a]:text-stone-300 [&_span]:text-gold"
+                />
+              </div>
+            )}
+
+            {/* Mode switch link on desktop */}
+            <div className="flex items-center gap-2 text-[11px]">
+              {isLandingMode ? (
+                <Link
+                  href={`/businesses/${business.slug}`}
+                  className="px-3 py-1 rounded bg-white/10 hover:bg-white/20 text-stone-200 text-xs font-semibold uppercase tracking-wider transition-all border border-white/20 inline-flex items-center gap-1.5"
+                >
+                  <span>Corporate Group View</span>
+                  <ArrowRight className="w-3 h-3" />
+                </Link>
+              ) : (
+                <Link
+                  href={`/businesses/${business.slug}?mode=landing`}
+                  className="px-3 py-1 rounded bg-gold/15 hover:bg-gold/25 text-gold text-xs font-bold uppercase tracking-wider transition-all border border-gold/40 inline-flex items-center gap-1.5"
+                  title="Switch to Landing Page view optimized for Paid Ads"
+                >
+                  <Sparkles className="w-3 h-3 text-gold" />
+                  <span>Ad Landing Page Mode</span>
+                </Link>
+              )}
+            </div>
           </div>
 
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-b border-white/15 pb-8">
-            <div className="space-y-3 max-w-3xl">
-              <div className="flex items-center gap-2">
+          {/* Hero Content Grid: Left Content + Right Quick Quote Card */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-7 space-y-4">
+              <div className="flex items-center gap-2 flex-wrap">
                 <span className="px-3 py-1 bg-gold text-navy text-xs font-bold uppercase tracking-wider rounded-sm">
                   {business.category}
                 </span>
                 <span className="text-xs uppercase tracking-wider text-stone-300 font-semibold">
                   {business.isAssociate ? (business.associationType || "Strategic Associate Company") : "A Sangales Company"}
+                </span>
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-300 bg-emerald-500/20 border border-emerald-500/40 px-2 py-0.5 rounded-sm">
+                  Direct Wholesale &bull; GST Invoicing
                 </span>
               </div>
 
@@ -172,7 +237,7 @@ export default async function BusinessDetailPage({ params }: Props) {
                   </div>
                 )}
                 <div>
-                  <h1 className="font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white">
+                  <h1 className="font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
                     {business.name}
                   </h1>
                   {business.tagline && (
@@ -197,32 +262,78 @@ export default async function BusinessDetailPage({ params }: Props) {
                   </div>
                 </div>
               )}
-            </div>
 
-            {/* Quick Contact CTAs in Hero */}
-            <div className="flex flex-wrap items-center gap-3 shrink-0">
-              <a
-                href={heroCta.href}
-                className="px-6 py-3.5 bg-gold hover:bg-white text-navy font-bold text-xs tracking-widest uppercase rounded-sm transition-all shadow-lg inline-flex items-center gap-2"
-              >
-                <span>{heroCta.label}</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
-              {business.website && (
+              {/* Key Highlights / Strengths in Hero */}
+              {business.strengths && business.strengths.length > 0 && (
+                <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2 max-w-2xl">
+                  {business.strengths.slice(0, 4).map((st, i) => (
+                    <div key={i} className="flex items-start gap-2 text-xs text-stone-200">
+                      <CheckCircle2 className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+                      <span className="line-clamp-2">{st}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Quick Contact CTAs in Hero */}
+              <div className="flex flex-wrap items-center gap-3 pt-3">
                 <a
-                  href={business.website}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-medium text-xs tracking-widest uppercase rounded-sm transition-all border border-white/20 inline-flex items-center gap-1.5"
+                  href={heroCta.href}
+                  className="px-6 py-3.5 bg-gold hover:bg-white text-navy font-bold text-xs tracking-widest uppercase rounded-sm transition-all shadow-lg inline-flex items-center gap-2"
                 >
-                  <span>{business.isAssociate ? "Visit Official Store" : "Visit Domain"}</span>
+                  <span>{heroCta.label}</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
-              )}
+
+                <a
+                  href={`https://wa.me/917507700936?text=${encodeURIComponent(
+                    `Hello ${business.name}, I would like to request commercial specifications and wholesale pricing.`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-5 py-3.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs tracking-widest uppercase rounded-sm transition-all shadow-lg inline-flex items-center gap-2"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>WhatsApp Quote</span>
+                </a>
+
+                <a
+                  href="tel:+917507700936"
+                  className="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-medium text-xs tracking-widest uppercase rounded-sm transition-all border border-white/20 inline-flex items-center gap-2"
+                >
+                  <Phone className="w-3.5 h-3.5 text-gold" />
+                  <span>+91 75077 00936</span>
+                </a>
+
+                {business.website && (
+                  <a
+                    href={business.website}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="px-4 py-3.5 text-stone-300 hover:text-white font-medium text-xs tracking-widest uppercase inline-flex items-center gap-1.5"
+                  >
+                    <span>{business.isAssociate ? "Visit Store" : "Official Domain"}</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </a>
+                )}
+              </div>
+            </div>
+
+            {/* Quick Quotation Lead Form (Above-the-fold) */}
+            <div className="lg:col-span-5">
+              <QuickQuoteCard
+                businessId={business.id}
+                businessName={business.name}
+                products={business.products}
+                campaignSource={campaignSource}
+              />
             </div>
           </div>
         </div>
       </section>
+
+      {/* 2. Direct Reassurance & Trust Bar */}
+      <TrustReassuranceBar businessName={business.name} />
 
       {/* Main Profile Body */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">

@@ -20,6 +20,11 @@ export default function MobileQuickBar({
   }
 
   const rawPhone = phone.replace(/[^0-9+]/g, "");
+  const isBusinessPage = pathname?.startsWith("/businesses/");
+  const enquiryHref = isBusinessPage ? "#enquiry-section" : "/contact";
+  const waText = isBusinessPage
+    ? "Hello SANGALES, I would like to enquire about wholesale pricing, specifications, and catalog."
+    : "Hello SANGALES Group, I would like to enquire about your products and services.";
 
   return (
     <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-navy-950/95 backdrop-blur-md border-t border-gold/30 px-3 py-2 shadow-2xl print:hidden">
@@ -30,12 +35,12 @@ export default function MobileQuickBar({
           className="flex flex-col items-center justify-center py-1.5 px-1 bg-white/5 hover:bg-white/10 active:bg-white/20 text-white rounded transition-colors text-center"
         >
           <Phone className="w-4 h-4 text-gold mb-0.5" />
-          <span className="text-[10px] font-bold uppercase tracking-wider">Call Desk</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider">Call Sales</span>
         </a>
 
         {/* 1-Tap WhatsApp */}
         <a
-          href="https://wa.me/917507700936?text=Hello%20SANGALES%20Group,%20I%20would%20like%20to%20enquire%20about%20your%20products%20and%20services."
+          href={`https://wa.me/917507700936?text=${encodeURIComponent(waText)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="flex flex-col items-center justify-center py-1.5 px-1 bg-emerald-600/90 hover:bg-emerald-600 active:bg-emerald-700 text-white rounded transition-colors text-center shadow-sm"
@@ -45,13 +50,23 @@ export default function MobileQuickBar({
         </a>
 
         {/* 1-Tap Quotation / Enquiry */}
-        <Link
-          href="/contact"
-          className="flex flex-col items-center justify-center py-1.5 px-1 bg-gold/90 hover:bg-gold active:bg-gold-600 text-navy rounded transition-colors text-center font-semibold"
-        >
-          <Send className="w-4 h-4 text-navy mb-0.5" />
-          <span className="text-[10px] font-bold uppercase tracking-wider">Enquiry</span>
-        </Link>
+        {isBusinessPage ? (
+          <a
+            href={enquiryHref}
+            className="flex flex-col items-center justify-center py-1.5 px-1 bg-gold/90 hover:bg-gold active:bg-gold-600 text-navy rounded transition-colors text-center font-bold"
+          >
+            <Send className="w-4 h-4 text-navy mb-0.5" />
+            <span className="text-[10px] font-bold uppercase tracking-wider">Get Quote</span>
+          </a>
+        ) : (
+          <Link
+            href="/contact"
+            className="flex flex-col items-center justify-center py-1.5 px-1 bg-gold/90 hover:bg-gold active:bg-gold-600 text-navy rounded transition-colors text-center font-semibold"
+          >
+            <Send className="w-4 h-4 text-navy mb-0.5" />
+            <span className="text-[10px] font-bold uppercase tracking-wider">Enquiry</span>
+          </Link>
+        )}
       </div>
     </div>
   );
