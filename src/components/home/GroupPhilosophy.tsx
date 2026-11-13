@@ -94,7 +94,7 @@ export default function GroupPhilosophy({ settings }: Props) {
               <div className="p-6 bg-navy text-stone-200 space-y-3">
                 <div className="flex items-center justify-between border-b border-navy-800 pb-2 text-xs">
                   <span className="text-stone-400">Target Industry Segments</span>
-                  <span className="text-white font-semibold">Food &bull; Agri &bull; Trading &bull; Packaging</span>
+                  <span className="text-white font-semibold">Food &bull; Agri &bull; Lighting &bull; Trading &bull; Packaging</span>
                 </div>
                 <div className="flex items-center justify-between border-b border-navy-800 pb-2 text-xs">
                   <span className="text-stone-400">Headquarters</span>

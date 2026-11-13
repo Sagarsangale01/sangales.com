@@ -800,23 +800,54 @@ export default async function BusinessDetailPage({ params }: Props) {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedBusinesses.map((rel) => (
-                <Link
-                  key={rel.id}
-                  href={`/businesses/${rel.slug}`}
-                  className="bg-white rounded-sm overflow-hidden border border-stone-200/80 p-5 shadow-sm hover:shadow-editorial transition-all group block"
-                >
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-gold-700">
-                    {rel.category}
-                  </span>
-                  <h4 className="font-heading text-lg font-bold text-navy group-hover:text-gold transition-colors mt-1">
-                    {rel.name}
-                  </h4>
-                  <p className="text-xs text-charcoal-100 line-clamp-2 mt-2 leading-relaxed">
-                    {rel.shortDescription}
-                  </p>
-                </Link>
-              ))}
+              {relatedBusinesses.map((rel) => {
+                const relCta = getBusinessCta(rel.slug);
+                return (
+                  <Link
+                    key={rel.id}
+                    href={`/businesses/${rel.slug}`}
+                    className="bg-white rounded-sm overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-editorial transition-all group flex flex-col justify-between"
+                  >
+                    <div>
+                      {rel.coverImage && (
+                        <div className="relative h-40 overflow-hidden bg-navy-950">
+                          <img
+                            src={rel.coverImage}
+                            alt={rel.name}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent" />
+                          <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between gap-2">
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-gold bg-navy/80 px-2 py-0.5 rounded-sm backdrop-blur-sm">
+                              {rel.category}
+                            </span>
+                            {rel.isAssociate && (
+                              <span className="text-[9px] font-extrabold uppercase tracking-wider text-navy bg-emerald-400 px-1.5 py-0.5 rounded-sm">
+                                Associate
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                      <div className="p-5 space-y-2">
+                        <h4 className="font-heading text-lg font-bold text-navy group-hover:text-gold transition-colors">
+                          {rel.name}
+                        </h4>
+                        <p className="text-xs text-charcoal-100 line-clamp-2 leading-relaxed">
+                          {rel.shortDescription}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="p-5 pt-0 border-t border-stone-100 mt-2">
+                      <div className="pt-3 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-navy group-hover:text-gold transition-colors">
+                        <span>{relCta.label}</span>
+                        <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 text-gold" />
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </section>
         )}

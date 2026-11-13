@@ -23,7 +23,7 @@ export default function JourneyTimeline({ milestones }: Props) {
               Our Journey &amp; Milestones
             </h2>
             <p className="mt-4 text-base sm:text-lg text-charcoal-100">
-              Tracing the measured, values-first progression of Sangales from foundational beginnings to a multi-industry corporate presence.
+              Tracing the measured, values-first progression of SANGALES GROUP from foundational beginnings to a multi-industry corporate presence.
             </p>
           </div>
 
