@@ -32,8 +32,8 @@ const PRESET_QUERIES = [
     text: "Hello Samiksha, I would like to enquire about Sangales Enterprises home lights, ultra-slim panel lights, commercial LED luminaires, street lights, and tube lights.",
   },
   {
-    label: "🏗️ PVC Panels & Materials",
-    text: "Hello Samiksha, I would like to enquire about Sangales Trading wholesale materials — PVC wall and ceiling panels, WPC fluted louvers, UV marble sheets, trim profiles, and mounting hardware.",
+    label: "🏗️ Steel, PVC Ply & Building Materials",
+    text: "Hello Samiksha, I would like to enquire about Sangales Trading wholesale building materials — Fe 500D/550D construction steel & TMT rebars, waterproof PVC ply sheets (6mm-18mm), designer wallpapers, PVC wall panels, and interior hardware.",
   },
   {
     label: "📦 Packaging & Disposables",

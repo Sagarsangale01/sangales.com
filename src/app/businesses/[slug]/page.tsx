@@ -26,6 +26,8 @@ import Breadcrumbs from "@/components/common/Breadcrumbs";
 import LandingHeader from "@/components/landing/LandingHeader";
 import QuickQuoteCard from "@/components/landing/QuickQuoteCard";
 import TrustReassuranceBar from "@/components/landing/TrustReassuranceBar";
+import ProcurementProcess from "@/components/landing/ProcurementProcess";
+import BusinessFaqSection from "@/components/landing/BusinessFaqSection";
 
 interface Props {
   params: {
@@ -750,6 +752,20 @@ export default async function BusinessDetailPage({ params, searchParams }: Props
               </section>
             )}
 
+            {/* Commercial Procurement Process */}
+            <ProcurementProcess
+              businessName={business.name}
+              category={business.category}
+              isLandingMode={isLandingMode}
+            />
+
+            {/* Wholesale & Commercial FAQ */}
+            <BusinessFaqSection
+              businessSlug={business.slug}
+              businessName={business.name}
+              isLandingMode={isLandingMode}
+            />
+
             {/* 12. Direct Business Enquiry Form */}
             <section id="enquiry-section" className="space-y-4">
               <div>
@@ -892,75 +908,112 @@ export default async function BusinessDetailPage({ params, searchParams }: Props
 
         {/* 13. Related Businesses */}
         {relatedBusinesses.length > 0 && (
-          <section className="pt-12 border-t border-stone-200">
-            <div className="flex items-center justify-between mb-8">
-              <div>
-                <span className="text-gold-700 text-xs font-bold tracking-superwide uppercase block mb-1">
-                  Portfolio Exploration
-                </span>
-                <h3 className="font-heading text-2xl font-extrabold text-navy">
-                  Other Sangales Group Companies
-                </h3>
-              </div>
-              <Link
-                href="/businesses"
-                className="text-xs font-bold uppercase tracking-wider text-navy hover:text-gold transition-colors"
-              >
-                All Businesses &rarr;
-              </Link>
-            </div>
+          isLandingMode ? (
+            <section className="pt-8 border-t border-stone-200">
+              <div className="bg-white rounded-sm border border-stone-200/90 p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+                <div className="space-y-1.5 text-center md:text-left">
+                  <div className="flex items-center justify-center md:justify-start gap-2">
+                    <span className="w-2 h-2 rounded-full bg-gold-600" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-gold-700">
+                      SANGALES GROUP ECOSYSTEM
+                    </span>
+                  </div>
+                  <h3 className="font-heading text-lg sm:text-xl font-bold text-navy">
+                    {business.name} is a verified operating entity of SANGALES GROUP
+                  </h3>
+                  <p className="text-xs text-charcoal-100 max-w-2xl leading-relaxed">
+                    Synergized across agricultural cultivation, modern FMCG foods, commercial lighting technology, industrial packaging, building materials, and digital systems.
+                  </p>
+                </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {relatedBusinesses.map((rel) => {
-                const relCta = getBusinessCta(rel.slug);
-                return (
+                <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
                   <Link
-                    key={rel.id}
-                    href={`/businesses/${rel.slug}`}
-                    className="bg-white rounded-sm overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-editorial transition-all group flex flex-col justify-between"
+                    href={`/businesses/${business.slug}`}
+                    className="text-xs font-bold text-navy hover:text-gold uppercase tracking-wider underline transition-colors px-2 py-1"
                   >
-                    <div>
-                      {rel.coverImage && (
-                        <div className="relative h-40 overflow-hidden bg-navy-950">
-                          <img
-                            src={rel.coverImage}
-                            alt={rel.name}
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent" />
-                          <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between gap-2">
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-gold bg-navy/80 px-2 py-0.5 rounded-sm backdrop-blur-sm">
-                              {rel.category}
-                            </span>
-                            {rel.isAssociate && (
-                              <span className="text-[9px] font-extrabold uppercase tracking-wider text-navy bg-emerald-400 px-1.5 py-0.5 rounded-sm">
-                                Associate
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                      )}
-                      <div className="p-5 space-y-2">
-                        <h4 className="font-heading text-lg font-bold text-navy group-hover:text-gold transition-colors">
-                          {rel.name}
-                        </h4>
-                        <p className="text-xs text-charcoal-100 line-clamp-2 leading-relaxed">
-                          {rel.shortDescription}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="p-5 pt-0 border-t border-stone-100 mt-2">
-                      <div className="pt-3 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-navy group-hover:text-gold transition-colors">
-                        <span>{relCta.label}</span>
-                        <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 text-gold" />
-                      </div>
-                    </div>
+                    Corporate Profile
                   </Link>
-                );
-              })}
-            </div>
-          </section>
+                  <Link
+                    href="/businesses"
+                    className="px-4 py-2.5 bg-navy hover:bg-gold hover:text-navy text-white font-bold text-xs uppercase tracking-wider rounded-sm transition-all shadow-sm inline-flex items-center gap-1.5"
+                  >
+                    <span>Explore Group Ventures</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 text-gold group-hover:text-navy" />
+                  </Link>
+                </div>
+              </div>
+            </section>
+          ) : (
+            <section className="pt-12 border-t border-stone-200">
+              <div className="flex items-center justify-between mb-8">
+                <div>
+                  <span className="text-gold-700 text-xs font-bold tracking-superwide uppercase block mb-1">
+                    Portfolio Exploration
+                  </span>
+                  <h3 className="font-heading text-2xl font-extrabold text-navy">
+                    Other Sangales Group Companies
+                  </h3>
+                </div>
+                <Link
+                  href="/businesses"
+                  className="text-xs font-bold uppercase tracking-wider text-navy hover:text-gold transition-colors"
+                >
+                  All Businesses &rarr;
+                </Link>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {relatedBusinesses.map((rel) => {
+                  const relCta = getBusinessCta(rel.slug);
+                  return (
+                    <Link
+                      key={rel.id}
+                      href={`/businesses/${rel.slug}`}
+                      className="bg-white rounded-sm overflow-hidden border border-stone-200/80 shadow-sm hover:shadow-editorial transition-all group flex flex-col justify-between"
+                    >
+                      <div>
+                        {rel.coverImage && (
+                          <div className="relative h-40 overflow-hidden bg-navy-950">
+                            <img
+                              src={rel.coverImage}
+                              alt={rel.name}
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent" />
+                            <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between gap-2">
+                              <span className="text-[10px] font-bold uppercase tracking-wider text-gold bg-navy/80 px-2 py-0.5 rounded-sm backdrop-blur-sm">
+                                {rel.category}
+                              </span>
+                              {rel.isAssociate && (
+                                <span className="text-[9px] font-extrabold uppercase tracking-wider text-navy bg-emerald-400 px-1.5 py-0.5 rounded-sm">
+                                  Associate
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        )}
+                        <div className="p-5 space-y-2">
+                          <h4 className="font-heading text-lg font-bold text-navy group-hover:text-gold transition-colors">
+                            {rel.name}
+                          </h4>
+                          <p className="text-xs text-charcoal-100 line-clamp-2 leading-relaxed">
+                            {rel.shortDescription}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="p-5 pt-0 border-t border-stone-100 mt-2">
+                        <div className="pt-3 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-navy group-hover:text-gold transition-colors">
+                          <span>{relCta.label}</span>
+                          <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 text-gold" />
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </section>
+          )
         )}
       </div>
     </div>

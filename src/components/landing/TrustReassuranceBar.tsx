@@ -54,3 +54,4 @@ export default function TrustReassuranceBar({ businessName, className = "" }: Pr
     </section>
   );
 }
+
