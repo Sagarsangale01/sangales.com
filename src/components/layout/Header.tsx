@@ -134,11 +134,11 @@ export default function Header({ settings }: Props) {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-4 lg:gap-6">
-          {/* Brand Logo - Fixed size with shrink-0 so it NEVER gets encroached */}
+        <div className="flex items-center justify-between gap-6 xl:gap-10">
+          {/* Brand Logo - Fixed size with shrink-0 and generous right margin so it NEVER gets encroached */}
           <Link
             href="/"
-            className="shrink-0 flex items-center focus:outline-none py-1 pr-2 xl:pr-4"
+            className="shrink-0 flex items-center focus:outline-none py-1 mr-3 lg:mr-6 xl:mr-10"
           >
             <img
               src={isDarkHero ? "/logos/sangales-logo-white.png" : "/logos/sangales-logo.png"}
@@ -148,7 +148,7 @@ export default function Header({ settings }: Props) {
           </Link>
 
           {/* Desktop Navigation - Centered / Distributed with ample spacing */}
-          <nav className="hidden lg:flex items-center gap-x-5 xl:gap-x-7">
+          <nav className="hidden lg:flex items-center gap-x-6 xl:gap-x-9">
             {/* About Dropdown */}
             <div
               className="relative"
@@ -159,7 +159,7 @@ export default function Header({ settings }: Props) {
               <button
                 type="button"
                 onClick={() => setAboutDropdownOpen(!aboutDropdownOpen)}
-                className={`text-xs xl:text-sm font-semibold tracking-wide transition-colors duration-200 flex items-center gap-1 py-1 cursor-pointer ${
+                className={`text-xs xl:text-sm font-semibold tracking-wide transition-colors duration-200 flex items-center gap-1.5 py-1 px-1 cursor-pointer ${
                   isAboutActive
                     ? isDarkHero
                       ? "text-gold"
@@ -226,7 +226,7 @@ export default function Header({ settings }: Props) {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-xs xl:text-sm font-semibold tracking-wide transition-colors duration-200 relative py-1 ${
+                  className={`text-xs xl:text-sm font-semibold tracking-wide transition-colors duration-200 relative py-1 px-1 ${
                     isActive
                       ? isDarkHero
                         ? "text-gold font-bold"
@@ -246,8 +246,8 @@ export default function Header({ settings }: Props) {
           </nav>
 
           {/* Right Action Cluster: Language Switcher + Partner Button */}
-          {/* Note: explicit left border and padding creates an uncrossable buffer zone */}
-          <div className="hidden lg:flex items-center gap-3 xl:gap-4 shrink-0 pl-4 xl:pl-6 border-l border-stone-200/50">
+          {/* Note: explicit left border and generous padding creates an uncrossable buffer zone */}
+          <div className="hidden lg:flex items-center gap-3.5 xl:gap-5 shrink-0 ml-auto pl-6 xl:pl-8 border-l border-stone-300">
             <LanguageSwitcher variant="dropdown" isDarkTheme={isDarkHero} />
 
             <Link
