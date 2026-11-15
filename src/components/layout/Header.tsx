@@ -22,6 +22,7 @@ export default function Header({ settings }: Props) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -32,16 +33,46 @@ export default function Header({ settings }: Props) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleDropdownEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setAboutDropdownOpen(true);
+  };
+
+  const handleDropdownLeave = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      setAboutDropdownOpen(false);
+    }, 220); // 220ms grace period ensures mouse transition across submenus never drops
+  };
+
   // Close mobile drawer and dropdown on route change
   useEffect(() => {
     setMobileMenuOpen(false);
     setAboutDropdownOpen(false);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
   }, [pathname]);
+
+  // Clean up timer on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   // Close dropdown on outside click
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
         setAboutDropdownOpen(false);
       }
     }
@@ -153,12 +184,15 @@ export default function Header({ settings }: Props) {
             <div
               className="relative"
               ref={dropdownRef}
-              onMouseEnter={() => setAboutDropdownOpen(true)}
-              onMouseLeave={() => setAboutDropdownOpen(false)}
+              onMouseEnter={handleDropdownEnter}
+              onMouseLeave={handleDropdownLeave}
             >
               <button
                 type="button"
-                onClick={() => setAboutDropdownOpen(!aboutDropdownOpen)}
+                onClick={() => {
+                  if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                  setAboutDropdownOpen((prev) => !prev);
+                }}
                 className={`text-xs xl:text-sm font-semibold tracking-wide transition-colors duration-200 flex items-center gap-1.5 py-1 px-1 cursor-pointer ${
                   isAboutActive
                     ? isDarkHero
@@ -181,37 +215,47 @@ export default function Header({ settings }: Props) {
                 )}
               </button>
 
-              {/* Mega Dropdown Menu */}
+              {/* Mega Dropdown Menu with zero-gap hover bridge */}
               {aboutDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-72 bg-white rounded-sm shadow-2xl border border-stone-200/90 p-2 z-50 animate-in fade-in-50 zoom-in-95">
-                  <div className="space-y-1">
-                    {aboutSubItems.map((item) => {
-                      const Icon = item.icon;
-                      const isActive = pathname === item.href;
-                      return (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className={`flex items-start gap-3 p-2.5 rounded-sm transition-colors ${
-                            isActive
-                              ? "bg-gold/15 text-navy font-bold"
-                              : "hover:bg-stone-50 text-charcoal"
-                          }`}
-                        >
-                          <div className="w-7 h-7 rounded-sm bg-navy text-gold flex items-center justify-center shrink-0 mt-0.5">
-                            <Icon className="w-3.5 h-3.5" />
-                          </div>
-                          <div>
-                            <span className="text-xs font-bold text-navy block leading-tight">
-                              {item.title}
-                            </span>
-                            <span className="text-[10px] text-stone-500 line-clamp-1 mt-0.5 leading-normal">
-                              {item.desc}
-                            </span>
-                          </div>
-                        </Link>
-                      );
-                    })}
+                <div
+                  className="absolute left-0 top-full pt-2 w-80 z-[100]"
+                  onMouseEnter={handleDropdownEnter}
+                  onMouseLeave={handleDropdownLeave}
+                >
+                  <div className="bg-white rounded-sm shadow-2xl border border-stone-200/90 border-t-2 border-t-gold p-2.5 animate-in fade-in-50 zoom-in-95">
+                    <div className="space-y-1">
+                      {aboutSubItems.map((item) => {
+                        const Icon = item.icon;
+                        const isActive = pathname === item.href;
+                        return (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={() => {
+                              if (timeoutRef.current) clearTimeout(timeoutRef.current);
+                              setAboutDropdownOpen(false);
+                            }}
+                            className={`flex items-start gap-3 p-2.5 rounded-sm transition-colors ${
+                              isActive
+                                ? "bg-gold/15 text-navy font-bold"
+                                : "hover:bg-stone-50 text-charcoal hover:text-navy"
+                            }`}
+                          >
+                            <div className="w-8 h-8 rounded-sm bg-navy text-gold flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                              <Icon className="w-4 h-4" />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <span className="text-xs font-bold text-navy block leading-tight">
+                                {item.title}
+                              </span>
+                              <span className="text-[11px] text-stone-500 line-clamp-1 mt-0.5 leading-normal">
+                                {item.desc}
+                              </span>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               )}
