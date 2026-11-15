@@ -329,3 +329,160 @@ export async function notifyNewEnquiry(enquiry: {
     sendAdminInstantMobileAlert(enquiry),
   ]);
 }
+
+/**
+ * Dispatches notifications for new online store orders:
+ * 1. Admin Email with full item list and shipping address
+ * 2. Customer Receipt Email
+ * 3. Instant Telegram push alert to admin smartphone
+ */
+export async function notifyNewOrder(order: {
+  id: string;
+  orderNumber: string;
+  customerName: string;
+  customerPhone: string;
+  customerEmail?: string;
+  shippingAddress: {
+    street: string;
+    city: string;
+    state: string;
+    pincode: string;
+  };
+  items: Array<{
+    productName: string;
+    quantity: number;
+    price: number;
+    total: number;
+    businessName: string;
+  }>;
+  subtotal: number;
+  shippingFee: number;
+  totalAmount: number;
+  paymentMethod: string;
+  paymentStatus: string;
+  transactionRef?: string;
+  utmSource?: string;
+  utmCampaign?: string;
+}) {
+  const adminEmail = process.env.NOTIFICATION_EMAIL || "contact.sangales@gmail.com";
+
+  const itemsHtml = order.items
+    .map(
+      (it) => `
+    <tr style="border-bottom: 1px solid #f1f5f9;">
+      <td style="padding: 10px 0; font-size: 13px; color: #0f172a;">
+        <strong>${it.productName}</strong><br/>
+        <span style="font-size: 11px; color: #64748b;">${it.businessName}</span>
+      </td>
+      <td style="padding: 10px 0; text-align: center; font-size: 13px; color: #0f172a;">${it.quantity}</td>
+      <td style="padding: 10px 0; text-align: right; font-size: 13px; font-weight: 600; color: #0f172a;">₹${it.total.toLocaleString("en-IN")}</td>
+    </tr>
+  `
+    )
+    .join("");
+
+  const adminHtml = `
+    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 620px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #ffffff;">
+      <div style="background-color: #142735; padding: 18px 24px; border-radius: 6px; margin-bottom: 20px;">
+        <h2 style="color: #ffffff; margin: 0; font-size: 18px;">SANGALES – A GROUP OF COMPANIES</h2>
+        <p style="color: #C6A66B; margin: 4px 0 0; font-size: 12px; font-weight: 600; text-transform: uppercase;">🛒 New Online Store Order Placed</p>
+      </div>
+
+      <div style="background-color: #f8fafc; padding: 14px 18px; border-radius: 6px; margin-bottom: 20px; border-left: 4px solid #C6A66B;">
+        <p style="margin: 0; font-size: 15px; font-weight: bold; color: #0f172a;">Order #${order.orderNumber}</p>
+        <p style="margin: 4px 0 0; font-size: 12px; color: #64748b;">Method: <strong>${order.paymentMethod}</strong> | Status: <strong>${order.paymentStatus}</strong>${order.transactionRef ? ` | Ref: ${order.transactionRef}` : ""}</p>
+      </div>
+
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 14px;">
+        <tr style="border-bottom: 1px solid #f1f5f9;">
+          <td style="padding: 8px 0; font-weight: bold; color: #64748b; width: 140px;">Customer:</td>
+          <td style="padding: 8px 0; color: #0f172a; font-weight: 600;">${order.customerName}</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #f1f5f9;">
+          <td style="padding: 8px 0; font-weight: bold; color: #64748b;">Phone / WhatsApp:</td>
+          <td style="padding: 8px 0; color: #0f172a;"><a href="tel:${order.customerPhone}" style="color: #0f172a; text-decoration: none;">${order.customerPhone}</a></td>
+        </tr>
+        <tr style="border-bottom: 1px solid #f1f5f9;">
+          <td style="padding: 8px 0; font-weight: bold; color: #64748b;">Shipping Address:</td>
+          <td style="padding: 8px 0; color: #0f172a;">${order.shippingAddress.street}, ${order.shippingAddress.city}, ${order.shippingAddress.state} - ${order.shippingAddress.pincode}</td>
+        </tr>
+      </table>
+
+      <h4 style="margin: 16px 0 8px; font-size: 13px; text-transform: uppercase; color: #142735; letter-spacing: 0.5px;">Ordered Line Items</h4>
+      <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+        <thead>
+          <tr style="border-bottom: 2px solid #e2e8f0; font-size: 11px; text-transform: uppercase; color: #64748b;">
+            <th style="padding: 6px 0; text-align: left;">Item</th>
+            <th style="padding: 6px 0; text-align: center;">Qty</th>
+            <th style="padding: 6px 0; text-align: right;">Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${itemsHtml}
+        </tbody>
+        <tfoot>
+          <tr style="border-top: 2px solid #e2e8f0; font-size: 14px;">
+            <td colspan="2" style="padding: 10px 0; font-weight: bold; color: #0f172a;">Grand Total:</td>
+            <td style="padding: 10px 0; text-align: right; font-weight: bold; color: #0f172a; font-size: 16px;">₹${order.totalAmount.toLocaleString("en-IN")}</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+        <a href="https://www.sangales.com/admin/orders" style="display: inline-block; background-color: #142735; color: #ffffff; text-decoration: none; padding: 10px 20px; font-size: 12px; font-weight: bold; letter-spacing: 0.5px; border-radius: 4px;">MANAGE ORDER IN ADMIN →</a>
+      </div>
+    </div>
+  `;
+
+  // Telegram alert
+  const tgToken = process.env.TELEGRAM_BOT_TOKEN;
+  const tgChatId = process.env.TELEGRAM_CHAT_ID;
+
+  if (tgToken && tgChatId) {
+    try {
+      const itemsList = order.items.map((i) => `• ${i.productName} x${i.quantity} (₹${i.total})`).join("\n");
+      const cleanPhone = order.customerPhone.replace(/[^0-9]/g, "");
+      const tgText =
+        `🛒 *NEW ONLINE ORDER RECEIVED!*\n` +
+        `━━━━━━━━━━━━━━━━━━━━━━\n` +
+        `📦 *Order:* #${order.orderNumber}\n` +
+        `👤 *Customer:* ${order.customerName}\n` +
+        `📞 *Phone:* ${order.customerPhone}\n` +
+        `📍 *City:* ${order.shippingAddress.city} (${order.shippingAddress.pincode})\n` +
+        `💳 *Payment:* ${order.paymentMethod} (${order.paymentStatus})\n` +
+        `💰 *Total Amount:* ₹${order.totalAmount.toLocaleString("en-IN")}\n\n` +
+        `🛍️ *Items:*\n${itemsList}\n` +
+        `━━━━━━━━━━━━━━━━━━━━━━\n` +
+        `👉 [Open Admin Orders](https://www.sangales.com/admin/orders)\n` +
+        `💬 [WhatsApp Customer](https://wa.me/91${cleanPhone.replace(/^91/, "")})`;
+
+      await fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: tgChatId,
+          text: tgText,
+          parse_mode: "Markdown",
+        }),
+      });
+    } catch (e) {
+      console.error("Order Telegram notification error:", e);
+    }
+  }
+
+  // Send admin email
+  await sendEmail({
+    to: adminEmail,
+    subject: `[ORDER] #${order.orderNumber} - ₹${order.totalAmount} from ${order.customerName}`,
+    html: adminHtml,
+  });
+
+  // Send customer email if provided
+  if (order.customerEmail) {
+    await sendEmail({
+      to: order.customerEmail,
+      subject: `Order Confirmation #${order.orderNumber} - SANGALES GROUP`,
+      html: adminHtml,
+    });
+  }
+}

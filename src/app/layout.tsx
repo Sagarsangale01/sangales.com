@@ -7,6 +7,8 @@ import MobileQuickBar from "@/components/layout/MobileQuickBar";
 import AskSamikshaChatbot from "@/components/common/AskSamikshaChatbot";
 import GoogleAnalytics from "@/components/common/GoogleAnalytics";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { CartProvider } from "@/context/CartContext";
+import CartDrawer from "@/components/cart/CartDrawer";
 import { Locale } from "@/lib/translations";
 import { cookies } from "next/headers";
 import { getSiteSettings } from "@/services/settingsService";
@@ -131,11 +133,14 @@ export default async function RootLayout({
       <body className="min-h-screen flex flex-col bg-offwhite text-charcoal pb-14 sm:pb-0">
         <GoogleAnalytics gaMeasurementId={settings.gaMeasurementId} gtmId={settings.gtmId} />
         <LanguageProvider initialLocale={initialLocale}>
-          <Header settings={settings} />
-          <main className="flex-grow">{children}</main>
-          <Footer settings={settings} businesses={businesses} />
-          <MobileQuickBar phone={settings.contactPhone} />
-          <AskSamikshaChatbot phone={settings.contactPhone} corporateName={settings.siteName} />
+          <CartProvider>
+            <Header settings={settings} />
+            <main className="flex-grow">{children}</main>
+            <Footer settings={settings} businesses={businesses} />
+            <MobileQuickBar phone={settings.contactPhone} />
+            <AskSamikshaChatbot phone={settings.contactPhone} corporateName={settings.siteName} />
+            <CartDrawer />
+          </CartProvider>
         </LanguageProvider>
       </body>
     </html>

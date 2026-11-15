@@ -17,12 +17,14 @@ import {
   ExternalLink,
   ShieldAlert,
   Package,
+  ShoppingBag,
 } from "lucide-react";
 
 const NAV_ITEMS = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
   { label: "Businesses", href: "/admin/businesses", icon: Building2 },
   { label: "Products & Solutions", href: "/admin/products", icon: Package },
+  { label: "Store Orders", href: "/admin/orders", icon: ShoppingBag },
   { label: "Categories", href: "/admin/categories", icon: FolderTree },
   { label: "Enquiries", href: "/admin/enquiries", icon: Inbox },
   { label: "News & Media", href: "/admin/news", icon: Newspaper },

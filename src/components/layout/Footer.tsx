@@ -131,8 +131,13 @@ export default function Footer({ settings: propSettings, businesses: propBusines
                 </Link>
               </li>
               <li>
-                <Link href="/catalogue" className="hover:text-gold transition-colors text-gold/90 font-medium">
-                  {dict.nav.catalogue} &rarr;
+                <Link href="/shop" className="hover:text-gold transition-colors text-gold/90 font-medium">
+                  {dict.nav.shop || "Online Shop"} &rarr;
+                </Link>
+              </li>
+              <li>
+                <Link href="/catalogue" className="hover:text-gold transition-colors">
+                  {dict.nav.catalogue}
                 </Link>
               </li>
               <li>

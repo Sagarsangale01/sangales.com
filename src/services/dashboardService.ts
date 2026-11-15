@@ -24,6 +24,13 @@ export async function getDashboardStats() {
     if (b.products) totalProducts += b.products.length;
   });
 
+  const orders = store.orders || [];
+  const totalOrders = orders.length;
+  const newOrders = orders.filter((o) => ["PLACED", "CONFIRMED", "PROCESSING"].includes(o.orderStatus)).length;
+  const orderRevenue = orders
+    .filter((o) => o.orderStatus !== "CANCELLED")
+    .reduce((sum, o) => sum + o.totalAmount, 0);
+
   // Build real recent activities feed
   const recentEnquiries = store.enquiries.slice(0, 5).map((e) => ({
     id: e.id,
@@ -56,6 +63,9 @@ export async function getDashboardStats() {
     publishedNews,
     activeJobs,
     totalApplications,
+    totalOrders,
+    newOrders,
+    orderRevenue,
     recentEnquiries,
     recentApplications,
   };

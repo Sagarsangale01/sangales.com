@@ -1139,5 +1139,43 @@
       "description": "Rollout of the centralized digital architecture to accelerate partnerships, institutional distribution, and incubation of future tech and logistics ventures.",
       "tag": "Corporate Platform"
     }
+  ],
+  "orders": [
+    {
+      "id": "ord-1794749356245",
+      "orderNumber": "SNG-2026-1001",
+      "customerName": "Amit Deshmukh",
+      "customerPhone": "+91 98231 99887",
+      "customerEmail": "amit@example.com",
+      "shippingAddress": {
+        "street": "Plot 14, Gangapur Road",
+        "city": "Nashik",
+        "state": "Maharashtra",
+        "pincode": "422013"
+      },
+      "items": [
+        {
+          "productId": "prod-ghee-1",
+          "productName": "Vedic A2 Gir Cow Bilona Ghee (500ml)",
+          "businessId": "biz-ghee",
+          "businessName": "Anvayi Farms",
+          "price": 1150,
+          "quantity": 1,
+          "unit": "500ml Glass Jar",
+          "total": 1150
+        }
+      ],
+      "subtotal": 1150,
+      "taxAmount": 0,
+      "shippingFee": 0,
+      "totalAmount": 1150,
+      "paymentMethod": "COD",
+      "paymentStatus": "PENDING",
+      "orderStatus": "PLACED",
+      "transactionRef": "",
+      "customerNotes": "",
+      "createdAt": "2026-11-15T13:29:16.245Z",
+      "updatedAt": "2026-11-15T13:29:16.245Z"
+    }
   ]
 }

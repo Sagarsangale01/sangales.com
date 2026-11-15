@@ -72,6 +72,50 @@ export interface MediaRecord {
   uploadedAt: string;
 }
 
+export interface OrderItem {
+  productId: string;
+  productName: string;
+  businessId: string;
+  businessName: string;
+  image?: string;
+  price: number;
+  quantity: number;
+  unit?: string;
+  total: number;
+}
+
+export interface OrderRecord {
+  id: string;
+  orderNumber: string;
+  customerName: string;
+  customerPhone: string;
+  customerEmail?: string;
+  shippingAddress: {
+    street: string;
+    city: string;
+    state: string;
+    pincode: string;
+    landmark?: string;
+  };
+  items: OrderItem[];
+  subtotal: number;
+  taxAmount: number;
+  shippingFee: number;
+  totalAmount: number;
+  paymentMethod: "COD" | "UPI_QR" | "WHATSAPP_CONFIRM";
+  paymentStatus: "PENDING" | "PAID" | "VERIFIED" | "FAILED";
+  orderStatus: "PLACED" | "CONFIRMED" | "PROCESSING" | "DISPATCHED" | "DELIVERED" | "CANCELLED";
+  transactionRef?: string;
+  trackingNumber?: string;
+  courierPartner?: string;
+  adminNotes?: string;
+  customerNotes?: string;
+  utmSource?: string;
+  utmCampaign?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface StoreState {
   businesses: BusinessRecord[];
   categories: { id: string; name: string; slug: string; description?: string }[];
@@ -80,6 +124,7 @@ export interface StoreState {
   enquiries: EnquiryRecord[];
   applications: ApplicationRecord[];
   media: MediaRecord[];
+  orders: OrderRecord[];
   settings: Record<string, string>;
   milestones?: MilestoneRecord[];
   adminCredentials?: {
@@ -196,6 +241,59 @@ function getDefaultState(): StoreState {
         uploadedAt: "2026-10-04",
       },
     ],
+    orders: [
+      {
+        id: "sng-ord-1001",
+        orderNumber: "SNG-2026-1001",
+        customerName: "Vikas Patil",
+        customerPhone: "+91 98220 54321",
+        customerEmail: "vikas.patil@example.com",
+        shippingAddress: {
+          street: "Flat 402, Shanti Heights, College Road",
+          city: "Nashik",
+          state: "Maharashtra",
+          pincode: "422005",
+          landmark: "Near BYK College",
+        },
+        items: [
+          {
+            productId: "prod-ghee-1",
+            productName: "Vedic A2 Gir Cow Bilona Ghee (500ml)",
+            businessId: "biz-ghee",
+            businessName: "Anvayi Farms",
+            image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&q=80&w=600",
+            price: 1150,
+            quantity: 2,
+            unit: "500ml Glass Jar",
+            total: 2300,
+          },
+          {
+            productId: "prod-sprout-1",
+            productName: "Organic Sprout Salad Bowl (Mixed Pulse)",
+            businessId: "biz-1",
+            businessName: "Annamrit Foods",
+            image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=600",
+            price: 120,
+            quantity: 3,
+            unit: "Fresh Box",
+            total: 360,
+          },
+        ],
+        subtotal: 2660,
+        taxAmount: 0,
+        shippingFee: 0,
+        totalAmount: 2660,
+        paymentMethod: "UPI_QR",
+        paymentStatus: "PAID",
+        orderStatus: "PROCESSING",
+        transactionRef: "UPI/2390829103/OKBIZ",
+        trackingNumber: "",
+        courierPartner: "Local Express Courier",
+        adminNotes: "Customer requested morning delivery.",
+        createdAt: "2026-11-14T10:30:00.000Z",
+        updatedAt: "2026-11-14T11:00:00.000Z",
+      },
+    ],
     settings: {
       siteName: "SANGALES",
       descriptor: "A GROUP OF COMPANIES",
@@ -225,6 +323,9 @@ export function getStore(): StoreState {
     const data: StoreState = JSON.parse(raw);
     if (!data.milestones || data.milestones.length === 0) {
       data.milestones = INITIAL_MILESTONES;
+    }
+    if (!data.orders) {
+      data.orders = [];
     }
     return data;
   } catch (err) {

@@ -11,6 +11,8 @@ export interface TranslationDictionary {
     news: string;
     careers: string;
     contact: string;
+    shop: string;
+    cart: string;
     partnerWithUs: string;
   };
   brand: {
@@ -137,6 +139,8 @@ export const translations: Record<Locale, TranslationDictionary> = {
       news: "News & Updates",
       careers: "Careers",
       contact: "Contact",
+      shop: "Shop",
+      cart: "Cart",
       partnerWithUs: "Partner With Us",
     },
     brand: {
@@ -304,6 +308,8 @@ export const translations: Record<Locale, TranslationDictionary> = {
       news: "घडामोडी व बातम्या",
       careers: "करिअर",
       contact: "संपर्क",
+      shop: "खरेदी (Shop)",
+      cart: "कार्ट",
       partnerWithUs: "सहकार्य करा",
     },
     brand: {
@@ -471,6 +477,8 @@ export const translations: Record<Locale, TranslationDictionary> = {
       news: "समाचार एवं अपडेट्स",
       careers: "करियर",
       contact: "संपर्क करें",
+      shop: "शॉप (Shop)",
+      cart: "कार्ट",
       partnerWithUs: "भागीदारी करें",
     },
     brand: {

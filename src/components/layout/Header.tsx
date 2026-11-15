@@ -3,8 +3,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowUpRight, ChevronDown, Building2, Eye, Compass, Newspaper } from "lucide-react";
+import { Menu, X, ArrowUpRight, ChevronDown, Building2, Eye, Compass, Newspaper, ShoppingBag } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useCart } from "@/context/CartContext";
 import LanguageSwitcher from "@/components/common/LanguageSwitcher";
 
 interface Props {
@@ -16,6 +17,7 @@ interface Props {
 
 export default function Header({ settings }: Props) {
   const { dict, locale } = useLanguage();
+  const { itemCount, openDrawer } = useCart();
   const siteName = settings?.siteName || "SANGALES";
   const descriptor = settings?.descriptor || "A Group of Companies";
   const [isScrolled, setIsScrolled] = useState(false);
@@ -47,7 +49,7 @@ export default function Header({ settings }: Props) {
     }
     timeoutRef.current = setTimeout(() => {
       setAboutDropdownOpen(false);
-    }, 220); // 220ms grace period ensures mouse transition across submenus never drops
+    }, 320); // 320ms grace period ensures smooth mouse transitions without accidental closures
   };
 
   // Close mobile drawer and dropdown on route change
@@ -138,6 +140,7 @@ export default function Header({ settings }: Props) {
   const primaryNavLinks = [
     { label: dict.nav.businesses, href: "/businesses" },
     { label: dict.nav.catalogue, href: "/catalogue" },
+    { label: dict.nav.shop, href: "/shop" },
     { label: dict.nav.careers, href: "/careers" },
     { label: dict.nav.contact, href: "/contact" },
   ];
@@ -147,6 +150,7 @@ export default function Header({ settings }: Props) {
     { label: dict.nav.about, href: "/about" },
     { label: dict.nav.businesses, href: "/businesses" },
     { label: dict.nav.catalogue, href: "/catalogue" },
+    { label: dict.nav.shop, href: "/shop" },
     { label: dict.nav.vision, href: "/our-vision" },
     { label: dict.nav.journey, href: "/our-journey" },
     { label: dict.nav.news, href: "/news" },
@@ -218,7 +222,7 @@ export default function Header({ settings }: Props) {
               {/* Mega Dropdown Menu with zero-gap hover bridge */}
               {aboutDropdownOpen && (
                 <div
-                  className="absolute left-0 top-full pt-2 w-80 z-[100]"
+                  className="absolute left-0 top-full pt-2.5 w-80 z-[100] before:content-[''] before:absolute before:-top-3 before:left-0 before:right-0 before:h-3"
                   onMouseEnter={handleDropdownEnter}
                   onMouseLeave={handleDropdownLeave}
                 >
@@ -289,9 +293,29 @@ export default function Header({ settings }: Props) {
             })}
           </nav>
 
-          {/* Right Action Cluster: Language Switcher + Partner Button */}
+          {/* Right Action Cluster: Cart Button + Language Switcher + Partner Button */}
           {/* Note: explicit left border and generous padding creates an uncrossable buffer zone */}
           <div className="hidden lg:flex items-center gap-3.5 xl:gap-5 shrink-0 ml-auto pl-6 xl:pl-8 border-l border-stone-300">
+            {/* Shopping Bag Button */}
+            <button
+              type="button"
+              onClick={openDrawer}
+              className={`relative p-2 rounded-full transition-all duration-200 flex items-center justify-center cursor-pointer ${
+                isDarkHero
+                  ? "text-stone-200 hover:text-white hover:bg-white/10"
+                  : "text-navy hover:text-navy hover:bg-stone-100"
+              }`}
+              aria-label="View Shopping Cart"
+              title="Shopping Cart"
+            >
+              <ShoppingBag className="w-5 h-5" />
+              {itemCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-gold text-navy font-bold text-[10px] w-5 h-5 rounded-full flex items-center justify-center shadow-xs border-2 border-white">
+                  {itemCount}
+                </span>
+              )}
+            </button>
+
             <LanguageSwitcher variant="dropdown" isDarkTheme={isDarkHero} />
 
             <Link
@@ -307,13 +331,29 @@ export default function Header({ settings }: Props) {
             </Link>
           </div>
 
-          {/* Mobile View: Language Switcher + Menu Trigger */}
+          {/* Mobile View: Cart + Language Switcher + Menu Trigger */}
           <div className="lg:hidden flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={openDrawer}
+              className={`relative p-2 rounded-full transition-colors cursor-pointer ${
+                isDarkHero ? "text-stone-200 hover:text-white" : "text-navy hover:bg-stone-100"
+              }`}
+              aria-label="View Shopping Cart"
+            >
+              <ShoppingBag className="w-5 h-5" />
+              {itemCount > 0 && (
+                <span className="absolute -top-0.5 -right-0.5 bg-gold text-navy font-bold text-[9px] w-4 h-4 rounded-full flex items-center justify-center shadow-xs">
+                  {itemCount}
+                </span>
+              )}
+            </button>
+
             <LanguageSwitcher variant="compact" isDarkTheme={isDarkHero} />
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`p-2 rounded-md transition-colors ${
+              className={`p-2 rounded-md transition-colors cursor-pointer ${
                 isDarkHero
                   ? "text-white hover:bg-white/10"
                   : "text-navy hover:bg-stone-100"
