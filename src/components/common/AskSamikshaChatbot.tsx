@@ -4,55 +4,135 @@ import React, { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { X, Send, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface AskSamikshaChatbotProps {
   phone?: string;
   corporateName?: string;
 }
 
-const PRESET_QUERIES = [
-  {
-    label: "💻 CRM, AI & Dynamic Websites",
-    text: "Hello Samiksha, I would like to enquire about Sangales Digital custom CRM solutions, AI integrations, dynamic websites, and software platforms.",
-  },
-  {
-    label: "🥦 Organic Vegetables & Grains",
-    text: "Hello Samiksha, I am interested in farm-fresh organic vegetables, wholesome wheat, bajra, jowar, and ancient millets from Sangales Farms.",
-  },
-  {
-    label: "🥗 Healthy Chaat & Sprouts",
-    text: "Hello Samiksha, I would like to enquire about Annamrit Foods menu — healthy chaat, fresh sprouts, breakfast favourites, wholesome meals, and distribution in Nashik.",
-  },
-  {
-    label: "🧈 Anvayi Farms A2 Ghee",
-    text: "Hello Samiksha, I would like to enquire about Anvayi Farms pure Desi Cow A2 Bilona Ghee and associate products.",
-  },
-  {
-    label: "💡 LED & Lighting Solutions",
-    text: "Hello Samiksha, I would like to enquire about Sangales Enterprises home lights, ultra-slim panel lights, commercial LED luminaires, street lights, and tube lights.",
-  },
-  {
-    label: "🏗️ Steel, PVC Ply & Building Materials",
-    text: "Hello Samiksha, I would like to enquire about Sangales Trading wholesale building materials — Fe 500D/550D construction steel & TMT rebars, waterproof PVC ply sheets (6mm-18mm), designer wallpapers, PVC wall panels, and interior hardware.",
-  },
-  {
-    label: "📦 Packaging & Disposables",
-    text: "Hello Samiksha, I would like to enquire about Sangales Packaging wholesale supplies — 4CP meal boxes, aluminium foil containers, paper bags (10x14, 6x14, 6x11, 4x10, 4x8), disposable glasses, and cutlery.",
-  },
-  {
-    label: "🤝 Corporate Partnership",
-    text: "Hello Samiksha, I represent an organization and would like to explore a commercial partnership with SANGALES Group.",
-  },
-  {
-    label: "💼 Careers",
-    text: "Hello Samiksha, I am reaching out regarding career opportunities at SANGALES Group.",
-  },
-];
+const PRESET_QUERIES_BY_LOCALE = {
+  en: [
+    {
+      label: "💻 CRM, AI & Dynamic Websites",
+      text: "Hello Samiksha, I would like to enquire about Sangales Digital custom CRM solutions, AI integrations, dynamic websites, and software platforms.",
+    },
+    {
+      label: "🥦 Organic Vegetables & Grains",
+      text: "Hello Samiksha, I am interested in farm-fresh organic vegetables, wholesome wheat, bajra, jowar, and ancient millets from Sangales Farms.",
+    },
+    {
+      label: "🥗 Healthy Chaat & Sprouts",
+      text: "Hello Samiksha, I would like to enquire about Annamrit Foods menu — healthy chaat, fresh sprouts, breakfast favourites, wholesome meals, and distribution in Nashik.",
+    },
+    {
+      label: "🧈 Anvayi Farms A2 Ghee",
+      text: "Hello Samiksha, I would like to enquire about Anvayi Farms pure Desi Cow A2 Bilona Ghee and associate products.",
+    },
+    {
+      label: "💡 LED & Lighting Solutions",
+      text: "Hello Samiksha, I would like to enquire about Sangales Enterprises home lights, ultra-slim panel lights, commercial LED luminaires, street lights, and tube lights.",
+    },
+    {
+      label: "🏗️ Steel, PVC Ply & Building Materials",
+      text: "Hello Samiksha, I would like to enquire about Sangales Trading wholesale building materials — Fe 500D/550D construction steel & TMT rebars, waterproof PVC ply sheets (6mm-18mm), designer wallpapers, PVC wall panels, and interior hardware.",
+    },
+    {
+      label: "📦 Packaging & Disposables",
+      text: "Hello Samiksha, I would like to enquire about Sangales Packaging wholesale supplies — 4CP meal boxes, aluminium foil containers, paper bags (10x14, 6x14, 6x11, 4x10, 4x8), disposable glasses, and cutlery.",
+    },
+    {
+      label: "🤝 Corporate Partnership",
+      text: "Hello Samiksha, I represent an organization and would like to explore a commercial partnership with SANGALES Group.",
+    },
+    {
+      label: "💼 Careers",
+      text: "Hello Samiksha, I am reaching out regarding career opportunities at SANGALES Group.",
+    },
+  ],
+  mr: [
+    {
+      label: "💻 सॉफ्टवेअर व डिजिटल सिस्टीम्स",
+      text: "नमस्कार समीक्षा, मला सांगळे डिजिटलच्या कस्टम सॉफ्टवेअर, सीआरएम आणि वेबसाइट्सबद्दल माहिती हवी आहे.",
+    },
+    {
+      label: "🥦 सेंद्रिय भाजीपाला व देशी धान्ये",
+      text: "नमस्कार समीक्षा, मला सांगळे फार्म्सच्या सेंद्रिय भाजीपाला, गहू, ज्वारी, बाजरी आणि कडधान्यांची माहिती हवी आहे.",
+    },
+    {
+      label: "🥗 पौष्टिक चाट व कडधान्ये आहार",
+      text: "नमस्कार समीक्षा, मला अन्नमृत फूड्सच्या पौष्टिक चाट, मोड आलेली कडधान्ये आणि नाशिक वितरणाबद्दल माहिती हवी आहे.",
+    },
+    {
+      label: "🧈 अन्वयी फार्म्स ए२ साजूक तूप",
+      text: "नमस्कार समीक्षा, मला अन्वयी फार्म्सच्या शुद्ध देशी गायीच्या ए२ बिलोना तुपाबद्दल माहिती हवी आहे.",
+    },
+    {
+      label: "💡 एलईडी प्रकाश व्यवस्था",
+      text: "नमस्कार समीक्षा, मला सांगळे एंटरप्रायझेसच्या व्यावसायिक एलईडी लाईट्स आणि पॅनेल्सबद्दल माहिती हवी आहे.",
+    },
+    {
+      label: "🏗️ स्टील, पीव्हीसी प्लाय व सजावट",
+      text: "नमस्कार समीक्षा, मला सांगळे ट्रेडिंगच्या टीएमटी स्टील (Fe 500D/550D), वॉटरप्रूफ पीव्हीसी प्लाय, वॉलपेपर्स आणि फिटिंग्सबद्दल माहिती हवी आहे.",
+    },
+    {
+      label: "📦 अन्न पॅकेजिंग व बॉक्सेस",
+      text: "नमस्कार समीक्षा, मला सांगळे पॅकेजिंगच्या मील बॉक्सेस, फॉइल कंटेनर्स आणि पेपर बॅग्जबद्दल माहिती हवी आहे.",
+    },
+    {
+      label: "🤝 व्यावसायिक भागीदारी",
+      text: "नमस्कार समीक्षा, मी सांगळे समूहासोबत व्यावसायिक भागीदारीसाठी चर्चा करू इच्छितो.",
+    },
+    {
+      label: "💼 करिअर संधी",
+      text: "नमस्कार समीक्षा, मी सांगळे समूहामधील करिअरच्या संधींविषयी विचारणा करत आहे.",
+    },
+  ],
+  hi: [
+    {
+      label: "💻 सॉफ्टवेयर एवं डिजिटल सिस्टम",
+      text: "नमस्ते समीक्षा, मुझे सांगळे डिजिटल के कस्टम सॉफ्टवेयर, सीआरएम और वेबसाइट्स के बारे में जानकारी चाहिए।",
+    },
+    {
+      label: "🥦 प्राकृतिक सब्जियां एवं अनाज",
+      text: "नमस्ते समीक्षा, मुझे सांगळे फार्म्स की जैविक सब्जियों, गेहूं, बाजरा और अनाज के बारे में जानकारी चाहिए।",
+    },
+    {
+      label: "🥗 सेहतमंद चाट व आहार",
+      text: "नमस्ते समीक्षा, मुझे अन्नमृत फूड्स के पौष्टिक आहार और सप्लाई के बारे में जानकारी चाहिए।",
+    },
+    {
+      label: "🧈 अन्वयी फार्म्स ए2 शुद्ध घी",
+      text: "नमस्ते समीक्षा, मुझे अन्वयी फार्म्स के शुद्ध देशी गाय के ए2 बिलोना घी के बारे में जानकारी चाहिए।",
+    },
+    {
+      label: "💡 आधुनिक एलईडी लाइटिंग",
+      text: "नमस्ते समीक्षा, मुझे सांगळे एंटरप्राइजेज की कमर्शियल एलईडी लाइट्स के बारे में जानकारी चाहिए।",
+    },
+    {
+      label: "🏗️ निर्माण स्टील एवं पीव्हीसी प्लाई",
+      text: "नमस्ते समीक्षा, मुझे सांगळे ट्रेडिंग के टीएमटी स्टील (Fe 500D/550D), वाटरप्रूफ पीव्हीसी प्लाई और वॉलपेपर्स के बारे में जानकारी चाहिए।",
+    },
+    {
+      label: "📦 फूड पैकेजिंग व बॉक्सेस",
+      text: "नमस्ते समीक्षा, मुझे सांगळे पैकेजिंग के मील बॉक्सेस, फॉयल कंटेनर्स और पेपर बैग्स के बारे में जानकारी चाहिए।",
+    },
+    {
+      label: "🤝 व्यावसायिक साझेदारी",
+      text: "नमस्ते समीक्षा, मैं सांगळे समूह के साथ व्यावसायिक साझेदारी हेतु चर्चा करना चाहता/चाहती हूँ।",
+    },
+    {
+      label: "💼 करियर अवसर",
+      text: "नमस्ते समीक्षा, मैं सांगळे समूह में करियर अवसरों के संबंध में संपर्क कर रहा/रही हूँ।",
+    },
+  ],
+};
 
 export default function AskSamikshaChatbot({
   phone = "+91 75077 00936",
   corporateName = "SANGALES",
 }: AskSamikshaChatbotProps) {
+  const { dict, locale } = useLanguage();
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -63,6 +143,7 @@ export default function AskSamikshaChatbot({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const rawNumber = phone.replace(/[^0-9]/g, "");
+  const presetQueries = PRESET_QUERIES_BY_LOCALE[locale] || PRESET_QUERIES_BY_LOCALE.en;
 
   useEffect(() => {
     setMounted(true);
@@ -110,7 +191,11 @@ export default function AskSamikshaChatbot({
     if (e) e.preventDefault();
     const finalMsg =
       message.trim() ||
-      `Hello Samiksha, I am visiting the ${corporateName} corporate website and would like to connect with a representative.`;
+      (locale === "mr"
+        ? `नमस्कार समीक्षा, मी सांगळे समूहाच्या वेबसाइटवरून संपर्क साधत असून अधिक माहिती जाणून घेऊ इच्छितो.`
+        : locale === "hi"
+        ? `नमस्ते समीक्षा, मैं सांगळे समूह की वेबसाइट से संपर्क कर रहा/रही हूँ और जानकारी चाहता/चाहती हूँ।`
+        : `Hello Samiksha, I am visiting the ${corporateName} corporate website and would like to connect with a representative.`);
 
     setIsSubmitting(true);
 
@@ -120,10 +205,10 @@ export default function AskSamikshaChatbot({
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fullName: senderName.trim() || "Website Visitor",
+          fullName: senderName.trim() || (locale === "mr" ? "वेबसाइट अभ्यागत" : locale === "hi" ? "वेबसाइट आगंतुक" : "Website Visitor"),
           phone: phone,
           email: "contact.sangales@gmail.com",
-          subject: "Enquiry via Ask to Samiksha WhatsApp Desk",
+          subject: `Enquiry via Ask to Samiksha Desk (${locale.toUpperCase()})`,
           message: finalMsg,
           enquiryType: "General",
           businessName: "Sangales Corporate Group",
@@ -198,17 +283,17 @@ export default function AskSamikshaChatbot({
                   <div className="min-w-0">
                     <div className="flex items-center gap-1.5 flex-wrap">
                       <h3 className="font-heading font-bold text-sm sm:text-base text-white tracking-wide truncate">
-                        Ask to Samiksha
+                        {dict.chatbot.title}
                       </h3>
                       {/* WhatsApp Verified Badge */}
                       <span className="text-[9px] sm:text-[10px] bg-white/20 text-white font-medium px-1.5 py-0.5 rounded-full flex items-center gap-0.5 shrink-0">
                         <span>✓</span>
-                        <span>Verified</span>
+                        <span>{dict.chatbot.verifiedDesk}</span>
                       </span>
                     </div>
                     <p className="text-[10px] sm:text-[11px] text-stone-200 mt-0.5 truncate flex items-center gap-1">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] inline-block animate-pulse"></span>
-                      <span>Online &bull; WhatsApp Desk</span>
+                      <span>{dict.chatbot.onlineStatus}</span>
                     </p>
                   </div>
                 </div>
@@ -229,7 +314,7 @@ export default function AskSamikshaChatbot({
               {/* Security Banner */}
               <div className="text-center">
                 <span className="text-[10px] font-medium text-stone-600 bg-[#FCF5EB] px-3 py-1 rounded-md shadow-2xs border border-[#E6DEC8] inline-block">
-                  🔒 Direct WhatsApp Communication &bull; SANGALES Group
+                  🔒 {locale === "mr" ? "थेट व्हॉट्सॲप संवाद • सांगळे समूह" : locale === "hi" ? "सीधा व्हाट्सएप संवाद • सांगळे समूह" : "Direct WhatsApp Communication • SANGALES Group"}
                 </span>
               </div>
 
@@ -242,17 +327,17 @@ export default function AskSamikshaChatbot({
                   <p className="font-semibold text-xs text-navy flex items-center justify-between">
                     <span>Samiksha</span>
                     <span className="text-[10px] text-stone-400 font-normal">
-                      Official Desk
+                      {dict.chatbot.officialDesk}
                     </span>
                   </p>
                   <p className="text-xs leading-relaxed text-stone-800">
-                    Namaste! 🙏 Welcome to <strong>SANGALES – A GROUP OF COMPANIES</strong>.
+                    {dict.chatbot.welcomeIntro}
                   </p>
                   <p className="text-xs leading-relaxed text-stone-700">
-                    How can I assist your business today? Select a department below or type your message to connect directly with me on WhatsApp.
+                    {dict.chatbot.welcomePrompt}
                   </p>
                   <span className="text-[10px] text-stone-400 block text-right pt-0.5">
-                    Hotline: {phone}
+                    {dict.chatbot.hotlinePrefix} {phone}
                   </span>
                 </div>
               </div>
@@ -260,10 +345,10 @@ export default function AskSamikshaChatbot({
               {/* Quick Topic Chips */}
               <div className="space-y-1.5 pt-1">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-stone-500 block px-1">
-                  Select an Enquiry Topic:
+                  {dict.chatbot.topicPrompt}
                 </span>
                 <div className="flex flex-wrap gap-1.5">
-                  {PRESET_QUERIES.map((q, i) => (
+                  {presetQueries.map((q, i) => (
                     <button
                       key={i}
                       type="button"
@@ -284,7 +369,7 @@ export default function AskSamikshaChatbot({
             >
               <input
                 type="text"
-                placeholder="Your Name (optional)"
+                placeholder={dict.chatbot.namePlaceholder}
                 value={senderName}
                 onChange={(e) => setSenderName(e.target.value)}
                 className="w-full text-xs p-2 border border-stone-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#075E54] bg-stone-50"
@@ -296,7 +381,7 @@ export default function AskSamikshaChatbot({
                   required
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Type your message for WhatsApp representative..."
+                  placeholder={dict.chatbot.inputPlaceholder}
                   className="w-full text-xs sm:text-sm p-2 sm:p-2.5 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#075E54] focus:border-[#075E54] resize-none text-charcoal bg-stone-50/50"
                 />
               </div>
@@ -316,14 +401,14 @@ export default function AskSamikshaChatbot({
                 </svg>
                 <span>
                   {isSubmitting
-                    ? "Connecting to WhatsApp..."
-                    : "Chat on WhatsApp (Direct)"}
+                    ? dict.chatbot.connectingStatus
+                    : dict.chatbot.chatButton}
                 </span>
                 <Send className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </button>
 
               <div className="flex items-center justify-between text-[11px] text-stone-500 pt-0.5 px-1">
-                <span>Or voice call:</span>
+                <span>{dict.chatbot.callVoice}</span>
                 <a
                   href={`tel:${rawNumber}`}
                   className="font-semibold text-navy hover:text-[#075E54] flex items-center gap-1 transition-colors"
@@ -363,13 +448,13 @@ export default function AskSamikshaChatbot({
             <div className="text-left flex flex-col justify-center">
               <div className="flex items-center gap-1.5">
                 <span className="font-heading font-bold text-xs sm:text-sm tracking-wide text-white group-hover:text-gold-200 transition-colors">
-                  Ask to Samiksha
+                  {dict.chatbot.title}
                 </span>
                 {/* WhatsApp Green Icon Indicator */}
                 <span className="w-2 h-2 rounded-full bg-[#25D366]"></span>
               </div>
               <span className="text-[9px] sm:text-[10px] text-stone-300 font-medium tracking-normal">
-                WhatsApp Desk &bull; +91 75077 00936
+                {locale === "mr" ? "व्हॉट्सॲप कक्ष" : locale === "hi" ? "व्हाट्सएप डेस्क" : "WhatsApp Desk"} &bull; +91 75077 00936
               </span>
             </div>
 

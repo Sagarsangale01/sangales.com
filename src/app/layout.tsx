@@ -5,6 +5,9 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileQuickBar from "@/components/layout/MobileQuickBar";
 import AskSamikshaChatbot from "@/components/common/AskSamikshaChatbot";
+import { LanguageProvider } from "@/context/LanguageContext";
+import { Locale } from "@/lib/translations";
+import { cookies } from "next/headers";
 import { getSiteSettings } from "@/services/settingsService";
 import { getPublishedBusinesses } from "@/services/businessService";
 
@@ -111,8 +114,13 @@ export default async function RootLayout({
     },
   };
 
+  const cookieStore = cookies();
+  const cookieLocale = cookieStore.get("NEXT_LOCALE")?.value as Locale | undefined;
+  const initialLocale: Locale =
+    cookieLocale && ["en", "mr", "hi"].includes(cookieLocale) ? cookieLocale : "en";
+
   return (
-    <html lang="en" className={`${manrope.variable} ${inter.variable}`}>
+    <html lang={initialLocale} className={`${manrope.variable} ${inter.variable}`}>
       <head>
         <script
           type="application/ld+json"
@@ -120,11 +128,13 @@ export default async function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-offwhite text-charcoal pb-14 sm:pb-0">
-        <Header settings={settings} />
-        <main className="flex-grow">{children}</main>
-        <Footer settings={settings} businesses={businesses} />
-        <MobileQuickBar phone={settings.contactPhone} />
-        <AskSamikshaChatbot phone={settings.contactPhone} corporateName={settings.siteName} />
+        <LanguageProvider initialLocale={initialLocale}>
+          <Header settings={settings} />
+          <main className="flex-grow">{children}</main>
+          <Footer settings={settings} businesses={businesses} />
+          <MobileQuickBar phone={settings.contactPhone} />
+          <AskSamikshaChatbot phone={settings.contactPhone} corporateName={settings.siteName} />
+        </LanguageProvider>
       </body>
     </html>
   );

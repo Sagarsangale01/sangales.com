@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import { ShieldCheck, Truck, FileCheck, PhoneCall } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface Props {
   businessName?: string;
@@ -7,26 +10,28 @@ interface Props {
 }
 
 export default function TrustReassuranceBar({ businessName, className = "" }: Props) {
+  const { dict } = useLanguage();
+
   const points = [
     {
       icon: ShieldCheck,
-      title: "Direct Wholesale Pricing",
-      desc: "Transparent manufacturer rates with tiered volume discounts.",
+      title: dict.trust.wholesalePricing,
+      desc: dict.trust.wholesalePricingDesc,
     },
     {
       icon: Truck,
-      title: "Swift Dispatch & Logistics",
-      desc: "Staged warehouse inventory with rapid transit across Maharashtra & Pan-India.",
+      title: dict.trust.swiftLogistics,
+      desc: dict.trust.swiftLogisticsDesc,
     },
     {
       icon: FileCheck,
-      title: "100% GST Tax Compliant",
-      desc: "Full statutory billing eligible for commercial input tax credit (ITC).",
+      title: dict.trust.gstCompliant,
+      desc: dict.trust.gstCompliantDesc,
     },
     {
       icon: PhoneCall,
-      title: "Dedicated Account Support",
-      desc: "Instant hotline (+91 75077 00936) & WhatsApp contractor coordination.",
+      title: dict.trust.dedicatedSupport,
+      desc: dict.trust.dedicatedSupportDesc,
     },
   ];
 
@@ -54,4 +59,3 @@ export default function TrustReassuranceBar({ businessName, className = "" }: Pr
     </section>
   );
 }
-

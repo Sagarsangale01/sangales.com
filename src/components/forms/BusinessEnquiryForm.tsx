@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Send, CheckCircle2, AlertCircle, MessageCircle } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface Props {
   businessId: string;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export default function BusinessEnquiryForm({ businessId, businessName }: Props) {
+  const { dict, locale } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -42,7 +44,13 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
     e.preventDefault();
 
     if (!formData.privacyConsent) {
-      setError("Please accept the privacy consent to submit.");
+      setError(
+        locale === "mr"
+          ? "कृपया पुढे जाण्यासाठी संमती बॉक्स निवडा."
+          : locale === "hi"
+          ? "कृपया आगे बढ़ने के लिए सहमति बॉक्स चुनें।"
+          : "Please accept the privacy consent to submit."
+      );
       setFieldErrors({ privacyConsent: ["Please check this box to consent."] });
       return;
     }
@@ -58,6 +66,7 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
         body: JSON.stringify({
           ...formData,
           businessId,
+          language: locale,
         }),
       });
 
@@ -71,7 +80,7 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
             .join(" • ");
           throw new Error(allMsgs || data?.message || "Please check the highlighted fields.");
         }
-        throw new Error(data?.message || "Failed to submit enquiry. Please try again.");
+        throw new Error(data?.message || dict.actions.errorMsg);
       }
 
       setSuccess(true);
@@ -84,40 +93,38 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
         subject: `Enquiry for ${businessName}`,
         message: "",
         privacyConsent: false,
+        botTrap: "",
       });
     } catch (err: any) {
-      setError(err.message || "An error occurred.");
+      setError(err.message || dict.actions.errorMsg);
     } finally {
       setLoading(false);
     }
   };
 
+  const localizedBiz = dict.businesses[businessName.toLowerCase().replace(/\s+/g, "-")];
+  const displayName = localizedBiz?.name || businessName;
+
   if (success) {
     return (
       <div className="p-8 bg-white border border-stone-200 rounded-sm shadow-sm text-center space-y-4">
         <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-        <h4 className="font-heading text-xl font-bold text-navy">Enquiry Dispatched Successfully</h4>
+        <h4 className="font-heading text-xl font-bold text-navy">
+          {locale === "mr"
+            ? "चौकशी यशस्वीरीत्या नोंदवली गेली!"
+            : locale === "hi"
+            ? "पूछताछ सफलतापूर्वक दर्ज की गई!"
+            : "Enquiry Dispatched Successfully"}
+        </h4>
         <p className="text-sm text-charcoal-100 max-w-md mx-auto">
-          Thank you for reaching out to <strong>{businessName}</strong>. An acknowledgement email has been sent, and our team will review your details shortly.
+          {dict.actions.successMsg}
         </p>
-
-        <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <a
-            href={`https://wa.me/917507700936?text=${encodeURIComponent(
-              `Hello SANGALES Group, I have submitted an enquiry for ${businessName} via your website.`
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
-          >
-            <MessageCircle className="w-4 h-4" />
-            Connect on WhatsApp (+91 75077 00936)
-          </a>
+        <div className="pt-2">
           <button
             onClick={() => setSuccess(false)}
-            className="w-full sm:w-auto px-5 py-2.5 bg-stone-100 hover:bg-stone-200 text-navy text-xs font-bold uppercase tracking-wider rounded-sm transition-all"
+            className="text-xs font-bold uppercase tracking-wider text-navy hover:text-gold transition-colors"
           >
-            Submit Another Enquiry
+            {locale === "mr" ? "दुसरी चौकशी पाठवा" : locale === "hi" ? "अन्य पूछताछ भेजें" : "Submit Another Enquiry"} &rarr;
           </button>
         </div>
       </div>
@@ -125,29 +132,32 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      noValidate
-      className="p-8 bg-white border border-stone-200/80 rounded-sm shadow-sm space-y-4"
-    >
-      {/* Invisible Honeypot field for spam prevention */}
-      <div className="hidden" aria-hidden="true" style={{ display: "none" }}>
-        <label htmlFor="biz-botTrap">Leave this empty</label>
+    <form onSubmit={handleSubmit} className="p-6 sm:p-8 bg-white border border-stone-200/80 rounded-sm shadow-sm space-y-5">
+      {/* Honeypot field for bot protection */}
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="b_trap">Leave this blank</label>
         <input
-          id="biz-botTrap"
           type="text"
-          name="botTrap"
-          tabIndex={-1}
-          autoComplete="off"
+          id="b_trap"
+          name="b_trap"
           value={formData.botTrap}
           onChange={(e) => updateField("botTrap", e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
         />
       </div>
+
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 text-red-800 text-xs rounded-sm space-y-1.5 shadow-sm">
-          <div className="flex items-center gap-2 font-bold text-red-700">
-            <AlertCircle className="w-4 h-4 shrink-0" />
-            <span>Unable to submit enquiry. Please correct the highlighted errors:</span>
+        <div className="p-4 bg-red-50 border border-red-200 rounded-sm text-xs text-red-800 space-y-1">
+          <div className="flex items-center gap-2 font-bold">
+            <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
+            <span>
+              {locale === "mr"
+                ? "कृपया आवश्यक माहिती तपासा:"
+                : locale === "hi"
+                ? "कृपया आवश्यक जानकारी जांचें:"
+                : "Unable to submit enquiry. Please correct the highlighted errors:"}
+            </span>
           </div>
           <p className="pl-6 text-red-700 leading-relaxed font-medium">{error}</p>
         </div>
@@ -157,14 +167,14 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">
-            Full Name <span className="text-red-500">*</span>
+            {dict.forms.fullNameLabel} <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
             required
             value={formData.fullName}
             onChange={(e) => updateField("fullName", e.target.value)}
-            placeholder="e.g. Ramesh Kulkarni"
+            placeholder={dict.forms.fullNamePlaceholder}
             className={`w-full px-3.5 py-2.5 text-sm bg-offwhite border rounded-sm focus:outline-none transition-colors text-charcoal ${
               fieldErrors.fullName
                 ? "border-red-500 bg-red-50/20 ring-1 ring-red-400 focus:border-red-500"
@@ -181,14 +191,14 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
 
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">
-            Work Email <span className="text-red-500">*</span>
+            {dict.forms.emailLabel} <span className="text-red-500">*</span>
           </label>
           <input
             type="email"
             required
             value={formData.email}
             onChange={(e) => updateField("email", e.target.value)}
-            placeholder="ramesh@company.com"
+            placeholder={dict.forms.emailPlaceholder}
             className={`w-full px-3.5 py-2.5 text-sm bg-offwhite border rounded-sm focus:outline-none transition-colors text-charcoal ${
               fieldErrors.email
                 ? "border-red-500 bg-red-50/20 ring-1 ring-red-400 focus:border-red-500"
@@ -208,14 +218,14 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">
-            Phone Number <span className="text-red-500">*</span>
+            {dict.forms.phoneLabel} <span className="text-red-500">*</span>
           </label>
           <input
             type="tel"
             required
             value={formData.phone}
             onChange={(e) => updateField("phone", e.target.value)}
-            placeholder="+91 75077 00936"
+            placeholder={dict.forms.phonePlaceholder}
             className={`w-full px-3.5 py-2.5 text-sm bg-offwhite border rounded-sm focus:outline-none transition-colors text-charcoal ${
               fieldErrors.phone
                 ? "border-red-500 bg-red-50/20 ring-1 ring-red-400 focus:border-red-500"
@@ -232,13 +242,13 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
 
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">
-            Company / Organization Name
+            {locale === "mr" ? "कंपनी / फर्मचे नाव" : locale === "hi" ? "कंपनी / फर्म का नाम" : "Company / Organization Name"}
           </label>
           <input
             type="text"
             value={formData.companyName}
             onChange={(e) => updateField("companyName", e.target.value)}
-            placeholder="e.g. Maharashtra Retailers"
+            placeholder={locale === "mr" ? "उदा. महाराष्ट्र ट्रेडर्स" : locale === "hi" ? "उदा. नेशनल कॉर्पोरेशन" : "e.g. Maharashtra Retailers"}
             className="w-full px-3.5 py-2.5 text-sm bg-offwhite border border-stone-200 rounded-sm focus:outline-none focus:border-gold text-charcoal"
           />
         </div>
@@ -248,7 +258,7 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">
-            Enquiry Nature <span className="text-red-500">*</span>
+            {dict.forms.enquiryTypeLabel} <span className="text-red-500">*</span>
           </label>
           <select
             value={formData.enquiryType}
@@ -259,12 +269,24 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
                 : "border-stone-200 focus:border-gold"
             }`}
           >
-            <option value="Product">Product Enquiry</option>
-            <option value="Wholesale">Wholesale &amp; Bulk Order</option>
-            <option value="Distribution">Dealership &amp; Distribution</option>
-            <option value="Supplier">Supplier &amp; Vendor Partnership</option>
-            <option value="Partnership">Business Collaboration</option>
-            <option value="General">General Questions</option>
+            <option value="Product">
+              {locale === "mr" ? "उत्पादन चौकशी" : locale === "hi" ? "उत्पाद पूछताछ" : "Product Enquiry"}
+            </option>
+            <option value="Wholesale">
+              {locale === "mr" ? "घाऊक व मोठ्या ऑर्डर्स (Wholesale)" : locale === "hi" ? "थोक व बल्क ऑर्डर्स (Wholesale)" : "Wholesale & Bulk Order"}
+            </option>
+            <option value="Distribution">
+              {locale === "mr" ? "डिलरशीप व वितरण (Dealership)" : locale === "hi" ? "डीलरशिप एवं वितरण" : "Dealership & Distribution"}
+            </option>
+            <option value="Supplier">
+              {locale === "mr" ? "व्हेंडर व पुरवठादार सहकार्य" : locale === "hi" ? "सप्लायर एवं वेंडर पार्टनरशिप" : "Supplier & Vendor Partnership"}
+            </option>
+            <option value="Partnership">
+              {locale === "mr" ? "व्यावसायिक भागीदारी" : locale === "hi" ? "व्यावसायिक साझेदारी" : "Business Collaboration"}
+            </option>
+            <option value="General">
+              {locale === "mr" ? "सर्वसाधारण विचारणा" : locale === "hi" ? "सामान्य प्रश्न" : "General Questions"}
+            </option>
           </select>
           {fieldErrors.enquiryType && (
             <p className="text-xs text-red-600 mt-1.5 flex items-center gap-1 font-medium">
@@ -276,7 +298,7 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
 
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">
-            Subject
+            {locale === "mr" ? "विषय" : locale === "hi" ? "विषय" : "Subject"}
           </label>
           <input
             type="text"
@@ -290,14 +312,14 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
       {/* Row 4: Message */}
       <div>
         <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">
-          Detailed Message / Commercial Specifications <span className="text-red-500">*</span>
+          {dict.forms.messageLabel} <span className="text-red-500">*</span>
         </label>
         <textarea
           required
           rows={4}
           value={formData.message}
           onChange={(e) => updateField("message", e.target.value)}
-          placeholder={`Describe your requirements or partnership interest for ${businessName}...`}
+          placeholder={dict.forms.messagePlaceholder}
           className={`w-full px-3.5 py-2.5 text-sm bg-offwhite border rounded-sm focus:outline-none transition-colors text-charcoal ${
             fieldErrors.message
               ? "border-red-500 bg-red-50/20 ring-1 ring-red-400 focus:border-red-500"
@@ -326,7 +348,7 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
             }`}
           />
           <label htmlFor="privacyConsent" className="text-xs text-charcoal-100 leading-normal">
-            I agree that Sangales Group and {businessName} may collect and store my information to process and respond to this business enquiry in accordance with the corporate privacy policy.
+            {dict.forms.privacyConsent}
           </label>
         </div>
         {fieldErrors.privacyConsent && (
@@ -341,10 +363,14 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-3.5 bg-navy hover:bg-gold hover:text-navy text-white text-xs font-bold uppercase tracking-widest rounded-sm transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
+        className="w-full py-3.5 bg-navy hover:bg-gold hover:text-navy text-white text-xs font-bold uppercase tracking-widest rounded-sm transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
       >
         <Send className="w-3.5 h-3.5" />
-        <span>{loading ? "Transmitting..." : `Submit Enquiry to ${businessName}`}</span>
+        <span>
+          {loading
+            ? dict.actions.submitting
+            : `${dict.forms.submitButton} (${displayName})`}
+        </span>
       </button>
     </form>
   );

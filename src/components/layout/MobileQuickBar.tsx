@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Phone, MessageCircle, Send } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface MobileQuickBarProps {
   phone?: string;
@@ -12,6 +13,7 @@ interface MobileQuickBarProps {
 export default function MobileQuickBar({
   phone = "+91 75077 00936",
 }: MobileQuickBarProps) {
+  const { dict, locale } = useLanguage();
   const pathname = usePathname();
 
   // Do not render on Admin CMS pages
@@ -22,8 +24,27 @@ export default function MobileQuickBar({
   const rawPhone = phone.replace(/[^0-9+]/g, "");
   const isBusinessPage = pathname?.startsWith("/businesses/");
   const enquiryHref = isBusinessPage ? "#enquiry-section" : "/contact";
+  
+  const waLabel = locale === "mr" ? "व्हॉट्सॲप" : locale === "hi" ? "व्हाट्सएप" : "WhatsApp";
+  const callLabel = locale === "mr" ? "कॉल करा" : locale === "hi" ? "कॉल करें" : dict.actions.callSales;
+  const quoteLabel = isBusinessPage
+    ? dict.actions.getQuote
+    : locale === "mr"
+    ? "चौकशी करा"
+    : locale === "hi"
+    ? "पूछताछ"
+    : "Enquiry";
+
   const waText = isBusinessPage
-    ? "Hello SANGALES, I would like to enquire about wholesale pricing, specifications, and catalog."
+    ? locale === "mr"
+      ? "नमस्कार सांगळे समूह, मला घाऊक दरपत्रक आणि उत्पादनांची माहिती हवी आहे."
+      : locale === "hi"
+      ? "नमस्ते सांगळे समूह, मुझे थोक मूल्य और उत्पादों की जानकारी चाहिए।"
+      : "Hello SANGALES, I would like to enquire about wholesale pricing, specifications, and catalog."
+    : locale === "mr"
+    ? "नमस्कार सांगळे समूह, मला आपल्या विविध व्यवसायांबद्दल माहिती हवी आहे."
+    : locale === "hi"
+    ? "नमस्ते सांगळे समूह, मुझे आपके व्यवसायों के संबंध में जानकारी चाहिए।"
     : "Hello SANGALES Group, I would like to enquire about your products and services.";
 
   return (
@@ -35,7 +56,9 @@ export default function MobileQuickBar({
           className="flex flex-col items-center justify-center py-1.5 px-1 bg-white/5 hover:bg-white/10 active:bg-white/20 text-white rounded transition-colors text-center"
         >
           <Phone className="w-4 h-4 text-gold mb-0.5" />
-          <span className="text-[10px] font-bold uppercase tracking-wider">Call Sales</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider truncate max-w-full">
+            {callLabel}
+          </span>
         </a>
 
         {/* 1-Tap WhatsApp */}
@@ -46,7 +69,9 @@ export default function MobileQuickBar({
           className="flex flex-col items-center justify-center py-1.5 px-1 bg-emerald-600/90 hover:bg-emerald-600 active:bg-emerald-700 text-white rounded transition-colors text-center shadow-sm"
         >
           <MessageCircle className="w-4 h-4 text-white mb-0.5" />
-          <span className="text-[10px] font-bold uppercase tracking-wider">WhatsApp</span>
+          <span className="text-[10px] font-bold uppercase tracking-wider truncate max-w-full">
+            {waLabel}
+          </span>
         </a>
 
         {/* 1-Tap Quotation / Enquiry */}
@@ -56,7 +81,9 @@ export default function MobileQuickBar({
             className="flex flex-col items-center justify-center py-1.5 px-1 bg-gold/90 hover:bg-gold active:bg-gold-600 text-navy rounded transition-colors text-center font-bold"
           >
             <Send className="w-4 h-4 text-navy mb-0.5" />
-            <span className="text-[10px] font-bold uppercase tracking-wider">Get Quote</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider truncate max-w-full">
+              {quoteLabel}
+            </span>
           </a>
         ) : (
           <Link
@@ -64,11 +91,12 @@ export default function MobileQuickBar({
             className="flex flex-col items-center justify-center py-1.5 px-1 bg-gold/90 hover:bg-gold active:bg-gold-600 text-navy rounded transition-colors text-center font-semibold"
           >
             <Send className="w-4 h-4 text-navy mb-0.5" />
-            <span className="text-[10px] font-bold uppercase tracking-wider">Enquiry</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider truncate max-w-full">
+              {quoteLabel}
+            </span>
           </Link>
         )}
       </div>
     </div>
   );
 }
-

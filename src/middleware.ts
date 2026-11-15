@@ -53,6 +53,8 @@ async function verifyJwt(token: string, secret: string) {
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const lang = request.nextUrl.searchParams.get("lang");
+  const isLangValid = lang && ["en", "mr", "hi"].includes(lang);
 
   // Protect /admin and all /admin/* sub-paths
   if (pathname === "/admin" || pathname.startsWith("/admin/")) {
@@ -61,7 +63,6 @@ export async function middleware(request: NextRequest) {
 
     // Login page handling
     if (pathname === "/admin/login") {
-      // If already authenticated, redirect to /admin dashboard
       if (session) {
         return NextResponse.redirect(new URL("/admin", request.url));
       }
@@ -82,7 +83,6 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(loginUrl);
     }
 
-    // Authenticated: forward request with pathname header for layout
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set("x-pathname", pathname);
     return NextResponse.next({
@@ -92,10 +92,25 @@ export async function middleware(request: NextRequest) {
     });
   }
 
+  // For public routes with ?lang= query param, synchronize NEXT_LOCALE cookie
+  if (isLangValid) {
+    const response = NextResponse.next();
+    response.cookies.set("NEXT_LOCALE", lang, {
+      path: "/",
+      maxAge: 31536000,
+      sameSite: "lax",
+    });
+    return response;
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/admin", "/admin/:path*"],
+  matcher: [
+    /*
+     * Match all request paths except for static assets
+     */
+    "/((?!api|_next/static|_next/image|favicon.ico|images|logos).*)",
+  ],
 };
-

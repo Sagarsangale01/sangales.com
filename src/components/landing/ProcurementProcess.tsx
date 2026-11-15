@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import { FileSpreadsheet, CheckCheck, Truck, ShieldCheck, ArrowRight } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ProcurementProcessProps {
   businessName: string;
@@ -12,32 +15,34 @@ export default function ProcurementProcess({
   category,
   isLandingMode = false,
 }: ProcurementProcessProps) {
+  const { dict, locale } = useLanguage();
+
   const steps = [
     {
-      step: "01",
-      title: "Specify Requirements & Volume",
-      description:
-        "Select your required product line or packaging dimensions, estimate your order quantities, and share your delivery pincode via our quick quote form or direct WhatsApp.",
+      step: dict.procurement.step1Num,
+      title: dict.procurement.step1Title,
+      description: dict.procurement.step1Desc,
       icon: FileSpreadsheet,
-      highlight: "Quick 2-Minute Response",
+      highlight: dict.procurement.step1Badge,
     },
     {
-      step: "02",
-      title: "Receive Commercial Proforma & Samples",
-      description:
-        "Our sales desk delivers clear, volume-tiered wholesale quotations with statutory GST pricing, technical data sheets, and expedited physical sample kits if needed.",
+      step: dict.procurement.step2Num,
+      title: dict.procurement.step2Title,
+      description: dict.procurement.step2Desc,
       icon: CheckCheck,
-      highlight: "Transparent B2B Pricing",
+      highlight: dict.procurement.step2Badge,
     },
     {
-      step: "03",
-      title: "Consignment Dispatch & GST Invoicing",
-      description:
-        "Following proforma confirmation, your order is inspected, packed, and dispatched with GST tax invoice, transport consignment notes, and end-to-end transit tracking.",
+      step: dict.procurement.step3Num,
+      title: dict.procurement.step3Title,
+      description: dict.procurement.step3Desc,
       icon: Truck,
-      highlight: "Assured Fast Transit",
+      highlight: dict.procurement.step3Badge,
     },
   ];
+
+  const localizedBiz = dict.businesses[businessName.toLowerCase().replace(/\s+/g, "-")];
+  const displayName = localizedBiz?.name || businessName;
 
   return (
     <section className="bg-white rounded-sm border border-stone-200/80 p-6 sm:p-10 shadow-sm space-y-8">
@@ -45,19 +50,19 @@ export default function ProcurementProcess({
         <div>
           <div className="inline-flex items-center gap-2 text-gold-700 text-xs font-bold tracking-superwide uppercase mb-1">
             <span className="w-6 h-[2px] bg-gold-600" />
-            Commercial Workflow
+            {dict.procurement.tagline}
           </div>
           <h2 className="font-heading text-2xl sm:text-3xl font-extrabold text-navy">
-            How Procurement Works with {businessName}
+            {dict.procurement.titlePrefix} {displayName}
           </h2>
           <p className="text-xs sm:text-sm text-charcoal-100 mt-1 max-w-2xl">
-            Streamlined 3-step commercial process engineered for institutional buyers, contractors, distributors, and enterprise clients.
+            {dict.procurement.subtitle}
           </p>
         </div>
 
         <div className="shrink-0 flex items-center gap-2 text-xs font-semibold text-stone-500 bg-offwhite px-3 py-1.5 rounded-sm border border-stone-200">
           <ShieldCheck className="w-4 h-4 text-emerald-600" />
-          <span>Statutory 100% GST Billing</span>
+          <span>{dict.trust.gstBillingBadge}</span>
         </div>
       </div>
 
@@ -81,7 +86,7 @@ export default function ProcurementProcess({
 
               <div className="space-y-2 mb-4">
                 <div className="flex items-center gap-2">
-                  <Icon className="w-4 h-4 text-navy group-hover:text-gold transition-colors" />
+                  <Icon className="w-4 h-4 text-navy group-hover:text-gold transition-colors shrink-0" />
                   <h3 className="font-heading text-base font-bold text-navy">
                     {st.title}
                   </h3>
@@ -92,8 +97,10 @@ export default function ProcurementProcess({
               </div>
 
               <div className="pt-3 border-t border-stone-200/60 flex items-center justify-between text-[11px] font-bold text-navy group-hover:text-gold transition-colors">
-                <span>Step {idx + 1} of 3</span>
-                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                <span>
+                  {dict.procurement.stepIndicator} {idx + 1} / 3
+                </span>
+                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1 text-gold" />
               </div>
             </div>
           );
@@ -102,4 +109,3 @@ export default function ProcurementProcess({
     </section>
   );
 }
-
