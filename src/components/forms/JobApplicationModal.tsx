@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { X, Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { X, CheckCircle2, AlertCircle } from "lucide-react";
 import { CareerRecord } from "@/lib/data";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface Props {
   job: CareerRecord | null;
@@ -10,6 +11,7 @@ interface Props {
 }
 
 export default function JobApplicationModal({ job, onClose }: Props) {
+  const { locale } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -41,7 +43,13 @@ export default function JobApplicationModal({ job, onClose }: Props) {
       });
 
       if (!res.ok) {
-        throw new Error("Failed to submit job application. Please try again.");
+        throw new Error(
+          locale === "mr"
+            ? "अर्ज पाठवताना त्रुटी आली. कृपया पुन्हा प्रयत्न करा."
+            : locale === "hi"
+            ? "आवेदन जमा करने में विफल। कृपया पुनः प्रयास करें।"
+            : "Failed to submit job application. Please try again."
+        );
       }
 
       setSuccess(true);
@@ -51,6 +59,75 @@ export default function JobApplicationModal({ job, onClose }: Props) {
       setLoading(false);
     }
   };
+
+  const modalTitle =
+    locale === "mr"
+      ? `अर्ज सादर करा: ${job.title}`
+      : locale === "hi"
+      ? `आवेदन करें: ${job.title}`
+      : `Apply: ${job.title}`;
+
+  const successTitle =
+    locale === "mr"
+      ? "अर्ज यशस्वीरीत्या स्वीकारला गेला"
+      : locale === "hi"
+      ? "आवेदन सफलतापूर्वक जमा हुआ"
+      : "Application Submitted";
+
+  const successDesc =
+    locale === "mr"
+      ? `${job.businessName} मधील ${job.title} या पदासाठी अर्ज केल्याबद्दल धन्यवाद. आमची निवड समिती आपल्या प्रोफाईलची पडताळणी करून आपल्याशी लवकरच संपर्क करेल.`
+      : locale === "hi"
+      ? `${job.businessName} में ${job.title} पद हेतु आवेदन करने के लिए धन्यवाद। हमारी चयन समिति आपकी प्रोफाइल की समीक्षा कर शीघ्र संपर्क करेगी।`
+      : `Thank you for applying for ${job.title} at ${job.businessName}. Our recruitment committee will review your profile.`;
+
+  const closeBtnText =
+    locale === "mr" ? "विंडो बंद करा" : locale === "hi" ? "खिड़की बंद करें" : "Close Window";
+
+  const nameLabel =
+    locale === "mr" ? "पूर्ण नाव" : locale === "hi" ? "पूरा नाम" : "Full Name";
+
+  const emailLabel =
+    locale === "mr" ? "ईमेल पत्ता" : locale === "hi" ? "ईमेल पता" : "Email";
+
+  const phoneLabel =
+    locale === "mr" ? "संपर्क क्रमांक / व्हॉट्सॲप" : locale === "hi" ? "फ़ोन नंबर / व्हाट्सएप" : "Phone Number";
+
+  const resumeLabel =
+    locale === "mr"
+      ? "रेझ्युमे / लिंक्डइन प्रोफाइल URL"
+      : locale === "hi"
+      ? "रिज्यूमे / लिंक्डइन प्रोफाइल URL"
+      : "Resume / LinkedIn Portfolio URL";
+
+  const coverLabel =
+    locale === "mr"
+      ? "थोडक्यात परिचय / अनुभवाची माहिती"
+      : locale === "hi"
+      ? "संक्षिप्त परिचय / कार्य अनुभव"
+      : "Brief Introduction / Experience Summary";
+
+  const coverPlaceholder =
+    locale === "mr"
+      ? "आपल्या अनुभवाबद्दल आणि आपण सांगळे समूहात का काम करू इच्छिता ते थोडक्यात सांगा..."
+      : locale === "hi"
+      ? "अपनी पृष्ठभूमि और सांगळे समूह में शामिल होने की अपनी रुचि के बारे में बताएं..."
+      : "Tell us about your background and why you want to join Sangales...";
+
+  const cancelBtnText =
+    locale === "mr" ? "रद्द करा" : locale === "hi" ? "रद्द करें" : "Cancel";
+
+  const submitBtnText = loading
+    ? locale === "mr"
+      ? "सादर करत आहे..."
+      : locale === "hi"
+      ? "जमा हो रहा है..."
+      : "Submitting..."
+    : locale === "mr"
+    ? "अर्ज सादर करा"
+    : locale === "hi"
+    ? "आवेदन जमा करें"
+    : "Submit Application";
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy-950/75 backdrop-blur-sm overflow-y-auto">
@@ -66,15 +143,15 @@ export default function JobApplicationModal({ job, onClose }: Props) {
         {success ? (
           <div className="text-center py-8 space-y-4">
             <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-            <h3 className="font-heading text-xl font-bold text-navy">Application Submitted</h3>
+            <h3 className="font-heading text-xl font-bold text-navy">{successTitle}</h3>
             <p className="text-sm text-charcoal-100">
-              Thank you for applying for <strong>{job.title}</strong> at {job.businessName}. Our recruitment committee will review your profile.
+              {successDesc}
             </p>
             <button
               onClick={onClose}
               className="mt-4 px-6 py-2.5 bg-navy text-gold text-xs font-bold uppercase tracking-wider rounded-sm"
             >
-              Close Window
+              {closeBtnText}
             </button>
           </div>
         ) : (
@@ -84,7 +161,7 @@ export default function JobApplicationModal({ job, onClose }: Props) {
                 {job.businessName} &bull; {job.location}
               </span>
               <h3 className="font-heading text-xl font-bold text-navy mt-0.5">
-                Apply: {job.title}
+                {modalTitle}
               </h3>
             </div>
 
@@ -97,7 +174,7 @@ export default function JobApplicationModal({ job, onClose }: Props) {
 
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1">
-                Full Name <span className="text-red-500">*</span>
+                {nameLabel} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -112,7 +189,7 @@ export default function JobApplicationModal({ job, onClose }: Props) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1">
-                  Email <span className="text-red-500">*</span>
+                  {emailLabel} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="email"
@@ -126,7 +203,7 @@ export default function JobApplicationModal({ job, onClose }: Props) {
 
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1">
-                  Phone Number <span className="text-red-500">*</span>
+                  {phoneLabel} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="tel"
@@ -141,7 +218,7 @@ export default function JobApplicationModal({ job, onClose }: Props) {
 
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1">
-                Resume / LinkedIn Portfolio URL <span className="text-red-500">*</span>
+                {resumeLabel} <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -155,13 +232,13 @@ export default function JobApplicationModal({ job, onClose }: Props) {
 
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1">
-                Brief Introduction / Experience Summary
+                {coverLabel}
               </label>
               <textarea
                 rows={3}
                 value={formData.coverLetter}
                 onChange={(e) => setFormData({ ...formData, coverLetter: e.target.value })}
-                placeholder="Tell us about your background and why you want to join Sangales..."
+                placeholder={coverPlaceholder}
                 className="w-full px-3.5 py-2 text-sm bg-offwhite border border-stone-200 rounded-sm focus:outline-none focus:border-gold text-charcoal"
               />
             </div>
@@ -170,16 +247,16 @@ export default function JobApplicationModal({ job, onClose }: Props) {
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-stone-500 hover:text-navy"
+                className="px-4 py-2 text-xs font-semibold uppercase tracking-wider text-stone-500 hover:text-navy cursor-pointer"
               >
-                Cancel
+                {cancelBtnText}
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="px-6 py-2.5 bg-navy hover:bg-gold hover:text-navy text-white text-xs font-bold uppercase tracking-widest rounded-sm transition-all shadow-md disabled:opacity-50"
+                className="px-6 py-2.5 bg-navy hover:bg-gold hover:text-navy text-white text-xs font-bold uppercase tracking-widest rounded-sm transition-all shadow-md disabled:opacity-50 cursor-pointer"
               >
-                {loading ? "Submitting..." : "Submit Application"}
+                {submitBtnText}
               </button>
             </div>
           </form>
@@ -188,4 +265,3 @@ export default function JobApplicationModal({ job, onClose }: Props) {
     </div>
   );
 }
-
