@@ -5,6 +5,8 @@ import { useSearchParams } from "next/navigation";
 import { Send, CheckCircle2, AlertCircle, MessageCircle } from "lucide-react";
 import { BusinessRecord } from "@/lib/data";
 import { useLanguage } from "@/context/LanguageContext";
+import { getStoredUTM } from "@/lib/utm";
+import { trackLeadSubmit } from "@/lib/analytics";
 
 interface Props {
   businesses: BusinessRecord[];
@@ -75,10 +77,23 @@ export default function CorporateContactForm({ businesses }: Props) {
     setFieldErrors({});
 
     try {
+      const utm = getStoredUTM();
+      const payload = {
+        ...formData,
+        utmSource: utm?.utm_source,
+        utmMedium: utm?.utm_medium,
+        utmCampaign: utm?.utm_campaign,
+        utmTerm: utm?.utm_term,
+        utmContent: utm?.utm_content,
+        gclid: utm?.gclid,
+        landingPage: typeof window !== "undefined" ? window.location.pathname : undefined,
+        referrer: typeof document !== "undefined" ? document.referrer : undefined,
+      };
+
       const res = await fetch("/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json().catch(() => null);
@@ -93,6 +108,16 @@ export default function CorporateContactForm({ businesses }: Props) {
         }
         throw new Error(data?.message || "Unable to submit enquiry. Please verify your details and retry.");
       }
+
+      // Track lead generation conversion event
+      const targetBiz = businesses.find((b) => b.id === formData.businessId);
+      trackLeadSubmit({
+        formName: "corporate_contact_form",
+        businessName: targetBiz?.name || "Corporate Headquarters",
+        enquiryType: formData.enquiryType,
+        email: formData.email,
+        phone: formData.phone,
+      });
 
       setSuccess(true);
       setFormData({

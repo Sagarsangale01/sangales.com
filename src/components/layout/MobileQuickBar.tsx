@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Phone, MessageCircle, Send } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { buildAttributedWhatsAppUrl } from "@/lib/utm";
+import { trackWhatsAppClick, trackPhoneClick } from "@/lib/analytics";
 
 interface MobileQuickBarProps {
   phone?: string;
@@ -47,13 +49,30 @@ export default function MobileQuickBar({
     ? "नमस्ते सांगळे समूह, मुझे आपके व्यवसायों के संबंध में जानकारी चाहिए।"
     : "Hello SANGALES Group, I would like to enquire about your products and services.";
 
+  const waUrl = buildAttributedWhatsAppUrl("917507700936", waText, "mobile_bar");
+
+  const handleWhatsApp = () => {
+    trackWhatsAppClick({
+      source: "mobile_quick_bar",
+      businessSlug: isBusinessPage ? pathname.replace("/businesses/", "") : undefined,
+    });
+  };
+
+  const handlePhone = () => {
+    trackPhoneClick({
+      phoneNumber: rawPhone,
+      source: "mobile_quick_bar",
+    });
+  };
+
   return (
     <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-navy-950/95 backdrop-blur-md border-t border-gold/30 px-3 py-2 shadow-2xl print:hidden">
       <div className="grid grid-cols-3 gap-2 max-w-md mx-auto">
         {/* 1-Tap Call */}
         <a
           href={`tel:${rawPhone}`}
-          className="flex flex-col items-center justify-center py-1.5 px-1 bg-white/5 hover:bg-white/10 active:bg-white/20 text-white rounded transition-colors text-center"
+          onClick={handlePhone}
+          className="flex flex-col items-center justify-center py-1.5 px-1 bg-white/5 hover:bg-white/10 active:bg-white/20 text-white rounded transition-colors text-center cursor-pointer"
         >
           <Phone className="w-4 h-4 text-gold mb-0.5" />
           <span className="text-[10px] font-bold uppercase tracking-wider truncate max-w-full">
@@ -63,10 +82,11 @@ export default function MobileQuickBar({
 
         {/* 1-Tap WhatsApp */}
         <a
-          href={`https://wa.me/917507700936?text=${encodeURIComponent(waText)}`}
+          href={waUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex flex-col items-center justify-center py-1.5 px-1 bg-emerald-600/90 hover:bg-emerald-600 active:bg-emerald-700 text-white rounded transition-colors text-center shadow-sm"
+          onClick={handleWhatsApp}
+          className="flex flex-col items-center justify-center py-1.5 px-1 bg-emerald-600/90 hover:bg-emerald-600 active:bg-emerald-700 text-white rounded transition-colors text-center shadow-sm cursor-pointer"
         >
           <MessageCircle className="w-4 h-4 text-white mb-0.5" />
           <span className="text-[10px] font-bold uppercase tracking-wider truncate max-w-full">

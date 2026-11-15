@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 import { BusinessRecord, ProductRecord } from "@/lib/data";
 import { useLanguage } from "@/context/LanguageContext";
+import { buildAttributedWhatsAppUrl } from "@/lib/utm";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 export interface FlatProductItem extends ProductRecord {
   businessId: string;
@@ -470,12 +472,22 @@ export default function ProductCatalogueClient({ businesses }: ProductCatalogueC
                 <div className="flex items-center gap-2 pt-3">
                   {/* Primary WhatsApp Action */}
                   <a
-                    href={`https://wa.me/917507700936?text=${encodeURIComponent(
-                      `Hello SANGALES, I would like to enquire about ${prod.name} from ${prod.businessName}.`
-                    )}`}
+                    href={buildAttributedWhatsAppUrl(
+                      "917507700936",
+                      `Hello SANGALES, I would like to enquire about ${prod.name} from ${prod.businessName}.`,
+                      prod.businessSlug
+                    )}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
+                    onClick={() => {
+                      trackWhatsAppClick({
+                        businessName: prod.businessName,
+                        businessSlug: prod.businessSlug,
+                        productName: prod.name,
+                        source: "catalogue_grid",
+                      });
+                    }}
+                    className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm cursor-pointer"
                   >
                     <MessageCircle className="w-3.5 h-3.5" />
                     <span>{whatsappBtnLabel}</span>
@@ -530,10 +542,19 @@ export default function ProductCatalogueClient({ businesses }: ProductCatalogueC
             <Send className="w-3.5 h-3.5" />
           </Link>
           <a
-            href="https://wa.me/917507700936?text=Hello%20SANGALES%20Corporate%20Desk,%20I%20have%20a%20custom%20bulk%20specification%20requirement."
+            href={buildAttributedWhatsAppUrl(
+              "917507700936",
+              "Hello SANGALES Corporate Desk, I have a custom bulk specification requirement.",
+              "catalogue_custom_rfp"
+            )}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-medium text-xs uppercase tracking-widest rounded-sm transition-all border border-white/20 inline-flex items-center gap-2"
+            onClick={() => {
+              trackWhatsAppClick({
+                source: "catalogue_bottom_rfp",
+              });
+            }}
+            className="px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-medium text-xs uppercase tracking-widest rounded-sm transition-all border border-white/20 inline-flex items-center gap-2 cursor-pointer"
           >
             <MessageCircle className="w-4 h-4 text-emerald-400" />
             <span>{chatDeskBtn}</span>

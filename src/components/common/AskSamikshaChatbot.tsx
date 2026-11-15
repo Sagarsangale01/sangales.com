@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { X, Send, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
+import { getStoredUTM, getAttributionRefString } from "@/lib/utm";
+import { trackWhatsAppClick } from "@/lib/analytics";
 
 interface AskSamikshaChatbotProps {
   phone?: string;
@@ -189,7 +191,7 @@ export default function AskSamikshaChatbot({
 
   const handleSendToWhatsApp = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    const finalMsg =
+    const baseMsg =
       message.trim() ||
       (locale === "mr"
         ? `नमस्कार समीक्षा, मी सांगळे समूहाच्या वेबसाइटवरून संपर्क साधत असून अधिक माहिती जाणून घेऊ इच्छितो.`
@@ -197,10 +199,20 @@ export default function AskSamikshaChatbot({
         ? `नमस्ते समीक्षा, मैं सांगळे समूह की वेबसाइट से संपर्क कर रहा/रही हूँ और जानकारी चाहता/चाहती हूँ।`
         : `Hello Samiksha, I am visiting the ${corporateName} corporate website and would like to connect with a representative.`);
 
+    const refString = getAttributionRefString("ask_samiksha");
+    const finalMsg = `${baseMsg}\n\n${refString}`;
+
     setIsSubmitting(true);
 
-    // 1. Silently record enquiry in background database
+    // Track WhatsApp Conversion Event
+    trackWhatsAppClick({
+      source: "ask_samiksha_chatbot",
+      phoneNumber: phone,
+    });
+
+    // 1. Silently record enquiry in background database with UTM attribution
     try {
+      const utm = getStoredUTM();
       fetch("/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -213,6 +225,14 @@ export default function AskSamikshaChatbot({
           enquiryType: "General",
           businessName: "Sangales Corporate Group",
           privacyConsent: true,
+          utmSource: utm?.utm_source || "Chatbot",
+          utmMedium: utm?.utm_medium,
+          utmCampaign: utm?.utm_campaign,
+          utmTerm: utm?.utm_term,
+          utmContent: utm?.utm_content,
+          gclid: utm?.gclid,
+          landingPage: typeof window !== "undefined" ? window.location.pathname : undefined,
+          referrer: typeof document !== "undefined" ? document.referrer : undefined,
         }),
       }).catch(() => {});
     } catch {

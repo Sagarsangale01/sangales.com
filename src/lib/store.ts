@@ -25,6 +25,18 @@ export interface EnquiryRecord {
   message: string;
   status: "NEW" | "CONTACTED" | "IN_DISCUSSION" | "IN_PROGRESS" | "CONVERTED" | "CLOSED";
   adminNotes?: string;
+
+  // Paid Ads & UTM Attribution
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  utmTerm?: string;
+  utmContent?: string;
+  gclid?: string;
+  fbclid?: string;
+  landingPage?: string;
+  referrer?: string;
+
   createdAt: string;
   updatedAt: string;
 }
@@ -39,6 +51,15 @@ export interface ApplicationRecord {
   resumeUrl: string;
   coverLetter?: string;
   status: "Pending" | "Reviewed" | "Shortlisted" | "Rejected";
+
+  // Paid Ads & UTM Attribution
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  utmTerm?: string;
+  utmContent?: string;
+  gclid?: string;
+
   createdAt: string;
 }
 

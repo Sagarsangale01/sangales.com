@@ -19,11 +19,12 @@ import {
   Globe,
   Clock,
   Sparkles,
+  BarChart3,
 } from "lucide-react";
 import { MilestoneRecord } from "@/lib/data";
 
 export default function AdminSettingsPage() {
-  const [activeTab, setActiveTab] = useState<"contact" | "hero" | "narrative" | "milestones" | "seo">("contact");
+  const [activeTab, setActiveTab] = useState<"contact" | "hero" | "narrative" | "milestones" | "seo" | "analytics">("contact");
   const [saved, setSaved] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -57,6 +58,10 @@ export default function AdminSettingsPage() {
 
     partnershipHeadline: "Let's Build Something Together.",
     partnershipSubtitle: "We actively seek long-term partnerships with distributors, institutional buyers, suppliers, and entrepreneurs who value quality and mutual growth.",
+
+    gaMeasurementId: "",
+    gtmId: "",
+    googleAdsId: "",
   });
 
   const [milestones, setMilestones] = useState<MilestoneRecord[]>([]);
@@ -234,6 +239,18 @@ export default function AdminSettingsPage() {
         >
           <Globe className="w-3.5 h-3.5 text-gold-700" />
           <span>SEO &amp; Palette</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab("analytics")}
+          className={`px-4 py-2.5 flex items-center gap-2 border-b-2 transition-colors whitespace-nowrap ${
+            activeTab === "analytics"
+              ? "border-navy text-navy font-bold bg-white"
+              : "border-transparent text-charcoal-100 hover:text-navy"
+          }`}
+        >
+          <BarChart3 className="w-3.5 h-3.5 text-gold-700" />
+          <span>Analytics &amp; Ads</span>
         </button>
       </div>
 
@@ -764,6 +781,91 @@ export default function AdminSettingsPage() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 6: Analytics & Paid Campaigns */}
+        {activeTab === "analytics" && (
+          <div className="space-y-6 animate-in fade-in">
+            <div className="bg-white p-6 rounded-sm border border-stone-200 shadow-sm space-y-4">
+              <h3 className="font-heading text-sm font-bold text-navy uppercase tracking-wider border-b border-stone-100 pb-2">
+                Google Analytics 4 &amp; Google Tag Manager (GTM)
+              </h3>
+              <p className="text-xs text-charcoal-100">
+                Configure your conversion tracking IDs for Google Ads, Meta Ads, and search analytics. All WhatsApp clicks, Quick Quotes, and corporate enquiries automatically fire conversion events with persistent UTM campaign tracking.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1">
+                    Google Analytics 4 Measurement ID
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. G-XXXXXXXXXX"
+                    value={settings.gaMeasurementId || ""}
+                    onChange={(e) => setSettings({ ...settings, gaMeasurementId: e.target.value })}
+                    className="w-full px-3 py-2 text-xs font-mono bg-offwhite border border-stone-200 rounded-sm focus:outline-none focus:border-navy"
+                  />
+                  <span className="text-[10px] text-stone-400 mt-1 block">
+                    Found in Google Analytics &gt; Admin &gt; Data Streams &gt; Measurement ID.
+                  </span>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1">
+                    Google Tag Manager Container ID
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. GTM-XXXXXXX"
+                    value={settings.gtmId || ""}
+                    onChange={(e) => setSettings({ ...settings, gtmId: e.target.value })}
+                    className="w-full px-3 py-2 text-xs font-mono bg-offwhite border border-stone-200 rounded-sm focus:outline-none focus:border-navy"
+                  />
+                  <span className="text-[10px] text-stone-400 mt-1 block">
+                    Found in Google Tag Manager container overview.
+                  </span>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1">
+                    Google Ads Conversion ID (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. AW-XXXXXXXXX"
+                    value={settings.googleAdsId || ""}
+                    onChange={(e) => setSettings({ ...settings, googleAdsId: e.target.value })}
+                    className="w-full px-3 py-2 text-xs font-mono bg-offwhite border border-stone-200 rounded-sm focus:outline-none focus:border-navy"
+                  />
+                  <span className="text-[10px] text-stone-400 mt-1 block">
+                    Used for direct Google Ads tag linking and conversion action verification.
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Tracking Features Summary Box */}
+            <div className="bg-navy-50/50 p-6 rounded-sm border border-navy-100 space-y-3">
+              <h4 className="font-heading text-xs font-bold uppercase tracking-wider text-navy">
+                Automatic Paid Campaign Tracking Features Enabled
+              </h4>
+              <ul className="text-xs text-charcoal-100 space-y-2 list-disc pl-4">
+                <li>
+                  <strong>UTM Parameter Persistence:</strong> Visitors arriving via Google or Meta Ads (e.g. <code>utm_source</code>, <code>utm_campaign</code>, <code>gclid</code>) maintain attribution across all inner pages during their session.
+                </li>
+                <li>
+                  <strong>WhatsApp Lead Attribution:</strong> Every WhatsApp CTA pre-fills the message with the originating ad campaign code so your sales reps instantly recognize lead sources.
+                </li>
+                <li>
+                  <strong>Dual Conversion Dispatch:</strong> Automatically triggers <code>generate_lead</code>, <code>whatsapp_click</code>, and <code>contact</code> in both GA4 (gtag) and GTM (dataLayer).
+                </li>
+                <li>
+                  <strong>CRM &amp; Mobile Alerts:</strong> Lead notification emails and Telegram alerts include the paid ad campaign and keyword.
+                </li>
+              </ul>
             </div>
           </div>
         )}

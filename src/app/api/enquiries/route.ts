@@ -31,6 +31,16 @@ const enquirySchema = z.object({
   privacyConsent: z
     .boolean()
     .refine((val) => val === true, "Please accept the privacy consent to submit"),
+  // Paid Campaign UTM Attribution
+  utmSource: z.string().optional(),
+  utmMedium: z.string().optional(),
+  utmCampaign: z.string().optional(),
+  utmTerm: z.string().optional(),
+  utmContent: z.string().optional(),
+  gclid: z.string().optional(),
+  fbclid: z.string().optional(),
+  landingPage: z.string().optional(),
+  referrer: z.string().optional(),
   // Invisible Honeypot Anti-Spam Field
   botTrap: z.string().optional(),
 });
@@ -89,6 +99,15 @@ export async function POST(req: NextRequest) {
       enquiryType: validated.enquiryType,
       subject: validated.subject,
       message: validated.message,
+      utmSource: validated.utmSource,
+      utmMedium: validated.utmMedium,
+      utmCampaign: validated.utmCampaign,
+      utmTerm: validated.utmTerm,
+      utmContent: validated.utmContent,
+      gclid: validated.gclid,
+      fbclid: validated.fbclid,
+      landingPage: validated.landingPage,
+      referrer: validated.referrer,
     });
 
     // Asynchronously dispatch transactional notifications (email + mobile alert)
@@ -101,6 +120,10 @@ export async function POST(req: NextRequest) {
       enquiryType: enquiry.enquiryType,
       businessName: enquiry.businessName,
       message: enquiry.message,
+      utmSource: enquiry.utmSource,
+      utmMedium: enquiry.utmMedium,
+      utmCampaign: enquiry.utmCampaign,
+      gclid: enquiry.gclid,
     }).catch((err) => console.error("Notification dispatch error:", err));
 
     return NextResponse.json({ success: true, enquiry }, { status: 201 });

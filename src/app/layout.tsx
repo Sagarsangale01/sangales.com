@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileQuickBar from "@/components/layout/MobileQuickBar";
 import AskSamikshaChatbot from "@/components/common/AskSamikshaChatbot";
+import GoogleAnalytics from "@/components/common/GoogleAnalytics";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { Locale } from "@/lib/translations";
 import { cookies } from "next/headers";
@@ -128,6 +129,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col bg-offwhite text-charcoal pb-14 sm:pb-0">
+        <GoogleAnalytics gaMeasurementId={settings.gaMeasurementId} gtmId={settings.gtmId} />
         <LanguageProvider initialLocale={initialLocale}>
           <Header settings={settings} />
           <main className="flex-grow">{children}</main>

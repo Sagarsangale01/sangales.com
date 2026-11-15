@@ -98,9 +98,9 @@ export default function EnquiryManagerClient({ initialEnquiries, businesses }: P
   };
 
   const exportCSV = () => {
-    const headers = ["ID,Date,Full Name,Email,Phone,Company,Type,Business,Status,Notes\n"];
+    const headers = ["ID,Date,Full Name,Email,Phone,Company,Type,Business,Status,UTM Source,UTM Medium,UTM Campaign,GCLID,Notes\n"];
     const rows = filtered.map((e) =>
-      `"${e.id}","${e.createdAt}","${e.fullName}","${e.email}","${e.phone}","${e.companyName || ""}","${e.enquiryType}","${e.businessName || "Group"}","${e.status}","${(e.adminNotes || "").replace(/"/g, '""')}"`
+      `"${e.id}","${e.createdAt}","${e.fullName}","${e.email}","${e.phone}","${e.companyName || ""}","${e.enquiryType}","${e.businessName || "Group"}","${e.status}","${e.utmSource || ""}","${e.utmMedium || ""}","${e.utmCampaign || ""}","${e.gclid || ""}","${(e.adminNotes || "").replace(/"/g, '""')}"`
     );
     const blob = new Blob([headers.join(""), rows.join("\n")], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
@@ -209,9 +209,14 @@ export default function EnquiryManagerClient({ initialEnquiries, businesses }: P
                     )}
                   </td>
                   <td className="py-3.5 px-4">
-                    <span className="px-2 py-0.5 bg-stone-100 text-stone-700 rounded-sm font-semibold text-[10px] uppercase">
+                    <span className="px-2 py-0.5 bg-stone-100 text-stone-700 rounded-sm font-semibold text-[10px] uppercase block w-fit">
                       {enq.enquiryType}
                     </span>
+                    {enq.utmSource && (
+                      <span className="mt-1 px-1.5 py-0.5 bg-amber-50 text-amber-800 border border-amber-200/80 rounded-sm font-bold text-[9px] uppercase tracking-wider block w-fit">
+                        🎯 {enq.utmSource}
+                      </span>
+                    )}
                   </td>
                   <td className="py-3.5 px-4 font-medium text-navy text-xs">
                     {enq.businessName || "Corporate Group"}
@@ -286,6 +291,45 @@ export default function EnquiryManagerClient({ initialEnquiries, businesses }: P
                 <p className="text-stone-700">{selectedEnquiry.phone}</p>
               </div>
             </div>
+
+            {/* Campaign & UTM Attribution Box */}
+            {(selectedEnquiry.utmSource || selectedEnquiry.gclid) && (
+              <div className="p-4 bg-amber-50/70 border border-amber-200 rounded-sm space-y-2 text-xs">
+                <span className="text-[10px] uppercase font-bold text-amber-800 tracking-wider block">
+                  🎯 Paid Campaign &amp; Lead Attribution
+                </span>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-stone-700">
+                  <div>
+                    <span className="text-[10px] text-stone-400 block uppercase">Source / Medium</span>
+                    <p className="font-semibold text-navy">
+                      {selectedEnquiry.utmSource || "N/A"} {selectedEnquiry.utmMedium ? `/ ${selectedEnquiry.utmMedium}` : ""}
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-stone-400 block uppercase">Campaign Name</span>
+                    <p className="font-semibold text-navy">{selectedEnquiry.utmCampaign || "N/A"}</p>
+                  </div>
+                  {selectedEnquiry.utmTerm && (
+                    <div>
+                      <span className="text-[10px] text-stone-400 block uppercase">Keyword / Term</span>
+                      <p className="font-semibold text-navy">{selectedEnquiry.utmTerm}</p>
+                    </div>
+                  )}
+                  {selectedEnquiry.gclid && (
+                    <div className="sm:col-span-2">
+                      <span className="text-[10px] text-stone-400 block uppercase">Google Click ID (GCLID)</span>
+                      <p className="font-mono text-[10px] text-stone-600 truncate">{selectedEnquiry.gclid}</p>
+                    </div>
+                  )}
+                  {selectedEnquiry.landingPage && (
+                    <div>
+                      <span className="text-[10px] text-stone-400 block uppercase">Landing Page</span>
+                      <p className="font-mono text-[10px] text-stone-600 truncate">{selectedEnquiry.landingPage}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
 
             {/* Message Body */}
             <div className="space-y-1">

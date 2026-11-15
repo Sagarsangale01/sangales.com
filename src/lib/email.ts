@@ -109,6 +109,8 @@ async function sendAdminInstantMobileAlert(enquiry: {
   enquiryType: string;
   businessName?: string;
   message: string;
+  utmSource?: string;
+  utmCampaign?: string;
 }) {
   const cleanPhone = enquiry.phone.replace(/[^0-9]/g, "");
   const waTarget = cleanPhone.startsWith("91")
@@ -121,6 +123,10 @@ async function sendAdminInstantMobileAlert(enquiry: {
 
   if (tgToken && tgChatId) {
     try {
+      const adTag = enquiry.utmSource
+        ? `\n🎯 *Campaign:* ${enquiry.utmSource} ${enquiry.utmCampaign ? `(${enquiry.utmCampaign})` : ""}`
+        : "";
+
       const tgText =
         `🔔 *NEW COMMERCIAL ENQUIRY RECEIVED*\n` +
         `━━━━━━━━━━━━━━━━━━━━━━\n` +
@@ -129,7 +135,8 @@ async function sendAdminInstantMobileAlert(enquiry: {
         `✉️ *Email:* ${enquiry.email}\n` +
         `🏢 *Company:* ${enquiry.companyName || "Individual"}\n` +
         `📌 *Category:* ${enquiry.enquiryType}\n` +
-        `🎯 *Target Entity:* ${enquiry.businessName || "Sangales Group"}\n\n` +
+        `🎯 *Target Entity:* ${enquiry.businessName || "Sangales Group"}` +
+        `${adTag}\n\n` +
         `💬 *Message:*\n"${enquiry.message}"\n` +
         `━━━━━━━━━━━━━━━━━━━━━━\n` +
         `👉 [Open Admin CRM](https://www.sangales.com/admin/enquiries)\n` +
@@ -208,6 +215,10 @@ export async function notifyNewEnquiry(enquiry: {
   enquiryType: string;
   businessName?: string;
   message: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  gclid?: string;
 }) {
   const adminEmail = process.env.NOTIFICATION_EMAIL || "contact.sangales@gmail.com";
 
@@ -243,6 +254,19 @@ export async function notifyNewEnquiry(enquiry: {
           <td style="padding: 10px 0; font-weight: bold; color: #64748b;">Target Entity:</td>
           <td style="padding: 10px 0; color: #0f172a; font-weight: 600;">${enquiry.businessName || "Sangales Group Headquarters"}</td>
         </tr>
+        ${
+          enquiry.utmSource
+            ? `
+        <tr style="border-bottom: 1px solid #f1f5f9; background-color: #fefce8;">
+          <td style="padding: 10px 0; font-weight: bold; color: #854d0e;">Ad Campaign / Source:</td>
+          <td style="padding: 10px 0; color: #854d0e; font-weight: 600;">
+            ${enquiry.utmSource} ${enquiry.utmMedium ? `/ ${enquiry.utmMedium}` : ""} ${enquiry.utmCampaign ? `(${enquiry.utmCampaign})` : ""}
+            ${enquiry.gclid ? `<br/><span style="font-size: 11px; font-weight: normal; color: #a16207;">Google Click ID: ${enquiry.gclid}</span>` : ""}
+          </td>
+        </tr>
+        `
+            : ""
+        }
       </table>
 
       <div style="background-color: #f8fafc; padding: 16px; border-left: 4px solid #C6A66B; margin: 20px 0; border-radius: 0 4px 4px 0;">

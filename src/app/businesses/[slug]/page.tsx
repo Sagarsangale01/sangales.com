@@ -28,6 +28,7 @@ import QuickQuoteCard from "@/components/landing/QuickQuoteCard";
 import TrustReassuranceBar from "@/components/landing/TrustReassuranceBar";
 import ProcurementProcess from "@/components/landing/ProcurementProcess";
 import BusinessFaqSection from "@/components/landing/BusinessFaqSection";
+import AttributedWhatsAppButton from "@/components/common/AttributedWhatsAppButton";
 
 interface Props {
   params: {
@@ -287,17 +288,16 @@ export default async function BusinessDetailPage({ params, searchParams }: Props
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
 
-                <a
-                  href={`https://wa.me/917507700936?text=${encodeURIComponent(
-                    `Hello ${business.name}, I would like to request commercial specifications and wholesale pricing.`
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-5 py-3.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs tracking-widest uppercase rounded-sm transition-all shadow-lg inline-flex items-center gap-2"
+                <AttributedWhatsAppButton
+                  message={`Hello ${business.name}, I would like to request commercial specifications and wholesale pricing.`}
+                  businessName={business.name}
+                  businessSlug={business.slug}
+                  source="hero_cta"
+                  className="px-5 py-3.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs tracking-widest uppercase rounded-sm transition-all shadow-lg inline-flex items-center gap-2 cursor-pointer"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>WhatsApp Quote</span>
-                </a>
+                </AttributedWhatsAppButton>
 
                 <a
                   href="tel:+917507700936"
@@ -416,15 +416,16 @@ export default async function BusinessDetailPage({ params, searchParams }: Props
                       </p>
                     </div>
                     <div className="pt-5">
-                      <a
-                        href="https://wa.me/917507700936?text=Hello%20Annamrit%20Foods,%20I%20would%20like%20to%20order%20daily%20meals%20/%20fresh%20sprouts%20in%20Nashik."
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-sm transition-all shadow-md"
+                      <AttributedWhatsAppButton
+                        message="Hello Annamrit Foods, I would like to order daily meals / fresh sprouts in Nashik."
+                        businessName="Annamrit Foods"
+                        businessSlug="annamrit-foods"
+                        source="kitchen_desk_cta"
+                        className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-sm transition-all shadow-md cursor-pointer"
                       >
                         <MessageCircle className="w-4 h-4" />
                         <span>Order on WhatsApp (Kitchen Desk)</span>
-                      </a>
+                      </AttributedWhatsAppButton>
                     </div>
                   </div>
 
@@ -524,122 +525,122 @@ export default async function BusinessDetailPage({ params, searchParams }: Props
                       <div className="p-5 pt-0 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 border-t border-stone-100 mt-4">
                         {business.slug === "annamrit-foods" ? (
                           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 w-full">
-                            <a
-                              href={`https://wa.me/917507700936?text=${encodeURIComponent(
-                                `Hello Annamrit Foods, I would like to order or enquire about ${prod.name}.`
-                              )}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
+                            <AttributedWhatsAppButton
+                              message={`Hello Annamrit Foods, I would like to order or enquire about ${prod.name}.`}
+                              businessName="Annamrit Foods"
+                              businessSlug="annamrit-foods"
+                              productName={prod.name}
+                              source="product_grid"
+                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm cursor-pointer"
                             >
                               <MessageCircle className="w-3.5 h-3.5" />
                               <span>Order on WhatsApp</span>
-                            </a>
+                            </AttributedWhatsAppButton>
                             <a
                               href="#enquiry-section"
                               className="text-xs font-semibold text-charcoal-100 hover:text-navy uppercase tracking-wider text-center"
                             >
-                              B2B / Catering &rarr;
+                              B2B / Catering →
                             </a>
                           </div>
                         ) : business.slug === "sangales-packaging" ? (
                           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 w-full">
-                            <a
-                              href={`https://wa.me/917507700936?text=${encodeURIComponent(
-                                `Hello Sangales Packaging, I would like to request a sample kit and size chart for ${prod.name}.`
-                              )}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
+                            <AttributedWhatsAppButton
+                              message={`Hello Sangales Packaging, I would like to request a sample kit and size chart for ${prod.name}.`}
+                              businessName="Sangales Packaging"
+                              businessSlug="sangales-packaging"
+                              productName={prod.name}
+                              source="product_grid"
+                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm cursor-pointer"
                             >
                               <MessageCircle className="w-3.5 h-3.5" />
                               <span>Sample &amp; Size Chart</span>
-                            </a>
+                            </AttributedWhatsAppButton>
                             <a
                               href="#enquiry-section"
                               className="text-xs font-semibold text-charcoal-100 hover:text-navy uppercase tracking-wider text-center"
                             >
-                              Bulk Pricing &rarr;
+                              Bulk Pricing →
                             </a>
                           </div>
                         ) : business.slug === "sangales-trading" ? (
                           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 w-full">
-                            <a
-                              href={`https://wa.me/917507700936?text=${encodeURIComponent(
-                                `Hello Sangales Trading, please share specifications and wholesale contractor rates for ${prod.name}.`
-                              )}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
+                            <AttributedWhatsAppButton
+                              message={`Hello Sangales Trading, please share specifications and wholesale contractor rates for ${prod.name}.`}
+                              businessName="Sangales Trading"
+                              businessSlug="sangales-trading"
+                              productName={prod.name}
+                              source="product_grid"
+                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm cursor-pointer"
                             >
                               <MessageCircle className="w-3.5 h-3.5" />
                               <span>Quote &amp; Specs</span>
-                            </a>
+                            </AttributedWhatsAppButton>
                             <a
                               href="#enquiry-section"
                               className="text-xs font-semibold text-charcoal-100 hover:text-navy uppercase tracking-wider text-center"
                             >
-                              Contractor Quote &rarr;
+                              Contractor Quote →
                             </a>
                           </div>
                         ) : business.slug === "sangales-enterprises" ? (
                           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 w-full">
-                            <a
-                              href={`https://wa.me/917507700936?text=${encodeURIComponent(
-                                `Hello Sangales Enterprises, I would like to enquire about commercial lighting specs and quote for ${prod.name}.`
-                              )}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
+                            <AttributedWhatsAppButton
+                              message={`Hello Sangales Enterprises, I would like to enquire about commercial lighting specs and quote for ${prod.name}.`}
+                              businessName="Sangales Enterprises"
+                              businessSlug="sangales-enterprises"
+                              productName={prod.name}
+                              source="product_grid"
+                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm cursor-pointer"
                             >
                               <MessageCircle className="w-3.5 h-3.5" />
                               <span>Lighting Quote</span>
-                            </a>
+                            </AttributedWhatsAppButton>
                             <a
                               href="#enquiry-section"
                               className="text-xs font-semibold text-charcoal-100 hover:text-navy uppercase tracking-wider text-center"
                             >
-                              Project Tender &rarr;
+                              Project Tender →
                             </a>
                           </div>
                         ) : business.slug === "sangales-farms" ? (
                           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 w-full">
-                            <a
-                              href={`https://wa.me/917507700936?text=${encodeURIComponent(
-                                `Hello Sangales Farms, I would like to enquire about wholesale / Mandi harvest supply for ${prod.name}.`
-                              )}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
+                            <AttributedWhatsAppButton
+                              message={`Hello Sangales Farms, I would like to enquire about wholesale / Mandi harvest supply for ${prod.name}.`}
+                              businessName="Sangales Farms"
+                              businessSlug="sangales-farms"
+                              productName={prod.name}
+                              source="product_grid"
+                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm cursor-pointer"
                             >
                               <MessageCircle className="w-3.5 h-3.5" />
                               <span>Mandi / Bulk Offtake</span>
-                            </a>
+                            </AttributedWhatsAppButton>
                             <a
                               href="#enquiry-section"
                               className="text-xs font-semibold text-charcoal-100 hover:text-navy uppercase tracking-wider text-center"
                             >
-                              Wholesale Supply &rarr;
+                              Wholesale Supply →
                             </a>
                           </div>
                         ) : business.slug === "sangales-digital" ? (
                           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 w-full">
-                            <a
-                              href={`https://wa.me/917507700936?text=${encodeURIComponent(
-                                `Hello Sangales Digital, I would like to discuss custom CRM / AI integration project for ${prod.name}.`
-                              )}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
+                            <AttributedWhatsAppButton
+                              message={`Hello Sangales Digital, I would like to discuss custom CRM / AI integration project for ${prod.name}.`}
+                              businessName="Sangales Digital"
+                              businessSlug="sangales-digital"
+                              productName={prod.name}
+                              source="product_grid"
+                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm cursor-pointer"
                             >
                               <MessageCircle className="w-3.5 h-3.5" />
                               <span>Discuss Project</span>
-                            </a>
+                            </AttributedWhatsAppButton>
                             <a
                               href="#enquiry-section"
                               className="text-xs font-semibold text-charcoal-100 hover:text-navy uppercase tracking-wider text-center"
                             >
-                              Request Scope &rarr;
+                              Request Scope →
                             </a>
                           </div>
                         ) : prod.directBuyUrl ? (
@@ -657,27 +658,27 @@ export default async function BusinessDetailPage({ params, searchParams }: Props
                               href="#enquiry-section"
                               className="text-xs font-semibold text-charcoal-100 hover:text-navy uppercase tracking-wider text-center"
                             >
-                              B2B Enquiry &rarr;
+                              B2B Enquiry →
                             </a>
                           </>
                         ) : (
                           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 w-full">
-                            <a
-                              href={`https://wa.me/917507700936?text=${encodeURIComponent(
-                                `Hello SANGALES, I would like to enquire about ${prod.name} (${business.name}).`
-                              )}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
+                            <AttributedWhatsAppButton
+                              message={`Hello SANGALES, I would like to enquire about ${prod.name} (${business.name}).`}
+                              businessName={business.name}
+                              businessSlug={business.slug}
+                              productName={prod.name}
+                              source="product_grid"
+                              className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm cursor-pointer"
                             >
                               <MessageCircle className="w-3.5 h-3.5" />
                               <span>Inquire on WhatsApp</span>
-                            </a>
+                            </AttributedWhatsAppButton>
                             <a
                               href="#enquiry-section"
-                              className="text-xs font-bold text-navy hover:text-gold uppercase tracking-wider text-center"
+                              className="text-xs font-semibold text-charcoal-100 hover:text-navy uppercase tracking-wider text-center"
                             >
-                              Enquire for Pricing &rarr;
+                              Commercial Quote →
                             </a>
                           </div>
                         )}
@@ -878,17 +879,16 @@ export default async function BusinessDetailPage({ params, searchParams }: Props
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
 
-                <a
-                  href={`https://wa.me/917507700936?text=${encodeURIComponent(
-                    `Hello SANGALES, I would like to inquire regarding ${business.name}.`
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-2.5 px-4 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs uppercase tracking-wider rounded-sm flex items-center justify-center gap-2 shadow-sm transition-all"
+                <AttributedWhatsAppButton
+                  message={`Hello SANGALES, I would like to inquire regarding ${business.name}.`}
+                  businessName={business.name}
+                  businessSlug={business.slug}
+                  source="contact_desk_sidebar"
+                  className="w-full py-2.5 px-4 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs uppercase tracking-wider rounded-sm flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>Chat on WhatsApp</span>
-                </a>
+                </AttributedWhatsAppButton>
 
                 <ShareBusinessButton businessName={business.name} />
               </div>

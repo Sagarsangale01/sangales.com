@@ -34,6 +34,11 @@ export interface SiteSettings {
   // Commercial Partnership Desk
   partnershipHeadline: string;
   partnershipSubtitle: string;
+
+  // Analytics & Paid Campaigns Tracking
+  gaMeasurementId?: string;
+  gtmId?: string;
+  googleAdsId?: string;
 }
 
 export function getSiteSettings(): SiteSettings {
@@ -67,6 +72,10 @@ export function getSiteSettings(): SiteSettings {
 
     partnershipHeadline: "Let's Build Something Together.",
     partnershipSubtitle: "We actively seek long-term partnerships with distributors, institutional buyers, suppliers, and entrepreneurs who value quality and mutual growth.",
+
+    gaMeasurementId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || "",
+    gtmId: process.env.NEXT_PUBLIC_GTM_ID || "",
+    googleAdsId: "",
   };
 
   return {

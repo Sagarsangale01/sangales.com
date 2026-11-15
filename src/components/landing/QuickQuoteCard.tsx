@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { Send, CheckCircle2, AlertCircle, MessageCircle, Sparkles } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { getStoredUTM, buildAttributedWhatsAppUrl } from "@/lib/utm";
+import { trackLeadSubmit, trackWhatsAppClick } from "@/lib/analytics";
 
 interface ProductOption {
   id: string;
@@ -55,10 +57,13 @@ export default function QuickQuoteCard({
     }
 
     try {
-      const subject = `[Ad Lead - ${campaignSource}] Quote Request for ${businessName} (${formData.selectedProduct})`;
+      const utm = getStoredUTM();
+      const effectiveSource = utm?.utm_source || campaignSource;
+
+      const subject = `[Ad Lead - ${effectiveSource}] Quote Request for ${businessName} (${formData.selectedProduct})`;
       const message = `Requirement: ${formData.selectedProduct}\nQuantity / Site Details: ${
         formData.quantityNotes || "Not specified"
-      }\nLanguage: ${locale.toUpperCase()}\nCampaign Source: ${campaignSource}`;
+      }\nLanguage: ${locale.toUpperCase()}\nCampaign: ${utm?.utm_campaign || "N/A"}`;
 
       const res = await fetch("/api/enquiries", {
         method: "POST",
@@ -74,6 +79,15 @@ export default function QuickQuoteCard({
           message,
           privacyConsent: true,
           language: locale,
+          utmSource: effectiveSource,
+          utmMedium: utm?.utm_medium,
+          utmCampaign: utm?.utm_campaign,
+          utmTerm: utm?.utm_term,
+          utmContent: utm?.utm_content,
+          gclid: utm?.gclid,
+          fbclid: utm?.fbclid,
+          landingPage: typeof window !== "undefined" ? window.location.pathname : undefined,
+          referrer: typeof document !== "undefined" ? document.referrer : undefined,
         }),
       });
 
@@ -82,6 +96,15 @@ export default function QuickQuoteCard({
       if (!res.ok || !data?.success) {
         throw new Error(data?.message || dict.actions.errorMsg);
       }
+
+      // Track Google Ads / GA4 conversion event
+      trackLeadSubmit({
+        formName: "quick_quote_card",
+        businessName,
+        enquiryType: "Wholesale",
+        email: formData.email,
+        phone: formData.phone,
+      });
 
       setSuccess(true);
     } catch (err: any) {
@@ -94,11 +117,19 @@ export default function QuickQuoteCard({
   const getWaUrl = () => {
     const text =
       locale === "mr"
-        ? `नमस्कार ${displayName}, मी दरपत्रक आणि उत्पादनांची चौकशी करू इच्छितो.`
+        ? `नमस्कार ${displayName}, मी दरपत्रक आणि उत्पादनांची चौकशी करू इच्छितो (${formData.selectedProduct}).`
         : locale === "hi"
-        ? `नमस्ते ${displayName}, मुझे थोक मूल्य और कोटेशन की आवश्यकता है।`
-        : `Hello ${businessName}, I would like to request commercial specifications and wholesale pricing.`;
-    return `https://wa.me/917507700936?text=${encodeURIComponent(text)}`;
+        ? `नमस्ते ${displayName}, मुझे थोक मूल्य और कोटेशन की आवश्यकता है (${formData.selectedProduct})।`
+        : `Hello ${businessName}, I would like to request commercial specifications and wholesale pricing (${formData.selectedProduct}).`;
+    return buildAttributedWhatsAppUrl("917507700936", text, businessName);
+  };
+
+  const handleWhatsAppClick = () => {
+    trackWhatsAppClick({
+      businessName,
+      productName: formData.selectedProduct,
+      source: "quick_quote_card",
+    });
   };
 
   if (success) {
@@ -125,7 +156,8 @@ export default function QuickQuoteCard({
             href={getWaUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-2.5 px-4 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs uppercase tracking-wider rounded-sm transition-all shadow-sm flex items-center justify-center gap-2"
+            onClick={handleWhatsAppClick}
+            className="w-full py-2.5 px-4 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs uppercase tracking-wider rounded-sm transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
           >
             <MessageCircle className="w-4 h-4" />
             <span>
@@ -150,7 +182,7 @@ export default function QuickQuoteCard({
                 botTrap: "",
               });
             }}
-            className="w-full text-center text-xs text-charcoal-100 hover:text-navy underline pt-1 font-medium"
+            className="w-full text-center text-xs text-charcoal-100 hover:text-navy underline pt-1 font-medium cursor-pointer"
           >
             {locale === "mr"
               ? "दुसरी चौकशी पाठवा"
@@ -332,7 +364,8 @@ export default function QuickQuoteCard({
             href={getWaUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-emerald-700 hover:text-emerald-800 transition-colors group"
+            onClick={handleWhatsAppClick}
+            className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-emerald-700 hover:text-emerald-800 transition-colors group cursor-pointer"
           >
             <MessageCircle className="w-3.5 h-3.5 shrink-0" />
             <span>

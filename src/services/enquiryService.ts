@@ -9,6 +9,15 @@ export async function createEnquiry(input: {
   enquiryType: string;
   subject?: string;
   message: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  utmTerm?: string;
+  utmContent?: string;
+  gclid?: string;
+  fbclid?: string;
+  landingPage?: string;
+  referrer?: string;
 }): Promise<EnquiryRecord> {
   const store = getStore();
   const business = input.businessId ? store.businesses.find((b) => b.id === input.businessId) : undefined;
@@ -26,6 +35,15 @@ export async function createEnquiry(input: {
     message: input.message.trim(),
     status: "NEW",
     adminNotes: "",
+    utmSource: input.utmSource,
+    utmMedium: input.utmMedium,
+    utmCampaign: input.utmCampaign,
+    utmTerm: input.utmTerm,
+    utmContent: input.utmContent,
+    gclid: input.gclid,
+    fbclid: input.fbclid,
+    landingPage: input.landingPage,
+    referrer: input.referrer,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   };
