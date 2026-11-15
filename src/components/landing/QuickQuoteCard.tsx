@@ -332,16 +332,17 @@ export default function QuickQuoteCard({
             href={getWaUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 hover:text-emerald-800 transition-colors"
+            className="inline-flex items-center justify-center gap-1.5 text-xs font-bold text-emerald-700 hover:text-emerald-800 transition-colors group"
           >
-            <MessageCircle className="w-3.5 h-3.5" />
+            <MessageCircle className="w-3.5 h-3.5 shrink-0" />
             <span>
               {locale === "mr"
-                ? "थेट व्हॉट्सॲपवर संपर्क करा (+91 75077 00936) &rarr;"
+                ? "थेट व्हॉट्सॲपवर संपर्क करा (+91 75077 00936)"
                 : locale === "hi"
-                ? "सीधे व्हाट्सएप पर बात करें (+91 75077 00936) &rarr;"
-                : "Chat Directly on WhatsApp (+91 75077 00936) &rarr;"}
+                ? "सीधे व्हाट्सएप पर बात करें (+91 75077 00936)"
+                : "Chat Directly on WhatsApp (+91 75077 00936)"}
             </span>
+            <span className="transition-transform group-hover:translate-x-0.5">→</span>
           </a>
         </div>
       </form>

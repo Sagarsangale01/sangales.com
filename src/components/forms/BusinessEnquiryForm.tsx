@@ -122,9 +122,10 @@ export default function BusinessEnquiryForm({ businessId, businessName }: Props)
         <div className="pt-2">
           <button
             onClick={() => setSuccess(false)}
-            className="text-xs font-bold uppercase tracking-wider text-navy hover:text-gold transition-colors"
+            className="text-xs font-bold uppercase tracking-wider text-navy hover:text-gold transition-colors inline-flex items-center gap-1.5"
           >
-            {locale === "mr" ? "दुसरी चौकशी पाठवा" : locale === "hi" ? "अन्य पूछताछ भेजें" : "Submit Another Enquiry"} &rarr;
+            <span>{locale === "mr" ? "दुसरी चौकशी पाठवा" : locale === "hi" ? "अन्य पूछताछ भेजें" : "Submit Another Enquiry"}</span>
+            <span>→</span>
           </button>
         </div>
       </div>

@@ -164,14 +164,14 @@ export default function FAQSection({
                             className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-700 hover:text-emerald-800 transition-colors"
                           >
                             <MessageCircle className="w-3.5 h-3.5" />
-                            <span>{faq.actionText} &rarr;</span>
+                            <span>{faq.actionText} →</span>
                           </a>
                         ) : (
                           <Link
                             href={faq.actionHref}
                             className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-navy hover:text-gold transition-colors"
                           >
-                            <span>{faq.actionText} &rarr;</span>
+                            <span>{faq.actionText} →</span>
                           </Link>
                         )}
                       </div>
