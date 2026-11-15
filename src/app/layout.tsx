@@ -130,16 +130,20 @@ export default async function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-offwhite text-charcoal pb-14 sm:pb-0">
+      <body className="min-h-screen flex flex-col bg-offwhite text-charcoal pb-14 sm:pb-0 print:pb-0 print:bg-white print:min-h-0">
         <GoogleAnalytics gaMeasurementId={settings.gaMeasurementId} gtmId={settings.gtmId} />
         <LanguageProvider initialLocale={initialLocale}>
           <CartProvider>
-            <Header settings={settings} />
-            <main className="flex-grow">{children}</main>
-            <Footer settings={settings} businesses={businesses} />
-            <MobileQuickBar phone={settings.contactPhone} />
-            <AskSamikshaChatbot phone={settings.contactPhone} corporateName={settings.siteName} />
-            <CartDrawer />
+            <div className="print:hidden">
+              <Header settings={settings} />
+            </div>
+            <main className="flex-grow print:p-0 print:m-0">{children}</main>
+            <div className="print:hidden">
+              <Footer settings={settings} businesses={businesses} />
+              <MobileQuickBar phone={settings.contactPhone} />
+              <AskSamikshaChatbot phone={settings.contactPhone} corporateName={settings.siteName} />
+              <CartDrawer />
+            </div>
           </CartProvider>
         </LanguageProvider>
       </body>
