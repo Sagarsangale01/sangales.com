@@ -169,21 +169,21 @@ export default function Header({ settings }: Props) {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-6 xl:gap-10">
-          {/* Brand Logo - Fixed size with shrink-0 and generous right margin so it NEVER gets encroached */}
+        <div className="flex items-center justify-between gap-3 xl:gap-6">
+          {/* Brand Logo - Fixed size with shrink-0 and clean margin */}
           <Link
             href="/"
-            className="shrink-0 flex items-center focus:outline-none py-1 mr-3 lg:mr-6 xl:mr-10"
+            className="shrink-0 flex items-center focus:outline-none py-1 mr-2 lg:mr-4 xl:mr-8"
           >
             <img
               src={isDarkHero ? "/logos/sangales-logo-white.png" : "/logos/sangales-logo.png"}
               alt={`${siteName} – ${descriptor}`}
-              className="h-9 sm:h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+              className="h-9 sm:h-10 xl:h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
             />
           </Link>
 
           {/* Desktop Navigation - Centered / Distributed with ample spacing */}
-          <nav className="hidden lg:flex items-center gap-x-6 xl:gap-x-9">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2.5 2xl:gap-4 shrink-0">
             {/* About Dropdown */}
             <div
               className="relative"
@@ -197,25 +197,25 @@ export default function Header({ settings }: Props) {
                   if (timeoutRef.current) clearTimeout(timeoutRef.current);
                   setAboutDropdownOpen((prev) => !prev);
                 }}
-                className={`text-xs xl:text-sm font-semibold tracking-wide transition-colors duration-200 flex items-center gap-1.5 py-1 px-1 cursor-pointer ${
+                className={`relative inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-2 text-xs xl:text-sm font-semibold tracking-wide whitespace-nowrap rounded-sm transition-all duration-200 cursor-pointer select-none ${
                   isAboutActive
                     ? isDarkHero
-                      ? "text-gold"
-                      : "text-navy"
+                      ? "text-gold font-bold bg-white/5"
+                      : "text-navy font-bold bg-stone-100/70"
                     : isDarkHero
-                    ? "text-stone-200 hover:text-white"
-                    : "text-charcoal-100 hover:text-navy"
+                    ? "text-stone-200 hover:text-white hover:bg-white/10"
+                    : "text-charcoal-100 hover:text-navy hover:bg-stone-100/80"
                 }`}
                 aria-expanded={aboutDropdownOpen}
               >
                 <span>{dict.nav.about}</span>
                 <ChevronDown
-                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                  className={`w-3.5 h-3.5 shrink-0 transition-transform duration-200 ${
                     aboutDropdownOpen ? "rotate-180 text-gold" : "text-stone-400"
                   }`}
                 />
                 {isAboutActive && (
-                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gold rounded-full" />
+                  <span className="absolute bottom-0 left-2.5 right-2.5 h-[2px] bg-gold rounded-full" />
                 )}
               </button>
 
@@ -274,19 +274,19 @@ export default function Header({ settings }: Props) {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-xs xl:text-sm font-semibold tracking-wide transition-colors duration-200 relative py-1 px-1 ${
+                  className={`relative inline-flex items-center justify-center px-2.5 xl:px-3 py-2 text-xs xl:text-sm font-semibold tracking-wide whitespace-nowrap rounded-sm transition-all duration-200 ${
                     isActive
                       ? isDarkHero
-                        ? "text-gold font-bold"
-                        : "text-navy font-bold"
+                        ? "text-gold font-bold bg-white/5"
+                        : "text-navy font-bold bg-stone-100/70"
                       : isDarkHero
-                      ? "text-stone-200 hover:text-white"
-                      : "text-charcoal-100 hover:text-navy"
+                      ? "text-stone-200 hover:text-white hover:bg-white/10"
+                      : "text-charcoal-100 hover:text-navy hover:bg-stone-100/80"
                   }`}
                 >
-                  {link.label}
+                  <span>{link.label}</span>
                   {isActive && (
-                    <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gold rounded-full" />
+                    <span className="absolute bottom-0 left-2.5 right-2.5 h-[2px] bg-gold rounded-full" />
                   )}
                 </Link>
               );
@@ -295,7 +295,7 @@ export default function Header({ settings }: Props) {
 
           {/* Right Action Cluster: Cart Button + Language Switcher + Partner Button */}
           {/* Note: explicit left border and generous padding creates an uncrossable buffer zone */}
-          <div className="hidden lg:flex items-center gap-3.5 xl:gap-5 shrink-0 ml-auto pl-6 xl:pl-8 border-l border-stone-300">
+          <div className="hidden lg:flex items-center gap-2.5 xl:gap-4 shrink-0 ml-auto pl-3 xl:pl-6 border-l border-stone-200/80">
             {/* Shopping Bag Button */}
             <button
               type="button"
@@ -320,7 +320,7 @@ export default function Header({ settings }: Props) {
 
             <Link
               href="/contact?type=Partnership"
-              className={`inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold tracking-wider uppercase rounded-sm transition-all duration-300 shadow-sm whitespace-nowrap ${
+              className={`inline-flex items-center gap-1.5 px-3.5 xl:px-4 py-2 text-xs font-bold tracking-wider uppercase rounded-sm transition-all duration-300 shadow-sm whitespace-nowrap ${
                 isDarkHero
                   ? "bg-gold text-navy hover:bg-white hover:text-navy"
                   : "bg-navy text-white hover:bg-gold hover:text-navy"
