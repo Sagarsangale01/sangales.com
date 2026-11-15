@@ -4,12 +4,14 @@ import React, { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Send, CheckCircle2, AlertCircle, MessageCircle } from "lucide-react";
 import { BusinessRecord } from "@/lib/data";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface Props {
   businesses: BusinessRecord[];
 }
 
 export default function CorporateContactForm({ businesses }: Props) {
+  const { dict, locale } = useLanguage();
   const searchParams = useSearchParams();
   const preselectedType = searchParams.get("type") || "Partnership";
   const preselectedBiz = searchParams.get("business") || "";
@@ -57,8 +59,14 @@ export default function CorporateContactForm({ businesses }: Props) {
     e.preventDefault();
 
     if (!formData.privacyConsent) {
-      setError("Please check the consent box to allow us to process your enquiry.");
-      setFieldErrors({ privacyConsent: ["Consent is required to submit."] });
+      const consentMsg =
+        locale === "mr"
+          ? "कृपया चौकशी पाठवण्यासाठी सहमतीच्या चौकटीवर खूण करा."
+          : locale === "hi"
+          ? "कृपया पूछताछ भेजने के लिए सहमति बॉक्स पर चेक करें।"
+          : "Please check the consent box to allow us to process your enquiry.";
+      setError(consentMsg);
+      setFieldErrors({ privacyConsent: [consentMsg] });
       return;
     }
 
@@ -97,6 +105,7 @@ export default function CorporateContactForm({ businesses }: Props) {
         subject: "",
         message: "",
         privacyConsent: false,
+        botTrap: "",
       });
     } catch (err: any) {
       setError(err.message || "An unexpected error occurred.");
@@ -106,18 +115,45 @@ export default function CorporateContactForm({ businesses }: Props) {
   };
 
   if (success) {
+    const successTitle =
+      locale === "mr"
+        ? "आपली चौकशी यशस्वीरित्या प्राप्त झाली आहे"
+        : locale === "hi"
+        ? "आपकी पूछताछ सफलतापूर्वक प्राप्त हो गई है"
+        : "Your Enquiry Has Been Received";
+
+    const successDesc =
+      locale === "mr"
+        ? "सांगळे समूहाशी संपर्क साधल्याबद्दल धन्यवाद. आमच्या संबंधित विभागाला माहिती पाठवण्यात आली असून आमचे प्रतिनिधी लवकरच आपल्याशी संपर्क साधतील."
+        : locale === "hi"
+        ? "सांगळे समूह से संपर्क करने के लिए धन्यवाद। हमारे संबंधित विभाग को सूचित कर दिया गया है और हमारे प्रतिनिधि शीघ्र ही आपसे संपर्क करेंगे।"
+        : "Thank you for contacting SANGALES – A GROUP OF COMPANIES. An acknowledgement has been sent to your email, and our operating desk has been notified.";
+
+    const supportDeskLabel =
+      locale === "mr" ? "थेट संपर्क कक्ष:" : locale === "hi" ? "सीधा सहायता डेस्क:" : "Direct Support Desk:";
+
+    const whatsappAction =
+      locale === "mr"
+        ? "व्हॉट्सॲपवर त्वरित जोडा (+91 75077 00936)"
+        : locale === "hi"
+        ? "व्हाट्सएप पर तुरंत जुड़ें (+91 75077 00936)"
+        : "Connect on WhatsApp (+91 75077 00936)";
+
+    const anotherAction =
+      locale === "mr" ? "दुसरी विचारणा नोंदवा" : locale === "hi" ? "अन्य अनुरोध दर्ज करें" : "Submit Another Request";
+
     return (
       <div className="bg-white p-8 sm:p-12 rounded-sm border border-stone-200/80 shadow-editorial text-center space-y-5">
         <CheckCircle2 className="w-14 h-14 text-emerald-600 mx-auto" />
         <h3 className="font-heading text-2xl font-bold text-navy">
-          Your Enquiry Has Been Received
+          {successTitle}
         </h3>
         <p className="text-sm text-charcoal-100 max-w-md mx-auto leading-relaxed">
-          Thank you for contacting <strong>SANGALES – A GROUP OF COMPANIES</strong>. An acknowledgement has been sent to your email, and our operating desk has been notified.
+          {successDesc}
         </p>
 
         <div className="p-4 bg-stone-50 border border-stone-200 rounded-sm max-w-md mx-auto text-left space-y-1 text-xs">
-          <p className="font-bold text-navy uppercase tracking-wider text-[11px]">Direct Support Desk:</p>
+          <p className="font-bold text-navy uppercase tracking-wider text-[11px]">{supportDeskLabel}</p>
           <p className="text-stone-600">Email: <span className="font-mono text-navy font-semibold">contact.sangales@gmail.com</span></p>
           <p className="text-stone-600">Phone &amp; WhatsApp: <span className="font-semibold text-navy">+91 75077 00936</span></p>
         </div>
@@ -130,18 +166,76 @@ export default function CorporateContactForm({ businesses }: Props) {
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-sm transition-all shadow-sm"
           >
             <MessageCircle className="w-4 h-4" />
-            Connect on WhatsApp (+91 75077 00936)
+            {whatsappAction}
           </a>
           <button
             onClick={() => setSuccess(false)}
             className="w-full sm:w-auto px-6 py-2.5 bg-navy text-gold text-xs font-bold uppercase tracking-wider rounded-sm hover:bg-gold hover:text-navy transition-all"
           >
-            Submit Another Request
+            {anotherAction}
           </button>
         </div>
       </div>
     );
   }
+
+  const nameLabel =
+    locale === "mr" ? "पूर्ण नाव" : locale === "hi" ? "पूरा नाम" : "Full Name";
+  const namePlaceholder =
+    locale === "mr" ? "उदा. राहुल सांगळे" : locale === "hi" ? "उदा. राहुल सांगळे" : "Anand R. Sangale";
+
+  const emailLabel =
+    locale === "mr" ? "ईमेल आयडी" : locale === "hi" ? "ईमेल आईडी" : "Work / Personal Email";
+
+  const phoneLabel =
+    locale === "mr" ? "मोबाईल नंबर" : locale === "hi" ? "मोबाइल नंबर" : "Phone / Mobile Number";
+
+  const companyLabel =
+    locale === "mr" ? "कंपनी किंवा फर्मचे नाव (ऐच्छिक)" : locale === "hi" ? "कंपनी या फर्म का नाम (वैकल्पिक)" : "Company / Organization Name";
+  const companyPlaceholder =
+    locale === "mr" ? "उदा. अपेक्स एंटरप्रायझेस" : locale === "hi" ? "उदा. एपेक्स एंटरप्राइजेज" : "e.g. Apex Distribution Corp";
+
+  const typeLabel =
+    locale === "mr" ? "चौकशीचे स्वरूप" : locale === "hi" ? "पूछताछ का प्रकार" : "Enquiry Classification";
+
+  const bizLabel =
+    locale === "mr" ? "संबंधित व्यवसाय (ऐच्छिक)" : locale === "hi" ? "संबंधित उद्यम (वैकल्पिक)" : "Related Business (Optional)";
+  const allBizText =
+    locale === "mr" ? "सांगळे समूह (सर्व विभाग)" : locale === "hi" ? "सांगळे समूह (समस्त प्रभाग)" : "Sangales Corporate Group (All)";
+
+  const subjectLabel =
+    locale === "mr" ? "विषय / मुख्य मुद्दा" : locale === "hi" ? "विषय / मुख्य शीर्षक" : "Subject Headline";
+  const subjectPlaceholder =
+    locale === "mr" ? "तुमच्या प्रस्तावाचा किंवा चौकशीचा थोडक्यात सारांश" : locale === "hi" ? "आपके प्रस्ताव या आवश्यकता का संक्षिप्त विवरण" : "Brief summary of your enquiry or proposal";
+
+  const messageLabel =
+    locale === "mr" ? "तपशीलवार संदेश / व्यावसायिक प्रस्ताव" : locale === "hi" ? "विस्तृत संदेश / व्यावसायिक प्रस्ताव" : "Detailed Message / Commercial Proposal";
+  const messagePlaceholder =
+    locale === "mr"
+      ? "कृपया उत्पादनाचा प्रकार, अपेक्षित प्रमाण, पुरवठ्याचे ठिकाण किंवा इतर तपशील नमूद करा..."
+      : locale === "hi"
+      ? "कृपया उत्पाद आवश्यकता, अनुमानित मात्रा, डिलीवरी स्थान या अन्य विवरण साझा करें..."
+      : "Provide pertinent specifications, order requirements, distribution regions, or questions...";
+
+  const consentLabel =
+    locale === "mr" ? (
+      <>
+        <strong>सांगळे समूहाला</strong> या व्यावसायिक चौकशीवर प्रक्रिया करण्यासाठी आणि माझ्याशी संपर्क साधण्यासाठी माझी सहमती आहे.
+      </>
+    ) : locale === "hi" ? (
+      <>
+        मैं इस व्यावसायिक पूछताछ के मूल्यांकन एवं संपर्क हेतु <strong>सांगळे समूह</strong> द्वारा जानकारी के उपयोग की सहमति देता/देती हूँ।
+      </>
+    ) : (
+      <>
+        I consent to <strong>SANGALES – A GROUP OF COMPANIES</strong> collecting, storing, and reviewing the submitted information for evaluating and responding to this corporate inquiry.
+      </>
+    );
+
+  const submitBtn =
+    loading
+      ? (locale === "mr" ? "चौकशी पाठवली जात आहे..." : locale === "hi" ? "प्रस्ताव भेजा जा रहा है..." : "Transmitting...")
+      : (locale === "mr" ? "चौकशी प्रस्ताव पाठवा" : locale === "hi" ? "व्यावसायिक प्रस्ताव भेजें" : "Submit Corporate Enquiry");
 
   return (
     <form
@@ -162,22 +256,14 @@ export default function CorporateContactForm({ businesses }: Props) {
           onChange={(e) => updateField("botTrap", e.target.value)}
         />
       </div>
-      <div>
-        <h3 className="font-heading text-2xl font-bold text-navy">
-          Corporate &amp; Business Enquiry Desk
-        </h3>
-        <p className="text-xs text-charcoal-100 mt-1">
-          Complete the details below to route your enquiry directly to group leadership.
-        </p>
-      </div>
 
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 text-red-800 text-xs rounded-sm space-y-1.5 shadow-sm">
-          <div className="flex items-center gap-2 font-bold text-red-700">
-            <AlertCircle className="w-4 h-4 shrink-0" />
-            <span>Unable to submit enquiry. Please correct the highlighted errors:</span>
+        <div className="p-4 bg-red-50 border-l-4 border-red-500 text-red-700 text-xs flex items-start gap-2.5 rounded-sm">
+          <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
+          <div className="space-y-1">
+            <span className="font-bold block">Submission Error:</span>
+            <span>{error}</span>
           </div>
-          <p className="pl-6 text-red-700 leading-relaxed font-medium">{error}</p>
         </div>
       )}
 
@@ -185,14 +271,14 @@ export default function CorporateContactForm({ businesses }: Props) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">
-            Full Name <span className="text-red-500">*</span>
+            {nameLabel} <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
             required
             value={formData.fullName}
             onChange={(e) => updateField("fullName", e.target.value)}
-            placeholder="e.g. Anand Vardhan"
+            placeholder={namePlaceholder}
             className={`w-full px-3.5 py-2.5 text-sm bg-offwhite border rounded-sm focus:outline-none transition-colors text-charcoal ${
               fieldErrors.fullName
                 ? "border-red-500 bg-red-50/20 ring-1 ring-red-400 focus:border-red-500"
@@ -209,14 +295,14 @@ export default function CorporateContactForm({ businesses }: Props) {
 
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">
-            Work / Personal Email <span className="text-red-500">*</span>
+            {emailLabel} <span className="text-red-500">*</span>
           </label>
           <input
             type="email"
             required
             value={formData.email}
             onChange={(e) => updateField("email", e.target.value)}
-            placeholder="anand@company.in"
+            placeholder="contact@company.in"
             className={`w-full px-3.5 py-2.5 text-sm bg-offwhite border rounded-sm focus:outline-none transition-colors text-charcoal ${
               fieldErrors.email
                 ? "border-red-500 bg-red-50/20 ring-1 ring-red-400 focus:border-red-500"
@@ -236,7 +322,7 @@ export default function CorporateContactForm({ businesses }: Props) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">
-            Phone / Mobile Number <span className="text-red-500">*</span>
+            {phoneLabel} <span className="text-red-500">*</span>
           </label>
           <input
             type="tel"
@@ -260,13 +346,13 @@ export default function CorporateContactForm({ businesses }: Props) {
 
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">
-            Company / Organization Name
+            {companyLabel}
           </label>
           <input
             type="text"
             value={formData.companyName}
             onChange={(e) => updateField("companyName", e.target.value)}
-            placeholder="e.g. Apex Distribution Corp"
+            placeholder={companyPlaceholder}
             className="w-full px-3.5 py-2.5 text-sm bg-offwhite border border-stone-200 rounded-sm focus:outline-none focus:border-gold text-charcoal"
           />
         </div>
@@ -276,7 +362,7 @@ export default function CorporateContactForm({ businesses }: Props) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">
-            Enquiry Classification <span className="text-red-500">*</span>
+            {typeLabel} <span className="text-red-500">*</span>
           </label>
           <select
             value={formData.enquiryType}
@@ -287,13 +373,13 @@ export default function CorporateContactForm({ businesses }: Props) {
                 : "border-stone-200 focus:border-gold"
             }`}
           >
-            <option value="Partnership">Business Partnership</option>
-            <option value="Distribution">Distribution &amp; Dealership</option>
-            <option value="Wholesale">Wholesale &amp; Bulk Purchasing</option>
-            <option value="Supplier">Supplier &amp; Mandi Ingestion</option>
-            <option value="Product">Product Enquiry</option>
-            <option value="Career">Career &amp; Employment</option>
-            <option value="General">General Corporate Enquiry</option>
+            <option value="Partnership">{locale === "mr" ? "व्यावसायिक भागीदारी" : locale === "hi" ? "व्यावसायिक साझेदारी" : "Business Partnership"}</option>
+            <option value="Distribution">{locale === "mr" ? "वितरण व डीलरशिप" : locale === "hi" ? "वितरण एवं डीलरशिप" : "Distribution & Dealership"}</option>
+            <option value="Wholesale">{locale === "mr" ? "घाऊक खरेदी व कंत्राट" : locale === "hi" ? "थोक खरीद एवं अनुबंध" : "Wholesale & Bulk Purchasing"}</option>
+            <option value="Supplier">{locale === "mr" ? "शेतकरी व पुरवठादार पुरवठा" : locale === "hi" ? "कृषक एवं आपूर्तिकर्ता आपूर्ति" : "Supplier & Mandi Ingestion"}</option>
+            <option value="Product">{locale === "mr" ? "उत्पादन चौकशी व नमुने" : locale === "hi" ? "उत्पाद पूछताछ एवं नमूने" : "Product Enquiry"}</option>
+            <option value="Career">{locale === "mr" ? "करिअर व नोकरी संधी" : locale === "hi" ? "करियर एवं रोजगार अवसर" : "Career & Employment"}</option>
+            <option value="General">{locale === "mr" ? "सर्वसाधारण कॉर्पोरेट विचारणा" : locale === "hi" ? "सामान्य कॉर्पोरेट पूछताछ" : "General Corporate Enquiry"}</option>
           </select>
           {fieldErrors.enquiryType && (
             <p className="text-xs text-red-600 mt-1.5 flex items-center gap-1 font-medium">
@@ -305,19 +391,24 @@ export default function CorporateContactForm({ businesses }: Props) {
 
         <div>
           <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">
-            Related Business (Optional)
+            {bizLabel}
           </label>
           <select
             value={formData.businessId}
             onChange={(e) => updateField("businessId", e.target.value)}
             className="w-full px-3.5 py-2.5 text-sm bg-offwhite border border-stone-200 rounded-sm focus:outline-none focus:border-gold text-charcoal"
           >
-            <option value="">Sangales Corporate Group (All)</option>
-            {businesses.map((b) => (
-              <option key={b.id} value={b.id}>
-                {b.name} ({b.category})
-              </option>
-            ))}
+            <option value="">{allBizText}</option>
+            {businesses.map((b) => {
+              const loc = dict.businesses && dict.businesses[b.slug];
+              const name = loc?.name || b.name;
+              const category = loc?.category || b.category;
+              return (
+                <option key={b.id} value={b.id}>
+                  {name} ({category})
+                </option>
+              );
+            })}
           </select>
         </div>
       </div>
@@ -325,13 +416,13 @@ export default function CorporateContactForm({ businesses }: Props) {
       {/* Row 4: Subject */}
       <div>
         <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">
-          Subject Headline
+          {subjectLabel}
         </label>
         <input
           type="text"
           value={formData.subject}
           onChange={(e) => updateField("subject", e.target.value)}
-          placeholder="Brief summary of your enquiry or proposal"
+          placeholder={subjectPlaceholder}
           className="w-full px-3.5 py-2.5 text-sm bg-offwhite border border-stone-200 rounded-sm focus:outline-none focus:border-gold text-charcoal"
         />
       </div>
@@ -339,14 +430,14 @@ export default function CorporateContactForm({ businesses }: Props) {
       {/* Row 5: Message */}
       <div>
         <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1.5">
-          Detailed Message / Commercial Proposal <span className="text-red-500">*</span>
+          {messageLabel} <span className="text-red-500">*</span>
         </label>
         <textarea
           required
           rows={5}
           value={formData.message}
           onChange={(e) => updateField("message", e.target.value)}
-          placeholder="Provide pertinent specifications, order requirements, distribution regions, or questions..."
+          placeholder={messagePlaceholder}
           className={`w-full px-3.5 py-2.5 text-sm bg-offwhite border rounded-sm focus:outline-none transition-colors text-charcoal ${
             fieldErrors.message
               ? "border-red-500 bg-red-50/20 ring-1 ring-red-400 focus:border-red-500"
@@ -375,7 +466,7 @@ export default function CorporateContactForm({ businesses }: Props) {
             }`}
           />
           <label htmlFor="privacyConsentCorporate" className="text-xs text-charcoal-100 leading-normal">
-            I consent to <strong>SANGALES – A GROUP OF COMPANIES</strong> collecting, storing, and reviewing the submitted information for evaluating and responding to this corporate inquiry.
+            {consentLabel}
           </label>
         </div>
         {fieldErrors.privacyConsent && (
@@ -393,7 +484,7 @@ export default function CorporateContactForm({ businesses }: Props) {
         className="w-full py-4 bg-navy hover:bg-gold hover:text-navy text-white text-xs font-bold uppercase tracking-widest rounded-sm transition-all shadow-md flex items-center justify-center gap-2 disabled:opacity-50"
       >
         <Send className="w-4 h-4" />
-        <span>{loading ? "Transmitting..." : "Submit Corporate Enquiry"}</span>
+        <span>{submitBtn}</span>
       </button>
     </form>
   );

@@ -1,44 +1,130 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { ArrowUpRight, Handshake, Truck, Store, Boxes } from "lucide-react";
 import { SiteSettings } from "@/services/settingsService";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface Props {
   settings?: SiteSettings;
 }
 
 export default function PartnershipCTA({ settings }: Props) {
-  const headline = settings?.partnershipHeadline || "Let's Build Something Together.";
+  const { dict, locale } = useLanguage();
+
+  const headline =
+    locale === "mr"
+      ? "चला, एकत्र मिळून नवीन व्यवसायाची उभारणी करूया."
+      : locale === "hi"
+      ? "आइए, मिलकर नए अवसरों का निर्माण करें।"
+      : settings?.partnershipHeadline || "Let's Build Something Together.";
+
   const subtitle =
-    settings?.partnershipSubtitle ||
-    "We actively seek long-term partnerships with distributors, institutional buyers, suppliers, and entrepreneurs who value quality and mutual growth.";
+    locale === "mr"
+      ? "आम्ही वितरक, संस्थात्मक खरेदीदार, पुरवठादार आणि व्यावसायिक भागीदारांसोबत परस्पर विश्वासावर आधारित दीर्घकालीन भागीदारीसाठी सदैव तत्पर आहोत."
+      : locale === "hi"
+      ? "हम गुणवत्ता और पारस्परिक विकास को महत्व देने वाले वितरकों, थोक खरीदारों, आपूर्तिकर्ताओं और उद्यमियों के साथ दीर्घकालिक साझेदारी का स्वागत करते हैं।"
+      : settings?.partnershipSubtitle ||
+        "We actively seek long-term partnerships with distributors, institutional buyers, suppliers, and entrepreneurs who value quality and mutual growth.";
+
+  const badgeText =
+    locale === "mr"
+      ? "व्यावसायिक • संस्थात्मक • प्रगती"
+      : locale === "hi"
+      ? "वाणिज्यिक • संस्थागत • विकास"
+      : "Commercial • Institutional • Growth";
 
   const avenues = [
     {
       icon: Store,
-      title: "Distribution & Dealerships",
-      desc: "Distribute Annamrit Foods healthy meals, or Sangales Packaging 4CP meal boxes, aluminium containers & paper bags across market channels.",
+      title:
+        locale === "mr"
+          ? "वितरण व डीलरशिप"
+          : locale === "hi"
+          ? "वितरण एवं डीलरशिप"
+          : "Distribution & Dealerships",
+      desc:
+        locale === "mr"
+          ? "अन्नमृत फूड्सचे पौष्टिक आहार किंवा सांगळे पॅकेजिंगचे ४सीपी मील बॉक्सेस, ॲल्युमिनियम कंटेनर्स व पेपर बॅग्जचे स्थानिक बाजारपेठेत अधिकृत वितरण."
+          : locale === "hi"
+          ? "अन्नमृत फूड्स के पौष्टिक आहार अथवा सांगळे पैकेजिंग के 4सीपी मील बॉक्सेस, एल्युमिनियम कंटेनर्स व पेपर बैग्स का क्षेत्रीय वितरण।"
+          : "Distribute Annamrit Foods healthy meals, or Sangales Packaging 4CP meal boxes, aluminium containers & paper bags across market channels.",
       type: "Distribution",
     },
     {
       icon: Truck,
-      title: "Supplier & Mandi Linkages",
-      desc: "Supply bulk grain, farm inputs, raw materials, or specialized packaging substrates.",
+      title:
+        locale === "mr"
+          ? "शेतकरी व पुरवठादार सहकार्य"
+          : locale === "hi"
+          ? "कृषक एवं आपूर्तिकर्ता संबंध"
+          : "Supplier & Mandi Linkages",
+      desc:
+        locale === "mr"
+          ? "थेट शेतातून धान्य, कृषी उत्पादने, कच्चा माल किंवा विशेष पॅकेजिंग साहित्याचा पुरवठा करण्यासाठी संपर्क साधा."
+          : locale === "hi"
+          ? "सीधे खेतों से उच्च गुणवत्ता अनाज, कृषि उत्पाद, कच्चा माल अथवा विशिष्ट पैकेजिंग सामग्री की आपूर्ति हेतु जुड़ें।"
+          : "Supply bulk grain, farm inputs, raw materials, or specialized packaging substrates.",
       type: "Supplier",
     },
     {
       icon: Boxes,
-      title: "Wholesale & Enterprise Procurement",
-      desc: "Procure Sangales Trading construction steel & TMT rebars, PVC ply sheets, designer wallpapers, architectural panels, and food packaging disposables.",
+      title:
+        locale === "mr"
+          ? "घाऊक व कॉर्पोरेट खरेदी"
+          : locale === "hi"
+          ? "थोक एवं संस्थागत खरीद"
+          : "Wholesale & Enterprise Procurement",
+      desc:
+        locale === "mr"
+          ? "सांगळे ट्रेडिंगचे बांधकाम टीएमटी स्टील (Fe 500D/550D), वॉटरप्रूफ पीव्हीसी प्लाय, वॉलपेपर्स आणि फूड पॅकेजिंग साहित्याची घाऊक दरात थेट खरेदी."
+          : locale === "hi"
+          ? "सांगळे ट्रेडिंग के निर्माण टीएमटी स्टील, वाटरप्रूफ पीवीसी प्लाई, वॉलपेपर्स और फ़ूड पैकेजिंग सामग्री की थोक दरों पर खरीद।"
+          : "Procure Sangales Trading construction steel & TMT rebars, PVC ply sheets, designer wallpapers, architectural panels, and food packaging disposables.",
       type: "Wholesale",
     },
     {
       icon: Handshake,
-      title: "Strategic Business Collaboration",
-      desc: "Joint commercial ventures, contract manufacturing, or technology co-development.",
+      title:
+        locale === "mr"
+          ? "धोरणात्मक व्यवसाय सहयोग"
+          : locale === "hi"
+          ? "रणनीतिक व्यावसायिक साझेदारी"
+          : "Strategic Business Collaboration",
+      desc:
+        locale === "mr"
+          ? "संयुक्त उपक्रम (Joint Ventures), कंत्राटी उत्पादन (Contract Manufacturing) किंवा नवीन तंत्रज्ञान प्रणालींचा एकत्रित विकास."
+          : locale === "hi"
+          ? "संयुक्त उपक्रम (Joint Ventures), अनुबंध विनिर्माण (Contract Manufacturing) अथवा नई डिजिटल प्रणाली का सह-विकास।"
+          : "Joint commercial ventures, contract manufacturing, or technology co-development.",
       type: "Partnership",
     },
   ];
+
+  const initiateLabel =
+    locale === "mr" ? "चौकशी सुरू करा" : locale === "hi" ? "प्रस्ताव भेजें" : "Initiate Request";
+
+  const cardTitle =
+    locale === "mr"
+      ? "आपल्याकडे विशेष व्यावसायिक प्रस्ताव किंवा घाऊक मागणी आहे का?"
+      : locale === "hi"
+      ? "क्या आपके पास कोई विशेष व्यावसायिक प्रस्ताव या थोक आवश्यकता है?"
+      : "Have a tailored proposition or enterprise requirement?";
+
+  const cardSubtitle =
+    locale === "mr"
+      ? "आमचे कॉर्पोरेट व्यवस्थापन प्रत्येक सत्यापित व्यावसायिक प्रस्तावाची २४ ते ४८ तासांच्या आत दखल घेऊन संपर्क साधते."
+      : locale === "hi"
+      ? "हमारा कॉर्पोरेट नेतृत्व प्रत्येक सत्यापित व्यावसायिक प्रस्ताव की 24–48 घंटों के भीतर समीक्षा कर संपर्क करता है।"
+      : "Our corporate leadership desk reviews and responds to every verified business proposal within 24–48 hours.";
+
+  const cardButton =
+    locale === "mr"
+      ? "कॉर्पोरेट टीमशी संपर्क साधा"
+      : locale === "hi"
+      ? "कॉर्पोरेट टीम से संपर्क करें"
+      : "Connect With Corporate Desk";
 
   return (
     <section className="py-20 lg:py-28 bg-navy-950 text-white relative overflow-hidden">
@@ -49,7 +135,7 @@ export default function PartnershipCTA({ settings }: Props) {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <span className="text-gold text-xs font-bold tracking-superwide uppercase">
-            Commercial &bull; Institutional &bull; Growth
+            {badgeText}
           </span>
           <h2 className="font-heading text-3xl sm:text-5xl font-extrabold text-white">
             {headline}
@@ -83,7 +169,7 @@ export default function PartnershipCTA({ settings }: Props) {
                   href={`/contact?type=${item.type}`}
                   className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-gold group-hover:text-white transition-colors"
                 >
-                  <span>Initiate Request</span>
+                  <span>{initiateLabel}</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
@@ -95,17 +181,17 @@ export default function PartnershipCTA({ settings }: Props) {
         <div className="bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 border border-navy-700 p-8 sm:p-10 rounded-sm flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
           <div className="space-y-1 text-center md:text-left">
             <h3 className="font-heading text-xl sm:text-2xl font-bold text-white">
-              Have a tailored proposition or enterprise requirement?
+              {cardTitle}
             </h3>
             <p className="text-xs sm:text-sm text-stone-300">
-              Our corporate leadership desk reviews and responds to every verified business proposal within 24–48 hours.
+              {cardSubtitle}
             </p>
           </div>
           <Link
             href="/contact"
             className="px-8 py-4 bg-gold hover:bg-white text-navy font-bold text-xs tracking-widest uppercase rounded-sm transition-all shadow-md shrink-0"
           >
-            Connect With Corporate Desk
+            {cardButton}
           </Link>
         </div>
       </div>
