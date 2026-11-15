@@ -138,7 +138,7 @@ export default function LanguageSwitcher({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-sm border transition-all duration-200 cursor-pointer ${
+        className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-semibold rounded-sm border transition-all duration-200 cursor-pointer ${
           isDarkTheme
             ? "bg-white/10 hover:bg-white/20 text-white border-white/25 hover:border-gold/60"
             : "bg-white hover:bg-stone-50 text-navy border-stone-300 hover:border-gold/60 shadow-2xs"
@@ -147,7 +147,7 @@ export default function LanguageSwitcher({
         aria-label="Select language"
       >
         <Globe className="w-3.5 h-3.5 text-gold-700 shrink-0" />
-        <span className="tracking-wide">{currentLang.nativeLabel}</span>
+        <span className="tracking-wide font-medium">{currentLang.nativeLabel}</span>
         <ChevronDown
           className={`w-3 h-3 text-stone-400 transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
@@ -156,7 +156,7 @@ export default function LanguageSwitcher({
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white rounded-sm shadow-2xl border border-stone-200/90 py-1.5 z-50 animate-in fade-in-50 zoom-in-95">
+        <div className="absolute right-0 mt-2 w-44 bg-white rounded-sm shadow-2xl border border-stone-200/90 py-1.5 z-50 animate-in fade-in-50 zoom-in-95">
           <div className="px-3 py-1 border-b border-stone-100 mb-1">
             <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block">
               Language / भाषा / भाषा

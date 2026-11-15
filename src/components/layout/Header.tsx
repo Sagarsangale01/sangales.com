@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight, ChevronDown, Building2, Eye, Compass, Newspaper } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import LanguageSwitcher from "@/components/common/LanguageSwitcher";
 
@@ -15,11 +15,13 @@ interface Props {
 }
 
 export default function Header({ settings }: Props) {
-  const { dict } = useLanguage();
+  const { dict, locale } = useLanguage();
   const siteName = settings?.siteName || "SANGALES";
   const descriptor = settings?.descriptor || "A Group of Companies";
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -30,14 +32,87 @@ export default function Header({ settings }: Props) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close mobile drawer on route transition
+  // Close mobile drawer and dropdown on route change
   useEffect(() => {
     setMobileMenuOpen(false);
+    setAboutDropdownOpen(false);
   }, [pathname]);
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setAboutDropdownOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const isDarkHero = pathname === "/" && !isScrolled;
 
-  const navLinks = [
+  // Sub-items for About Us Dropdown
+  const aboutSubItems = [
+    {
+      title: dict.nav.about,
+      desc:
+        locale === "mr"
+          ? "सांगळे समूहाचा इतिहास व पार्श्वभूमी"
+          : locale === "hi"
+          ? "सांगळे समूह का परिचय एवं पृष्ठभूमि"
+          : "Overview of SANGALES Group & Governance",
+      href: "/about",
+      icon: Building2,
+    },
+    {
+      title: dict.nav.vision,
+      desc:
+        locale === "mr"
+          ? "आमची मूल्ये आणि भविष्यवेध"
+          : locale === "hi"
+          ? "हमारे मूल्य और भविष्यदृष्टि"
+          : "Mission, core values & ethical commitments",
+      href: "/our-vision",
+      icon: Eye,
+    },
+    {
+      title: dict.nav.journey,
+      desc:
+        locale === "mr"
+          ? "उद्योगाचा यशस्वी प्रवास व टप्पे"
+          : locale === "hi"
+          ? "हमारी विकास यात्रा और मील के पत्थर"
+          : "Foundational journey & milestones",
+      href: "/our-journey",
+      icon: Compass,
+    },
+    {
+      title: dict.nav.news,
+      desc:
+        locale === "mr"
+          ? "समूहातील घडामोडी आणि प्रेस बातम्या"
+          : locale === "hi"
+          ? "समूह की ताजा खबरें और अपडेट्स"
+          : "Corporate announcements & media releases",
+      href: "/news",
+      icon: Newspaper,
+    },
+  ];
+
+  const isAboutActive = ["/about", "/our-vision", "/our-journey", "/news"].some(
+    (p) => pathname === p || pathname.startsWith(p + "/")
+  );
+
+  // Core desktop nav links
+  const primaryNavLinks = [
+    { label: dict.nav.businesses, href: "/businesses" },
+    { label: dict.nav.catalogue, href: "/catalogue" },
+    { label: dict.nav.careers, href: "/careers" },
+    { label: dict.nav.contact, href: "/contact" },
+  ];
+
+  // Full links list for mobile drawer
+  const allMobileNavLinks = [
     { label: dict.nav.about, href: "/about" },
     { label: dict.nav.businesses, href: "/businesses" },
     { label: dict.nav.catalogue, href: "/catalogue" },
@@ -52,36 +127,110 @@ export default function Header({ settings }: Props) {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-stone-200/60 py-3.5"
+          ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-stone-200/60 py-3"
           : isDarkHero
-          ? "bg-transparent py-5"
-          : "bg-white/90 backdrop-blur-md border-b border-stone-200/40 py-5"
+          ? "bg-transparent py-4 sm:py-5"
+          : "bg-white/90 backdrop-blur-md border-b border-stone-200/40 py-4 sm:py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Brand Logo */}
-          <Link href="/" className="group flex items-center focus:outline-none py-1">
+        <div className="flex items-center justify-between gap-4 lg:gap-6">
+          {/* Brand Logo - Fixed size with shrink-0 so it NEVER gets encroached */}
+          <Link
+            href="/"
+            className="shrink-0 flex items-center focus:outline-none py-1 pr-2 xl:pr-4"
+          >
             <img
               src={isDarkHero ? "/logos/sangales-logo-white.png" : "/logos/sangales-logo.png"}
               alt={`${siteName} – ${descriptor}`}
-              className="h-10 sm:h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
+              className="h-9 sm:h-11 w-auto object-contain transition-transform duration-200 group-hover:scale-[1.02]"
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-6 xl:space-x-7">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+          {/* Desktop Navigation - Centered / Distributed with ample spacing */}
+          <nav className="hidden lg:flex items-center gap-x-5 xl:gap-x-7">
+            {/* About Dropdown */}
+            <div
+              className="relative"
+              ref={dropdownRef}
+              onMouseEnter={() => setAboutDropdownOpen(true)}
+              onMouseLeave={() => setAboutDropdownOpen(false)}
+            >
+              <button
+                type="button"
+                onClick={() => setAboutDropdownOpen(!aboutDropdownOpen)}
+                className={`text-xs xl:text-sm font-semibold tracking-wide transition-colors duration-200 flex items-center gap-1 py-1 cursor-pointer ${
+                  isAboutActive
+                    ? isDarkHero
+                      ? "text-gold"
+                      : "text-navy"
+                    : isDarkHero
+                    ? "text-stone-200 hover:text-white"
+                    : "text-charcoal-100 hover:text-navy"
+                }`}
+                aria-expanded={aboutDropdownOpen}
+              >
+                <span>{dict.nav.about}</span>
+                <ChevronDown
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                    aboutDropdownOpen ? "rotate-180 text-gold" : "text-stone-400"
+                  }`}
+                />
+                {isAboutActive && (
+                  <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gold rounded-full" />
+                )}
+              </button>
+
+              {/* Mega Dropdown Menu */}
+              {aboutDropdownOpen && (
+                <div className="absolute left-0 mt-2 w-72 bg-white rounded-sm shadow-2xl border border-stone-200/90 p-2 z-50 animate-in fade-in-50 zoom-in-95">
+                  <div className="space-y-1">
+                    {aboutSubItems.map((item) => {
+                      const Icon = item.icon;
+                      const isActive = pathname === item.href;
+                      return (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className={`flex items-start gap-3 p-2.5 rounded-sm transition-colors ${
+                            isActive
+                              ? "bg-gold/15 text-navy font-bold"
+                              : "hover:bg-stone-50 text-charcoal"
+                          }`}
+                        >
+                          <div className="w-7 h-7 rounded-sm bg-navy text-gold flex items-center justify-center shrink-0 mt-0.5">
+                            <Icon className="w-3.5 h-3.5" />
+                          </div>
+                          <div>
+                            <span className="text-xs font-bold text-navy block leading-tight">
+                              {item.title}
+                            </span>
+                            <span className="text-[10px] text-stone-500 line-clamp-1 mt-0.5 leading-normal">
+                              {item.desc}
+                            </span>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Other Primary Links */}
+            {primaryNavLinks.map((link) => {
+              const isActive =
+                pathname === link.href ||
+                (link.href !== "/" && pathname.startsWith(link.href));
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm font-medium tracking-wide transition-colors duration-200 relative py-1 ${
+                  className={`text-xs xl:text-sm font-semibold tracking-wide transition-colors duration-200 relative py-1 ${
                     isActive
                       ? isDarkHero
-                        ? "text-gold font-semibold"
-                        : "text-navy font-semibold"
+                        ? "text-gold font-bold"
+                        : "text-navy font-bold"
                       : isDarkHero
                       ? "text-stone-200 hover:text-white"
                       : "text-charcoal-100 hover:text-navy"
@@ -96,16 +245,17 @@ export default function Header({ settings }: Props) {
             })}
           </nav>
 
-          {/* Right Action CTA & Language Switcher */}
-          <div className="hidden lg:flex items-center space-x-3 xl:space-x-4">
+          {/* Right Action Cluster: Language Switcher + Partner Button */}
+          {/* Note: explicit left border and padding creates an uncrossable buffer zone */}
+          <div className="hidden lg:flex items-center gap-3 xl:gap-4 shrink-0 pl-4 xl:pl-6 border-l border-stone-200/50">
             <LanguageSwitcher variant="dropdown" isDarkTheme={isDarkHero} />
 
             <Link
               href="/contact?type=Partnership"
-              className={`inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold tracking-wider uppercase rounded-sm transition-all duration-300 ${
+              className={`inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold tracking-wider uppercase rounded-sm transition-all duration-300 shadow-sm whitespace-nowrap ${
                 isDarkHero
-                  ? "bg-gold text-navy hover:bg-white hover:text-navy shadow-sm"
-                  : "bg-navy text-white hover:bg-gold hover:text-navy shadow-sm"
+                  ? "bg-gold text-navy hover:bg-white hover:text-navy"
+                  : "bg-navy text-white hover:bg-gold hover:text-navy"
               }`}
             >
               <span>{dict.nav.partnerWithUs}</span>
@@ -113,14 +263,16 @@ export default function Header({ settings }: Props) {
             </Link>
           </div>
 
-          {/* Mobile Menu & Language Trigger */}
-          <div className="lg:hidden flex items-center gap-2">
+          {/* Mobile View: Language Switcher + Menu Trigger */}
+          <div className="lg:hidden flex items-center gap-2 shrink-0">
             <LanguageSwitcher variant="compact" isDarkTheme={isDarkHero} />
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={`p-2 rounded-md transition-colors ${
-                isDarkHero ? "text-white hover:bg-white/10" : "text-navy hover:bg-stone-100"
+                isDarkHero
+                  ? "text-white hover:bg-white/10"
+                  : "text-navy hover:bg-stone-100"
               }`}
               aria-label="Toggle navigation menu"
             >
@@ -144,23 +296,31 @@ export default function Header({ settings }: Props) {
           {/* Mobile Language Switcher */}
           <div className="pb-2">
             <span className="text-[10px] font-bold uppercase tracking-wider text-stone-400 block mb-2">
-              Language / भाषा / भाषा:
+              Language / भाषा निवडा:
             </span>
-            <LanguageSwitcher variant="segmented" isDarkTheme={true} className="w-full justify-between" />
+            <LanguageSwitcher
+              variant="segmented"
+              isDarkTheme={true}
+              className="w-full justify-between"
+            />
           </div>
 
-          <nav className="flex flex-col space-y-2 border-t border-navy-800 pt-3">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+          {/* Full Vertical Navigation List */}
+          <nav className="flex flex-col space-y-1.5 border-t border-navy-800 pt-3">
+            {allMobileNavLinks.map((link) => {
+              const isActive =
+                pathname === link.href ||
+                (link.href !== "/" && pathname.startsWith(link.href));
               return (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-base py-2 border-b border-navy-800/60 transition-colors ${
-                    isActive ? "text-gold font-semibold" : "text-stone-300 hover:text-white"
+                  className={`text-base py-2 border-b border-navy-800/60 transition-colors flex items-center justify-between ${
+                    isActive ? "text-gold font-bold" : "text-stone-300 hover:text-white"
                   }`}
                 >
-                  {link.label}
+                  <span>{link.label}</span>
+                  {isActive && <span className="w-1.5 h-1.5 rounded-full bg-gold" />}
                 </Link>
               );
             })}
@@ -169,7 +329,7 @@ export default function Header({ settings }: Props) {
           <div className="pt-2 flex flex-col gap-3">
             <Link
               href="/contact?type=Partnership"
-              className="w-full text-center py-3 bg-gold text-navy font-semibold text-xs tracking-wider uppercase rounded-sm hover:bg-white transition-colors"
+              className="w-full text-center py-3 bg-gold text-navy font-bold text-xs tracking-wider uppercase rounded-sm hover:bg-white transition-colors"
             >
               {dict.nav.partnerWithUs}
             </Link>
