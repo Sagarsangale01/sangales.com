@@ -131,9 +131,18 @@ export default function ShopClient({ initialProducts, businesses }: Props) {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-gold/15 border border-gold/30 rounded-full text-gold text-xs font-bold tracking-wider uppercase mb-4">
-              <ShoppingBag className="w-3.5 h-3.5" />
-              <span>Official SANGALES Group Direct Storefront</span>
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-gold/15 border border-gold/30 rounded-full text-gold text-xs font-bold tracking-wider uppercase">
+                <ShoppingBag className="w-3.5 h-3.5" />
+                <span>Official SANGALES Group Direct Storefront</span>
+              </div>
+              <Link
+                href="/track-order"
+                className="inline-flex items-center gap-1.5 px-3 py-1 bg-white/10 hover:bg-white/20 text-stone-200 hover:text-white rounded-full text-xs font-semibold tracking-wide transition-colors"
+              >
+                <Truck className="w-3.5 h-3.5 text-gold" />
+                <span>Track Existing Order &rarr;</span>
+              </Link>
             </div>
             <h1 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
               Direct Supply &amp; Products Store

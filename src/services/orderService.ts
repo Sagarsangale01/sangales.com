@@ -101,6 +101,30 @@ export async function getOrderById(id: string): Promise<OrderRecord | null> {
   return order || null;
 }
 
+export async function trackOrderByNumberAndPhone(
+  orderNumber: string,
+  phone: string
+): Promise<OrderRecord | null> {
+  const store = getStore();
+  const cleanNum = orderNumber.trim().toUpperCase();
+  const cleanPhoneInput = phone.replace(/[^0-9]/g, "");
+
+  const order = (store.orders || []).find((o) => {
+    const numMatch = o.orderNumber.toUpperCase() === cleanNum;
+    if (!numMatch) return false;
+
+    const orderPhoneClean = o.customerPhone.replace(/[^0-9]/g, "");
+    const last10Order = orderPhoneClean.slice(-10);
+    const last10Input = cleanPhoneInput.slice(-10);
+    return (
+      orderPhoneClean === cleanPhoneInput ||
+      (last10Order.length >= 8 && last10Order === last10Input)
+    );
+  });
+
+  return order || null;
+}
+
 export async function updateOrderStatus(
   id: string,
   updates: {

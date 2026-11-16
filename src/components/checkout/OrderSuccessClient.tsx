@@ -367,7 +367,15 @@ export default function OrderSuccessClient({ order }: Props) {
             <span>Continue Shopping at SANGALES Store</span>
           </Link>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href={`/track-order?order=${encodeURIComponent(order.orderNumber)}&phone=${encodeURIComponent(order.customerPhone)}`}
+              className="px-4 py-2.5 bg-stone-100 hover:bg-stone-200 text-navy font-bold text-xs uppercase tracking-wider rounded-sm transition-all shadow-xs flex items-center gap-2"
+            >
+              <Truck className="w-4 h-4 text-gold-700" />
+              <span>Track Shipment Live</span>
+            </Link>
+
             <button
               onClick={handlePrint}
               className="px-5 py-2.5 bg-navy hover:bg-gold hover:text-navy text-white font-bold text-xs uppercase tracking-wider rounded-sm transition-all shadow-sm flex items-center gap-2 cursor-pointer"

@@ -136,6 +136,11 @@ export default function Footer({ settings: propSettings, businesses: propBusines
                 </Link>
               </li>
               <li>
+                <Link href="/track-order" className="hover:text-gold transition-colors text-stone-300">
+                  Track Order &amp; Dispatch
+                </Link>
+              </li>
+              <li>
                 <Link href="/catalogue" className="hover:text-gold transition-colors">
                   {dict.nav.catalogue}
                 </Link>
