@@ -15,6 +15,7 @@ import {
   X,
   Image as ImageIcon,
   Tag,
+  Boxes,
 } from "lucide-react";
 import { AdminProductItem } from "@/services/businessService";
 
@@ -37,10 +38,18 @@ export default function ProductManagerClient({ initialProducts, businesses }: Pr
     businessId: businesses[0]?.id || "",
     name: "",
     category: "",
+    subCategory: "",
+    sku: "",
     price: "",
+    mrp: "",
+    unit: "Standard Unit",
+    stockStatus: "IN_STOCK" as "IN_STOCK" | "LOW_STOCK" | "OUT_OF_STOCK",
+    stockQuantity: 50,
+    lowStockThreshold: 10,
     directBuyUrl: "",
     image: "",
     description: "",
+    isFeaturedInShop: true,
   });
 
   const filteredProducts = useMemo(() => {
@@ -51,10 +60,11 @@ export default function ProductManagerClient({ initialProducts, businesses }: Pr
       if (search.trim() !== "") {
         const q = search.toLowerCase();
         const matchName = p.name.toLowerCase().includes(q);
+        const matchSku = p.sku?.toLowerCase().includes(q) || false;
         const matchDesc = p.description.toLowerCase().includes(q);
         const matchCat = p.category?.toLowerCase().includes(q) || false;
         const matchBiz = p.businessName.toLowerCase().includes(q);
-        if (!matchName && !matchDesc && !matchCat && !matchBiz) return false;
+        if (!matchName && !matchSku && !matchDesc && !matchCat && !matchBiz) return false;
       }
       return true;
     });
@@ -66,10 +76,18 @@ export default function ProductManagerClient({ initialProducts, businesses }: Pr
       businessId: selectedBusiness !== "ALL" ? selectedBusiness : businesses[0]?.id || "",
       name: "",
       category: "",
+      subCategory: "",
+      sku: `SNG-${Date.now().toString().slice(-6)}`,
       price: "",
+      mrp: "",
+      unit: "Standard Unit",
+      stockStatus: "IN_STOCK",
+      stockQuantity: 50,
+      lowStockThreshold: 10,
       directBuyUrl: "",
       image: "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600",
       description: "",
+      isFeaturedInShop: true,
     });
     setError(null);
     setIsModalOpen(true);
@@ -81,10 +99,18 @@ export default function ProductManagerClient({ initialProducts, businesses }: Pr
       businessId: prod.businessId,
       name: prod.name,
       category: prod.category || "",
+      subCategory: prod.subCategory || "",
+      sku: prod.sku || `SNG-${prod.id.toUpperCase()}`,
       price: prod.price || "",
+      mrp: prod.mrp || "",
+      unit: prod.unit || "Standard Unit",
+      stockStatus: prod.stockStatus || "IN_STOCK",
+      stockQuantity: prod.stockQuantity ?? 50,
+      lowStockThreshold: prod.lowStockThreshold ?? 10,
       directBuyUrl: prod.directBuyUrl || "",
       image: prod.image || "",
       description: prod.description,
+      isFeaturedInShop: prod.isFeaturedInShop ?? true,
     });
     setError(null);
     setIsModalOpen(true);
@@ -165,7 +191,14 @@ export default function ProductManagerClient({ initialProducts, businesses }: Pr
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
+          <Link
+            href="/admin/inventory"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-gold/15 hover:bg-gold/25 text-gold-900 text-xs font-bold uppercase tracking-wider rounded-sm transition-all border border-gold/30 shadow-xs"
+          >
+            <Boxes className="w-3.5 h-3.5 text-gold-700" />
+            <span>Inventory &amp; Stock Hub</span>
+          </Link>
           <Link
             href="/catalogue"
             target="_blank"
@@ -245,10 +278,10 @@ export default function ProductManagerClient({ initialProducts, businesses }: Pr
             <thead className="bg-stone-50 border-b border-stone-200 text-stone-600 font-bold uppercase tracking-wider">
               <tr>
                 <th className="py-3 px-4 w-14">Image</th>
-                <th className="py-3 px-4">Solution / Product</th>
+                <th className="py-3 px-4">Solution / Product &amp; SKU</th>
                 <th className="py-3 px-4">Business Unit</th>
                 <th className="py-3 px-4">Category</th>
-                <th className="py-3 px-4">Indicative Rate</th>
+                <th className="py-3 px-4">Rate &amp; Stock</th>
                 <th className="py-3 px-4 text-right">Actions</th>
               </tr>
             </thead>
@@ -279,7 +312,15 @@ export default function ProductManagerClient({ initialProducts, businesses }: Pr
                     </td>
                     <td className="py-3 px-4 max-w-xs">
                       <p className="font-bold text-navy text-xs">{prod.name}</p>
-                      <p className="text-[11px] text-stone-500 line-clamp-2 leading-relaxed">
+                      <div className="flex items-center gap-1.5 mt-0.5">
+                        <span className="font-mono text-[9px] bg-stone-100 text-stone-600 px-1 py-0.2 rounded-xs font-semibold">
+                          {prod.sku || `SNG-${prod.id.toUpperCase()}`}
+                        </span>
+                        {prod.unit && (
+                          <span className="text-[10px] text-stone-400">&bull; {prod.unit}</span>
+                        )}
+                      </div>
+                      <p className="text-[11px] text-stone-500 line-clamp-1 leading-relaxed mt-0.5">
                         {prod.description}
                       </p>
                     </td>
@@ -302,8 +343,27 @@ export default function ProductManagerClient({ initialProducts, businesses }: Pr
                         <span className="text-stone-400 text-[10px]">Uncategorized</span>
                       )}
                     </td>
-                    <td className="py-3 px-4 whitespace-nowrap font-medium text-navy text-xs">
-                      {prod.price || <span className="text-stone-400 font-normal">On Request</span>}
+                    <td className="py-3 px-4 whitespace-nowrap">
+                      <div className="font-medium text-navy text-xs">
+                        {prod.price || <span className="text-stone-400 font-normal">On Request</span>}
+                      </div>
+                      <div className="mt-0.5">
+                        <span
+                          className={`inline-block px-1.5 py-0.5 text-[9px] font-bold uppercase rounded-xs ${
+                            prod.stockStatus === "OUT_OF_STOCK"
+                              ? "bg-red-100 text-red-700"
+                              : prod.stockStatus === "LOW_STOCK"
+                              ? "bg-amber-100 text-amber-800"
+                              : "bg-emerald-100 text-emerald-800"
+                          }`}
+                        >
+                          {prod.stockStatus === "OUT_OF_STOCK"
+                            ? "Out of Stock"
+                            : prod.stockStatus === "LOW_STOCK"
+                            ? `Low (${prod.stockQuantity ?? 5})`
+                            : `In Stock (${prod.stockQuantity ?? 50})`}
+                        </span>
+                      </div>
                     </td>
                     <td className="py-3 px-4 text-right whitespace-nowrap">
                       <div className="inline-flex items-center gap-1.5">
@@ -404,14 +464,89 @@ export default function ProductManagerClient({ initialProducts, businesses }: Pr
                 </div>
                 <div>
                   <label className="block text-xs font-bold uppercase tracking-wider text-navy mb-1">
-                    Indicative Price / Unit
+                    SKU Code
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.sku}
+                    onChange={(e) => setFormData({ ...formData, sku: e.target.value })}
+                    placeholder="e.g. SNG-PKG-100"
+                    className="w-full px-3 py-2 text-xs bg-offwhite border border-stone-200 rounded-sm focus:outline-none focus:border-gold font-mono"
+                  />
+                </div>
+              </div>
+
+              {/* Pricing & Units */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3 bg-stone-50 border border-stone-200 rounded-sm">
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-navy mb-1">
+                    Selling Price (₹)
                   </label>
                   <input
                     type="text"
                     value={formData.price}
                     onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                    placeholder="e.g. ₹450 / Bulk Rate"
-                    className="w-full px-3 py-2 text-xs bg-offwhite border border-stone-200 rounded-sm focus:outline-none focus:border-gold"
+                    placeholder="e.g. ₹450"
+                    className="w-full px-3 py-2 text-xs bg-white border border-stone-300 rounded-sm font-bold text-navy"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-stone-600 mb-1">
+                    MRP (₹)
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.mrp}
+                    onChange={(e) => setFormData({ ...formData, mrp: e.target.value })}
+                    placeholder="e.g. ₹550"
+                    className="w-full px-3 py-2 text-xs bg-white border border-stone-300 rounded-sm"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-stone-600 mb-1">
+                    Packaging Unit
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.unit}
+                    onChange={(e) => setFormData({ ...formData, unit: e.target.value })}
+                    placeholder="e.g. Pack of 100"
+                    className="w-full px-3 py-2 text-xs bg-white border border-stone-300 rounded-sm"
+                  />
+                </div>
+              </div>
+
+              {/* Stock Status & Quantity */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3 bg-amber-50/50 border border-amber-200 rounded-sm">
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-navy mb-1">
+                    Stock Status
+                  </label>
+                  <select
+                    value={formData.stockStatus}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        stockStatus: e.target.value as "IN_STOCK" | "LOW_STOCK" | "OUT_OF_STOCK",
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs bg-white border border-stone-300 rounded-sm font-semibold"
+                  >
+                    <option value="IN_STOCK">● In Stock</option>
+                    <option value="LOW_STOCK">▲ Low Stock</option>
+                    <option value="OUT_OF_STOCK">✕ Out of Stock</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-navy mb-1">
+                    Stock Quantity
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={formData.stockQuantity}
+                    onChange={(e) => setFormData({ ...formData, stockQuantity: parseInt(e.target.value) || 0 })}
+                    className="w-full px-3 py-2 text-xs bg-white border border-stone-300 rounded-sm font-bold"
                   />
                 </div>
               </div>

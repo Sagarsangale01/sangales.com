@@ -22,7 +22,23 @@ export async function POST(req: NextRequest) {
 
   try {
     const body = await req.json();
-    const { businessId, name, description, image, category, price, directBuyUrl } = body;
+    const {
+      businessId,
+      name,
+      description,
+      image,
+      category,
+      subCategory,
+      price,
+      mrp,
+      unit,
+      sku,
+      stockStatus,
+      stockQuantity,
+      lowStockThreshold,
+      isFeaturedInShop,
+      directBuyUrl,
+    } = body;
 
     if (!businessId || !name || !description) {
       return NextResponse.json(
@@ -36,7 +52,15 @@ export async function POST(req: NextRequest) {
       description,
       image,
       category,
+      subCategory,
       price,
+      mrp,
+      unit,
+      sku,
+      stockStatus,
+      stockQuantity: typeof stockQuantity === "number" ? stockQuantity : Number(stockQuantity) || 50,
+      lowStockThreshold: typeof lowStockThreshold === "number" ? lowStockThreshold : Number(lowStockThreshold) || 10,
+      isFeaturedInShop: isFeaturedInShop !== undefined ? Boolean(isFeaturedInShop) : true,
       directBuyUrl,
     });
 

@@ -45,35 +45,70 @@
           "name": "Healthy Sprout Chaat & Savory Bowls",
           "category": "Healthy Chaat",
           "description": "Freshly tossed sprouted beans with diced tomatoes, crunchy cucumber, coriander herbs, and zesty spices for a delicious, guilt-free snack.",
-          "image": "/images/annamrit-foods/annamrit-sprout-chaat.jpg"
+          "image": "/images/annamrit-foods/annamrit-sprout-chaat.jpg",
+          "price": "₹120",
+          "mrp": "₹150",
+          "unit": "Per Bowl (250g)",
+          "sku": "SNG-AF-101",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 45,
+          "lowStockThreshold": 10
         },
         {
           "id": "af-2",
           "name": "Fresh Sprout Bowls & Protein Mixes",
           "category": "Fresh Sprouts",
           "description": "Daily fresh steamed and seasoned sprouted moong and mixed lentils rich in natural plant protein and wholesome nutrition.",
-          "image": "/images/annamrit-foods/annamrit-fresh-sprouts.jpg"
+          "image": "/images/annamrit-foods/annamrit-fresh-sprouts.jpg",
+          "price": "₹140",
+          "mrp": "₹175",
+          "unit": "Per Bowl (300g)",
+          "sku": "SNG-AF-102",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 50,
+          "lowStockThreshold": 10
         },
         {
           "id": "af-3",
           "name": "Layered Sprout & Veggie Salad Meal Box",
           "category": "Meal Options",
           "description": "Nutrient-dense meal box featuring sprouted moong, diced carrots, fresh cucumber, tomatoes, greens, and fresh lemon wedge for daily energy.",
-          "image": "/images/annamrit-foods/annamrit-salad-meal-box.jpg"
+          "image": "/images/annamrit-foods/annamrit-salad-meal-box.jpg",
+          "price": "₹180",
+          "mrp": "₹220",
+          "unit": "Meal Box (450g)",
+          "sku": "SNG-AF-103",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 30,
+          "lowStockThreshold": 10
         },
         {
           "id": "af-4",
           "name": "Vitality Fresh Vegetable Salad Platter",
           "category": "Breakfast & Salads",
           "description": "Crisp garden-fresh slices of ripe tomatoes, sweet carrots, nutritious beetroot, and cool cucumbers prepared with pristine hygiene.",
-          "image": "/images/annamrit-foods/annamrit-vitality-salad.jpg"
+          "image": "/images/annamrit-foods/annamrit-vitality-salad.jpg",
+          "price": "₹220",
+          "mrp": "₹260",
+          "unit": "Party Platter (600g)",
+          "sku": "SNG-AF-104",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 25,
+          "lowStockThreshold": 5
         },
         {
           "id": "af-5",
           "name": "Traditional Kala Chana & Sundal Chaat",
           "category": "Healthy Chaat",
           "description": "Slow-tempered black chickpeas (Kala Chana) garnished with tangy raw mango slices, fresh grated coconut, and aromatic curry leaves.",
-          "image": "/images/annamrit-foods/annamrit-kala-chana-chaat.jpg"
+          "image": "/images/annamrit-foods/annamrit-kala-chana-chaat.jpg",
+          "price": "₹130",
+          "mrp": "₹160",
+          "unit": "Per Bowl (250g)",
+          "sku": "SNG-AF-105",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 40,
+          "lowStockThreshold": 10
         }
       ],
       "gallery": [
@@ -143,49 +178,98 @@
           "name": "Farm-Fresh Organic Vegetables & Greens",
           "category": "Organic Vegetables",
           "description": "Naturally grown, chemical-free daily vegetables harvested fresh from Maharashtra farmlands — including fresh farm tomatoes, cucumbers, spinach, fenugreek, brinjals, gourds, and coriander herbs for wholesome daily meals.",
-          "image": "/images/farms/organic-farm-vegetables.jpg"
+          "image": "/images/farms/organic-farm-vegetables.jpg",
+          "price": "₹85",
+          "mrp": "₹110",
+          "unit": "1 kg Fresh Basket",
+          "sku": "SNG-SF-201",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 80,
+          "lowStockThreshold": 15
         },
         {
           "id": "sf-2",
           "name": "Wholesome Natural Wheat",
           "category": "Wholesome Grains",
           "description": "Golden, sun-ripened whole wheat grains with high bran and natural gluten integrity. Cleaned, sorted, and free from synthetic polish — ideal for soft rotis, chapatis, and stone-ground flour.",
-          "image": "/images/farms/wholesome-wheat-grains.jpg"
+          "image": "/images/farms/wholesome-wheat-grains.jpg",
+          "price": "₹2,250",
+          "mrp": "₹2,600",
+          "unit": "50 kg Jute Bag",
+          "sku": "SNG-SF-202",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 55,
+          "lowStockThreshold": 10
         },
         {
           "id": "sf-3",
           "name": "Pure Farm-Fresh Bajra & Pearl Millet",
           "category": "Millets & Superfoods",
           "description": "Authentic, nutrient-dense Pearl Millet (Bajra) grains packed with iron, zinc, dietary fiber, and complex carbohydrates for wholesome daily winter bhakris and nutritious rotlas.",
-          "image": "/images/farms/pure-bajra-pearl-millet.jpg"
+          "image": "/images/farms/pure-bajra-pearl-millet.jpg",
+          "price": "₹1,850",
+          "mrp": "₹2,200",
+          "unit": "50 kg Bag",
+          "sku": "SNG-SF-203",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 40,
+          "lowStockThreshold": 10
         },
         {
           "id": "sf-4",
           "name": "Authentic Shalu Jowar & Sorghum",
           "category": "Wholesome Grains",
           "description": "Naturally gluten-free, premium white Shalu Jowar cultivated with organic soil enrichment. Rich in antioxidants, magnesium, and digestive fiber, producing soft, sweet traditional bhakris.",
-          "image": "/images/farms/authentic-shalu-jowar.jpg"
+          "image": "/images/farms/authentic-shalu-jowar.jpg",
+          "price": "₹1,950",
+          "mrp": "₹2,350",
+          "unit": "50 kg Bag",
+          "sku": "SNG-SF-204",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 35,
+          "lowStockThreshold": 10
         },
         {
           "id": "sf-5",
           "name": "Ancient Indian Millets & Superfood Mix",
           "category": "Millets & Superfoods",
           "description": "A curated range of unprocessed, mineral-packed ancient Indian millets including Finger Millet (Ragi), Foxtail Millet, and Little Millet for diabetic-friendly, high-calcium nutrition.",
-          "image": "/images/farms/ancient-indian-millets-ragi.jpg"
+          "image": "/images/farms/ancient-indian-millets-ragi.jpg",
+          "price": "₹280",
+          "mrp": "₹350",
+          "unit": "1 kg Pack",
+          "sku": "SNG-SF-205",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 60,
+          "lowStockThreshold": 10
         },
         {
           "id": "sf-6",
           "name": "Farm-Fresh Vine Tomatoes & Salad Veggies",
           "category": "Organic Vegetables",
           "description": "Naturally ripened, farm-fresh juicy red vine tomatoes and crisp salad vegetables grown with organic compost and zero synthetic ripening chemicals.",
-          "image": "/images/farms/farm-fresh-tomatoes.jpg"
+          "image": "/images/farms/farm-fresh-tomatoes.jpg",
+          "price": "₹65",
+          "mrp": "₹90",
+          "unit": "1 kg Pack",
+          "sku": "SNG-SF-206",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 90,
+          "lowStockThreshold": 20
         },
         {
           "id": "sf-7",
           "name": "Farm Harvest Pulses & Legumes",
           "category": "Farm Harvest",
           "description": "Naturally matured, unpolished whole pulses including whole green moong, desi chana, and tur grown through sustainable crop-rotation to naturally enrich the soil and provide pure protein.",
-          "image": "/images/farms/farm-harvest-pulses-legumes.jpg"
+          "image": "/images/farms/farm-harvest-pulses-legumes.jpg",
+          "price": "₹195",
+          "mrp": "₹240",
+          "unit": "1 kg Pack",
+          "sku": "SNG-SF-207",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 75,
+          "lowStockThreshold": 15
         }
       ],
       "gallery": [
@@ -267,42 +351,84 @@
           "name": "Home Lights & Residential Fixtures",
           "category": "Home Lighting",
           "description": "Modern interior residential lights including recessed ceiling downlights, ambient wall sconces, cove fixtures, and decorative chandeliers for luxury homes.",
-          "image": "/images/enterprises/decorative-ambient-lighting.jpg"
+          "image": "/images/enterprises/decorative-ambient-lighting.jpg",
+          "price": "₹380",
+          "mrp": "₹520",
+          "unit": "Per Fixture",
+          "sku": "SNG-LED-HM01",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 70,
+          "lowStockThreshold": 15
         },
         {
           "id": "se-2",
           "name": "Ultra-Slim Commercial & Home LED Panel Lights",
           "category": "Panel Lights",
           "description": "Glare-free, ultra-slim square (2x2 ft, 1x1 ft) and round edge-lit LED panel lights engineered for modular false ceilings in homes, offices, hospitals, and educational institutions.",
-          "image": "/images/enterprises/commercial-led-panel-lights.jpg"
+          "image": "/images/enterprises/commercial-led-panel-lights.jpg",
+          "price": "₹550",
+          "mrp": "₹750",
+          "unit": "Per Panel (15W/22W)",
+          "sku": "SNG-LED-PNL02",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 85,
+          "lowStockThreshold": 15
         },
         {
           "id": "se-3",
           "name": "Commercial & Architectural LED Lights",
           "category": "LED Lights",
           "description": "High-performance commercial LED luminaires, magnetic track systems, COB spotlights, and profile fixtures providing superior lumens-per-watt efficiency and accent lighting.",
-          "image": "/images/enterprises/architectural-track-lighting.jpg"
+          "image": "/images/enterprises/architectural-track-lighting.jpg",
+          "price": "₹1,250",
+          "mrp": "₹1,650",
+          "unit": "Per Luminaire",
+          "sku": "SNG-LED-ARC03",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 45,
+          "lowStockThreshold": 10
         },
         {
           "id": "se-4",
           "name": "Outdoor LED Street Lights & Luminaires",
           "category": "Street Lights",
           "description": "Heavy-duty weatherproof outdoor roadway LED streetlights with surge protection, wide roadway beam angles, and automated dusk-to-dawn sensor compatibility for streets and campuses.",
-          "image": "/images/enterprises/outdoor-led-street-lighting.jpg"
+          "image": "/images/enterprises/outdoor-led-street-lighting.jpg",
+          "price": "₹2,450",
+          "mrp": "₹3,200",
+          "unit": "Per Light (50W/100W)",
+          "sku": "SNG-LED-STR04",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 30,
+          "lowStockThreshold": 8
         },
         {
           "id": "se-5",
           "name": "Energy-Saving LED Tube Lights & Battens",
           "category": "Tube Lights",
           "description": "High-efficiency T5 and T8 integrated LED tube lights and slim batten fittings delivering instant, flicker-free bright illumination with up to 60% energy savings over conventional tubelights.",
-          "image": "/images/enterprises/led-tube-lights.jpg"
+          "image": "/images/enterprises/led-tube-lights.jpg",
+          "price": "₹280",
+          "mrp": "₹380",
+          "unit": "Per 20W Batten",
+          "sku": "SNG-LED-TUB05",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 150,
+          "lowStockThreshold": 25
         },
         {
           "id": "se-6",
           "name": "Heavy-Duty Industrial High Bays & Floodlights",
           "category": "Industrial & Floodlights",
           "description": "Robust IP66 dust-and-waterproof industrial LED high bay fixtures and high-wattage floodlights with die-cast aluminum heat sinks for factories, production floors, and warehouses.",
-          "image": "/images/enterprises/industrial-led-floodlights.jpg"
+          "image": "/images/enterprises/industrial-led-floodlights.jpg",
+          "price": "₹4,200",
+          "mrp": "₹5,500",
+          "unit": "Per High Bay (150W)",
+          "sku": "SNG-LED-HBY06",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 22,
+          "lowStockThreshold": 5
         }
       ],
       "gallery": [
@@ -381,56 +507,112 @@
           "name": "Construction Steel & High-Strength TMT Rebars",
           "category": "Steel & Building Materials",
           "description": "Certified Fe 500D and Fe 550D high-ductility, corrosion-resistant TMT rebars available in standard diameters (8mm to 32mm) for residential slabs, commercial pillars, and civil infrastructure foundations.",
-          "image": "/images/trading/construction-steel-tmt-bars.jpg"
+          "image": "/images/trading/construction-steel-tmt-bars.jpg",
+          "price": "₹58,500",
+          "mrp": "₹62,000",
+          "unit": "Per Metric Ton (MT)",
+          "sku": "SNG-TRD-TMT550",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 40,
+          "lowStockThreshold": 5
         },
         {
           "id": "st-2",
           "name": "Waterproof PVC Ply Sheets & High-Density Foam Boards",
           "category": "PVC Ply & Boards",
           "description": "100% waterproof, termite-proof, and borer-free high-density PVC ply boards (6mm to 18mm, 8x4 ft). Superior moisture-resistant alternative to traditional plywood for modular kitchens, bathroom vanities, and partitions.",
-          "image": "/images/trading/pvc-ply-sheets.jpg"
+          "image": "/images/trading/pvc-ply-sheets.jpg",
+          "price": "₹1,350",
+          "mrp": "₹1,650",
+          "unit": "Per Sheet (8x4 ft)",
+          "sku": "SNG-TRD-PVCPLY",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 65,
+          "lowStockThreshold": 10
         },
         {
           "id": "st-3",
           "name": "Designer Interior Wallpapers & 3D Wall Coverings",
           "category": "Wallpapers & Decor",
           "description": "Luxury washable vinyl and non-woven designer wallpapers featuring contemporary geometric patterns, textured fabrics, metallic accents, and natural stone textures for living rooms, bedrooms, and executive offices.",
-          "image": "/images/trading/designer-interior-wallpapers.jpg"
+          "image": "/images/trading/designer-interior-wallpapers.jpg",
+          "price": "₹1,750",
+          "mrp": "₹2,200",
+          "unit": "Per Roll (57 sq ft)",
+          "sku": "SNG-TRD-WLPP01",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 50,
+          "lowStockThreshold": 10
         },
         {
           "id": "st-4",
           "name": "Decorative PVC Wall & Ceiling Panels",
           "category": "PVC Panels",
           "description": "High-grade waterproof and termite-proof PVC tongue-and-groove panels for walls and false ceilings. Available in contemporary wood grains, matte textures, and gloss finishes for modern homes and commercial spaces.",
-          "image": "/images/trading/pvc-wall-ceiling-panels.jpg"
+          "image": "/images/trading/pvc-wall-ceiling-panels.jpg",
+          "price": "₹420",
+          "mrp": "₹550",
+          "unit": "Per Panel (10ft)",
+          "sku": "SNG-TRD-PNL10",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 120,
+          "lowStockThreshold": 20
         },
         {
           "id": "st-5",
           "name": "WPC Fluted Louvers & Architectural Wall Panels",
           "category": "WPC Louvers",
           "description": "Heavy-duty Wood Plastic Composite (WPC) fluted wall panels and charcoal louvers. Engineered for luxury feature walls, TV units, exterior cladding accents, and commercial reception backdrops.",
-          "image": "/images/trading/wpc-fluted-louvers.jpg"
+          "image": "/images/trading/wpc-fluted-louvers.jpg",
+          "price": "₹950",
+          "mrp": "₹1,250",
+          "unit": "Per Louver Panel",
+          "sku": "SNG-TRD-WPCLV",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 80,
+          "lowStockThreshold": 15
         },
         {
           "id": "st-6",
           "name": "High-Gloss PVC UV Marble Sheets (8x4 ft)",
           "category": "UV Marble Sheets",
           "description": "Ultra-luxurious 8ft x 4ft faux marble wall sheets with UV protective coating. Scratch-resistant, lightweight, and moisture-proof alternative to natural Italian marble for lobby and living room feature walls.",
-          "image": "/images/trading/pvc-uv-marble-sheets.jpg"
+          "image": "/images/trading/pvc-uv-marble-sheets.jpg",
+          "price": "₹1,850",
+          "mrp": "₹2,400",
+          "unit": "Per Sheet (8x4 ft)",
+          "sku": "SNG-TRD-UVMRB",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 45,
+          "lowStockThreshold": 10
         },
         {
           "id": "st-7",
           "name": "Structural Steel Sections, GI Channels & Ceiling Framing Hardware",
           "category": "Steel & Hardware",
           "description": "Zinc-coated rust-resistant GI channels, perimeter wall angles, structural steel sections, stainless steel mounting clips, and heavy-duty drywall screws engineered for secure and rapid panel anchoring.",
-          "image": "/images/trading/mounting-hardware-channels.jpg"
+          "image": "/images/trading/mounting-hardware-channels.jpg",
+          "price": "₹340",
+          "mrp": "₹450",
+          "unit": "Per 12ft Channel",
+          "sku": "SNG-TRD-GICHN",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 200,
+          "lowStockThreshold": 30
         },
         {
           "id": "st-8",
           "name": "High-Strength Structural Adhesives & Silicone Sealants",
           "category": "Adhesives & Sealants",
           "description": "Professional-grade nail-free instant grab adhesives and neutral silicone sealants designed for bonding PVC ply, panels, marble sheets, and louvers securely to plastered walls, plywood, or concrete.",
-          "image": "/images/trading/structural-adhesives-sealants.jpg"
+          "image": "/images/trading/structural-adhesives-sealants.jpg",
+          "price": "₹290",
+          "mrp": "₹380",
+          "unit": "Per Cartridge (310ml)",
+          "sku": "SNG-TRD-ADHES",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 160,
+          "lowStockThreshold": 25
         }
       ],
       "gallery": [
@@ -516,42 +698,84 @@
           "name": "4CP Compartment Meal Boxes (with Anti-Leak Lids)",
           "category": "Meal Boxes & Trays",
           "description": "Heavy-duty food-grade 4-compartment meal box (separate sections for Dal, Rice, 2 Sabzis/Roti) with tight-fitting anti-leak clear lids. Ideal for cloud kitchens, corporate thali lunch delivery, and caterers.",
-          "image": "/images/packaging/4cp-meal-box.jpg"
+          "image": "/images/packaging/4cp-meal-box.jpg",
+          "price": "₹850",
+          "mrp": "₹1,050",
+          "unit": "Pack of 100",
+          "sku": "SNG-PKG-4CP100",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 120,
+          "lowStockThreshold": 20
         },
         {
           "id": "sp-2",
           "name": "Aluminium Foil Food Containers (All Sizes)",
           "category": "Foil Containers",
           "description": "Heavy-duty, heat-retaining aluminium foil containers with matching foil/poly lids. Available in small square (250ml dip/chutney), medium rectangular (450ml/500ml), and large (650ml/750ml/1000ml) biryani & gravy meal containers.",
-          "image": "/images/packaging/aluminium-foil-containers.jpg"
+          "image": "/images/packaging/aluminium-foil-containers.jpg",
+          "price": "₹450",
+          "mrp": "₹550",
+          "unit": "Pack of 100",
+          "sku": "SNG-PKG-ALU100",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 180,
+          "lowStockThreshold": 30
         },
         {
           "id": "sp-3",
           "name": "Eco-Friendly Paper Bags (Sizes: 10x14, 6x14, 6x11, 4x10, 4x8)",
           "category": "Paper Bags & Pouches",
           "description": "Durable food-grade kraft and white paper bags available in standard dimensions: 10x14 inches (parcel/bakery), 6x14 inches (long snacks/rolls), 6x11 inches (standard takeaway), 4x10 inches (cutlery/snacks), and 4x8 inches (small pouches).",
-          "image": "/images/packaging/paper-bags-sizes.jpg"
+          "image": "/images/packaging/paper-bags-sizes.jpg",
+          "price": "₹380",
+          "mrp": "₹480",
+          "unit": "Bundle of 100",
+          "sku": "SNG-PKG-BAG100",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 95,
+          "lowStockThreshold": 20
         },
         {
           "id": "sp-4",
           "name": "Clear Disposable Glasses & Beverage Cups",
           "category": "Tableware & Glassware",
           "description": "Hygienic, crack-resistant transparent disposable glasses for water, juices, lassi, shakes, and cold beverages in 150ml, 200ml, 250ml, and 300ml capacities.",
-          "image": "/images/packaging/disposable-glass-cup.jpg"
+          "image": "/images/packaging/disposable-glass-cup.jpg",
+          "price": "₹240",
+          "mrp": "₹300",
+          "unit": "Pack of 100",
+          "sku": "SNG-PKG-GLS100",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 140,
+          "lowStockThreshold": 25
         },
         {
           "id": "sp-5",
           "name": "Food-Grade Disposable Spoons & Cutlery",
           "category": "Disposable Cutlery",
           "description": "Sturdy, food-grade transparent and white disposable spoons, forks, and individually wrapped cutlery kits for clean and hygienic food delivery.",
-          "image": "/images/packaging/disposable-spoon.jpg"
+          "image": "/images/packaging/disposable-spoon.jpg",
+          "price": "₹180",
+          "mrp": "₹240",
+          "unit": "Pack of 100",
+          "sku": "SNG-PKG-CUT100",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 200,
+          "lowStockThreshold": 30
         },
         {
           "id": "sp-6",
           "name": "Heavy-Duty Paper Plates & Platters",
           "category": "Paper Tableware",
           "description": "Oil-resistant, microwave-safe biodegradable paper plates in 6-inch, 8-inch, 10-inch, and 12-inch buffet sizes for catering, parties, and street food.",
-          "image": "/images/packaging/disposable-meal-packaging-kit.jpg"
+          "image": "/images/packaging/disposable-meal-packaging-kit.jpg",
+          "price": "₹320",
+          "mrp": "₹400",
+          "unit": "Pack of 100",
+          "sku": "SNG-PKG-PLT100",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 110,
+          "lowStockThreshold": 20
         }
       ],
       "gallery": [
@@ -621,42 +845,84 @@
           "name": "Custom CRM Solutions & Sales Pipeline Platforms",
           "category": "Enterprise CRM",
           "description": "Bespoke Customer Relationship Management (CRM) software built around your exact business stages, lead capture pipelines, customer interaction histories, automated follow-ups, and sales analytics.",
-          "image": "/images/digital/custom-crm-solutions.jpg"
+          "image": "/images/digital/custom-crm-solutions.jpg",
+          "price": "₹45,000",
+          "mrp": "₹60,000",
+          "unit": "Annual License / Setup",
+          "sku": "SNG-DIG-CRM01",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 99,
+          "lowStockThreshold": 5
         },
         {
           "id": "sd-2",
           "name": "Enterprise AI Integrations & Intelligent Automation",
           "category": "AI & Machine Learning",
           "description": "Advanced artificial intelligence integrations including intelligent 24/7 conversational chatbots, automated data extraction, document intelligence, predictive customer scoring, and AI workflow copilots.",
-          "image": "/images/digital/ai-integrations.jpg"
+          "image": "/images/digital/ai-integrations.jpg",
+          "price": "₹75,000",
+          "mrp": "₹95,000",
+          "unit": "Project Deployment Scope",
+          "sku": "SNG-DIG-AI02",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 99,
+          "lowStockThreshold": 5
         },
         {
           "id": "sd-3",
           "name": "Custom & Dynamic Websites & Web Applications",
           "category": "Web Engineering",
           "description": "Lightning-fast, mobile-optimized dynamic websites and web applications with rich interactive UI, modern database backends, automated enquiry capture, and enterprise-grade SEO.",
-          "image": "/images/digital/dynamic-websites.jpg"
+          "image": "/images/digital/dynamic-websites.jpg",
+          "price": "₹25,000",
+          "mrp": "₹35,000",
+          "unit": "Full-Stack Deployment",
+          "sku": "SNG-DIG-WEB03",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 99,
+          "lowStockThreshold": 5
         },
         {
           "id": "sd-4",
           "name": "Bespoke Business Management & ERP Portals",
           "category": "Business Software",
           "description": "Centralized operational software connecting inventory tracking, vendor management, invoice generation, team workflows, and executive analytics into one secure web dashboard.",
-          "image": "/images/digital/bespoke-business-software.jpg"
+          "image": "/images/digital/bespoke-business-software.jpg",
+          "price": "₹95,000",
+          "mrp": "₹1,25,000",
+          "unit": "Enterprise Solution",
+          "sku": "SNG-DIG-ERP04",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 99,
+          "lowStockThreshold": 5
         },
         {
           "id": "sd-5",
           "name": "Cloud Microservices & API Integration Systems",
           "category": "Cloud & APIs",
           "description": "Robust middleware bridging payment gateways, WhatsApp Business APIs, shipping logistics, SMS dispatchers, and existing enterprise accounting software with zero downtime.",
-          "image": "/images/digital/cloud-microservices.jpg"
+          "image": "/images/digital/cloud-microservices.jpg",
+          "price": "₹35,000",
+          "mrp": "₹45,000",
+          "unit": "Integration Architecture",
+          "sku": "SNG-DIG-API05",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 99,
+          "lowStockThreshold": 5
         },
         {
           "id": "sd-6",
           "name": "High-Conversion Digital Commerce & Ordering Funnels",
           "category": "Digital Commerce",
           "description": "Scalable online ordering portals, commercial B2B catalogs, and subscription platforms featuring secure payment gateways and automated transactional messaging.",
-          "image": "/images/digital/sangales-digital-cover.jpg"
+          "image": "/images/digital/sangales-digital-cover.jpg",
+          "price": "₹40,000",
+          "mrp": "₹55,000",
+          "unit": "Commerce Funnel Engine",
+          "sku": "SNG-DIG-COM06",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 99,
+          "lowStockThreshold": 5
         }
       ],
       "gallery": [
@@ -768,19 +1034,31 @@
           "id": "af-ghee-1l",
           "name": "Premium Desi Cow A2 Bilona Ghee (1 Litre)",
           "category": "A2 Bilona Ghee",
-          "price": "₹ 3,000.00",
+          "price": "₹3,000",
           "description": "Pure, aromatic, danedar (grainy) A2 Desi Cow Ghee lovingly handcrafted from whole curd using the traditional wooden bilona churning process. Packed with natural vitamins, healthy fats, and beta-carotene.",
           "image": "/images/anvayi-farms/anvayi-ghee-1litre.jpg",
-          "directBuyUrl": "https://www.anvayifarms.com/shop"
+          "directBuyUrl": "https://www.anvayifarms.com/shop",
+          "mrp": "₹3,500",
+          "unit": "1 Litre Glass Jar",
+          "sku": "ANV-GHEE-1L",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 48,
+          "lowStockThreshold": 10
         },
         {
           "id": "af-ghee-500ml",
           "name": "Premium Desi Cow A2 Bilona Ghee (500ml)",
           "category": "A2 Bilona Ghee",
-          "price": "₹ 1,500.00",
+          "price": "₹1,500",
           "description": "Small-batch authentic Desi Cow Bilona Ghee in a premium glass jar. Produced under Ahinsak Dohan with zero preservatives, chemicals, or additives for daily family nourishment.",
           "image": "/images/anvayi-farms/anvayi-ghee-500ml.jpg",
-          "directBuyUrl": "https://www.anvayifarms.com/shop"
+          "directBuyUrl": "https://www.anvayifarms.com/shop",
+          "mrp": "₹1,800",
+          "unit": "500ml Glass Jar",
+          "sku": "ANV-GHEE-500M",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 65,
+          "lowStockThreshold": 15
         },
         {
           "id": "af-makkhan",
@@ -788,7 +1066,14 @@
           "category": "Cultured Dairy",
           "description": "Slow-churned artisanal white butter extracted directly from whole cultured curd using the traditional bilona method, preserving active probiotic enzymes and homestyle flavor.",
           "image": "/images/anvayi-farms/anvayi-bilona-method.png",
-          "directBuyUrl": "https://www.anvayifarms.com/shop"
+          "directBuyUrl": "https://www.anvayifarms.com/shop",
+          "price": "₹850",
+          "mrp": "₹980",
+          "unit": "500g Tub",
+          "sku": "ANV-MKH-500G",
+          "stockStatus": "LOW_STOCK",
+          "stockQuantity": 8,
+          "lowStockThreshold": 10
         },
         {
           "id": "af-farm-dairy",
@@ -796,7 +1081,14 @@
           "category": "Farm Heritage",
           "description": "Fresh, unadulterated farm staples sourced from naturally grazed indigenous cows fed a pure vegetarian diet under compassionate care.",
           "image": "/images/anvayi-farms/anvayi-desi-cows.png",
-          "directBuyUrl": "https://www.anvayifarms.com"
+          "directBuyUrl": "https://www.anvayifarms.com",
+          "price": "₹450",
+          "mrp": "₹520",
+          "unit": "Farm Basket",
+          "sku": "ANV-FARM-CB",
+          "stockStatus": "IN_STOCK",
+          "stockQuantity": 32,
+          "lowStockThreshold": 10
         }
       ],
       "gallery": [

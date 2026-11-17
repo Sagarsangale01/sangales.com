@@ -191,8 +191,10 @@ export default function ShopClient({ initialProducts, businesses }: Props) {
 
   // Add to cart handler
   const handleAddToCart = (prod: AdminProductItem) => {
+    if (prod.stockStatus === "OUT_OF_STOCK") return;
     const { numeric, unit } = parsePrice(prod.price);
     const qty = getQty(prod.id);
+    const itemUnit = prod.unit || (unit ? unit.replace(/^\//, "").trim() : "Standard Unit");
 
     addItem({
       productId: prod.id,
@@ -202,7 +204,7 @@ export default function ShopClient({ initialProducts, businesses }: Props) {
       image: prod.image,
       price: numeric > 0 ? numeric : 500,
       quantity: qty,
-      unit: unit ? unit.replace(/^\//, "").trim() : "Standard Unit",
+      unit: itemUnit,
     });
 
     setAddedItemMap((prev) => ({ ...prev, [prod.id]: true }));
@@ -213,8 +215,10 @@ export default function ShopClient({ initialProducts, businesses }: Props) {
 
   // Buy now handler
   const handleBuyNow = (prod: AdminProductItem) => {
+    if (prod.stockStatus === "OUT_OF_STOCK") return;
     const { numeric, unit } = parsePrice(prod.price);
     const qty = getQty(prod.id);
+    const itemUnit = prod.unit || (unit ? unit.replace(/^\//, "").trim() : "Standard Unit");
 
     addItem({
       productId: prod.id,
@@ -224,7 +228,7 @@ export default function ShopClient({ initialProducts, businesses }: Props) {
       image: prod.image,
       price: numeric > 0 ? numeric : 500,
       quantity: qty,
-      unit: unit ? unit.replace(/^\//, "").trim() : "Standard Unit",
+      unit: itemUnit,
     });
 
     router.push("/checkout");
@@ -312,17 +316,28 @@ export default function ShopClient({ initialProducts, businesses }: Props) {
     const qty = getQty(prod.id);
     const isAdded = addedItemMap[prod.id];
 
+    const isOut = prod.stockStatus === "OUT_OF_STOCK" || (typeof prod.stockQuantity === "number" && prod.stockQuantity <= 0);
+    const isLow = !isOut && (prod.stockStatus === "LOW_STOCK" || (typeof prod.stockQuantity === "number" && prod.stockQuantity <= (prod.lowStockThreshold || 10)));
+
+    const numMrp = parsePrice(prod.mrp).numeric;
+    const discount = numMrp > numeric && numeric > 0 ? Math.round(((numMrp - numeric) / numMrp) * 100) : 0;
+    const packagingUnit = prod.unit || (unit ? unit.replace(/^\//, "").trim() : "");
+
     return (
       <div
         key={prod.id}
-        className="bg-white rounded-md border border-stone-200 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden group"
+        className={`bg-white rounded-md border shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col overflow-hidden group ${
+          isOut ? "border-red-200 opacity-90" : "border-stone-200"
+        }`}
       >
         {/* Image Container */}
         <div className="relative aspect-4/3 bg-stone-100 overflow-hidden">
           <img
             src={prod.image || "/images/placeholder.jpg"}
             alt={prod.name}
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${
+              isOut ? "grayscale-50 contrast-75" : ""
+            }`}
             onError={(e) => {
               (e.target as HTMLElement).style.display = "none";
             }}
@@ -333,21 +348,46 @@ export default function ShopClient({ initialProducts, businesses }: Props) {
             {prod.businessName}
           </span>
 
-          {/* Stock Status */}
-          <span className="absolute top-2.5 right-2.5 bg-emerald-600/90 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-xs shadow-xs flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-            In Stock
-          </span>
+          {/* Stock Status Badge */}
+          {isOut ? (
+            <span className="absolute top-2.5 right-2.5 bg-red-600 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-xs shadow-xs flex items-center gap-1">
+              ✕ Out of Stock
+            </span>
+          ) : isLow ? (
+            <span className="absolute top-2.5 right-2.5 bg-amber-500 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-xs shadow-xs flex items-center gap-1 animate-pulse">
+              ▲ Only {prod.stockQuantity ?? 5} Left
+            </span>
+          ) : (
+            <span className="absolute top-2.5 right-2.5 bg-emerald-600/90 text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-xs shadow-xs flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+              In Stock
+            </span>
+          )}
+
+          {/* Discount badge if MRP > Price */}
+          {discount > 0 && !isOut && (
+            <span className="absolute bottom-2.5 left-2.5 bg-red-600 text-white text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-xs shadow-xs">
+              {discount}% OFF
+            </span>
+          )}
         </div>
 
         {/* Body Content */}
         <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
           <div>
-            {prod.category && (
-              <span className="inline-block text-[10px] uppercase font-bold text-stone-500 bg-stone-100 px-2 py-0.5 rounded-xs tracking-wider mb-2">
-                {prod.category}
-              </span>
-            )}
+            <div className="flex items-center gap-2 mb-2">
+              {prod.category && (
+                <span className="inline-block text-[10px] uppercase font-bold text-stone-500 bg-stone-100 px-2 py-0.5 rounded-xs tracking-wider">
+                  {prod.category}
+                </span>
+              )}
+              {prod.sku && (
+                <span className="font-mono text-[9px] text-stone-400 font-semibold">
+                  {prod.sku}
+                </span>
+              )}
+            </div>
+
             <h3 className="font-bold text-navy text-sm sm:text-base leading-snug line-clamp-2 mb-1.5 group-hover:text-gold-700 transition-colors">
               {prod.name}
             </h3>
@@ -360,89 +400,126 @@ export default function ShopClient({ initialProducts, businesses }: Props) {
             {/* Price row */}
             <div className="pt-3 border-t border-stone-100 flex items-baseline justify-between mb-3">
               <div>
-                <span className="text-lg font-black text-navy">{display}</span>
-                {unit && (
-                  <span className="text-xs text-stone-500 font-medium ml-1">
-                    {unit}
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-lg font-black text-navy">{display}</span>
+                  {discount > 0 && (
+                    <span className="text-xs text-stone-400 line-through">
+                      ₹{numMrp.toLocaleString("en-IN")}
+                    </span>
+                  )}
+                </div>
+                {packagingUnit && (
+                  <span className="text-[11px] text-stone-500 font-medium block">
+                    / {packagingUnit}
                   </span>
                 )}
               </div>
-              <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-xs">
-                Direct Dispatch
-              </span>
+
+              {isOut ? (
+                <span className="text-[10px] font-bold text-red-700 bg-red-50 px-1.5 py-0.5 rounded-xs">
+                  Restock Pending
+                </span>
+              ) : isLow ? (
+                <span className="text-[10px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded-xs">
+                  Fast Selling
+                </span>
+              ) : (
+                <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded-xs">
+                  Direct Dispatch
+                </span>
+              )}
             </div>
 
             {/* Quantity & Cart Action */}
             <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                {/* Qty Selector */}
-                <div className="flex items-center border border-stone-300 rounded-sm bg-stone-50 h-9 shrink-0">
-                  <button
-                    type="button"
-                    onClick={() => setQty(prod.id, qty - 1)}
-                    className="px-2.5 h-full text-stone-600 hover:bg-stone-200 transition-colors cursor-pointer"
-                    aria-label="Decrease"
+              {isOut ? (
+                <div className="space-y-2">
+                  <div className="p-2 bg-stone-50 text-stone-500 text-center text-xs font-medium rounded-sm border border-stone-200">
+                    Currently Out of Stock
+                  </div>
+                  <a
+                    href={getWaProductUrl(prod)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider rounded-sm transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer"
                   >
-                    <Minus className="w-3 h-3" />
-                  </button>
-                  <span className="w-8 text-center text-xs font-bold text-navy">
-                    {qty}
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setQty(prod.id, qty + 1)}
-                    className="px-2.5 h-full text-stone-600 hover:bg-stone-200 transition-colors cursor-pointer"
-                    aria-label="Increase"
-                  >
-                    <Plus className="w-3 h-3" />
-                  </button>
+                    <MessageCircle className="w-3.5 h-3.5" />
+                    <span>Enquire for Restock on WhatsApp</span>
+                  </a>
                 </div>
+              ) : (
+                <>
+                  <div className="flex items-center gap-2">
+                    {/* Qty Selector */}
+                    <div className="flex items-center border border-stone-300 rounded-sm bg-stone-50 h-9 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => setQty(prod.id, qty - 1)}
+                        className="px-2.5 h-full text-stone-600 hover:bg-stone-200 transition-colors cursor-pointer"
+                        aria-label="Decrease"
+                      >
+                        <Minus className="w-3 h-3" />
+                      </button>
+                      <span className="w-8 text-center text-xs font-bold text-navy">
+                        {qty}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setQty(prod.id, qty + 1)}
+                        className="px-2.5 h-full text-stone-600 hover:bg-stone-200 transition-colors cursor-pointer"
+                        aria-label="Increase"
+                      >
+                        <Plus className="w-3 h-3" />
+                      </button>
+                    </div>
 
-                {/* Add to Cart Button */}
-                <button
-                  type="button"
-                  onClick={() => handleAddToCart(prod)}
-                  className={`flex-1 h-9 rounded-sm font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs ${
-                    isAdded
-                      ? "bg-emerald-600 text-white"
-                      : "bg-navy hover:bg-navy-900 text-white"
-                  }`}
-                >
-                  {isAdded ? (
-                    <>
-                      <Check className="w-3.5 h-3.5" />
-                      <span>Added!</span>
-                    </>
-                  ) : (
-                    <>
-                      <ShoppingBag className="w-3.5 h-3.5 text-gold" />
-                      <span>Add to Cart</span>
-                    </>
-                  )}
-                </button>
-              </div>
+                    {/* Add to Cart Button */}
+                    <button
+                      type="button"
+                      onClick={() => handleAddToCart(prod)}
+                      className={`flex-1 h-9 rounded-sm font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-xs ${
+                        isAdded
+                          ? "bg-emerald-600 text-white"
+                          : "bg-navy hover:bg-navy-900 text-white"
+                      }`}
+                    >
+                      {isAdded ? (
+                        <>
+                          <Check className="w-3.5 h-3.5" />
+                          <span>Added!</span>
+                        </>
+                      ) : (
+                        <>
+                          <ShoppingBag className="w-3.5 h-3.5 text-gold" />
+                          <span>Add to Cart</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
 
-              {/* Buy Now & WhatsApp Actions */}
-              <div className="grid grid-cols-2 gap-2 pt-1">
-                <button
-                  type="button"
-                  onClick={() => handleBuyNow(prod)}
-                  className="w-full py-1.5 bg-gold hover:bg-gold-600 text-navy font-bold text-[11px] uppercase tracking-wider rounded-sm transition-all shadow-xs flex items-center justify-center gap-1 cursor-pointer"
-                >
-                  <span>Buy Now</span>
-                  <ArrowRight className="w-3 h-3" />
-                </button>
+                  {/* Buy Now & WhatsApp Actions */}
+                  <div className="grid grid-cols-2 gap-2 pt-1">
+                    <button
+                      type="button"
+                      onClick={() => handleBuyNow(prod)}
+                      className="w-full py-1.5 bg-gold hover:bg-gold-600 text-navy font-bold text-[11px] uppercase tracking-wider rounded-sm transition-all shadow-xs flex items-center justify-center gap-1 cursor-pointer"
+                    >
+                      <span>Buy Now</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </button>
 
-                <a
-                  href={getWaProductUrl(prod)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-1.5 bg-stone-100 hover:bg-emerald-50 hover:text-emerald-700 text-stone-700 font-bold text-[11px] rounded-sm transition-all border border-stone-200 flex items-center justify-center gap-1 cursor-pointer"
-                >
-                  <MessageCircle className="w-3 h-3 text-emerald-600" />
-                  <span>WhatsApp</span>
-                </a>
-              </div>
+                    <a
+                      href={getWaProductUrl(prod)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-1.5 bg-stone-100 hover:bg-emerald-50 hover:text-emerald-700 text-stone-700 font-bold text-[11px] rounded-sm transition-all border border-stone-200 flex items-center justify-center gap-1 cursor-pointer"
+                    >
+                      <MessageCircle className="w-3 h-3 text-emerald-600" />
+                      <span>WhatsApp</span>
+                    </a>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

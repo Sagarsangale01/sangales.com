@@ -34,7 +34,15 @@ export interface BusinessRecord {
     description: string;
     image: string;
     category?: string;
+    subCategory?: string;
     price?: string;
+    mrp?: string;
+    unit?: string;
+    sku?: string;
+    stockStatus?: "IN_STOCK" | "LOW_STOCK" | "OUT_OF_STOCK";
+    stockQuantity?: number;
+    lowStockThreshold?: number;
+    isFeaturedInShop?: boolean;
     directBuyUrl?: string;
   }[];
   gallery: {

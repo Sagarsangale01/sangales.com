@@ -144,7 +144,15 @@ export interface AdminProductItem {
   description: string;
   image: string;
   category?: string;
+  subCategory?: string;
   price?: string;
+  mrp?: string;
+  unit?: string;
+  sku?: string;
+  stockStatus?: "IN_STOCK" | "LOW_STOCK" | "OUT_OF_STOCK";
+  stockQuantity?: number;
+  lowStockThreshold?: number;
+  isFeaturedInShop?: boolean;
   directBuyUrl?: string;
 }
 
@@ -159,6 +167,12 @@ export async function getAllProductsAcrossBusinesses(): Promise<AdminProductItem
           businessId: b.id,
           businessName: b.name,
           businessSlug: b.slug,
+          stockStatus: p.stockStatus || "IN_STOCK",
+          stockQuantity: typeof p.stockQuantity === "number" ? p.stockQuantity : 50,
+          lowStockThreshold: typeof p.lowStockThreshold === "number" ? p.lowStockThreshold : 10,
+          unit: p.unit || "Standard Unit",
+          sku: p.sku || `SNG-${p.id.toUpperCase()}`,
+          isFeaturedInShop: p.isFeaturedInShop ?? true,
         });
       });
     }
@@ -173,7 +187,15 @@ export async function addProductToBusiness(
     description: string;
     image?: string;
     category?: string;
+    subCategory?: string;
     price?: string;
+    mrp?: string;
+    unit?: string;
+    sku?: string;
+    stockStatus?: "IN_STOCK" | "LOW_STOCK" | "OUT_OF_STOCK";
+    stockQuantity?: number;
+    lowStockThreshold?: number;
+    isFeaturedInShop?: boolean;
     directBuyUrl?: string;
   }
 ): Promise<AdminProductItem | null> {
@@ -183,15 +205,24 @@ export async function addProductToBusiness(
 
   if (!biz.products) biz.products = [];
 
+  const newId = `prod-${Date.now()}`;
   const newProd = {
-    id: `prod-${Date.now()}`,
+    id: newId,
     name: input.name.trim(),
     description: input.description.trim(),
     image:
       input.image?.trim() ||
       "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=600",
     category: input.category?.trim() || "",
+    subCategory: input.subCategory?.trim() || "",
     price: input.price?.trim() || "",
+    mrp: input.mrp?.trim() || "",
+    unit: input.unit?.trim() || "Standard Unit",
+    sku: input.sku?.trim() || `SNG-${newId.toUpperCase()}`,
+    stockStatus: input.stockStatus || "IN_STOCK",
+    stockQuantity: typeof input.stockQuantity === "number" ? input.stockQuantity : 50,
+    lowStockThreshold: typeof input.lowStockThreshold === "number" ? input.lowStockThreshold : 10,
+    isFeaturedInShop: input.isFeaturedInShop ?? true,
     directBuyUrl: input.directBuyUrl?.trim() || "",
   };
 
@@ -209,11 +240,19 @@ export async function addProductToBusiness(
 export async function updateProductInBusiness(
   productId: string,
   input: {
-    name: string;
-    description: string;
+    name?: string;
+    description?: string;
     image?: string;
     category?: string;
+    subCategory?: string;
     price?: string;
+    mrp?: string;
+    unit?: string;
+    sku?: string;
+    stockStatus?: "IN_STOCK" | "LOW_STOCK" | "OUT_OF_STOCK";
+    stockQuantity?: number;
+    lowStockThreshold?: number;
+    isFeaturedInShop?: boolean;
     directBuyUrl?: string;
     businessId?: string;
   }
@@ -226,19 +265,29 @@ export async function updateProductInBusiness(
   const prodIdx = targetBiz.products.findIndex((p) => p.id === productId);
   if (prodIdx === -1) return null;
 
+  const current = targetBiz.products[prodIdx];
+
   // If businessId is changing, move product to the new business
   if (input.businessId && input.businessId !== targetBiz.id) {
     const newBiz = store.businesses.find((b) => b.id === input.businessId);
     if (newBiz) {
       if (!newBiz.products) newBiz.products = [];
       const updatedProd = {
-        ...targetBiz.products[prodIdx],
-        name: input.name.trim(),
-        description: input.description.trim(),
-        image: input.image?.trim() || targetBiz.products[prodIdx].image,
-        category: input.category?.trim() || "",
-        price: input.price?.trim() || "",
-        directBuyUrl: input.directBuyUrl?.trim() || "",
+        ...current,
+        name: input.name !== undefined ? input.name.trim() : current.name,
+        description: input.description !== undefined ? input.description.trim() : current.description,
+        image: input.image !== undefined ? input.image.trim() : current.image,
+        category: input.category !== undefined ? input.category.trim() : current.category,
+        subCategory: input.subCategory !== undefined ? input.subCategory.trim() : (current as any).subCategory,
+        price: input.price !== undefined ? input.price.trim() : current.price,
+        mrp: input.mrp !== undefined ? input.mrp.trim() : (current as any).mrp,
+        unit: input.unit !== undefined ? input.unit.trim() : (current as any).unit,
+        sku: input.sku !== undefined ? input.sku.trim() : (current as any).sku,
+        stockStatus: input.stockStatus !== undefined ? input.stockStatus : (current as any).stockStatus,
+        stockQuantity: input.stockQuantity !== undefined ? input.stockQuantity : (current as any).stockQuantity,
+        lowStockThreshold: input.lowStockThreshold !== undefined ? input.lowStockThreshold : (current as any).lowStockThreshold,
+        isFeaturedInShop: input.isFeaturedInShop !== undefined ? input.isFeaturedInShop : (current as any).isFeaturedInShop,
+        directBuyUrl: input.directBuyUrl !== undefined ? input.directBuyUrl.trim() : current.directBuyUrl,
       };
       targetBiz.products.splice(prodIdx, 1);
       newBiz.products.push(updatedProd);
@@ -253,23 +302,77 @@ export async function updateProductInBusiness(
   }
 
   // Update in place
-  targetBiz.products[prodIdx] = {
-    ...targetBiz.products[prodIdx],
-    name: input.name.trim(),
-    description: input.description.trim(),
-    image: input.image?.trim() || targetBiz.products[prodIdx].image,
-    category: input.category?.trim() || "",
-    price: input.price?.trim() || "",
-    directBuyUrl: input.directBuyUrl?.trim() || "",
+  const updatedProd = {
+    ...current,
+    name: input.name !== undefined ? input.name.trim() : current.name,
+    description: input.description !== undefined ? input.description.trim() : current.description,
+    image: input.image !== undefined ? input.image.trim() : current.image,
+    category: input.category !== undefined ? input.category.trim() : current.category,
+    subCategory: input.subCategory !== undefined ? input.subCategory.trim() : (current as any).subCategory,
+    price: input.price !== undefined ? input.price.trim() : current.price,
+    mrp: input.mrp !== undefined ? input.mrp.trim() : (current as any).mrp,
+    unit: input.unit !== undefined ? input.unit.trim() : (current as any).unit,
+    sku: input.sku !== undefined ? input.sku.trim() : (current as any).sku,
+    stockStatus: input.stockStatus !== undefined ? input.stockStatus : (current as any).stockStatus,
+    stockQuantity: input.stockQuantity !== undefined ? input.stockQuantity : (current as any).stockQuantity,
+    lowStockThreshold: input.lowStockThreshold !== undefined ? input.lowStockThreshold : (current as any).lowStockThreshold,
+    isFeaturedInShop: input.isFeaturedInShop !== undefined ? input.isFeaturedInShop : (current as any).isFeaturedInShop,
+    directBuyUrl: input.directBuyUrl !== undefined ? input.directBuyUrl.trim() : current.directBuyUrl,
   };
 
+  targetBiz.products[prodIdx] = updatedProd;
   saveStore(store);
 
   return {
-    ...targetBiz.products[prodIdx],
+    ...updatedProd,
     businessId: targetBiz.id,
     businessName: targetBiz.name,
     businessSlug: targetBiz.slug,
+  };
+}
+
+export async function updateProductInventory(
+  productId: string,
+  updates: {
+    stockStatus?: "IN_STOCK" | "LOW_STOCK" | "OUT_OF_STOCK";
+    stockQuantity?: number;
+    price?: string;
+    mrp?: string;
+    unit?: string;
+    sku?: string;
+  }
+): Promise<AdminProductItem | null> {
+  return updateProductInBusiness(productId, updates);
+}
+
+export async function getInventorySummary() {
+  const products = await getAllProductsAcrossBusinesses();
+  const total = products.length;
+  const inStock = products.filter((p) => p.stockStatus === "IN_STOCK").length;
+  const lowStock = products.filter((p) => p.stockStatus === "LOW_STOCK").length;
+  const outOfStock = products.filter((p) => p.stockStatus === "OUT_OF_STOCK").length;
+  const totalQuantity = products.reduce((sum, p) => sum + (p.stockQuantity || 0), 0);
+
+  // Calculate estimated total inventory retail value
+  let totalEstimatedValue = 0;
+  products.forEach((p) => {
+    if (p.price) {
+      const clean = p.price.replace(/,/g, "");
+      const match = clean.match(/([0-9]+(?:\.[0-9]+)?)/);
+      const val = match ? parseFloat(match[1]) : 0;
+      if (val > 0) {
+        totalEstimatedValue += val * (p.stockQuantity || 0);
+      }
+    }
+  });
+
+  return {
+    total,
+    inStock,
+    lowStock,
+    outOfStock,
+    totalQuantity,
+    totalEstimatedValue,
   };
 }
 

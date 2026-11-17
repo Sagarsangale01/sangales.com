@@ -20,8 +20,18 @@ export async function getDashboardStats() {
   const totalApplications = store.applications.length;
 
   let totalProducts = 0;
+  let inStockProducts = 0;
+  let lowStockProducts = 0;
+  let outOfStockProducts = 0;
   store.businesses.forEach((b) => {
-    if (b.products) totalProducts += b.products.length;
+    if (b.products) {
+      totalProducts += b.products.length;
+      b.products.forEach((p) => {
+        if (p.stockStatus === "OUT_OF_STOCK") outOfStockProducts++;
+        else if (p.stockStatus === "LOW_STOCK") lowStockProducts++;
+        else inStockProducts++;
+      });
+    }
   });
 
   const orders = store.orders || [];
@@ -57,6 +67,9 @@ export async function getDashboardStats() {
     upcomingBusinesses,
     totalEnquiries,
     totalProducts,
+    inStockProducts,
+    lowStockProducts,
+    outOfStockProducts,
     newEnquiries,
     inProgressEnquiries,
     closedEnquiries,

@@ -13,6 +13,7 @@ import {
   Plus,
   Package,
   ShoppingBag,
+  Boxes,
 } from "lucide-react";
 import { getDashboardStats } from "@/services/dashboardService";
 import { formatDate } from "@/lib/utils";
@@ -45,6 +46,13 @@ export default async function AdminDashboardPage() {
           >
             <Plus className="w-4 h-4" />
             <span>Add Business</span>
+          </Link>
+          <Link
+            href="/admin/inventory"
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-offwhite hover:bg-stone-200 text-navy text-xs font-bold uppercase tracking-wider rounded-sm transition-all border border-stone-300"
+          >
+            <Boxes className="w-4 h-4 text-gold-700" />
+            <span>Inventory ({stats.inStockProducts || 0} in stock)</span>
           </Link>
           <Link
             href="/admin/orders"
